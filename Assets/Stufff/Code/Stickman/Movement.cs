@@ -196,13 +196,7 @@ public class Movement : MonoBehaviour
     public bool BackflipCollected;
     public bool InfoCollected;
     public bool NoMoreCollected;
-    [Header(" Stuff ")]
-    //Performance level destoryer
-    public GameObject Level1;
-    public GameObject Level2;
-    public GameObject Level1Grass;
-    public GameObject BloodFX;
-    public bool Anim_Locked;
+ 
     [Header(" Lab Stuff ")]
     public int ExamHeliID_Checkpoint;
     public GameObject LabLevel;
@@ -307,7 +301,15 @@ public class Movement : MonoBehaviour
     public bool InCinematic;
     public float CinematicSlideSpeed;
     public float MaxCinematicSlideSpeed;
+       [Header(" Misc ")]
+    //Performance level destoryer
+    public GameObject Level1;
+    public GameObject Level2;
+    public GameObject Level1Grass;
+    public GameObject BloodFX;
+    public bool Anim_Locked;
 
+    public GameObject TutTXT;
 
 
     void Start()
@@ -1318,6 +1320,7 @@ public class Movement : MonoBehaviour
 
     public void HURT_COMBO_MESS_UP_ANIMATION_KEY()
     {
+        TutTXT.gameObject.SetActive(false);
         CurrentPunches -= 1;
     }
 
@@ -3694,7 +3697,7 @@ public class Movement : MonoBehaviour
 
     }
 
-
+   
     public void SaveProgress()
     {
         SaveSystem.SaveProgess(this);

@@ -526,6 +526,7 @@ public class EnemyAI : MonoBehaviour
 
             }
             EnemyAnim.SetTrigger("Dead");
+            EnemyAnim.CrossFade("Dead", 0, 0);
         }
         //if(PhysicsText != null)
         //{
@@ -1946,6 +1947,8 @@ public class EnemyAI : MonoBehaviour
             TutKeyInput.InputS = KeyCode.Q;
             TutText.gameObject.SetActive(true);
             TutKeyInput.FreezeTime = true;
+            TutTXT = "Backflip[Q] To Dodge Attacks";
+
 
         }
         else if (isCombat)
@@ -1954,6 +1957,9 @@ public class EnemyAI : MonoBehaviour
             txugi.text = TutTXT;
             TutKeyInput.InputS = KeyCode.Q;
             TutText.gameObject.SetActive(true);
+            TutKeyInput.FreezeTime = false;
+            TutTXT = "Backflip[Q] To Dodge Attacks";
+
         }
         
 
@@ -2197,16 +2203,7 @@ public class EnemyAI : MonoBehaviour
 
     public void Counter()
     {
-        if (isTutorial && !AlrTaught_Tutorial_Bool)
-        {
-            AlrTaught_Tutorial_Bool = true;
-            TutTXT = "Counter[R]";
-            TutText.gameObject.SetActive(true);
-            TutKeyInput.SloMo = true;
-            TutKeyInput.InputS = KeyCode.R;
-            TextMeshProUGUI ugi = TutText.gameObject.GetComponent<TextMeshProUGUI>();
-            ugi.text = TutTXT;
-        }
+       
         if (Time.time >= LastCounterCDTime + CounterCD)
         {
             LastCounterCDTime = Time.time;
@@ -2229,7 +2226,16 @@ public class EnemyAI : MonoBehaviour
         // THIS IS THE COUNTER ATTACK IM ALSO TRASH AT NAMING STUFF
         if (PlayerHealth.PlayerHP > 0)
         {
-
+             if (isTutorial && !AlrTaught_Tutorial_Bool)
+        {
+            AlrTaught_Tutorial_Bool = true;
+            TutTXT = "Counter[R]";
+            TutText.gameObject.SetActive(true);
+            TutKeyInput.SloMo = true;
+            TutKeyInput.InputS = KeyCode.R;
+            TextMeshProUGUI ugi = TutText.gameObject.GetComponent<TextMeshProUGUI>();
+            ugi.text = TutTXT;
+        }
             Vector2 targetPosition = new Vector2(StickmanPOS.position.x, transform.position.y);
             // look at him (stick)
             
