@@ -1938,11 +1938,30 @@ public class EnemyAI : MonoBehaviour
     }
     public void MeleeAttack()
     {
-        if (!AlrAttacked && isCombat)
+        // This is for the Tutorial in Chapter 0
+        if (isCombat && !PlayerManager.BackFlip)
         {
-            StartCoroutine(TutorialManager());
-            AlrAttacked = true;
+            TextMeshProUGUI txugi = TutText.gameObject.GetComponent<TextMeshProUGUI>();
+            txugi.text = TutTXT;
+            TutKeyInput.InputS = KeyCode.Q;
+            TutText.gameObject.SetActive(true);
+            TutKeyInput.FreezeTime = true;
+
         }
+        else if (isCombat)
+        {
+            TextMeshProUGUI txugi = TutText.gameObject.GetComponent<TextMeshProUGUI>();
+            txugi.text = TutTXT;
+            TutKeyInput.InputS = KeyCode.Q;
+            TutText.gameObject.SetActive(true);
+        }
+        
+
+        // if (!AlrAttacked && isCombat)
+        // {
+        //     StartCoroutine(TutorialManager());
+        //     AlrAttacked = true;
+        // }
         if (!isBoss)
         {
             StartCoroutine(Initiate_ATK_After_Melee_If_Needed());
@@ -2178,10 +2197,12 @@ public class EnemyAI : MonoBehaviour
 
     public void Counter()
     {
-        if (isTutorial)
+        if (isTutorial && !AlrTaught_Tutorial_Bool)
         {
-            TutTXT = "Enemy Caught Your Bullet Counter[R] it Back";
+            AlrTaught_Tutorial_Bool = true;
+            TutTXT = "Counter[R]";
             TutText.gameObject.SetActive(true);
+            TutKeyInput.SloMo = true;
             TutKeyInput.InputS = KeyCode.R;
             TextMeshProUGUI ugi = TutText.gameObject.GetComponent<TextMeshProUGUI>();
             ugi.text = TutTXT;
