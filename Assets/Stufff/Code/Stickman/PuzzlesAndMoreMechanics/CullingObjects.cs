@@ -11,7 +11,11 @@ public class CullingObjects : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(ObjectToCull != null)
+        {
         ObjectToCull.gameObject.SetActive(false);
+
+        }
 
     }
 
@@ -23,7 +27,7 @@ public class CullingObjects : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && WantToCullIfTouch)
+        if (ObjectToCull != null && collision.gameObject.CompareTag("Player") && WantToCullIfTouch)
         {
             ObjectToCull.gameObject.SetActive(true);
         }

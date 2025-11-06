@@ -149,6 +149,7 @@ MonoBehaviour:
   Scien2: {fileID: 0}
   WantParticles: 0
   Particles: {fileID: 0}
+  ScreamSound: {fileID: 0}
 --- !u!114 &3710221236382326993
 MonoBehaviour:
   m_ObjectHideFlags: 0

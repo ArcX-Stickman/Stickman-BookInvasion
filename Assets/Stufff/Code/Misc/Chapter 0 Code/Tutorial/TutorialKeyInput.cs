@@ -15,20 +15,53 @@ public class TutorialKeyInput : MonoBehaviour
 {
     public string Animname;
     public GameObject GameObject;
-    private Animator animator;
+    public Animator animator;
     public KeyCode InputS;
     public string Txt;
+    private PauseManager Pause;
+    public bool FreezeTime;
+
+    public bool SloMo;
+
+    private bool Clicked;
     // Update is called once per frame
     void Update()
+{
+    if (Pause == null)
     {
+        Pause = FindAnyObjectByType<PauseManager>();
+        if (Pause == null) return;
+    }
 
-        animator = GameObject.GetComponent<Animator>();
-        if (Input.GetKeyDown(InputS))
-        {
-            //TextMeshProUGUI txt = GameObject.GetComponent<TextMeshProUGUI>();
-            //txt.text = Txt;
-            animator.CrossFade(Animname, 0, 0);
-        }
+    //TimeScaleBased();
+
+    if (Input.GetKeyDown(InputS))
+    {
+        Clicked = true;
+        Pause.NoHUD = false;
+        animator.CrossFade(Animname, 0, 0);
+        // if (FreezeTime || SloMo)
+        //     Pause.Resume();
+    }
+}
+
+    
+
+    public void TimeScaleBased()
+    {
+        // if (gameObject.activeSelf && !Clicked)
+        // {
+        //     if (FreezeTime)
+        //     {
+        //         Pause.NoHUD = true;
+        //         Pause.Pause();
+        //     }
+        //     else if (SloMo)
+        //     {           
+        //         Time.timeScale = 0.4f;
+        //         Time.fixedDeltaTime = Time.timeScale * 0.02f;
+        //     }
+        // }
 
     }
 }

@@ -101,6 +101,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Default(SkipLighting)
+    uniqueID: 344434965
+    locked: 0
   - name: Stickman
     uniqueID: 1861242529
     locked: 0

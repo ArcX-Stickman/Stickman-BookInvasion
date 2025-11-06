@@ -526,6 +526,7 @@ public class EnemyAI : MonoBehaviour
 
             }
             EnemyAnim.SetTrigger("Dead");
+            EnemyAnim.CrossFade("Dead", 0, 0);
         }
         //if(PhysicsText != null)
         //{
@@ -1269,6 +1270,10 @@ public class EnemyAI : MonoBehaviour
         }
         if (collision.CompareTag("Bullet") )
         {
+            if (!RangeManager.PlayerSpotted)
+            {
+                RangeManager.PlayerSpotted = true;
+            }
             PlayerManager.CameraScript.StartCoroutine(PlayerManager.CameraScript.ShakeCamGroundFeeling(58.5f, 0.2f));
             Bullet bulletScript = collision.GetComponent<Bullet>();
             GameObject effect = Instantiate(Dead, transform.position, Quaternion.identity);
@@ -1359,8 +1364,14 @@ public class EnemyAI : MonoBehaviour
         }
         if (collision.CompareTag("StickMelee") && !PlayerManager.isUppercut)
         {
+            
+            if (!RangeManager.PlayerSpotted)
+            {
+                RangeManager.PlayerSpotted = true;
+            }
+            
             PlayerManager.CameraScript.StartCoroutine(PlayerManager.CameraScript.ShakeCamGroundFeeling(48.5f, 0.2f));
-
+            
             if (PlayerManager.isInPerfectDodge)
             {
                 PlayerManager.CameraScript.StartCoroutine(PlayerManager.CameraScript.ShakeCamGroundFeeling(78.5f, 0.2f));
@@ -1928,11 +1939,35 @@ public class EnemyAI : MonoBehaviour
     }
     public void MeleeAttack()
     {
-        if (!AlrAttacked && isCombat)
+        // This is for the Tutorial in Chapter 0
+        if (isCombat && !PlayerManager.BackFlip)
         {
-            StartCoroutine(TutorialManager());
-            AlrAttacked = true;
+            TextMeshProUGUI txugi = TutText.gameObject.GetComponent<TextMeshProUGUI>();
+            txugi.text = TutTXT;
+            TutKeyInput.InputS = KeyCode.Q;
+            TutText.gameObject.SetActive(true);
+            TutKeyInput.FreezeTime = true;
+            TutTXT = "Backflip[Q] To Dodge Attacks";
+
+
         }
+        else if (isCombat)
+        {
+            TextMeshProUGUI txugi = TutText.gameObject.GetComponent<TextMeshProUGUI>();
+            txugi.text = TutTXT;
+            TutKeyInput.InputS = KeyCode.Q;
+            TutText.gameObject.SetActive(true);
+            TutKeyInput.FreezeTime = false;
+            TutTXT = "Backflip[Q] To Dodge Attacks";
+
+        }
+        
+
+        // if (!AlrAttacked && isCombat)
+        // {
+        //     StartCoroutine(TutorialManager());
+        //     AlrAttacked = true;
+        // }
         if (!isBoss)
         {
             StartCoroutine(Initiate_ATK_After_Melee_If_Needed());
@@ -2168,14 +2203,7 @@ public class EnemyAI : MonoBehaviour
 
     public void Counter()
     {
-        if (isTutorial)
-        {
-            TutTXT = "Enemy Caught Your Bullet Counter[R] it Back";
-            TutText.gameObject.SetActive(true);
-            TutKeyInput.InputS = KeyCode.R;
-            TextMeshProUGUI ugi = TutText.gameObject.GetComponent<TextMeshProUGUI>();
-            ugi.text = TutTXT;
-        }
+       
         if (Time.time >= LastCounterCDTime + CounterCD)
         {
             LastCounterCDTime = Time.time;
@@ -2198,7 +2226,16 @@ public class EnemyAI : MonoBehaviour
         // THIS IS THE COUNTER ATTACK IM ALSO TRASH AT NAMING STUFF
         if (PlayerHealth.PlayerHP > 0)
         {
-
+             if (isTutorial && !AlrTaught_Tutorial_Bool)
+        {
+            AlrTaught_Tutorial_Bool = true;
+            TutTXT = "Counter[R]";
+            TutText.gameObject.SetActive(true);
+            TutKeyInput.SloMo = true;
+            TutKeyInput.InputS = KeyCode.R;
+            TextMeshProUGUI ugi = TutText.gameObject.GetComponent<TextMeshProUGUI>();
+            ugi.text = TutTXT;
+        }
             Vector2 targetPosition = new Vector2(StickmanPOS.position.x, transform.position.y);
             // look at him (stick)
             
