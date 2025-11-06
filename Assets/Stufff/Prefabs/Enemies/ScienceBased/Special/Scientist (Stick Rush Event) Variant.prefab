@@ -1,0 +1,131 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &8469065695845163374
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1819813413933744852, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1819813413933744852, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2490996525076020992, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3525466948935121194, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
+      propertyPath: speed
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3525466948935121194, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
+      propertyPath: Health
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3525466948935121194, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
+      propertyPath: MeleeCD
+      value: 867867840
+      objectReference: {fileID: 0}
+    - target: {fileID: 3525466948935121194, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
+      propertyPath: MaxSpeed
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 3525466948935121194, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
+      propertyPath: CounterCD
+      value: 78678680
+      objectReference: {fileID: 0}
+    - target: {fileID: 3525466948935121194, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
+      propertyPath: RangedATK_CD
+      value: 6.456465e+11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3525466948935121194, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
+      propertyPath: RushEventEnemy
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3525466948935121194, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
+      propertyPath: MeleeCD_Dominant
+      value: 86876860
+      objectReference: {fileID: 0}
+    - target: {fileID: 3525466948935121194, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
+      propertyPath: MeleeCD_Recesive
+      value: 86787690
+      objectReference: {fileID: 0}
+    - target: {fileID: 3525466948935121194, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
+      propertyPath: RangedCD_Dominant
+      value: 7867867
+      objectReference: {fileID: 0}
+    - target: {fileID: 3525466948935121194, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
+      propertyPath: RangedCD_Recesive
+      value: 678678660
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083457038562122465, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
+      propertyPath: m_Name
+      value: Scientist (Stick Rush Event) Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5069876217128232118, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5383754938710710511, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5628954187899327829, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7710454842136702542, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 217.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 7710454842136702542, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -17.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 7710454842136702542, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7710454842136702542, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7710454842136702542, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7710454842136702542, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7710454842136702542, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7710454842136702542, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7710454842136702542, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7710454842136702542, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8330331292622364142, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}

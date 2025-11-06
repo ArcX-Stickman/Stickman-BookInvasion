@@ -1,0 +1,778 @@
+fileFormatVersion: 2
+guid: 777372fa0a5786d49b7549fcf120f87e
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Stickman_Understands_It_Now_0
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 2750
+        width: 658
+        height: 1037
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d90d82af088bfd458d07380fbb582a7
+      internalID: -1555677050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stickman_Understands_It_Now_1
+      rect:
+        serializedVersion: 2
+        x: 1154
+        y: 2731
+        width: 649
+        height: 1056
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d57d2da3a469e546a26f1a8a1241289
+      internalID: -1332393881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stickman_Understands_It_Now_2
+      rect:
+        serializedVersion: 2
+        x: 1998
+        y: 2756
+        width: 717
+        height: 1031
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f21795e8f6b1e44ab196e9ca52bcd18
+      internalID: -1909899586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stickman_Understands_It_Now_3
+      rect:
+        serializedVersion: 2
+        x: 2895
+        y: 3141
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92b2e67e2b9c00c48aff50d3dc5f210f
+      internalID: -1585505542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stickman_Understands_It_Now_4
+      rect:
+        serializedVersion: 2
+        x: 2906
+        y: 2734
+        width: 789
+        height: 1053
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ad79a5d07d8d1b4fbdb4b8ff490da72
+      internalID: 1844972596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stickman_Understands_It_Now_5
+      rect:
+        serializedVersion: 2
+        x: 3125
+        y: 2750
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 764a462d0a9fae14ab5360457df7e474
+      internalID: 2062343542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stickman_Understands_It_Now_6
+      rect:
+        serializedVersion: 2
+        x: 1371
+        y: 2742
+        width: 4
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50ba5efed1243ea4eb009e89b46b200b
+      internalID: -2138902239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stickman_Understands_It_Now_7
+      rect:
+        serializedVersion: 2
+        x: 1555
+        y: 2742
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9842d6b0deb10d04087b3a5188bbb092
+      internalID: -781632432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stickman_Understands_It_Now_8
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 2727
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d2dd81c5f09be449a3016474ae8c1e9
+      internalID: -191149546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stickman_Understands_It_Now_9
+      rect:
+        serializedVersion: 2
+        x: 3164
+        y: 2727
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 630aa8dc138665b4e91c57c2117c1f84
+      internalID: 1984474664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stickman_Understands_It_Now_10
+      rect:
+        serializedVersion: 2
+        x: 3375
+        y: 2422
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 280201e65355dbc468adaa2143e63a0d
+      internalID: 621338133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stickman_Understands_It_Now_11
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 1365
+        width: 704
+        height: 1031
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4ed8492b8b65cb478e20f21ce7237db
+      internalID: 2022201488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stickman_Understands_It_Now_12
+      rect:
+        serializedVersion: 2
+        x: 1154
+        y: 1365
+        width: 649
+        height: 1031
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ebfbbc6cd46af4942b98e10430043a78
+      internalID: 756610234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stickman_Understands_It_Now_13
+      rect:
+        serializedVersion: 2
+        x: 2045
+        y: 1340
+        width: 648
+        height: 1056
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11b13d2dcb74e1c49bda154c3e974c99
+      internalID: -2044289881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stickman_Understands_It_Now_14
+      rect:
+        serializedVersion: 2
+        x: 2688
+        y: 1750
+        width: 7
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a31bf7498a277f748b19a4c0e1349c1d
+      internalID: -1655016388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stickman_Understands_It_Now_15
+      rect:
+        serializedVersion: 2
+        x: 2998
+        y: 1354
+        width: 674
+        height: 1068
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74644fc4e2345024485d700cf32a65a7
+      internalID: -55211378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stickman_Understands_It_Now_16
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 1359
+        width: 15
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99bcb21c67cbfc6498d75a0838046de5
+      internalID: 93601669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stickman_Understands_It_Now_17
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 1360
+        width: 8
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c03829c175731cd45b8acf2cb38be4a8
+      internalID: -1541829367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stickman_Understands_It_Now_18
+      rect:
+        serializedVersion: 2
+        x: 641
+        y: 1363
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17f0e9d7053208244a00761676231e6c
+      internalID: 1453795374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stickman_Understands_It_Now_19
+      rect:
+        serializedVersion: 2
+        x: 3426
+        y: 1344
+        width: 12
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5917a7f9a1afda45ab37cfe35d9501e
+      internalID: -280338361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stickman_Understands_It_Now_20
+      rect:
+        serializedVersion: 2
+        x: 438
+        y: 1340
+        width: 11
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96c975fedb771874fb205298a42d5946
+      internalID: -2032819903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stickman_Understands_It_Now_21
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 124
+        width: 738
+        height: 1114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd4e340c1de9a114592b28b3a29cf1a3
+      internalID: -1984665453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stickman_Understands_It_Now_22
+      rect:
+        serializedVersion: 2
+        x: 547
+        y: 1219
+        width: 16
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7430d6bedf207d6418bd8f18eae8f63a
+      internalID: 136086093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stickman_Understands_It_Now_23
+      rect:
+        serializedVersion: 2
+        x: 1062
+        y: 98
+        width: 751
+        height: 1140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31b8daaeb69ed2d4586cfd8b66a8420c
+      internalID: 866107699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stickman_Understands_It_Now_24
+      rect:
+        serializedVersion: 2
+        x: 1813
+        y: 902
+        width: 11
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bf6ede00727dfe4388764c93f0df944
+      internalID: -1502547826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stickman_Understands_It_Now_25
+      rect:
+        serializedVersion: 2
+        x: 1813
+        y: 801
+        width: 7
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b6cf263f420cb748a347426f6742d73
+      internalID: 2070081493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stickman_Understands_It_Now_26
+      rect:
+        serializedVersion: 2
+        x: 1812
+        y: 777
+        width: 4
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc1fbc585c776854db4dcbb7736336bb
+      internalID: 1875974970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stickman_Understands_It_Now_27
+      rect:
+        serializedVersion: 2
+        x: 1797
+        y: 766
+        width: 19
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07d52c280ab357a45bcc5bbe755e08c3
+      internalID: 1859743990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stickman_Understands_It_Now_28
+      rect:
+        serializedVersion: 2
+        x: 1516
+        y: 98
+        width: 31
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6093a5caf536a947a15bc85d8a0b966
+      internalID: -455613379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Stickman_Understands_It_Now_0: -1555677050
+      Stickman_Understands_It_Now_1: -1332393881
+      Stickman_Understands_It_Now_10: 621338133
+      Stickman_Understands_It_Now_11: 2022201488
+      Stickman_Understands_It_Now_12: 756610234
+      Stickman_Understands_It_Now_13: -2044289881
+      Stickman_Understands_It_Now_14: -1655016388
+      Stickman_Understands_It_Now_15: -55211378
+      Stickman_Understands_It_Now_16: 93601669
+      Stickman_Understands_It_Now_17: -1541829367
+      Stickman_Understands_It_Now_18: 1453795374
+      Stickman_Understands_It_Now_19: -280338361
+      Stickman_Understands_It_Now_2: -1909899586
+      Stickman_Understands_It_Now_20: -2032819903
+      Stickman_Understands_It_Now_21: -1984665453
+      Stickman_Understands_It_Now_22: 136086093
+      Stickman_Understands_It_Now_23: 866107699
+      Stickman_Understands_It_Now_24: -1502547826
+      Stickman_Understands_It_Now_25: 2070081493
+      Stickman_Understands_It_Now_26: 1875974970
+      Stickman_Understands_It_Now_27: 1859743990
+      Stickman_Understands_It_Now_28: -455613379
+      Stickman_Understands_It_Now_3: -1585505542
+      Stickman_Understands_It_Now_4: 1844972596
+      Stickman_Understands_It_Now_5: 2062343542
+      Stickman_Understands_It_Now_6: -2138902239
+      Stickman_Understands_It_Now_7: -781632432
+      Stickman_Understands_It_Now_8: -191149546
+      Stickman_Understands_It_Now_9: 1984474664
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

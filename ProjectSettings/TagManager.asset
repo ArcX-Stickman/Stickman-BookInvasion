@@ -1,0 +1,121 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Ground
+  - Damager
+  - Blocker
+  - Book
+  - Bullet
+  - ArcBullet
+  - Leaf
+  - StickPOS
+  - Biology
+  - SuperB
+  - StepUp
+  - SlideVolume
+  - TopBook
+  - SlideEnd
+  - Slope
+  - HidingPOS
+  - HIding
+  - Hiding
+  - HidePOS
+  - Safe
+  - Door
+  - GunKiller
+  - StickMelee
+  - Explosive
+  - Culling
+  - Chopper
+  - DoublePunchTime
+  - StickCatch
+  - Void
+  - RightBorder
+  - LeftBorder
+  - CounterBullet
+  - HPBAR
+  - HPBARIMG
+  - Ownership
+  - OpposingBullet
+  - Spec
+  - Spawn
+  - AttackSight
+  - FishR
+  - FishL
+  - Fox
+  - SunRay
+  - Cart
+  - Boom
+  - ObjectOfDestruction
+  - Ladder
+  - Tree
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - ObjectsOfDestruction
+  - Water
+  - UI
+  - 
+  - 
+  - 
+  - Items
+  - 
+  - Grass
+  - NonCollisionW/MovingStuff
+  - Player
+  - slide
+  - 
+  - 
+  - Book
+  - 
+  - 
+  - Bullet
+  - Lil Rock
+  - 
+  - Fish
+  - CherryTree
+  - StickMelee
+  - Ledge
+  - Explosive
+  - Culling
+  - Soil
+  - Local
+  - Remote
+  m_SortingLayers:
+  - name: Sky
+    uniqueID: 550122193
+    locked: 0
+  - name: Background
+    uniqueID: 1692089731
+    locked: 0
+  - name: Tree
+    uniqueID: 1384925235
+    locked: 0
+  - name: NotLitByBGObjects
+    uniqueID: 2343039389
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Stickman
+    uniqueID: 1861242529
+    locked: 0
+  - name: TreeV2
+    uniqueID: 324584967
+    locked: 0
+  - name: Grass
+    uniqueID: 3278969687
+    locked: 0
+  - name: Geology
+    uniqueID: 1654650147
+    locked: 0
+  - name: New Layer 7
+    uniqueID: 452579495
+    locked: 0
+  - name: Other
+    uniqueID: 395125691
+    locked: 0

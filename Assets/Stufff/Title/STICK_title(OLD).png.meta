@@ -1,0 +1,1605 @@
+fileFormatVersion: 2
+guid: 39c1a67500ced4567adcbc62c632fc2d
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: STICK_title_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 7310
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: caecbe279e30545d7afdc1132f8aa499
+      internalID: 1316589324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_1
+      rect:
+        serializedVersion: 2
+        x: 1255
+        y: 7310
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f031a1656f38149ddbb49b814d6273ab
+      internalID: 1703850568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_2
+      rect:
+        serializedVersion: 2
+        x: 2509
+        y: 7310
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f694466e9c2a24fa79ea099c5359435e
+      internalID: -333136572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_3
+      rect:
+        serializedVersion: 2
+        x: 3763
+        y: 7310
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 460c0f6be7a1b4827b1666de25068bb7
+      internalID: -103384573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_4
+      rect:
+        serializedVersion: 2
+        x: 5017
+        y: 7310
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c42ee266aac3f4d07a1b19d52b90a34d
+      internalID: -2013249609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_5
+      rect:
+        serializedVersion: 2
+        x: 6271
+        y: 7310
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84b7d9668f816428281921155b1c53cb
+      internalID: -1280847649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_6
+      rect:
+        serializedVersion: 2
+        x: 7525
+        y: 7310
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b41e575e112bb4f27a0f0614966ae3b3
+      internalID: 1830930436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_7
+      rect:
+        serializedVersion: 2
+        x: 8779
+        y: 7310
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3b60ac9813714ae7bc939083dde6772
+      internalID: 53208644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_8
+      rect:
+        serializedVersion: 2
+        x: 10033
+        y: 7310
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35ae6654f6a7146feb9b8c60ebd44b26
+      internalID: 435442224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_9
+      rect:
+        serializedVersion: 2
+        x: 11287
+        y: 7310
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39ad18c4a3bfb4e959e2902acfee12c2
+      internalID: 116365232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_10
+      rect:
+        serializedVersion: 2
+        x: 12541
+        y: 7310
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fce5d564d7eb43c59ced5fa440929f6
+      internalID: 1505168460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_11
+      rect:
+        serializedVersion: 2
+        x: 13795
+        y: 7310
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: afeedb09ba21f4dff9f33325b386e786
+      internalID: 1645274537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_12
+      rect:
+        serializedVersion: 2
+        x: 15049
+        y: 7310
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf098a598724d4992abeb26d835a3e7e
+      internalID: -1552790051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_13
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 5848
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 284ef9450944145fdbf674a8e9f4b2f4
+      internalID: -1084215507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_14
+      rect:
+        serializedVersion: 2
+        x: 1255
+        y: 5848
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b146e96b06b44a1689d5b6454257a11
+      internalID: -1294239541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_15
+      rect:
+        serializedVersion: 2
+        x: 2509
+        y: 5848
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 100b8696083fd4621af93c2a7fb5a4ed
+      internalID: 1152652319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_16
+      rect:
+        serializedVersion: 2
+        x: 3763
+        y: 5848
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a6620e16152842fcbf63fc2c914c2b6
+      internalID: -208931640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_17
+      rect:
+        serializedVersion: 2
+        x: 5017
+        y: 5848
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbbff8947554c4f75a382dd1a2500a16
+      internalID: -914295465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_18
+      rect:
+        serializedVersion: 2
+        x: 6271
+        y: 5848
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2232b93924c384e62a6081b9c412ec6c
+      internalID: -257035330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_19
+      rect:
+        serializedVersion: 2
+        x: 7525
+        y: 5848
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab536ca6a1271407885ff9461f1799a8
+      internalID: -1510321359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_20
+      rect:
+        serializedVersion: 2
+        x: 8779
+        y: 5848
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ef80cd9c77ab4abe910a77298dbf2ea
+      internalID: -1408354396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_21
+      rect:
+        serializedVersion: 2
+        x: 10033
+        y: 5848
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4931130bea973436b831e4bace25b0a5
+      internalID: 1720570361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_22
+      rect:
+        serializedVersion: 2
+        x: 11287
+        y: 5848
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 294a625cc126144a481b48fdc6a07edf
+      internalID: -251656610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_23
+      rect:
+        serializedVersion: 2
+        x: 12541
+        y: 5848
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0657e0a4aa404e248ff58ce487123a7
+      internalID: -387288602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_24
+      rect:
+        serializedVersion: 2
+        x: 13795
+        y: 5848
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 923abd34022de4e818603e4599a6dbb2
+      internalID: -895535383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_25
+      rect:
+        serializedVersion: 2
+        x: 15049
+        y: 5848
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bab918530785a4d848addf5b6c497957
+      internalID: -1406384467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_26
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 4386
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e801fdcc1f6843c386d676cb46642e6
+      internalID: -594191847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_27
+      rect:
+        serializedVersion: 2
+        x: 1255
+        y: 4386
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0b279a78ff5049de94d7e1eba280eaa
+      internalID: -2134804550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_28
+      rect:
+        serializedVersion: 2
+        x: 2509
+        y: 4386
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b60b758cb2a764207be8f21e744adf8d
+      internalID: 271366048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_29
+      rect:
+        serializedVersion: 2
+        x: 3763
+        y: 4386
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eaf8a912df9c0430d9b87947c89bb39b
+      internalID: -1197289466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_30
+      rect:
+        serializedVersion: 2
+        x: 5017
+        y: 4386
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56282563dc7a64e4c8534b287db03756
+      internalID: -1944716569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_31
+      rect:
+        serializedVersion: 2
+        x: 6271
+        y: 4386
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ff1d996f529342e1a5a6622239ab268
+      internalID: -941684158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_32
+      rect:
+        serializedVersion: 2
+        x: 7525
+        y: 4386
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ddadb947925544749f63320604d5f72
+      internalID: 1089724719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_33
+      rect:
+        serializedVersion: 2
+        x: 8779
+        y: 4386
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b045b438de7ed4af882c0293cf9ccdee
+      internalID: -672477002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_34
+      rect:
+        serializedVersion: 2
+        x: 10033
+        y: 4386
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12a00bf284ff84cf5a2fb5379581348b
+      internalID: 1642650221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_35
+      rect:
+        serializedVersion: 2
+        x: 11287
+        y: 4386
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b664e0ac6c1d24f788f5f44609762f93
+      internalID: -169165463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_36
+      rect:
+        serializedVersion: 2
+        x: 12541
+        y: 4386
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37a32b1ba9a824d78bc6e77111d7ef4f
+      internalID: -439513716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_37
+      rect:
+        serializedVersion: 2
+        x: 13795
+        y: 4386
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c96347f0401b475dbc883ed8bbd2c27
+      internalID: -492257436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_38
+      rect:
+        serializedVersion: 2
+        x: 15049
+        y: 4386
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df02c6febf1d444858dc00268279796a
+      internalID: 590161435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_39
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 2924
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b84695e157e734bdf8c7a347918f95fb
+      internalID: -706683264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_40
+      rect:
+        serializedVersion: 2
+        x: 1255
+        y: 2924
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ac8f38b05658414993d3427d55e9ed0
+      internalID: 389306978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_41
+      rect:
+        serializedVersion: 2
+        x: 2509
+        y: 2924
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: adea2e44b90ae4e8ab91a8b97b8fb086
+      internalID: 1000266420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_42
+      rect:
+        serializedVersion: 2
+        x: 3763
+        y: 2924
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1c8dafb5990b466f86d70acdc27e67f
+      internalID: 2027466607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_43
+      rect:
+        serializedVersion: 2
+        x: 5017
+        y: 2924
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e891fd7f14e94809aec2922ce4a8a40
+      internalID: 856855019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_44
+      rect:
+        serializedVersion: 2
+        x: 6271
+        y: 2924
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd51536397bf9413eb9d0303d4a82343
+      internalID: 583472427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_45
+      rect:
+        serializedVersion: 2
+        x: 7525
+        y: 2924
+        width: 1252
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c197b6b3f01fc4c6ab96c4e164b00333
+      internalID: 1533594335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_46
+      rect:
+        serializedVersion: 2
+        x: 8779
+        y: 2924
+        width: 1256
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b0f1e91d08f74371b1eddf6d35e9f72
+      internalID: 2096024216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_47
+      rect:
+        serializedVersion: 2
+        x: 10037
+        y: 2924
+        width: 1265
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26566ed9e42fc4aad96e67fe2e178533
+      internalID: -1628954617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_48
+      rect:
+        serializedVersion: 2
+        x: 11304
+        y: 2924
+        width: 1279
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d15cce999b3424477bb2cabac692ef72
+      internalID: 1118208103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_49
+      rect:
+        serializedVersion: 2
+        x: 12585
+        y: 2924
+        width: 1295
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e044fd9671fc4636a0a1e94bcbd329b
+      internalID: 1177836782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_50
+      rect:
+        serializedVersion: 2
+        x: 13882
+        y: 2924
+        width: 1253
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e60f55c350aef47188bfb28ffc4dc756
+      internalID: -1546676164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_51
+      rect:
+        serializedVersion: 2
+        x: 15137
+        y: 2924
+        width: 1238
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d0d05481d2ac47db95fc9afceeb2625
+      internalID: 1694715967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_52
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1462
+        width: 1253
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbdc8578ab6774a66ac0a2c33d2922f2
+      internalID: 224197860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_53
+      rect:
+        serializedVersion: 2
+        x: 1256
+        y: 1462
+        width: 1177
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6506f4bb53a864fbc9693264ae1e077f
+      internalID: -1529210435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_54
+      rect:
+        serializedVersion: 2
+        x: 2435
+        y: 1462
+        width: 1211
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f503e091643414eeba892c854d2a3897
+      internalID: -1972481242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_55
+      rect:
+        serializedVersion: 2
+        x: 3648
+        y: 1462
+        width: 1238
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a424e03021cc04bd1ac1ea536331af85
+      internalID: 583205579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_56
+      rect:
+        serializedVersion: 2
+        x: 4888
+        y: 1462
+        width: 1214
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cbca82c170b44e94a103bb8c5f98810
+      internalID: 119132377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_57
+      rect:
+        serializedVersion: 2
+        x: 6104
+        y: 1462
+        width: 1203
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5690323e78fc49d0a6475a95c133104
+      internalID: 849616656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_58
+      rect:
+        serializedVersion: 2
+        x: 7309
+        y: 1462
+        width: 1271
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52bc40a511ace4c7ab461e0482afce16
+      internalID: -709628758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_59
+      rect:
+        serializedVersion: 2
+        x: 8582
+        y: 1462
+        width: 1325
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aed2b50bc6d2a494495919c4dd45fcc6
+      internalID: -1241689369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_60
+      rect:
+        serializedVersion: 2
+        x: 9909
+        y: 1462
+        width: 1293
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a335cfc61a00d4fe882bcfbf7ad6d721
+      internalID: 755152404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_61
+      rect:
+        serializedVersion: 2
+        x: 11204
+        y: 1462
+        width: 1311
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 474b7761c6d274b908f1a983046895fd
+      internalID: -1510111736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_62
+      rect:
+        serializedVersion: 2
+        x: 12517
+        y: 1462
+        width: 1280
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22adc1eec476a4c36bc3a79ecfc65f58
+      internalID: -778651436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_63
+      rect:
+        serializedVersion: 2
+        x: 13799
+        y: 1462
+        width: 1253
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa2f787d5ec3341aea881d42bb12c5c5
+      internalID: -1094145526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_64
+      rect:
+        serializedVersion: 2
+        x: 15054
+        y: 1462
+        width: 1295
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1cdaf68b6d50a478888846caf5e44f8a
+      internalID: -1489280972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: STICK_title_65
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 0
+        width: 1279
+        height: 1460
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3b662d91b46640a3a9a4347187e9a3b
+      internalID: 2143662544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      STICK_title_0: 1316589324
+      STICK_title_1: 1703850568
+      STICK_title_10: 1505168460
+      STICK_title_11: 1645274537
+      STICK_title_12: -1552790051
+      STICK_title_13: -1084215507
+      STICK_title_14: -1294239541
+      STICK_title_15: 1152652319
+      STICK_title_16: -208931640
+      STICK_title_17: -914295465
+      STICK_title_18: -257035330
+      STICK_title_19: -1510321359
+      STICK_title_2: -333136572
+      STICK_title_20: -1408354396
+      STICK_title_21: 1720570361
+      STICK_title_22: -251656610
+      STICK_title_23: -387288602
+      STICK_title_24: -895535383
+      STICK_title_25: -1406384467
+      STICK_title_26: -594191847
+      STICK_title_27: -2134804550
+      STICK_title_28: 271366048
+      STICK_title_29: -1197289466
+      STICK_title_3: -103384573
+      STICK_title_30: -1944716569
+      STICK_title_31: -941684158
+      STICK_title_32: 1089724719
+      STICK_title_33: -672477002
+      STICK_title_34: 1642650221
+      STICK_title_35: -169165463
+      STICK_title_36: -439513716
+      STICK_title_37: -492257436
+      STICK_title_38: 590161435
+      STICK_title_39: -706683264
+      STICK_title_4: -2013249609
+      STICK_title_40: 389306978
+      STICK_title_41: 1000266420
+      STICK_title_42: 2027466607
+      STICK_title_43: 856855019
+      STICK_title_44: 583472427
+      STICK_title_45: 1533594335
+      STICK_title_46: 2096024216
+      STICK_title_47: -1628954617
+      STICK_title_48: 1118208103
+      STICK_title_49: 1177836782
+      STICK_title_5: -1280847649
+      STICK_title_50: -1546676164
+      STICK_title_51: 1694715967
+      STICK_title_52: 224197860
+      STICK_title_53: -1529210435
+      STICK_title_54: -1972481242
+      STICK_title_55: 583205579
+      STICK_title_56: 119132377
+      STICK_title_57: 849616656
+      STICK_title_58: -709628758
+      STICK_title_59: -1241689369
+      STICK_title_6: 1830930436
+      STICK_title_60: 755152404
+      STICK_title_61: -1510111736
+      STICK_title_62: -778651436
+      STICK_title_63: -1094145526
+      STICK_title_64: -1489280972
+      STICK_title_65: 2143662544
+      STICK_title_7: 53208644
+      STICK_title_8: 435442224
+      STICK_title_9: 116365232
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

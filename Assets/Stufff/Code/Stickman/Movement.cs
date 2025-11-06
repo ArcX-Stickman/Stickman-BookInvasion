@@ -1,0 +1,3762 @@
+
+
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Xml;
+using TMPro;
+using UnityEngine;
+using UnityEngine.Playables;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+
+public class Movement : MonoBehaviour
+{
+    public float Speed;
+    public float JumpForce;
+    public Rigidbody2D rb;
+    public Animator StickAnim;
+    
+    public bool Grounded;
+    public bool CallJumpDEBUG;
+
+    public GameObject MuzzleFire;
+    public Sprite[] MuzzleSprites;
+    public AudioClip Gun;
+    public AudioSource AudioPlayer;
+    public GameObject GunBullet;
+    public GameObject MegaBullet;
+    public GameObject GunBulletArc;
+    public Transform AimPoint;
+    public Transform ArcAimPoint;
+    public Transform StickPOSGlitch;
+    public Volume PostProces;
+    public MotionBlur MB;
+    public Health StickHP;
+    public float MaxSpeed;
+    public bool JumpDodge;
+    public AudioClip BassDrop;
+    public GameObject PitchBlack;
+    public GameObject Graphix;
+    public bool HeCanMove;
+    public bool GraphixOn;
+    public bool AbleToJump;
+    public Transform StickPOS;
+    public bool EarthQ;
+    public bool EarthQ_Dodge;
+    public bool Dead;
+    public AudioClip Fail;
+    public AudioSource GunAudio;
+    private float resetYPosition = -2.338124f;
+    public bool IsShooting;
+    public bool IsFalling;
+    public MotionBlur motionBlurHandler;
+    public MeleeComboSpeed MeleeCollision;
+    public BoxCollider2D StickCollider;
+    public bool SlideJump;
+    public bool IsStunned;
+    //Movement
+    [Header("Movement ")]
+
+    public float Acceleration;
+    public float Deacceleration;
+    public bool isJumping;
+    public Biology_AttackZone Streak_Bio;
+    public float shootCooldown = 0.5f; // Cooldown time between shots
+    private float nextShootTime = 0f;
+    public bool isShooting;
+    [Header("Sliding ")]
+
+    //Slide Cancel Code
+    public float SlideCancelTime;
+    public float SlideCancelSpeed;
+    public float cancelCD;
+    public float SlideGravity;
+    public bool canSlide;
+    public bool canCancel;
+    private float slideTime = 0;
+    private float cancelTime = 0;
+    public bool isSliding;
+    public float MaxSlideSpeed;
+    public bool SlideVolume;
+    public float SlideMomentum;
+    public bool SlideVolumeEnd;
+    public bool BuildUp;
+    public bool SlopeSlide;
+    public AudioClip SlideSFX;
+    //Animation States
+    public bool InSlideAnimation;
+    //Slope Check and Collider Code
+    private BoxCollider2D BoxC;
+    private Vector2 ColliderSize;
+    private float SlopeCheckDistance;
+    public LayerMask WhatsGround;
+    //Dash Code
+    private bool canDash = true;
+    public bool isDashing;
+    public float dashTime;
+    public float dashPower;
+    public float dashCD;
+    public AudioClip DashSFX;
+    //KnockBack Code
+    public float knockbackTime = 0.2f;
+    public float hitdirectionforce = 10f;
+    public float constantForce = 5f;
+    public float inputForce;
+    private Coroutine Knockbackcoroutine;
+    public bool StickmanGetsKnocked { get; private set; }
+    //Knockback Values
+    //Knockback time: 0.62
+    //Hit Direction force 13.07
+    // constant force 8.6
+    //Bools From books
+    public bool BiologyThrow;
+
+    //Hiding Mechanics
+    public bool Hiding;
+    public bool CanHide;
+    public bool TouchHiding;
+    public bool TouchedCollider;
+    // Misc
+    public bool FirstClear;
+    [Header("BackFlip WHoooo")]
+    // BackFlip WHoooo
+    public bool BackFlip;
+    public float BackFlipRotation;
+    public float BackFlipForce;
+    private float LastBackFlip;
+    public float BackFlipCD;
+    public AudioClip BackFlipSFX;
+    public AudioSource BackFlipAS;
+    public float LastBackflipTime;
+    public bool AirBackFlip;
+    [Header("Melee Stuff ")]
+    // Melee I guess
+    public AudioSource PunchAudioP;
+    public AudioClip[] PunchSFX;
+    public BoxCollider2D MeleeCollider;
+    public string punchAnimationName = "Punch";
+    public float PunchspeedIncrease = 0.2f;
+    public float PunchdecayRate = 0.5f;
+    private float defaultSpeed = 1f;
+    private float currentSpeed;
+    private float lastPunch;
+    public float resetPunchSpeedTime = 2f;
+    public float MaxPunchSpeed;
+    public bool PunchBool;
+    public float PunchAnimationSpeed;
+    public bool CanCombo;
+    public float MeleeCD;
+    private float lastPunchTime;
+    public float ComboCount;
+    public int CurrentPunches;
+    public int MaxPunches;
+    public float Maxdelay4Punch;
+    private float OG_MeleeCD;
+    public bool isUppercut;
+    public GameObject RaycastableObj;
+    public float RayDistance;
+    public LayerMask WhatsTheBookLayer;
+    private bool isInPunchAttach;
+    private float LastAttachFreeFlow;
+    public float FreeFlowAttachCD;
+    public float AttachSpeed;
+    public AudioClip MegaPunch;
+    public AudioClip RopeShift;
+
+    [Header("Progression Values ")]
+    // Progression Values
+    public string SceneName;
+    public bool HasGun;
+    public bool BreakIn;
+    public bool AlreadyPickedGun;
+    public bool CanDoublePunch;
+    public int Checkpoint;
+    public bool HasKilledEmbry;
+    public bool HasKilledEcology;
+    public bool HasAlreadySeenEmbryTips;
+    public bool HasAlreadySeenEmbryTipsGlitchPreventer;
+    public bool FinshedEncounterAfterLab;
+    public bool HasBrokeOutOfRope;
+    public LoadingSystem LoadingSystem;
+    [Header("PerkTree Values ")]
+    public int XP_Orbs;
+
+
+    // Cutscene Progression
+    public bool Cutscene_IntroFight;
+    public bool NeedsToViewDirecFirstIntro;
+    public bool HasFullyWatchedFirst;
+    public bool SeenGunDirections;
+    [Header("PaperCollectables")]
+    // Values For PaperCollectables
+    public bool BackflipCollected;
+    public bool InfoCollected;
+    public bool NoMoreCollected;
+    [Header(" Stuff ")]
+    //Performance level destoryer
+    public GameObject Level1;
+    public GameObject Level2;
+    public GameObject Level1Grass;
+    public GameObject BloodFX;
+    public bool Anim_Locked;
+    [Header(" Lab Stuff ")]
+    public int ExamHeliID_Checkpoint;
+    public GameObject LabLevel;
+    public GameObject LabBG_SPRITE;
+    public GameObject Cart;
+    public Vector2 AccelerationCart;
+    public Transform Point4Cart;
+    public float MinDIS4Cart;
+    public float DistanceFromCartPoint;
+    [Header(" HeliChase Stuff ")]
+    public Transform HeliLadder;
+    public Transform UpLadder;
+    public Transform DownLadder;
+    public Transform HeliCinematicClimbDestination;
+    public Transform InHeliPoS;
+    public float MinDisHeliCineClimbDes;
+    public bool HasFullyClimbed;
+    public bool InHeliCineBeatdown;
+    [Header(" Forest Heli Chase Stuff ")]
+    public GameObject Engine;
+
+    // Footsteps
+    public bool WalkOnGrass;
+    public AudioSource FootP;
+    public AudioSource FootPMetal;
+    public AudioClip GrassFootSFX;
+    public bool WalkOnWood;
+    public AudioSource WoodP;
+    [Header("Countering IG ")]
+    // Countering IG
+    public bool IsInThrowAnim;
+    public bool HasCaught;
+    public GameObject EmbryProjectile;
+    public Transform EmbryPOS;
+    public bool CanCatch;
+    public Transform CounterAimPoint;
+    public AudioClip ThrowSFX;
+    public GameObject ExamBullet;
+    public Transform Helicopter;
+    //Encounters
+    public bool InEmbryBoss;
+    public bool InBIO_Boss;
+    public bool InScienceBoss;
+    public bool InExamBoss;
+    [Header("Stealth Kill")]
+    //Stealth Kill
+    public bool InStealth;
+    public bool InStealthKill;
+    public Animator MainCamAnim;
+    public AudioClip FallingSFX;
+    public AudioClip PunchSFXStealth;
+    [Header("Gust Of Bullets (Ult)")]
+    public bool GustOfBullets;
+    public AudioSource Hypothesis;
+    public AudioSource BattleTheme;
+    public AudioSource UltTheme;
+    public AudioSource LabTheme;
+    public float UltCD;
+    public float LastULT;
+    public PlayableDirector UltCam;
+  // jump stuff coyote time
+    private float coyoteTime = 0.07f;
+    private float coyoteTimerCounter;
+
+    private bool AlrPlayedDeath;
+    public AudioClip DeathSFX;
+    public AudioClip PerfectDodge;
+    
+    [Header("Perfect Dodge")]
+    public AudioSource PerfectDodgeSloMO;
+    public bool isInPerfectDodge;
+    public int PerfectDodgeCount;
+    public TimeManager TimeManager;
+    public Slider LockedInMeterSlider;
+    public int MaxDodge;
+    public float SloMORate;
+    public bool isActive;
+    public Image LockedInThunder;
+    public bool LockedIN;
+    public AudioClip WeAreLockedIn_SFX_ACTIVATE;
+    public CameraScript CameraScript;
+    public AudioClip GaugeFull;
+    public GameObject Particle4LockingIn;
+    public Animator LockedThunderAnim;
+    public bool MegaHeal;
+    public AudioClip OrbSpawn;
+    public bool AuraSigmaRizzyDodge;
+
+    [Header("DebuggingValues")]
+    public float DistanceToBook = 0;
+    public bool isVoid;
+    public float JumpCD;
+    public float LastJump;
+    public float timeBecameAirborne;
+    public float jumpAnimationHelper = 0.15f;
+    public bool HeliFinale;
+    public float DashDisDebug;
+    public GameObject HeliForestCheck;
+    [Header("Cinematic Values")]
+    public float CineMaticSpeed;
+    public float MaxCineMaticSpeed;
+    public bool InCinematic;
+    public float CinematicSlideSpeed;
+    public float MaxCinematicSlideSpeed;
+
+
+
+    void Start()
+    {
+        Grounded = true;
+        Jump();
+        if(Level1 != null && Level2 != null)
+        {
+            Level1.gameObject.SetActive(true);
+
+            Level2.gameObject.SetActive(true);
+        }
+ 
+        //MuzzleFire.gameObject.SetActive(false);
+        StickCollider = GetComponent<BoxCollider2D>();
+
+        LastULT = -UltCD;
+
+        //if (Checkpoint > 3)
+        //{
+        //    Level1.gameObject.SetActive(true);
+
+        //    Level2.gameObject.SetActive(true);
+        //}
+        //if(Checkpoint <= 3)
+        //{
+        //    Level2.gameObject.SetActive(false);
+        //    ;
+        //    Level1.gameObject.SetActive(true);
+        //}
+
+
+        OG_MeleeCD = MeleeCD;
+
+        StickHP.MegaCharge = 30;
+
+        if (AlreadyPickedGun)
+        {
+            HasGun = true;
+        }
+        else
+        {
+            HasGun = false;
+
+        }
+
+
+        BoxC = GetComponent<BoxCollider2D>();
+
+        ColliderSize = BoxC.size;
+
+        Time.timeScale = 1;
+
+
+        HeCanMove = true;
+        Dead = false;
+        IsStunned = false;
+        AbleToJump = true;
+
+        PitchBlack.gameObject.SetActive(false);
+
+        //Speed = MaxSpeed;
+
+        Vector3 currentPosition = transform.position;
+
+        // Set the Y axis to 0, keeping X and Z unchanged
+        currentPosition.y = 0;
+
+
+        rb = GetComponent<Rigidbody2D>();
+        StickAnim = GetComponent<Animator>();
+    }
+
+    private void OnValidate()
+    {
+
+        Acceleration = (50 * Acceleration) / MaxSpeed;
+        Deacceleration = (50 * Deacceleration) / MaxSpeed;
+
+        #region Variable Ranges
+        Acceleration = Mathf.Clamp(Acceleration, 0.01f, MaxSpeed);
+        Deacceleration = Mathf.Clamp(Deacceleration, 0.01f, MaxSpeed);
+        #endregion
+
+    }
+
+    public void AURA_CLIPFARM_RIZZY_DodgeBoolAura()  // bro how did i come up with this name 
+    {
+        AudioPlayer.PlayOneShot(BackFlipSFX);
+        if (!AuraSigmaRizzyDodge)
+        {
+            AuraSigmaRizzyDodge = true;
+
+        }
+        else
+        {
+            AuraSigmaRizzyDodge = false;
+
+        }
+    }
+
+
+
+
+    private bool AlrDid4DeathCor;
+
+    public IEnumerator KnockBackAction(Vector2 hitdirection, Vector2 constantForceDirection, float inputDirection)
+    {
+        StickmanGetsKnocked = true;
+        hitdirection = new Vector2(hitdirection.x, -Mathf.Abs(hitdirection.y));
+        constantForceDirection = new Vector2(constantForceDirection.x, -Mathf.Abs(constantForceDirection.y));
+        Vector2 _hitForce = hitdirection * hitdirectionforce;
+        Vector2 _constantForce = constantForceDirection * constantForce;
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+        float elapsedTime = 0f; 
+        while (elapsedTime < knockbackTime)
+        {
+            elapsedTime += Time.fixedDeltaTime;
+
+         
+            Vector2 _knockbackForce = _hitForce + _constantForce;
+            Vector2 _combinedForce = new Vector2(_knockbackForce.x, Mathf.Min(_knockbackForce.y, 0));
+
+            if (inputDirection != 0)
+            {
+                _combinedForce += new Vector2(inputDirection * inputForce, 0f);
+            }
+
+            rb.velocity = _combinedForce;
+
+            yield return new WaitForFixedUpdate();
+        }
+
+        StickAnim.SetBool("Fall", false);
+
+
+        rb.gravityScale = originalGravity;
+        StickmanGetsKnocked = false;
+    }
+    private bool AlrAttaching;
+    public Transform groundCheck;
+    public float checkRadius = 0.2f;
+    public LayerMask whatIsGround;
+
+    void FixedUpdate()
+    {
+        if (Input.GetKey(KeyCode.F4) && Input.GetKeyDown(KeyCode.S))
+        {
+            Debug.Log("Debugging Save");
+            SaveProgress();
+        }
+
+
+        if (Grounded && StickAnim.GetBool("Jump"))
+        {
+            if (timeBecameAirborne != 0f && Time.time >= timeBecameAirborne + jumpAnimationHelper)
+            {
+                StickAnim.SetBool("Jump", false);
+            }
+            else if (timeBecameAirborne == 0f)
+            {
+                StickAnim.SetBool("Jump", false);
+            }
+        }
+        else if (!Grounded)
+        {
+            StickAnim.SetBool("Jump", true);
+        }
+
+        SlopeCheck();
+        if (Cart.gameObject.activeSelf)
+        {
+            SupaFast_Cart_BreakIn();
+        }
+        //if(rb.constraints == RigidbodyConstraints2D.None)
+        //{
+        //    if (Grounded)
+        //        rb.rotation = Mathf.Lerp(rb.rotation, 0f, Time.fixedDeltaTime * 70f);
+
+        //}
+
+        if (HeliForestCheck != null || InCinematic)
+        {
+            if(MaxSpeed <= CineMaticSpeed)
+            {
+                Speed = CineMaticSpeed;
+                MaxSpeed = CineMaticSpeed;
+            }
+            if(MaxSpeed >= MaxCineMaticSpeed)
+            {
+                MaxSpeed = MaxCineMaticSpeed;
+            }
+            if(MaxSlideSpeed <= CinematicSlideSpeed)
+            {
+                MaxSlideSpeed = CinematicSlideSpeed;
+                
+            }
+            if(SlideCancelSpeed <= MaxCinematicSlideSpeed)
+            {
+                SlideCancelSpeed = MaxCinematicSlideSpeed;
+            }
+           // rb.gravityScale = 15;
+        }
+        if(OnLadder && !HasFullyClimbed && !NeverDoCineBeatDownAgain)
+        {
+            StartCoroutine(ClimbHeliCinematic());
+        }
+
+        if (InHeliCineBeatdown && !NeverDoCineBeatDownAgain && HasFullyClimbed)
+        {
+            HeliCineBeatDownManager();
+        }
+    }
+    private bool AlrDid4Reload;
+    public bool FacingRight;
+    private bool PlayedLockedIn_CompletedGauge;
+
+ 
+    private void Update()
+    {
+        if(hingeJoint2D == null)
+        {
+            hingeJoint2D = GetComponent<HingeJoint2D>();
+        }
+        if (OnLadder && !isFallingHeli && HeliFinale)
+        {
+            StickAnim.SetBool("Heli", true);
+            StickAnim.SetBool("Dash",false);
+           HeliManager();
+        }
+
+       
+        if (CallJumpDEBUG)
+        {
+            Jump();
+            CallJumpDEBUG = false;
+        }
+        if (!Grounded && timeBecameAirborne == 0f) 
+        {
+            timeBecameAirborne = Time.time;
+        }
+        else if (Grounded)
+        {
+            timeBecameAirborne = 0f; 
+        }
+        // Dodge Meter
+        if(LockedInMeterSlider != null)
+        {
+            if (PerfectDodgeCount >= MaxDodge)
+            {
+                PerfectDodgeCount = MaxDodge;
+            }
+            LockedInMeterSlider.maxValue = MaxDodge;
+            LockedInMeterSlider.value = PerfectDodgeCount;
+            if (!LockedIN)
+            {
+                LockedInThunder.color = Color.gray;
+            }
+            else
+            {
+                LockedInThunder.color = Color.white;
+            }
+            if (PerfectDodgeCount == MaxDodge && !PlayedLockedIn_CompletedGauge && Particle4LockingIn != null)
+            {
+                Particle4LockingIn.gameObject.SetActive(true);
+                AudioPlayer.PlayOneShot(GaugeFull);
+                CameraScript.StartCoroutine(CameraScript.ShakeCam(3.5f, 0.15f));
+                PlayedLockedIn_CompletedGauge = true;
+            }
+            if (Input.GetKeyDown(KeyCode.LeftControl) && !LockedIN && PerfectDodgeCount == MaxDodge)
+            {
+                Particle4LockingIn.gameObject.SetActive(true);
+                LockedThunderAnim.SetBool("1", true);
+                LockedIN = true;
+                CameraScript.StartCoroutine(CameraScript.ShakeCam(5.5f, 0.15f));
+                AudioPlayer.PlayOneShot(WeAreLockedIn_SFX_ACTIVATE);
+            }
+            if (Input.GetKeyDown(KeyCode.E) && isInPerfectDodge && !PowerfulPunch && !Dead)
+            {
+                ResetAllAnimationStates();
+                StickAnim.CrossFade("I Understand it Now Stickman Mega Heal", 0, 0);
+                MegaHeal = true;
+            }
+        }
+       
+
+       
+        // force no gun for the Hideout section
+        if(Checkpoint == 551)
+        {
+            HasGun = false;
+        }
+
+        if(HeCanMove == false  && !IsStunned)
+        {
+            HeCanMove = true;
+        }
+
+        if (BackFlip)
+        {
+            //StickAnim.ResetTrigger("Punch");
+            //BoxCollider2D punchCollision = MeleeCollider.gameObject.GetComponent<BoxCollider2D>();
+            //punchCollision.enabled = false;
+        }
+
+        // performance
+        if(Checkpoint == ExamHeliID_Checkpoint && LabLevel != null && LabBG_SPRITE != null)
+        {
+            Move();
+            HasGun = true;
+            PauseManager pm = FindAnyObjectByType<PauseManager>();
+            pm.Hypothesis.gameObject.SetActive(false);
+            if (!pm.BreakIN.gameObject.activeSelf)
+            {
+                BreakIn = true;
+                LabBG_SPRITE.gameObject.SetActive(true);
+                pm.Hypothesis.gameObject.SetActive(false);
+                pm.BreakIN.gameObject.SetActive(true);
+            }
+            if(LabLevel != null)
+            {
+                LabLevel.gameObject.SetActive(true);
+
+            }
+        }
+        if(Level1 != null && Level2 != null)
+        {
+            if (Checkpoint >= 3 && Checkpoint != 726438 && Checkpoint != ExamHeliID_Checkpoint)
+            {
+                Level1.gameObject.SetActive(false);
+
+                Level2.gameObject.SetActive(true);
+            }
+            if (Checkpoint < 3 || Checkpoint == 726438)
+            {
+                Level2.gameObject.SetActive(false);
+
+                Level1.gameObject.SetActive(true);
+            }
+        }
+        
+
+        if(InEmbryBoss && MaxSpeed >= 50 )
+        {
+            MaxSpeed = 50;
+        }
+
+        if(InEmbryBoss && JumpForce >= 50)
+        {
+            JumpForce = 50;
+
+        }
+
+        if (MaxSpeed < 60 && HeCanMove)
+        {
+            MaxSpeed = 60;
+        }
+
+        if (!Grounded)
+        {
+            StopFootsteps();
+        }
+        if (isDashing)
+        {
+            StopFootsteps();
+        }
+        
+        if (BackFlip)
+        {
+            StopFootsteps();
+        }
+        if (isSliding)
+        {
+            StopFootsteps();
+        }
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            Footsteps();
+        }
+        else if (!Input.GetKey(KeyCode.A))
+        {
+            StopFootsteps();
+        }
+
+
+        if (Input.GetKey(KeyCode.G))
+        {
+            if(Time.time >= LastULT + UltCD && StickHP.Testing)
+            {
+                LastULT = Time.time;
+                StickAnim.SetTrigger("Hyper");
+            }
+           
+        }
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            Footsteps();
+        }
+        else if(!Input.GetKey(KeyCode.D))
+        {
+            StopFootsteps();
+        }
+
+        Grounded = CheckIfGrounded();
+
+
+
+
+        if(lastPunchTime + MeleeCD >= Maxdelay4Punch)
+        {
+            MeleeCD = OG_MeleeCD;
+            ComboCount = 0;
+        }
+
+
+        if (Input.GetButton("Fire2"))
+        {
+
+            if(Time.time >= lastPunchTime + MeleeCD && !BackFlip || isInPerfectDodge)
+            {
+                if (BackFlip && isInPerfectDodge && !MegaHeal)
+                {
+                    PowerfulPunch = true;
+                    MeleeCollider.enabled = true;
+
+                }
+
+               else if (!BackFlip && !isInPerfectDodge)
+                {
+                    if (InHeliCineBeatdown)
+                    {
+                        Exam examBook = GameObject.FindAnyObjectByType<Exam>();
+                        if (!examBook.isPunch)
+                        {
+                            StickAnim.SetTrigger("Punch");
+
+                        }
+                    }
+                    else
+                    {
+                        StickAnim.SetTrigger("Punch");
+
+                    }
+
+                }
+                StartCoroutine(PunchFreeFlow());
+
+                MeleeCD = Mathf.Max(OG_MeleeCD - ComboCount, 0.1f);
+                MeleeCD = MeleeCD - ComboCount;
+                lastPunchTime = Time.time;
+
+
+
+
+            }
+        }
+
+
+
+        if (JumpForce >= 25)
+        {
+            JumpForce = 25;
+        }
+
+        if (Input.GetAxis("Horizontal") > 0)
+        {
+            FacingRight = true;
+        }
+        else if (Input.GetAxis("Horizontal") < 0)
+        {
+            FacingRight = false;
+        }
+
+
+        if (isDashing)
+        {
+            motionBlurHandler.HandleMotionBlur();
+        }
+
+        //Kill himself
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            StickHP.PlayerHP = 0;
+        }
+
+
+        //Slidecancel and Move speed min max
+
+
+       
+
+
+       
+        // Handle Max Speed
+        if (SlideCancelSpeed < 100)
+        {
+            if (!inRush && HeliForestCheck == null)
+            {
+                SlideCancelSpeed = 100;
+
+            }
+        }
+
+        if (SlideCancelSpeed > 220)
+        {
+            SlideCancelSpeed = 220;
+        }
+
+        if (BreakIn == true && MaxSpeed > 80 && Checkpoint != ExamHeliID_Checkpoint)
+        {
+            MaxSpeed = 80;
+        }
+
+        if(Checkpoint == ExamHeliID_Checkpoint && HeliForestCheck == null)
+        {
+            if (MaxSpeed >= 100 || MaxSpeed <= 100)
+            {
+                MaxSpeed = 100;
+            }
+
+            if(rb.gravityScale < 15 && !isDashing && HeliForestCheck == null)
+            {
+                rb.gravityScale = 15;
+            }
+            else if(HeliForestCheck == null)
+            {
+                rb.gravityScale = 20;
+
+            }
+
+
+        }
+
+        if(HeliForestCheck != null)
+        {
+          
+            if(MaxSpeed < 100)
+            {
+                MaxSpeed = 100;
+            }
+
+        }
+
+
+
+
+
+
+
+        //Countering KeyBoard
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            StickAnim.SetTrigger("Catch");
+        }
+
+        if (HasCaught)
+        {
+            Helicopter exam = FindFirstObjectByType<Helicopter>();
+            if (exam != null)
+            {
+                if(exam.ExamHealth <= 1 && !PlayedCutHeli)
+                {
+                    PlayedCutHeli = true;
+                    StartCoroutine(EndDemoVersion1());
+                }
+            }
+            HasCaught = false;
+            StickAnim.SetTrigger("Caught");
+        }
+
+
+
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            if (StickHP.PlayerHP > 0 && canSlide == true)
+            {
+                StartCoroutine(Slide());
+
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (InHeliCineBeatdown)
+            {
+                StickAnim.SetTrigger("Dodge");
+
+                StickAnim.CrossFade("CrazySigmaDodgeYOOOOOO",0,0);
+
+            }
+            else
+            {
+                StickAnim.SetTrigger("Dodge");
+
+                if (PerfectDodgeCount == MaxDodge && LockedIN && !inRush)
+                {
+                    StartedDecay = false;
+                    StartCoroutine(PerfectDodge_SloMO());
+                }
+                else if (StickHP.PlayerHP > 0 && Time.time >= LastBackFlip + BackFlipCD && !inSlipperyState && !inCombo && !isJumping && Grounded && !inRush)
+                {
+                    LastBackFlip = Time.time;
+                    StartCoroutine(BackFlipMove());
+
+                }
+                else if (StickHP.PlayerHP > 0 && Time.time >= LastBackFlip + BackFlipCD && !inSlipperyState && !inCombo && !AirBackFlip && !inRush)
+                {
+                    AirBackFlip = true;
+                    LastBackFlip = Time.time;
+                    StartCoroutine(BackFlipMove());
+                }
+                //else if (StickHP.PlayerHP > 0 && Time.time >= LastBackFlip + BackFlipCD && isJumping && !inSlipperyState)
+                //{
+                //    isJumping = false;
+                //    LastBackFlip = Time.time;
+                //    StartCoroutine(BackFlipMove());
+                //}
+
+            }
+
+
+
+
+        }
+
+
+
+
+        //hide
+
+
+        if (Hiding)
+        {
+            StickAnim.SetBool("Hide", true);
+        }
+        if (!Hiding)
+        {
+            StickAnim.SetBool("Hide", false);
+        }
+
+        //if (Input.GetKeyDown(KeyCode.Q) && CanHide)
+        //{
+        //    if (!Hiding && TouchedCollider)
+        //    {
+        //        // Start running toward the hiding position
+        //        StartCoroutine(RunToHidingPosition());
+        //    }
+        //    else
+        //    {
+        //        // Stop hiding and allow movement
+        //        Hiding = false;
+        //        HeCanMove = true;
+        //        StickAnim.SetBool("Hide", false);
+        //        StickAnim.SetBool("Walking", false);
+        //    }
+        //}
+
+
+
+        if ((Input.GetKeyDown(KeyCode.E)) && Hiding)
+        {
+            Hiding = false;
+            //transform.position = HidePosition.position;
+            //transform.position = Vector3.MoveTowards(HidePosition.position, transform.position, MaxSpeed / 5 * Time.deltaTime);
+            HeCanMove = true;
+            StickAnim.SetBool("Hide", false);
+        }
+
+
+        //Time.timeScale = 1;
+
+        if (HidePosition != null)
+        {
+            TouchedCollider = true;
+
+        }
+        else
+        {
+            TouchedCollider = false;
+        }
+
+        if (isDashing)
+        {
+            canSlide = false;
+            return;
+        }
+
+        if (!isSliding)
+        {
+            StickAnim.SetBool("Slide", false);
+        }
+
+
+
+
+        if (EarthQ_Dodge == true)
+        {
+            //StickAnim.SetBool("Jump", false);
+            //StickAnim.SetBool("DodgeLow", true);
+        }
+
+
+        if (EarthQ_Dodge == false)
+        {
+
+            StickAnim.SetBool("DodgeLow", false);
+        }
+
+
+
+
+
+        
+        // dead
+        if (StickHP.PlayerHP <= 0)
+        {
+            //if (!AlrDid4DeathCor)
+            //{
+            //    AlrDid4DeathCor = true;
+            //    StartCoroutine(WaitForBit());
+
+            //}
+            StickAnim.CrossFade("Dead",0,0);
+            StickAnim.SetTrigger("Dead");
+            Speed = 0;
+            Dead = true;
+            if (!AlrPlayedDeath)
+            {
+                AlrPlayedDeath = true;
+                AudioPlayer.PlayOneShot(DeathSFX);
+            }
+          
+        }
+
+
+        if (Dead == true)
+        {
+            StickHP.PlayerHP = 0;
+            TimeManager.RevertSpeed();
+        }
+
+        
+
+
+        // call move void
+        if(Cart!= null)
+        {
+            if (StickmanGetsKnocked == false && !SlopeSlide && !Cart.gameObject.activeSelf && HeCanMove && !Dead && !PunchBool)
+            {
+
+                Move();
+            }
+        }
+        else
+        {
+            if (StickmanGetsKnocked == false && !SlopeSlide  && HeCanMove && !Dead && !PunchBool)
+            {
+
+                Move();
+            }
+        }
+       
+        if (PunchBool && !isInPunchAttach && !isInPerfectDodge)
+        {
+            rb.velocity = new Vector2(0, rb.velocity.y);
+            StopFootsteps();
+        }
+
+      
+
+        if (StickPOS.position.y < resetYPosition)
+        {
+            FallStick();
+        }
+        if (Input.GetKey(KeyCode.Space) && StickPOS.position.y < resetYPosition)
+        {
+            FallStick();
+        }
+        if (Input.anyKey && StickPOS.position.y < resetYPosition)
+        {
+            FallStick();
+        }
+
+
+
+
+
+
+        if (Grounded == true)
+        {
+            AirBackFlip = false;
+            isJumping = false;
+            StickAnim.SetBool("OnGround", true);
+
+            AbleToJump = true;
+            SlideJump = false;
+
+            canSlide = true;
+
+            StickAnim.SetBool("DodgeLow", false);
+
+            StickAnim.SetBool("Jump", false);
+            //StickAnim.ResetTrigger("JumpShoot");
+
+
+            JumpDodge = false;
+
+            StickAnim.SetBool("DodgeHigh", false);
+
+            StickAnim.SetBool("Fall", false);
+        }
+
+        if (!Grounded)
+        {
+
+            StickAnim.SetBool("OnGround", false);
+            AbleToJump = false;
+            canSlide = false;
+            //StickAnim.SetBool("Slide", false);
+            if(HeliForestCheck == null) // Helps With Slope Levels
+            {
+                isSliding = false;
+
+            }
+
+        }
+
+
+        if (Input.GetKey(KeyCode.Space) && !isSliding && !SlideJump && !InSlideAnimation && !Dead && Time.time >= LastJump + JumpCD && Grounded)
+        {
+            LastJump = Time.time;
+            Debug.Log("Jump Has Been Requested");
+            if (StickmanGetsKnocked == false && !InSlideAnimation && !inRush)
+            {
+                Debug.Log("Jump Has Went Through");
+                coyoteTimerCounter = 0;
+                Jump();
+
+                if (!SlideJump)
+                {
+                    rb.gravityScale = 10.55f;
+                }
+
+
+
+            }
+
+        }
+
+        if (Input.GetKey(KeyCode.P))
+        {
+            Graphix.gameObject.SetActive(true);
+        }
+
+
+        if (Input.GetKey(KeyCode.L))
+        {
+            Graphix.gameObject.SetActive(false);
+        }
+
+
+        
+        if (Input.GetButton("Fire1"))
+        {
+            if (HasGun && StickHP.MegaCharge > 0.5f && Time.deltaTime > 0 && StickHP.MegaCharge >= 5 && !isInPerfectDodge)
+            {
+                if (StickHP.PlayerHP > 0)
+                {
+                    if (!isDashing)
+                    {
+                        if (Hiding)
+                        {
+                            transform.localScale = new Vector3(1, 1, 1);
+                        }
+                        Shoot();
+                        
+                    }
+
+                }
+            }
+
+
+
+
+
+        }
+
+        
+        //if (Input.GetButton("Fire2"))
+        //{
+        //    if (!isDashing)
+        //    {
+        //        StickAnim.SetTrigger("ShootVariPistol");
+        //    }
+
+        //}
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            StickAnim.SetTrigger("Crouch");
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && !Dead && !BackFlip && !isInPerfectDodge && !OnLadder || Input.GetKeyDown(KeyCode.LeftShift) && canDash && HeliFinale && !OnLadder)
+        {
+            StartCoroutine(Dash());
+        }
+
+        if (StickmanGetsKnocked == true)
+        {
+            Speed = 0;
+            Grounded = false;
+
+        }
+
+        if (StickmanGetsKnocked == false)
+        {
+            RevertSpeed();
+
+        }
+
+        AssignPossibleNulls();
+        ShootNPunch();
+    }
+
+    //private bool FoundLedge;
+    //private Vector2 LedgePosition;
+    // there was gonna be a section where you climb a Hill but ngl it made me mad and now no more climb
+    // HE HE HE HAA!!!!
+    // >:D
+    //public void CheckForThemLedges()
+    //{
+    //    Vector2 rayDirection = new Vector2(0f, LedgeCheckDistance);
+    //    RaycastHit2D raycast = Physics2D.Raycast(LedgeChecker.position, rayDirection, LedgeCheckDistance, WhatsALedge);
+    //    Debug.DrawRay(LedgeChecker.position, rayDirection * RayDistance, Color.red);
+
+    //    if (raycast.collider != null)
+    //    {
+
+    //    }
+
+
+    //}
+    public bool inSlipperyState;
+    public bool PowerfulPunch;
+
+    //public void CalculateStuffForLedge()
+    //{
+    //    // nah
+    //}
+    // Things for balancing  energy draining when shooting;
+    private float DelayCD = 0.2f;
+    private float LastDelay;
+
+    public void TURN_OFFF_RBBBBBBBB()
+    {
+        rb.simulated = false; 
+    }
+
+    public void TURN_ONNNNN_RBBBBBB()
+    {
+        rb.simulated = true;
+    }
+    private bool CheckIfGrounded()
+    {
+        float extraHeight = 0.4f;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, GetComponent<BoxCollider2D>().bounds.extents.y + extraHeight, WhatsGround);
+        Debug.DrawRay(transform.position, Vector2.down * (GetComponent<BoxCollider2D>().bounds.extents.y + extraHeight), Color.red);
+        return hit.collider != null;
+    }
+
+    public void AnimationKey_StunTrue()
+    {
+        IsStunned = true;
+    }
+    public void StartCounterCouroutine()
+    {
+        AudioPlayer.PlayOneShot(ThrowSFX);
+        StartCoroutine(CounterAttack());
+    }
+
+    // freeze fram
+    public void FreeezeAnimation_KEY()
+    {
+        if(Checkpoint != ExamHeliID_Checkpoint)
+        {
+            TimeManager.FreezeTime(0.2f);
+
+        }
+    }
+    public void ThrowSFX_ANIMTION_KEY()
+    {
+        AudioPlayer.PlayOneShot(ThrowSFX);
+
+    }
+
+    public IEnumerator WaitForBit()
+    {
+        yield return new WaitForSeconds(3f);
+        LoadingSystem.LoadGameScene();
+
+    }
+
+
+    public void HURT_COMBO_MESS_UP_ANIMATION_KEY()
+    {
+        CurrentPunches -= 1;
+    }
+
+    public bool HasCaughtSniper;
+    public IEnumerator CounterAttack()
+    {
+
+        if (InExamBoss)
+        {
+            //yield return new WaitForSecondsRealtime(0.1f);
+            //Vector2 direction = (Helicopter.position - CounterAimPoint.position).normalized;
+            //GameObject projectile = Instantiate(ExamBullet, CounterAimPoint.position, Quaternion.identity);
+            //Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
+            //float enemySpeed = rb.velocity.x;
+            //float distance = Vector2.Distance(CounterAimPoint.position, Helicopter.position);
+            //float ThrowSpeed = 100;
+            //float velocityX = direction.x * ThrowSpeed + enemySpeed;
+            //float arcHeight = 0.5f;
+            //float velocityY = Mathf.Atan(2 * arcHeight * Mathf.Abs(Physics2D.gravity.y));
+            //rb.velocity = new Vector2(velocityX, velocityY);
+            yield return new WaitForSecondsRealtime(0.1f);
+            GameObject projectile = Instantiate(GunBullet, AimPoint.position, Quaternion.identity);
+            projectile.tag = "CounterBullet";
+            Vector2 shootDirection = (transform.localScale.x > 0) ? Vector2.right : Vector2.left;
+            projectile.GetComponent<Bullet>().SetDirection(shootDirection);
+            projectile.GetComponent<Bullet>().isEnemyCounter = true;
+        }
+        else
+        {
+            if (!InEmbryBoss)
+            {
+                yield return new WaitForSecondsRealtime(0.1f);
+                GameObject projectile = Instantiate(GunBullet, AimPoint.position, Quaternion.identity);
+                projectile.tag = "CounterBullet";
+                Vector2 shootDirection = (transform.localScale.x > 0) ? Vector2.right : Vector2.left;
+                projectile.GetComponent<Bullet>().SetDirection(shootDirection);
+                projectile.GetComponent<Bullet>().isEnemyCounter = true;
+            }
+           
+        }
+
+
+        if (InEmbryBoss)
+        {
+
+            yield return new WaitForSecondsRealtime(0.1f);
+            Vector2 direction = (EmbryPOS.position - CounterAimPoint.position).normalized;
+            GameObject projectile = Instantiate(EmbryProjectile, CounterAimPoint.position, Quaternion.identity);
+            Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
+            float enemySpeed = rb.velocity.x;
+            float distance = Vector2.Distance(CounterAimPoint.position, EmbryPOS.position);
+            float baseThrowSpeed = 100;
+            float velocityX = direction.x * baseThrowSpeed + enemySpeed;
+            float arcHeight = 0.5f;
+            float velocityY = Mathf.Sqrt(2 * arcHeight * Mathf.Abs(Physics2D.gravity.y));
+            rb.velocity = new Vector2(velocityX, velocityY);
+            //rb.AddTorque(570f);  // fix this later tooo many visual bugs that make it not gucci :/
+        }
+
+    }
+
+
+    public void InCounterAnimBoolTrue()
+    {
+        IsInThrowAnim = true;
+    }
+
+
+    public void InCounterAnimBoolFalse()
+    {
+        IsInThrowAnim = false;
+    }
+
+    public void WeDontgotitAnymore()
+    {
+        HasCaught = false;
+    }
+
+    public void CanCatchBool()
+    {
+        CanCatch = true;
+    }
+
+    public void CanCatchBoolIsFalse()
+    {
+        CanCatch = false;
+    }
+
+
+    private float slideMomentum = 0f;
+
+    public void AnimationKey_IsDashingBool()
+    {
+        isDashing = true;
+    }
+
+    public void AnimationKey_IsSlidingBool()
+    {
+        isSliding = true;
+    }
+
+    public void AnimationKey_DashFalse()
+    {
+        isDashing = false;
+    }
+    public void Jump()
+    {
+        Grounded = false;
+        coyoteTimerCounter = 0;
+        BackFlipAS.pitch = Random.Range(0.7f, 1.5f);
+        BackFlipAS.PlayOneShot(BackFlipSFX);
+        rb.gravityScale = 20;
+        isJumping = true;
+
+        if (rb.velocity.magnitude > 5.1f && MaxSpeed >= 40 && StickHP.MegaCharge > 1)
+        {
+            motionBlurHandler.HandleMotionBlur();
+        }
+        if (!InSlideAnimation && !SlideJump)
+        {
+            if(StickHP.MegaCharge > 1)
+            {
+                if(Checkpoint != ExamHeliID_Checkpoint || HeliForestCheck != null)
+                {
+                    JumpForce = Mathf.Max(25, JumpForce * ((MaxSpeed / JumpForce) / 1.5f));
+                    
+                }
+                else
+                {
+                    JumpForce = 90; 
+
+                }
+                MaxSpeed += 0.4f;
+                StickHP.MegaCharge -= 2.5f;
+                //StickHP.StartCoroutine(StickHP.DelayinMegaCharge());
+            }
+            else
+            {
+                float TempJumpForce = Mathf.Max(25, JumpForce * ((MaxSpeed / JumpForce) / 1.5f));
+                float MinimizedForce = TempJumpForce / 2;
+                JumpForce = MinimizedForce;
+                MaxSpeed -= 0.7f;
+
+
+            }
+            Debug.Log("Jump Void()");
+
+            if (AbleToJump && !isSliding)
+            {
+                Debug.Log("Jump Void Is Active");
+                if(!isDashing && !isSliding && !IsShooting && !Dead && !inSlipperyState && !Anim_Locked)
+                {
+                    StickAnim.CrossFade("Jump", 0,0);
+
+                }
+                else
+                {
+
+                    StickAnim.SetBool("Jump", true);
+
+                }
+
+                if(JumpForce >= 50)
+                {
+                    JumpForce = 50; // this is how we limit the jump to not make it crazy
+                }
+                float horizontalMomentum = rb.velocity.x;
+                rb.velocity = new Vector2(horizontalMomentum, JumpForce);
+
+                Grounded = false;
+            }
+        }
+    }
+
+   public void AnimationKey_UppercutBool()
+    {
+        isUppercut = true;
+
+    }
+
+    public void ShootNPunch()
+    {
+        if(CurrentPunches < 0)
+        {
+            CurrentPunches = 0;
+        }
+        if(CurrentPunches >= MaxPunches && HasGun)
+        {
+            CurrentPunches = 0;
+            rb.rotation = 0;
+
+            StickAnim.SetTrigger("ComboSnP");
+            inCombo = true;
+
+        }
+    }
+
+    public void ShootNPunch_Combo_Move()
+    {
+        float TimeMax = 1;
+        float horizontalMomentum = 25;
+        float TimeDuration = 0;
+        while (TimeMax > TimeDuration)
+        {
+            TimeDuration += Time.deltaTime;
+            rb.velocity = new Vector2(transform.localScale.x * (-1 * (horizontalMomentum)), 0);
+
+        }
+        // Vector3 MoveDirec = new Vector3(horizontalMomentum, 0f, 0f) * Time.deltaTime;
+        //rb.velocity = MoveDirec;
+        //Vector3 MovementThing = new Vector3(x, y, 0f) * Time.deltaTime;
+        //motionBlurHandler.HandleMotionBlur();
+        //transform.position -= MoveDirec;
+
+    }
+
+    //public IEnumerator ShootNPunchCourtine()
+    //{
+        
+    //}
+    public void AnimationKey_UppercutFalse()
+    {
+        isUppercut = false;
+    }
+    private IEnumerator RunToHidingPosition()
+    {
+
+        StickAnim.SetBool("RunHide", true);
+
+
+        HeCanMove = false;
+
+        while (Vector3.Distance(transform.position, HidePosition.position) > 0.1f)
+        {
+
+            transform.position = Vector3.MoveTowards(transform.position, HidePosition.position, (MaxSpeed * 2.4f) * Time.deltaTime);
+
+
+            Vector3 direction = HidePosition.position - transform.position;
+            transform.localScale = new Vector3(Mathf.Sign(direction.x), 1, 1);
+
+            yield return null;
+        }
+
+
+        StickAnim.SetBool("RunHide", false);
+
+
+        Hiding = true;
+
+
+
+        transform.localScale = new Vector3(-1, 1, 1);
+
+
+
+        StickAnim.SetBool("Hide", true);
+    }
+
+
+
+
+    public void SHOW_BLOOD_FX()
+    {
+        BloodFX.gameObject.SetActive(true);
+        Animator anim = BloodFX.GetComponent<Animator>();
+        anim.Play("BloodFX");
+    }
+
+    // Final Bullet For EndingDemo V1 
+    private bool PlayedCutHeli = false;
+    private float TimeDivided;
+    private bool HadDividedDeathCam;
+    public IEnumerator EndDemoVersion1()
+    {
+        if (!HadDividedDeathCam)
+        {
+            TimeDivided = CameraScript.durationofDeath / 6;
+            CameraScript.durationofDeath = TimeDivided;
+            HadDividedDeathCam = true;
+        }
+        CameraScript.StartCoroutine(CameraScript.DeathCam());
+
+        while (CameraScript.CamSize > 21)
+        {
+            yield return null;
+        }
+        SwitchSceneToCutscene();
+
+
+    }
+
+    public void SwitchSceneToCutscene()
+    {
+        AsyncOperation loadOperation = SceneManager.LoadSceneAsync("HeliCut");
+        loadOperation.allowSceneActivation = true;
+
+
+    }
+
+    private IEnumerator FallStick()
+    {
+        // Reset the Y position of Stickman
+        Vector3 newPOS = StickPOS.position;
+        newPOS.y = resetYPosition;
+        StickPOS.position = newPOS;
+
+        yield return new WaitForSeconds(0.000000000000001f);
+    }
+
+
+    public IEnumerator AccelerateSpeed(float MSpeed, float time)
+    {
+        if(Speed == MSpeed) yield break;
+        while(Speed != MSpeed && rb.velocity.x > 0) 
+        {
+            Speed = Mathf.Lerp(MaxSpeed, MSpeed, time);
+            yield return null ;
+        
+        }
+
+        yield break;
+    }
+
+
+    public void JumpBoolean()
+    {
+        JumpDodge = true;
+    }
+
+    public void JumpBooleanFalse()
+    {
+        JumpDodge = false;
+    }
+    private bool AlrAttached;
+
+    private bool StartedDecay;
+    // Perfect Dodge Mechanic
+    public IEnumerator PerfectDodge_SloMO()
+    {
+        LockedThunderAnim.SetBool("1", false);
+        LockedIN = false;
+        PerfectDodgeSloMO.gameObject.SetActive(true);
+        PerfectDodgeSloMO.Play();
+        ResetAllAnimationStates();
+        PerfectDodgeCount = 0;
+        //StickAnim.enabled = false;
+        float OGsloRate = TimeManager.slomoRate;
+        TimeManager.slomoRate = SloMORate;
+        TimeManager.SloMO();
+        if (!BackFlip)
+        {
+            StartCoroutine(BackFlipMove());
+        }
+        while (PerfectDodgeSloMO.isPlaying)
+        {
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                isInPerfectDodge = false;
+                MegaHeal = false;
+                TimeManager.RevertSpeed();
+                StickAnim.speed = 1;
+                StickAnim.enabled = true;
+                PerfectDodgeSloMO.gameObject.SetActive(false);
+                TimeManager.slomoRate = OGsloRate;
+                PerfectDodgeCount = 0;
+                PowerfulPunch = false;
+                PlayedLockedIn_CompletedGauge = false;
+                AlrAttached = false;
+                yield break;
+            }
+            if (PowerfulPunch && !MegaHeal)
+            {
+                if (!AlrAttached && !Dead)
+                {
+                    AlrAttached = true;
+                    StickAnim.CrossFade("StickAttach", 0, 0);
+
+                }
+                ResetAllAnimationStates();
+                isInPerfectDodge = true;
+                PerfectDodgeCount = 0;
+                StickAnim.enabled = true;
+                StickAnim.speed = 10;
+                StartCoroutine(PunchFreeFlow());
+                Grounded = true;
+            }
+            isInPerfectDodge = true;
+            yield return null;
+            if(MegaHeal == true)
+            {
+                rb.rotation = 0;
+                yield return new WaitUntil(() => !MegaHeal);
+                isInPerfectDodge = false;
+                PerfectDodgeSloMO.gameObject.SetActive(false);
+                MegaHeal = false;
+                TimeManager.RevertSpeed();
+                StickAnim.speed = 1;
+                StickAnim.enabled = true;
+                TimeManager.slomoRate = OGsloRate;
+                PerfectDodgeCount = 0;
+                PowerfulPunch = false;
+                PlayedLockedIn_CompletedGauge = false;
+                yield break;
+
+            }
+        }
+        isInPerfectDodge = false;
+        MegaHeal = false;
+        TimeManager.RevertSpeed();
+        StickAnim.speed = 1;
+        StickAnim.enabled = true;
+        TimeManager.slomoRate = OGsloRate;
+        PerfectDodgeCount = 0;
+        PowerfulPunch = false;
+        PlayedLockedIn_CompletedGauge = false;
+        AlrAttached = false;
+        yield break;
+
+    }
+    public bool inRush = false;
+
+    public IEnumerator Stickman_AdrenalineRush()
+    {
+        PerfectDodgeSloMO.gameObject.SetActive(true);
+        PerfectDodgeSloMO.Play();
+        PauseManager pauseManager = GameObject.FindObjectOfType<PauseManager>();
+        pauseManager.BreakIN.Pause();
+        ResetAllAnimationStates();
+        inRush = true;
+        PerfectDodgeCount = 0;
+        float OGsloRate = TimeManager.slomoRate;
+        TimeManager.slomoRate = SloMORate/1.5f;
+        TimeManager.SloMO();
+        ResetAllAnimationStates();
+        StickAnim.SetBool("Slide", true);
+        StickAnim.ResetTrigger("Shoot");
+        StickAnim.ResetTrigger("SlideShoot");
+        StartCoroutine(Slide());
+        while (PerfectDodgeSloMO.isPlaying)
+        {
+            SlideCancelSpeed = 220;
+            StickHP.MegaCharge = 30;
+            yield return null;
+           
+        }
+        isInPerfectDodge = false;
+        MegaHeal = false;
+        TimeManager.RevertSpeed();
+        StickAnim.speed = 1;
+        pauseManager.BreakIN.Play();
+        StickAnim.enabled = true;
+        TimeManager.slomoRate = OGsloRate;
+        PerfectDodgeCount = 0;
+        PowerfulPunch = false;
+        PlayedLockedIn_CompletedGauge = false;
+        AlrAttached = false;
+        inRush = false;
+        yield break;
+
+    }
+    public void AssignPossibleNulls()
+    {
+        if(TimeManager == null)
+        {
+            TimeManager = FindAnyObjectByType<TimeManager>();
+        }
+        if(CameraScript == null)
+        {
+            CameraScript = FindAnyObjectByType<CameraScript>();
+        }
+    }
+
+    public void ResetAllAnimationStates()
+    {
+        StickAnim.ResetTrigger("Punch");
+        StickAnim.ResetTrigger("Jump");
+        StickAnim.ResetTrigger("Dash");
+        StickAnim.ResetTrigger("Caught");
+        StickAnim.ResetTrigger("Catch");
+        StickAnim.ResetTrigger("Shoot");
+        StickAnim.ResetTrigger("JumpShoot");
+        StickAnim.ResetTrigger("ComboSnP");
+        StickAnim.ResetTrigger("PistolCombo");
+        StickAnim.ResetTrigger("StealthKill");
+        StickAnim.ResetTrigger("VariFixer");
+        StickAnim.ResetTrigger("Idle");
+        StickAnim.ResetTrigger("Heal");
+
+        StickAnim.SetBool("OnGround", false);
+        StickAnim.SetBool("DodgeLow", false);
+        StickAnim.SetBool("DodgeHigh", false);
+        StickAnim.SetBool("Jump", false);
+        StickAnim.SetBool("Slide", false);
+        StickAnim.SetBool("Walking", false);
+        StickAnim.SetBool("Hide", false);
+        StickAnim.SetBool("Attach", false);
+        StickAnim.SetBool("Dash", false);
+        StickAnim.SetBool("RunHide", false);
+        StickAnim.SetBool("Stun", false);
+    }
+
+    public void AddSlideMomentum_WhileShooting_MOMENTUM_ANIMTION_KEY()
+    {
+        SlideCancelSpeed = 250;
+        Slide();
+    }
+    public void ShootingBool()
+    {
+
+        rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+    }
+
+
+    public void ShootingFalse()
+    {
+
+        rb.constraints = RigidbodyConstraints2D.None;
+        MaxSpeed *= 0.9f;
+
+
+    }
+
+
+
+
+
+
+    
+
+
+
+
+    //private Vector2 moveinput;
+
+    public void Move()
+    {
+        if (HeCanMove == true && StickmanGetsKnocked == false )
+        {
+
+            //BuildUp = true;
+            float horizontalInput = Input.GetAxis("Horizontal");
+
+            //if (Checkpoint != ExamHeliID_Checkpoint)
+            //{
+            //    horizontalInput = Input.GetAxis("Horizontal");
+            //}
+            //else
+            //{
+            //    horizontalInput = 1;
+            //}
+            rb.velocity = new Vector2(horizontalInput * Speed, rb.velocity.y);
+            FacingRight = transform.localScale.x >= 1 ? true : false; 
+            float targetspeed = horizontalInput * Speed;
+
+
+            if (rb.velocity.magnitude > 5.1f && MaxSpeed >= 40)
+            {
+                if(isDashing | isSliding | isJumping | BackFlip && StickHP.MegaCharge >= 1)
+                {
+                    motionBlurHandler.HandleMotionBlur();
+
+                }
+            }
+
+            if (StickmanGetsKnocked == false && !isInPunchAttach && !BackFlip)
+            {
+                if (horizontalInput > 0.01)
+                {
+                    //FacingRight = true;
+                    StickDirection = 1;
+                    transform.localScale = Vector3.one;
+
+                }
+                else if (horizontalInput < -0.01)
+                {
+                    //FacingRight = false;
+                    StickDirection = -1;
+                    transform.localScale = new Vector3(-1, 1, 1);
+
+                }
+
+            }
+
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                if (StickHP.PlayerHP > 0 && canSlide == true && !isInPerfectDodge)
+                {
+                    BuildUp = true;
+                    StartCoroutine(Slide());
+
+                }
+            }
+
+
+            StickAnim.SetBool("Walking", horizontalInput != 0);
+        }
+        else
+        {
+            float horizontalInput = Input.GetAxis("Horizontal");
+
+            if (horizontalInput > 0.01 && !BackFlip)
+            {
+                //FacingRight = true;
+                StickDirection = 1;
+                transform.localScale = Vector3.one;
+            }
+            else if (horizontalInput < -0.01 && !BackFlip)
+            {
+               // FacingRight = false;
+                StickDirection = -1;
+                transform.localScale = new Vector3(-1, 1, 1);
+
+            }
+        }
+        
+
+
+
+
+
+
+
+
+    }
+    public void CallKnockBack(Vector2 hitdirection, Vector2 constantForceDirection, float inputDirection)
+    {
+        Debug.Log("KnockBack Called");
+        Knockbackcoroutine = StartCoroutine(KnockBackAction(hitdirection, constantForceDirection, inputDirection));
+    }
+
+
+
+    private void SlopeCheck()
+    {
+        Vector2 CheckPOS = transform.position - new Vector3(0.0f, ColliderSize.y / 2);
+
+        SlopeCheckVerticle(CheckPOS);
+    }
+
+
+
+    private void SlopeCheckVerticle(Vector2 checkPos)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.down, SlopeCheckDistance, WhatsGround);
+
+        if (hit)
+        {
+            Debug.DrawRay(hit.point, hit.normal);
+        }
+
+    }
+
+    public void AnimationKey_GainA_Little_Energy_While_Stunned()
+    {
+        rb.velocity = Vector2.zero;
+        StickHP.MegaCharge += 1.2f;
+    }
+
+    public void AnimationKey_UltisFalse()
+    {
+        BattleTheme.gameObject.SetActive(false);
+
+        GustOfBullets = false;
+
+    }
+
+    public void AnimationKey_DisableAndEnableUltTheme()
+    {
+        UltCam.enabled = true;
+        MainCamAnim.speed = 3;
+        GustOfBullets = true;
+        BattleTheme.gameObject.SetActive(false);
+        UltTheme.gameObject.SetActive(true);
+        Hypothesis.gameObject.SetActive(false);
+        LabTheme.gameObject.SetActive(false);
+    }
+
+   
+    public IEnumerator ClimbHeliCinematic()
+    {
+        float Distance = Mathf.Abs(transform.position.y - HeliCinematicClimbDestination.position.y);
+
+        while (Distance >= MinDisHeliCineClimbDes)
+        {
+            if (NeverDoCineBeatDownAgain)
+            {
+                yield break;
+            }
+            Distance = Mathf.Abs(transform.position.y - HeliCinematicClimbDestination.position.y);
+            HeCanMove = false;
+            transform.position = Vector2.MoveTowards(transform.position, HeliCinematicClimbDestination.position, 15 * Time.deltaTime);
+            Debug.Log("Distance HeliCineMaticLadder: " + Distance);
+            yield return null;
+        }
+        InHeliCineBeatdown = true;
+        StickAnim.SetTrigger("HeliCinePunch");
+        StickAnim.SetBool("Heli", false);
+        OnLadder = false;
+        HasFullyClimbed = true;
+        yield break;
+       
+    }
+
+    public bool NeverDoCineBeatDownAgain;
+    public void HeliCineBeatDownManager()
+    {
+        if (!InHeliCineBeatdown) return;
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        transform.position = InHeliPoS.position;
+        if (InHeliCineBeatdown)
+        {
+            canDash = false;
+
+        }
+        else
+        {
+            canDash = true;
+
+        }
+        Grounded = false;
+        StickAnim.SetBool("Heli", false);
+        StickAnim.SetBool("Jump", false);
+        StickAnim.SetBool("Cinematic", true);
+        HeCanMove = false;
+    }
+
+
+    public void AnimationKey_DisableUltThem()
+    {
+        MainCamAnim.speed = 1;
+
+        GustOfBullets = false;
+
+        if (!BreakIn)
+        {
+            Hypothesis.gameObject.SetActive(true);
+
+        }
+        else
+        {
+            LabTheme.gameObject.SetActive(false);
+
+        }
+        UltTheme.gameObject.SetActive(false);
+    }
+
+
+    public void CantMove()
+    {
+        MaxSpeed = 0;
+        HeCanMove = false;
+
+        //if (PressedDash == false)
+        //{
+        //    HeCanMove = false;
+        //}
+        //else
+        //{
+        //    HeCanMove = true;
+        //}
+    }
+
+    public void CanMove()
+    {
+        MaxSpeed = 60;
+        isPunching = false;
+        HeCanMove = true;
+    }
+
+
+    private float CD_FallOFFHELI = 0.6f;
+    private float LastFELLOFFHELI = 0;
+    public bool isFallingHeli;
+ 
+
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground") && !IsFalling)
+        {
+            Grounded = true;
+        }
+
+        if (collision.gameObject.CompareTag("Tree") && HeliFinale )
+        {
+            if (!isDashing)
+            {
+                OnLadder = false;
+                StickAnim.SetBool("Heli", false);
+                StartCoroutine(FallOfLadder());
+            }
+            
+
+        }
+
+
+        string otherObjectName = collision.gameObject.name;
+        if (StickHP.Testing)
+        {
+            Debug.Log("Collided with: " + otherObjectName);
+
+        }
+
+
+
+        if (collision.gameObject.CompareTag("Slope"))
+        {
+            Debug.Log("SlideVolume Worked");
+            SlideVolume = true;
+
+
+        }
+
+
+        if (collision.gameObject.CompareTag("SlideEnd"))
+        {
+            SlideVolume = false;
+
+
+        }
+
+
+        if (collision.gameObject.CompareTag("Book"))
+        {
+            BoxCollider2D MyCollider = GetComponent<BoxCollider2D>();
+            BoxCollider2D bxcd = collision.gameObject.gameObject.GetComponent<BoxCollider2D>();
+            if (isDashing)
+            {
+                Physics2D.IgnoreCollision(bxcd, MyCollider, true);
+
+            }
+            else
+            {
+                Physics2D.IgnoreCollision(bxcd, MyCollider, false);
+
+            }
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            Grounded = false;
+        }
+    }
+
+
+
+
+    //private void OnCollisionExit2D(Collision2D collision)
+    //{
+    // if (!collision.gameObject.CompareTag("SldieVolume"))
+    // {
+    //SlideVolume = false;
+
+
+    //}
+    //  }
+
+
+    private bool OneTimeHealth_AlarmDoor = false;
+    public bool TouchingATKSight;
+    public bool OnLadder;
+    
+    private HingeJoint2D hingeJoint2D;
+
+    public bool UpLadderWant;
+    public void HeliManager()
+    {
+        if (!OnLadder || isFallingHeli || InHeliCineBeatdown) Debug.Log("Heli Failed Stick Falling nOw");
+        if (!OnLadder || isFallingHeli || InHeliCineBeatdown || !HeliFinale) return;
+        Debug.Log("HeliManager On");
+        canDash = true;
+        if (!InHeliCineBeatdown)
+        {
+            rb.bodyType = RigidbodyType2D.Dynamic;
+
+        }
+        if(OnLadder && !isFallingHeli)
+        {
+            transform.position = HeliLadder.position;
+            rb.gravityScale = 0;
+            transform.rotation = HeliLadder.rotation;
+        }
+        else
+        {
+            return;
+        }
+
+            isFallingHeli = false;
+        if (isDashing)
+        {
+            isDashing = false;
+            StickAnim.CrossFade("Helicopter", 0, 0);
+        }
+
+        
+        HeCanMove = false;
+        StickAnim.SetBool("Heli", true);
+
+       
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            UpLadderWant = false;
+            SwitchHeliPOS();
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            UpLadderWant = true;
+            SwitchHeliPOS();
+
+        }
+
+    }
+
+    public IEnumerator FallOfLadder()
+    {
+        //if(isDashing) yield break;
+        isDashing = false;
+        rb.rotation = 0;
+        OnLadder = false;
+        isFallingHeli = true;
+        Debug.Log("Heli Fell OFF");
+        StartCoroutine(BackFlipMove());
+        isFallingHeli = false;
+        yield break;
+
+
+    }
+    public void SwitchHeliPOS()
+    {
+        // Switches Stickman's POS in HeliFight
+        AudioPlayer.PlayOneShot(RopeShift);
+        if (HasFullyClimbed)
+        {
+            if (UpLadderWant == false)
+            {
+                UpLadderWant = false;
+                HeliLadder = DownLadder;
+            }
+            else
+            {
+                UpLadderWant = true;
+                HeliLadder = UpLadder;
+            }
+        }
+       
+    }
+
+    public Transform HidePosition;
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Hiding"))
+        {
+            CanHide = true;
+        }
+        if (collision.CompareTag("Ladder") && !isFallingHeli && !InHeliCineBeatdown)
+        {
+            StickAnim.SetBool("Dash", false);
+            OnLadder = true;
+            HeliManager();
+            
+        }
+        else if (InHeliCineBeatdown)
+        {
+            StickAnim.SetBool("Heli", false);
+
+        }
+
+        if (collision.CompareTag("HidePOS"))
+        {
+            TouchHiding = true;
+            HidePosition = collision.transform;
+
+        }
+        if (collision.CompareTag("AttackSight"))
+        {
+            TouchingATKSight = true;
+        }
+        if (MeleeCollider.CompareTag("Book"))
+        {
+            if(Time.time >= lastPunchTime + MeleeCD)
+            {
+                ComboCount += 1;
+
+            }
+        }
+
+        if (collision.CompareTag("DoublePunchTime"))
+        {
+            CanDoublePunch = true;
+
+        }
+
+        if (collision.CompareTag("Safe"))
+        {
+            if (OneTimeHealth_AlarmDoor == false)
+            {
+                OneTimeHealth_AlarmDoor = true;
+                StickHP.PlayerHP += 15;
+                StickHP.MegaCharge += 6;
+            }
+
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Hiding"))
+        {
+            CanHide = false;
+        }
+        if (collision.CompareTag("AttackSight"))
+        {
+            TouchingATKSight = false;
+        }
+        if (!collision.CompareTag("HidePOS"))
+        {
+            TouchHiding = false;
+        }
+    }
+
+    public void NotSlopSlide()
+    {
+        SlopeSlide = false;
+    }
+
+    public void YAxisFixer()
+    {
+        Vector3 currentPosition = transform.position;
+
+
+        currentPosition.y = 0;
+    }
+
+    private bool Shooting;
+
+
+    public void ShootingFalseStatement()
+    {
+        Shooting = false;
+    }
+
+
+    public void Shoot()
+    {
+        if (Time.time >= nextShootTime)
+        {
+            nextShootTime = Time.time + shootCooldown;
+
+
+
+
+            if (Hiding)
+            {
+                StartCoroutine(HideShoot());
+            }
+            else if (!Grounded || isDashing)
+            {
+                StickAnim.SetTrigger("JumpShoot");
+
+            }
+            else if (isSliding)
+            {
+                StickAnim.SetTrigger("SlideShoot");
+
+            }
+            else if (PunchBool && PunchAnimationSpeed >= 2.5)
+            {
+                SigmaCombo();
+            }
+            else
+            {
+                Speed = 0;
+                StickAnim.SetTrigger("Shoot");
+
+            }
+        }
+    }
+
+
+    public void CanComboSet()
+    {
+        CanCombo = true;
+    }
+
+
+    public void CanNotCombo()
+    {
+        CanCombo = false;
+    }
+
+    public void SigmaCombo()
+    {
+        StickAnim.SetTrigger("PistolCombo");
+
+
+
+
+
+    }
+
+    public void AnimationKey_JumpBool()
+    {
+        isJumping = true;
+    }
+    public void SigmaComboAnimFunc()
+    {
+        float horizontalMomentum = 90;
+
+
+        rb.velocity = new Vector2(transform.localScale.x * (-1 * (horizontalMomentum)), 0);
+
+        rb.rotation = 0;
+    }
+
+
+    public IEnumerator HideShoot()
+    {
+
+        transform.localScale = new Vector3(1, 1, 1);
+
+
+        Speed = 0;
+        StickAnim.SetTrigger("Shoot");
+
+
+        yield return new WaitForSeconds(StickAnim.GetCurrentAnimatorStateInfo(0).length);
+
+
+        transform.localScale = new Vector3(-1, 1, 1);
+
+
+
+    }
+
+
+
+
+
+
+    public void NoSlide()
+    {
+        canSlide = false;
+    }
+
+    public void YeaSlide()
+    {
+        canSlide = true;
+    }
+
+    public bool inCombo;
+    public void ShootABullet()
+    {
+        Debug.Log("ShootABullet called");
+        if (Time.time >= DelayCD + LastDelay)
+        {
+            if (!inCombo)
+            {
+                StickHP.MegaCharge -= 5.2f;
+
+            }
+            else
+            {
+                StickHP.MegaCharge += 0.2f;
+
+            }
+            LastDelay = Time.time;
+            StartCoroutine(StickHP.DelayinMegaCharge());
+            StartCoroutine(MuzzleFireAnim());
+            
+            //GameObject bullet = Instantiate(GunBullet, AimPoint.position, Quaternion.identity);
+            GameObject bullet = ObjectPooler.SpawnObj(GunBullet,AimPoint.position,Quaternion.identity,ObjectPooler.PoolType.GamObjects);
+            Vector2 shootDirection = (transform.localScale.x > 0) ? Vector2.right : Vector2.left;
+            bullet.GetComponent<Bullet>().SetDirection(shootDirection);
+
+        }
+
+
+        //Legacy Code Used Too Shoot a massive bullet one shottting enemies didnt feel good and would mess up the Challange and ngl not rlly
+        //fit it
+
+
+        //if (!StickHP.CanSuper)
+        //{
+            
+        //}
+        //else // Super bullet
+        //{
+        //    GameObject bullet = Instantiate(MegaBullet, AimPoint.position, Quaternion.identity);
+
+
+        //    Vector2 shootDirection = (transform.localScale.x > 0) ? Vector2.right : Vector2.left;
+        //    bullet.GetComponent<Bullet>().SetDirection(shootDirection);
+
+        //    StickHP.CanSuper = false;
+        //    StickHP.MegaCharge = 0;
+        //}
+    }
+
+
+
+    // Make Stickman GO Supa Fast brbrrr Gives PLayer Adreline Feel type thing in the lab break in
+    public bool HasKilledYappers_Sciests_WithACart;
+    public void SupaFast_Cart_BreakIn()
+    {
+        if (!inSlipperyState && Cart.activeSelf)
+        {
+            float MaxPushSpeed = 0f;
+
+            if (HasKilledYappers_Sciests_WithACart)
+            {
+                MaxPushSpeed = 110;
+
+            }
+            else
+            {
+                MaxPushSpeed = 80;
+
+            }
+            transform.localScale = new Vector3(1, 1, 1);
+            if (rb.velocity.magnitude > MaxPushSpeed)
+            {
+                rb.velocity = Vector3.ClampMagnitude(rb.velocity, MaxPushSpeed);
+            }
+            rb.AddForce(AccelerationCart * rb.mass);
+        }
+        else
+        {
+            return;
+        }
+        
+    }
+
+    public void ArcBullet()
+    {
+        GameObject bullet = Instantiate(GunBulletArc, ArcAimPoint.position, Quaternion.identity);
+
+
+        Vector2 shootDirection = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+
+
+        bullet.GetComponent<Bullet>().SetDirection(shootDirection);
+    }
+
+
+    public void EarthQ_Dodge_False()
+    {
+        EarthQ_Dodge = false;
+    }
+
+
+    public void IdleFix()
+    {
+        StickAnim.SetTrigger("VariFixer");
+    }
+
+
+    public void ReloadLevel()
+    {
+        PitchBlack.gameObject.SetActive(true);
+        if (!AlrDid4DeathCor)
+        {
+            AlrDid4DeathCor = true;
+            StartCoroutine(WaitForBit());
+
+        }
+    }
+
+
+
+
+
+
+    public void GunAnim()
+    {
+        //Speed = 0;
+        GunAudio.pitch = Random.Range(0.9f, 1.2f);
+        GunAudio.PlayOneShot(Gun);
+    }
+
+
+
+    public void StopSpeed()
+    {
+        Speed = 0;
+    }
+
+    public void RevertSpeed()
+    {
+        Speed = MaxSpeed;
+    }
+
+    public void CantJump()
+    {
+        AbleToJump = false;
+        IsStunned = true;
+    }
+
+
+
+    public void CanJump()
+    {
+        IsStunned = false;
+        AbleToJump = true;
+        RevertSpeed();
+
+
+    }
+
+
+    public void JumpFalserAnim()
+    {
+
+
+
+        //StickAnim.SetBool("Jump", false);
+    }
+
+
+
+    // Earthquake from geology code
+    public void IsEQ()
+    {
+        EarthQ = true;
+    }
+
+
+    public void SlideCancel()
+    {
+        isSliding = false;
+    }
+
+    public void Charger()
+    {
+        if (BreakIn)
+        {
+            StickHP.PlayerHP = StickHP.PlayerHP + 0.1f;
+        }
+        else
+        {
+            StickHP.PlayerHP = StickHP.PlayerHP + 0.03f;
+        }
+
+    }
+
+
+    // Punching Code
+
+    public void NotPunchAnimatorBool()
+    {
+        PunchBool = false;
+        StickAnim.speed = 1.0f;
+    }
+
+
+    public void PunchReduce()
+    {
+        PunchAnimationSpeed -= 0.5f;
+    }
+
+    private Coroutine punchDecayCoroutine;
+    private bool isPunching;
+    public void Punch()
+    {
+        AuraSigmaRizzyDodge = false;
+        AudioClip play = null;
+        isPunching = true;
+        if (StickHP.Testing)
+        {
+            CurrentPunches += 1;
+
+        }
+        PunchBool = true;
+        if (CanDoublePunch)
+        {
+            PunchAudioP.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
+
+        }
+        PunchAudioP.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
+        if (!PowerfulPunch)
+        {
+             play = PunchSFX[UnityEngine.Random.Range(0, PunchSFX.Length)];
+        }
+        else
+        {
+            play = MegaPunch;
+        }
+       
+
+        PunchAudioP.PlayOneShot(play);
+        lastPunch = Time.time;
+       
+    }
+
+    public LayerMask WutsEnemy;
+    public BoxCollider2D VolumeFreeFlowCombat;
+
+    public bool EnemyRecivedHit;
+    private float SFXCDFREEFLOWCD = 1.2f;
+    private float LastCalledSFXCDFREEFLOW;
+    private float StickDirection;
+    public IEnumerator PunchFreeFlow()
+    {
+
+        // Add things for collision
+        //tempListEnems.Append() / <--- NOO dont do this crap Actually <--- Actually YESSSS DO SUM LIKE THISSS!!!!
+        // Create a fake origin point from where the player jumps
+        //Then find that angle Math.Atan2(origin y - Book y / origin x - Book x) to get the angle
+        // find trig ratios of enemy and player
+        // X = Math.Sin(angle) * AttachSpeed;
+        // Y = Math.Cos(angle) * AttachSpeed;
+        // Tell Player to Then Travel to Enemy, Player.transform += new Vector thing(x,y,0) and i think time.deltatime???
+        rb.rotation = 0;
+        // Make dat Rayyyy 
+        float tempRayDistance = 0;
+        if (isInPerfectDodge)
+        {
+            tempRayDistance = 999;
+        }
+        else
+        {
+            tempRayDistance = RayDistance;
+        }
+        if(RaycastableObj != null)
+        {
+            Vector2 rayDirection = new Vector2(StickDirection, 0f);
+            RaycastHit2D raycast = Physics2D.Raycast(RaycastableObj.transform.position, rayDirection, tempRayDistance, WhatsTheBookLayer);
+            Debug.DrawRay(RaycastableObj.transform.position, rayDirection * RayDistance, Color.red);
+            BoxCollider2D punchCollision = MeleeCollider.gameObject.GetComponent<BoxCollider2D>();
+            if (!BackFlip && !isInPerfectDodge)
+            {
+                punchCollision.enabled = true;
+
+            }
+            else if (BackFlip && isInPerfectDodge)
+            {
+                punchCollision.enabled = true;
+
+            }
+
+
+            if (raycast.collider != null)
+            {
+                RaycastHit2D[] raycasts = Physics2D.RaycastAll(RaycastableObj.transform.position, rayDirection, RayDistance, WhatsTheBookLayer);
+                List<Transform> list = new List<Transform>();
+                List<float> listDis = new List<float>();
+                float MaxDistance = float.MinValue;
+                int IndexForGreatest = 0;
+                GameObject EmptyBook = raycast.collider.gameObject;
+                foreach (RaycastHit2D hit in raycasts)
+                {
+                    list.Add(raycast.collider.gameObject.transform);
+                    Debug.Log("Yo we got" + list.Count + "Raycast Hits Whoo");
+
+                }
+
+                if (list.Count > 1)
+                {
+                    for (int i = list.Count - 1; i >= 0; i--)
+                    {
+                        float TempDis = Vector2.Distance(transform.position, list[i].position);
+                        listDis.Add(TempDis);
+                    }
+                    for (int i = 0; i < listDis.Count; i++)
+                    {
+                        if (listDis[i] > MaxDistance)
+                        {
+                            MaxDistance = listDis[i];
+                            IndexForGreatest = i;
+                        }
+                    }
+                    EmptyBook = list[IndexForGreatest].gameObject;
+                    list.Clear();
+                    listDis.Clear();
+                    IndexForGreatest = 0;
+
+                }
+                else
+                {
+                    EmptyBook = raycast.collider.gameObject;
+                    list.Clear();
+                    listDis.Clear();
+                    IndexForGreatest = 0;
+                }
+                Debug.Log("Colliison:" + raycast.collider.gameObject);
+                GameObject book = EmptyBook;
+                float distance = Vector2.Distance(transform.position, book.transform.position);
+                BoxCollider2D BookCollider = book.GetComponent<BoxCollider2D>();
+                // Check if he can dash only if facing him with out this comabat jus spam and spam >:( // i mean it kinda still is 
+                float varfordirec = (book.transform.position.x - transform.position.x);
+                while (distance >= 11 && StickHP.PlayerHP > 0)
+                {
+                    Grounded = false;
+
+                    BoxCollider2D bxcd = GetComponent<BoxCollider2D>();
+                    BoxCollider2D BookBxcd = book.GetComponent<BoxCollider2D>();
+
+                    if (BookBxcd != null && bxcd.IsTouching(BookBxcd))
+                    {
+                        StickAnim.SetBool("Attach", false);
+                        StickAnim.CrossFade("Punch", 0, 0);
+                        HeCanMove = true;
+                        AlrAttaching = false;
+                        LastAttachFreeFlow = Time.time;
+                        break;
+                    }
+                    DistanceToBook = distance;
+                    if (distance >= 11)
+                    {
+                        rb.rotation = 0;
+                        StickAnim.SetBool("Attach", true);
+
+                        if (Time.time >= SFXCDFREEFLOWCD + LastCalledSFXCDFREEFLOW)
+                        {
+                            LastCalledSFXCDFREEFLOW = Time.time;
+                            AudioPlayer.PlayOneShot(DashSFX);
+
+                        }
+                        HeCanMove = false;
+                        isInPunchAttach = true;
+                        distance = Vector2.Distance(transform.position, book.transform.position);
+                        Vector3 PlayerPos = transform.position;
+                        Vector3 BookPos = book.transform.position;
+                        Debug.Log("YOOO BOOK Got detected by ray");
+                        float angle = Mathf.Atan2(PlayerPos.y - BookPos.y, PlayerPos.x - BookPos.x);
+
+                        float x = Mathf.Cos(angle) * 350;
+                        float y = Mathf.Sin(angle) * 350;
+
+                        Vector3 MovementThing = new Vector3(x, y, 0f) * Time.deltaTime;
+                        motionBlurHandler.HandleMotionBlur();
+                        transform.position -= MovementThing;
+                        if (StickCollider.IsTouching(BookCollider))
+                        {
+                            StickAnim.SetBool("Attach", false);
+                            StickAnim.CrossFade("Punch", 0, 0);
+                            HeCanMove = true;
+                            break;
+                        }
+                        if (BookPos.x < transform.position.x)
+                        {
+                            FacingRight = false;
+                            transform.localScale = new Vector3(-1, 1, 1);
+
+                        }
+                        else if (BookPos.x > transform.position.x)
+                        {
+                            FacingRight = true;
+                            transform.localScale = new Vector3(1, 1, 1);
+                        }
+                        distance = Vector2.Distance(transform.position, BookPos);
+                        if (distance < 12)
+                        {
+                            StickAnim.SetBool("Attach", false);
+                            StickAnim.CrossFade("Punch", 0, 0);
+                            HeCanMove = true;
+                            AlrAttaching = false;
+                            LastAttachFreeFlow = Time.time;
+                            break;
+                        }
+
+                        yield return null;
+                    }
+                    else if (distance <= 11)
+                    {
+                        StickAnim.SetBool("Attach", false);
+                        StickAnim.CrossFade("Punch", 0, 0);
+                        HeCanMove = true;
+                        AlrAttaching = false;
+                        LastAttachFreeFlow = Time.time;
+                        break;
+                    }
+                    else
+                    {
+                        LastAttachFreeFlow = Time.time;
+                        StickAnim.SetBool("Attach", false);
+                        StickAnim.CrossFade("Punch", 0, 0);
+                        AlrAttaching = false;
+                        break;
+                    }
+                    StickAnim.SetBool("Attach", false);
+                    yield return null;
+
+                }
+                list.Clear();
+                listDis.Clear();
+                IndexForGreatest = 0;
+            }
+
+
+
+
+        }
+        else
+        {
+            LastAttachFreeFlow = Time.time;
+            StickAnim.SetBool("Attach", false);
+            StickAnim.SetTrigger("Punch");
+            HeCanMove = true;
+            yield break;
+
+        }
+        HeCanMove = true;
+        EnemyRecivedHit = false;
+        StickAnim.SetBool("Attach", false);
+       
+
+
+    }
+    public IEnumerator PunchDecay()
+    {
+        Debug.Log("DecayPunch");
+        yield return new WaitForSeconds(1.3f);
+
+        StickAnim.speed = 1;
+        PunchBool = false;
+        PunchAnimationSpeed = 0;
+
+    }
+
+    public void Animation_KeysIsinPunchAtttachFalse()
+    {
+        isInPunchAttach = false;
+
+    }
+
+    public void IsEQEND()
+    {
+        EarthQ = false;
+    }
+
+    public void DashSFXPLAY()
+    {
+        AudioPlayer.PlayOneShot(DashSFX);
+    }
+
+    private bool PressedDash;
+    public LayerMask StickLayer;
+    private IEnumerator Dash()
+    {
+        AirBackFlip = false;
+        StickCollider.enabled = true;
+        IsStunned = false;
+        float NecessaryAmount;
+        if (BreakIn)
+        {
+            NecessaryAmount = 2.1f;
+        }
+        else
+        {
+            NecessaryAmount = 8.5f;
+        }
+
+        if (StickHP.MegaCharge > NecessaryAmount)
+        {
+            StartCoroutine(StickHP.DelayinMegaCharge());
+
+            if (HeliFinale && HeliLadder != null)
+            {
+                StickAnim.SetBool("Dash", true);
+                canDash = false;
+                isDashing = true;
+                //dashPower = dashPower * (MaxSpeed / dashPower + 0.5f);
+                // Physics2D.IgnoreLayerCollision(StickLayer,WhatsTheBookLayer,true);
+                float originalGravity = rb.gravityScale;
+                rb.gravityScale = 0f;
+                float DisToLadder = Vector2.Distance(transform.position, HeliLadder.position);
+                DashDisDebug = DisToLadder;
+                Debug.Log("DashDis" + DisToLadder);
+                while(DisToLadder > 10)
+                {
+                     DisToLadder = Vector2.Distance(transform.position, HeliLadder.position);
+                    DashDisDebug = DisToLadder;
+                    Debug.Log("DashDis" + DisToLadder);
+
+                    transform.position = Vector2.MoveTowards(transform.position, HeliLadder.position, 260 * Time.deltaTime);
+                    yield return null;
+                }
+                StickAnim.SetBool("Dash", false);
+                OnLadder = true;
+                isFallingHeli = false;
+                canDash = true;
+                yield break;
+
+            }
+            else if (HeCanMove == true)
+            {
+                MaxSpeed += 1.3f;
+                StickHP.MegaCharge = StickHP.MegaCharge - NecessaryAmount;
+                StickAnim.SetBool("Dash", true);
+                canDash = false;
+                isDashing = true;
+                //dashPower = dashPower * (MaxSpeed / dashPower + 0.5f);
+               // Physics2D.IgnoreLayerCollision(StickLayer,WhatsTheBookLayer,true);
+                float originalGravity = rb.gravityScale;
+                rb.gravityScale = 0f;
+                rb.velocity = new Vector2(transform.localScale.x * dashPower, 0);
+                yield return new WaitForSeconds(dashTime);
+                rb.gravityScale = originalGravity;
+                isDashing = false;
+                yield return new WaitForSeconds(dashCD);
+                canDash = true;
+                StickAnim.SetBool("Dash", false);
+                Debug.Log("Dash" + dashPower);
+               // Physics2D.IgnoreLayerCollision(StickLayer, WhatsTheBookLayer, false);
+
+            }
+            else
+            {
+                PressedDash = true;
+                StickHP.MegaCharge = StickHP.MegaCharge - StickHP.MegaCharge;
+                HeCanMove = true;
+               // Physics2D.IgnoreLayerCollision(StickLayer, WhatsTheBookLayer, true);
+                StickAnim.SetBool("Dash", true);
+                canDash = false;
+                isDashing = true;
+                float originalGravity = rb.gravityScale;
+                rb.gravityScale = 0f;
+                rb.velocity = new Vector2(transform.localScale.x * dashPower, 0f);
+                yield return new WaitForSeconds(dashTime);
+                rb.gravityScale = originalGravity;
+                isDashing = false;
+                yield return new WaitForSeconds(dashCD);
+                canDash = true;
+                StickAnim.SetBool("Dash", false);
+                PressedDash = false;
+               // Physics2D.IgnoreLayerCollision(StickLayer, WhatsTheBookLayer, false);
+
+            }
+
+
+
+
+        }
+        else
+        {
+            AudioPlayer.PlayOneShot(Fail);
+        }
+
+
+
+
+
+
+    }
+
+
+
+
+    private bool AlrMuzzle;
+    public IEnumerator MuzzleFireAnim()
+    {
+
+        GameObject FX = Instantiate(MuzzleFire,transform.position,Quaternion.identity);
+        FX.transform.localScale =  new Vector3(FacingRight ? 1 : -1, 1, 1);
+        FX.transform.position = transform.position;
+        //rb.gravityScale = slideMomentum >= MaxSlideSpeed ? 4 : 10;
+        //MuzzleFire.transform.localScale = new Vector3(FacingRight ? 1 : -1, 1, 1);
+
+
+        //if (FacingRight)
+        //{
+        //    MuzzleFire.transform.localScale = new Vector3(1, 1, 1);
+        //}
+        //else
+        //{
+        //    MuzzleFire.transform.localScale = new Vector3(-1, 1, 1);
+
+        //}
+
+        //MuzzleFire.gameObject.SetActive(true);
+        yield return new WaitForSecondsRealtime(0.4f);
+        //MuzzleFire.gameObject.SetActive(false);
+        inCombo = false;
+
+
+    }
+
+
+    public void InSlideAnimationTrue()
+    {
+        InSlideAnimation = true;
+    }
+
+    
+    public void Footsteps()
+    {
+        if (WalkOnGrass && Grounded && !isSliding && !isDashing && !BackFlip  && !Dead)
+        {
+            if (BreakIn)
+            {
+                FootPMetal.pitch = Random.Range(1, 1.2f);
+                FootPMetal.gameObject.SetActive(true);
+            }
+            else
+            {
+                FootP.pitch = Random.Range(1, 1.2f);
+                FootP.gameObject.SetActive(true);
+                WoodP.gameObject.SetActive(false);
+
+            }
+
+
+        }
+        if(WalkOnWood && Grounded && !isSliding && !isDashing && !BackFlip && !Dead)
+        {
+            WoodP.pitch = Random.Range(1, 1.2f);
+            WoodP.gameObject.SetActive(true);
+            FootP.gameObject.SetActive(false);
+
+        }
+
+
+
+
+    }
+
+
+    public void StopFootsteps()
+    {
+        if (BreakIn)
+        {
+            FootPMetal.pitch = Random.Range(1, 1.2f);
+            FootPMetal.gameObject.SetActive(false);
+        }
+        FootP.gameObject.SetActive(false);
+        WoodP.gameObject.SetActive(false) ;
+    }
+
+    public void StopPunchInMiddle()
+    {
+        if (CanDoublePunch == false)
+        {
+
+            StickAnim.SetTrigger("Idle");
+        }
+        else
+        {
+            Debug.Log("uhhh NO");
+        }
+    }
+
+    public void HidingTrue()
+    {
+
+        Hiding = true;
+    }
+
+
+
+    //Slide Speed Voids
+
+
+
+    public void SlideSpeed40()
+    {
+        SlideCancelSpeed = 40;
+    }
+
+    public void SlideSpeed80()
+    {
+        SlideCancelSpeed = 80;
+    }
+
+
+    public void Gravity0()
+    {
+        rb.gravityScale = 0;
+        rb.mass = 0.01f;
+    }
+
+    public void GravityNormal()
+    {
+        if (!SlideJump || !isJumping)
+        {
+            rb.gravityScale = 10.55f;
+            rb.mass = 76.55f;
+        }
+        
+
+    }
+
+    public void LowGravity()
+    {
+        rb.gravityScale = 10.55f;
+        rb.mass = 16.55f;
+    }
+
+    public void HeavyGravity()
+    {
+        rb.gravityScale = 100;
+    }
+
+
+
+
+
+
+
+
+
+    //Movement Overhaul
+
+
+
+    public IEnumerator BackFlipMove()
+    {
+        Debug.Log("We Want A Flip");
+        float horizontalMomentum = 0;
+        if (StickHP.MegaCharge >= 1.3f)
+        {
+            if(StickHP.MegaCharge <= 5)
+            {
+                horizontalMomentum = 10;
+            }
+            else
+            {
+                horizontalMomentum = 50;
+            }
+            StartCoroutine(StickHP.DelayinMegaCharge());
+
+            Grounded = false;
+            StickHP.MegaCharge -= 1.2f;
+            BackFlipAS.pitch = Random.Range(0.7f, 1.5f);
+            BackFlipAS.PlayOneShot(BackFlipSFX);
+            LastBackflipTime = Time.time;
+            BackFlip = true;
+            if (!FacingRight)
+            {
+                horizontalMomentum = horizontalMomentum * -1;
+            }
+            rb.velocity = new Vector2(transform.localScale.x * ((horizontalMomentum)), BackFlipForce);
+            float flipTime = 0.7f;
+            float elapsedTime = 0f;
+            while (flipTime > elapsedTime && !InHeliCineBeatdown)
+            {
+                Debug.Log("We Want A Flip Flippppp");
+
+                motionBlurHandler.HandleMotionBlur();
+                HeCanMove = false;
+                if (StickDirection >= 0)
+                {
+                    rb.rotation += 10;
+                    rb.velocity = new Vector2(-Mathf.Abs(-horizontalMomentum), rb.velocity.y);
+                }
+                else
+                {
+                    rb.rotation -= 10;
+                    rb.velocity = new Vector2(Mathf.Abs(horizontalMomentum), rb.velocity.y);
+                }
+                elapsedTime += Time.deltaTime;
+                yield return null;
+
+            }
+            BackFlip = false;
+            HeCanMove = true;
+            rb.rotation = 0;
+
+        }
+
+
+
+
+
+
+    }
+
+
+    //Mostly happens When Hurt
+    public IEnumerator FreezeFX()
+    {
+        Time.timeScale = 0;
+        Time.fixedDeltaTime = Time.timeScale * 0.02f;
+        yield return new WaitForSeconds(0.07f);
+        Time.timeScale = 1;
+        Time.fixedDeltaTime = 0.02f;
+
+    }
+    public void RunSpeedUp()
+    {
+        if (!isShooting)
+        {
+            MaxSpeed += 1.5f;
+        }
+
+    }
+
+    public void SlowerHim()
+    {
+        if (MaxSpeed > 40)
+        {
+            MaxSpeed -= 0.1f;
+            SlideCancelSpeed -= 3.5f;
+        }
+    }
+
+    public void isShootingBool()
+    {
+        if (!isShooting)
+        {
+            isShooting = true;
+        }
+
+
+    }
+
+
+
+
+
+    public void SlowStickABitWhileShoot()
+    {
+        MaxSpeed -= 2.5f;
+    }
+
+    public void FastenStickABitWhileShoot()
+    {
+        MaxSpeed += 0.5f;
+    }
+
+
+    public void SlideLossMomentum()
+    {
+        if (SlideCancelSpeed > 100)
+        {
+            if (!Grounded)
+            {
+                SlideCancelSpeed -= 5;
+            }
+            else
+            {
+                SlideCancelSpeed -= 60;
+            }
+
+        }
+
+    }
+
+
+    public void SlideBuildUP()
+    {
+
+        //SlideCancelSpeed = SlideCancelSpeed + (MaxSpeed / SlideCancelSpeed);
+        if (Speed > 45)
+        {
+            JumpForce += 0.1f;
+            StickHP.MegaCharge = StickHP.MegaCharge + 0.000001f;
+            float time2 = 0;
+            time2 = time2 + 3;
+            SlideCancelSpeed = SlideCancelSpeed + 1.8f;
+        }
+
+
+    }
+
+
+    public void FallingBool()
+    {
+        IsFalling = true;
+    }
+
+
+    public void NotFallingBool()
+    {
+        IsFalling = false;
+    }
+
+
+    public void isShootingBoolFalse()
+    {
+        isShooting = false;
+        MaxSpeed = MaxSpeed + 20;
+
+    }
+
+
+
+
+
+
+    public void InSlideAnimationFalse()
+    {
+        InSlideAnimation = false;
+    }
+
+
+    private float SlideTime;
+    private float SlideDuration;
+    private IEnumerator Slide()
+    {
+
+
+
+        if (StickHP.PlayerHP > 0)
+        {
+            float NecessaryAmount;
+            if (BreakIn)
+            {
+                NecessaryAmount = 2.1f;
+            }
+            else
+            {
+                NecessaryAmount = 3.5f;
+            }
+
+
+            if(HeCanMove)
+            {
+                AudioPlayer.PlayOneShot(SlideSFX);
+                StartCoroutine(StickHP.DelayinMegaCharge());
+
+                if (rb.velocity.magnitude > 0.1f)
+                {
+                    motionBlurHandler.HandleMotionBlur();
+                }
+
+                StickAnim.SetBool("Slide", true);
+                canSlide = false;
+                isSliding = true;
+                StickHP.MegaCharge -= NecessaryAmount;
+                float slideMomentum = SlideCancelSpeed;
+                float originalGravity = rb.gravityScale;
+                rb.gravityScale = SlideGravity;
+
+                rb.velocity = new Vector2(slideMomentum * Mathf.Sign(transform.localScale.x), rb.velocity.y);
+
+                while (isSliding)
+                {
+                    SlideMomentum = slideMomentum;
+
+                    SlopeSlide = false;
+
+                    if (!inRush && slideMomentum > 0)
+                    {
+                        slideMomentum -= 90 * Time.deltaTime;
+                    }
+
+                    rb.velocity = new Vector2(slideMomentum * Mathf.Sign(transform.localScale.x), rb.velocity.y);
+
+                    if (Input.GetKeyDown(KeyCode.Space) && AbleToJump && !isInPerfectDodge)
+                    {
+                        if (isSliding && Grounded)
+                        {
+                            StickAnim.SetBool("Slide", false); // Reset slide animation
+                            StickAnim.SetBool("Jump", true);  // Trigger jump animation
+
+                            rb.gravityScale = slideMomentum >= MaxSlideSpeed ? 4 : 10;
+
+                            float jumpVelocityX = slideMomentum * Mathf.Sign(transform.localScale.x);
+
+                            isSliding = false;
+                            SlideJump = true;
+
+                            yield return new WaitForSeconds(0.2f); // Prevent immediate reset
+                            SlideJump = false;
+                            break;
+                        }
+                    }
+
+
+                    yield return null;
+                }
+
+                
+            }
+            else if(HeCanMove == false)
+            {
+                AudioPlayer.PlayOneShot(SlideSFX);
+
+                if (rb.velocity.magnitude > 0.1f)
+                {
+                    motionBlurHandler.HandleMotionBlur();
+                }
+
+                StickAnim.SetBool("Slide", true);
+                canSlide = false;
+                isSliding = true;
+                float slideMomentum = SlideCancelSpeed;
+                float originalGravity = rb.gravityScale;
+                rb.gravityScale = SlideGravity;
+
+                rb.velocity = new Vector2(slideMomentum * Mathf.Sign(transform.localScale.x), rb.velocity.y);
+
+                while (isSliding)
+                {
+
+                    if (!SlideVolume)
+                    {
+
+                        SlopeSlide = false;
+
+
+                        if (!inRush)
+                        {
+                            slideMomentum -= SlideCancelSpeed * (MaxSpeed / SlideCancelSpeed) * Time.deltaTime;
+
+                        }
+                        else
+                        {
+                            slideMomentum += SlideCancelSpeed * (MaxSpeed / SlideCancelSpeed) * Time.deltaTime;
+
+                        }
+                        rb.velocity = new Vector2(slideMomentum * Mathf.Sign(transform.localScale.x), rb.velocity.y);
+
+                        if (Input.GetKeyDown(KeyCode.Space) && AbleToJump)
+                        {
+                            if (isSliding && Grounded)
+                            {
+                                StickAnim.SetBool("Slide", false); // Reset slide animation
+                                StickAnim.SetBool("Jump", true);  // Trigger jump animation
+
+                                rb.gravityScale = slideMomentum >= MaxSlideSpeed ? 4 : 10;
+
+                                float jumpVelocityX = slideMomentum * Mathf.Sign(transform.localScale.x);
+                                rb.velocity = new Vector2(jumpVelocityX, JumpForce);
+
+                                isSliding = false;
+                                SlideJump = true;
+
+                                yield return new WaitForSeconds(0.2f); // Prevent immediate reset
+                                SlideJump = false;
+                                break;
+                            }
+                        }
+
+                    }
+                    else
+                    {
+
+                        SlopeSlide = true;
+
+                        float MaxSlideMomentum = 70;
+
+
+                        slideMomentum += SlideCancelSpeed * Time.deltaTime;
+                        rb.velocity = new Vector2(slideMomentum * Mathf.Sign(transform.localScale.x), rb.velocity.y);
+                        slideMomentum = Mathf.Min(slideMomentum, MaxSlideMomentum);
+
+                        if (Input.GetKeyDown(KeyCode.Space) && AbleToJump)
+                        {
+                            if (isSliding && Grounded)
+                            {
+                                if (slideMomentum >= MaxSlideMomentum)
+                                {
+                                    rb.gravityScale = 4;
+
+                                }
+                                float targetspeed = slideMomentum * Speed;
+
+                                float speeddif = targetspeed - rb.velocity.x;
+
+                                //float accelrate = (Mathf.Abs(targetspeed) > 0.01) ? Acceleration : Deacceleration;
+
+                                float slideVelocityX = rb.velocity.x;
+
+
+                                rb.velocity = new Vector2(slideVelocityX, JumpForce);
+
+                                StickAnim.SetBool("Jump", true);
+
+                                Grounded = false;
+                                SlideJump = true;
+                                yield return new WaitForSeconds(0.2f);
+
+                                SlideJump = false;
+                                isSliding = false;
+                                break;
+                            }
+                        }
+
+                        //if (slideMomentum > 200)
+                        //{
+                        //    slideMomentum = 200;
+                        //}
+                    }
+
+
+
+
+
+                    if (!SlideVolume)
+                    {
+                        slideMomentum = Mathf.Max(0, slideMomentum - SlideCancelSpeed * Time.deltaTime);
+                        rb.velocity = new Vector2(slideMomentum * Mathf.Sign(transform.localScale.x), rb.velocity.y);
+                    }
+
+                    yield return null;
+                }
+            }
+           
+        }
+        else
+        {
+            AudioPlayer.PlayOneShot(Fail);
+        }
+    }
+
+
+
+
+    // Saving
+
+    public IEnumerator ReloadGameScene()
+    {
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+    }
+
+    public IEnumerator ImmediateReloadGameScene()
+    {
+        yield return new WaitForSeconds(0.1f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+    }
+
+    public void PlayPunchSFX4Stealth()
+    {
+        AudioPlayer.PlayOneShot(PunchSFXStealth);
+    }
+
+
+    public void MegaHeal_OrbSpawnSFX()
+    {
+        AudioPlayer.PlayOneShot(OrbSpawn);
+    }
+    public void MegaHealSFX()
+    {
+        AudioPlayer.PlayOneShot(StickHP.HealSFX);
+        StickHP.PlayerHP = 100;
+    }
+
+    public void MegaHealStoppper()
+    {
+        MegaHeal = false;
+
+    }
+
+    private bool PlayedFallSFX;
+    public IEnumerator StealthKill(Transform EnemyPos)
+    {
+        MainCamAnim.SetBool("Zoom", true);
+        AudioPlayer.PlayOneShot(FallingSFX);
+        StickAnim.SetTrigger("StealthKill");
+        Debug.Log("Called Stealth Kill");
+        float distanceToBook = Vector2.Distance(transform.position, EnemyPos.position);
+        InStealth = false;
+        InStealthKill = true;
+
+        //Vector2 direction = (EnemyPos.position - transform.position).normalized;
+        //rb.velocity = (direction * Speed);
+
+        while (distanceToBook > 0.1f)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, EnemyPos.position, Speed * Time.deltaTime);
+            yield return null;
+
+
+
+
+        }
+
+
+        PlayedFallSFX = false;
+        InStealthKill = false;
+
+
+
+
+
+
+    }
+
+
+    public void SaveProgress()
+    {
+        SaveSystem.SaveProgess(this);
+    }
+    public void TellThat1stDone()
+    {
+        HasFullyWatchedFirst = true;
+        SaveProgress();
+    }
+
+    public void LoadProgress()
+    {
+        PlayerData data = SaveSystem.LoadSave();
+        HasGun = data.HasGun;   
+        SceneName = data.SceneName;
+        Checkpoint = data.Checkpoint;
+        Cutscene_IntroFight = data.Cutscene_IntroFight;
+        //Positions
+        Vector3 position;
+        position.x = data.PlayerPOS[0];
+        position.y = data.PlayerPOS[1];
+        position.z = data.PlayerPOS[2];
+        FinshedEncounterAfterLab = data.HasFinishedEncounterAfterLab; 
+        transform.position = position;
+        HasBrokeOutOfRope = data.HasBrokeOutOfRope;
+
+
+        // Collectibles and Paper
+        BackflipCollected = data.Backflip;
+        InfoCollected = data.InfoCollect;
+        NoMoreCollected = data.NoMoreCollect;
+
+        //Cutscenes
+        NeedsToViewDirecFirstIntro = data.NeedsToViewDirecFirstIntro;
+        HasFullyWatchedFirst = data.HasFullyWatchedFirst;
+        SeenGunDirections = data.SeenGunDirections;
+
+        //Bosses
+        HasKilledEmbry = data.HasKilledEmbry;
+        HasKilledEcology = data.HasKilledEcology;
+
+    }
+
+    public void OverrideSave_Position(float x, float y, float z)
+    {
+        // Overide Position
+        transform.position = new Vector3(x, y, z);
+        SaveProgress();
+    }
+
+
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene("Game");
+    }
+
+
+
+
+
+}
+
+
+
+

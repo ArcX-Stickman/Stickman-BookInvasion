@@ -1,0 +1,11 @@
+Model Information:
+* title:	Tree wind system
+* source:	https://sketchfab.com/3d-models/tree-wind-system-87a2022bd8ad4c85b4d11825143e4e77
+* author:	RandyGF (https://sketchfab.com/RandyGF)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Tree wind system" (https://sketchfab.com/3d-models/tree-wind-system-87a2022bd8ad4c85b4d11825143e4e77) by RandyGF (https://sketchfab.com/RandyGF) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
