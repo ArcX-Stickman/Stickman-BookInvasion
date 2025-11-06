@@ -1269,6 +1269,10 @@ public class EnemyAI : MonoBehaviour
         }
         if (collision.CompareTag("Bullet") )
         {
+            if (!RangeManager.PlayerSpotted)
+            {
+                RangeManager.PlayerSpotted = true;
+            }
             PlayerManager.CameraScript.StartCoroutine(PlayerManager.CameraScript.ShakeCamGroundFeeling(58.5f, 0.2f));
             Bullet bulletScript = collision.GetComponent<Bullet>();
             GameObject effect = Instantiate(Dead, transform.position, Quaternion.identity);
@@ -1359,8 +1363,14 @@ public class EnemyAI : MonoBehaviour
         }
         if (collision.CompareTag("StickMelee") && !PlayerManager.isUppercut)
         {
+            
+            if (!RangeManager.PlayerSpotted)
+            {
+                RangeManager.PlayerSpotted = true;
+            }
+            
             PlayerManager.CameraScript.StartCoroutine(PlayerManager.CameraScript.ShakeCamGroundFeeling(48.5f, 0.2f));
-
+            
             if (PlayerManager.isInPerfectDodge)
             {
                 PlayerManager.CameraScript.StartCoroutine(PlayerManager.CameraScript.ShakeCamGroundFeeling(78.5f, 0.2f));

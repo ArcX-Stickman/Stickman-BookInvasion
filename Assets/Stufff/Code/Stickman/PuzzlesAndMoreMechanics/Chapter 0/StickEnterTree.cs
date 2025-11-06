@@ -6,6 +6,7 @@ using UnityEngine;
 public class StickEnterTree : MonoBehaviour
 {
     public bool ImportantTree;
+        public GameObject BackflipPopUP;
     public SpriteRenderer Tree;
     public float OpacityThing = 0.5f;
     public float OG_Opacity;
@@ -17,6 +18,9 @@ public class StickEnterTree : MonoBehaviour
     public string Txt;
     public KeyCode Kc;
 
+
+// sigma 
+    private int umIDKMan = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -57,6 +61,10 @@ public class StickEnterTree : MonoBehaviour
             Tree.color = c;
             if (Tut && BackflipTut !=null)
             {
+                if(BackflipPopUP != null)
+                {
+                    BackflipPopUP.gameObject.SetActive(true);
+                }
                 BackflipTut.gameObject.SetActive(true);
                 Animator anim = BackflipTut.GetComponent<Animator>();
                 TextMeshProUGUI tx = BackflipTut.GetComponent<TextMeshProUGUI>();
