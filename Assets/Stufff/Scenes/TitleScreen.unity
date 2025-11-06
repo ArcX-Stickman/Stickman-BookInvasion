@@ -1039,6 +1039,7 @@ MonoBehaviour:
   rb: {fileID: 131488525}
   StickAnim: {fileID: 131488532}
   Grounded: 0
+  CallJumpDEBUG: 0
   MuzzleFire: {fileID: 212466453}
   MuzzleSprites:
   - {fileID: 21300000, guid: fa163e432eef1b54994f52c6814904ed, type: 3}
@@ -1092,6 +1093,7 @@ MonoBehaviour:
   isSliding: 0
   MaxSlideSpeed: 67.1
   SlideVolume: 0
+  SlideMomentum: 0
   SlideVolumeEnd: 0
   BuildUp: 0
   SlopeSlide: 0
@@ -1121,6 +1123,8 @@ MonoBehaviour:
   BackFlipCD: 0.51
   BackFlipSFX: {fileID: 8300000, guid: 2d094aba077e77b4bae2dd35c9289ddc, type: 3}
   BackFlipAS: {fileID: 131488524}
+  LastBackflipTime: 0
+  AirBackFlip: 0
   PunchAudioP: {fileID: 131488524}
   PunchSFX:
   - {fileID: 8300000, guid: e09e99d3176c38645bb8e06680a2a34a, type: 3}
@@ -1151,6 +1155,9 @@ MonoBehaviour:
     m_Bits: 131072
   FreeFlowAttachCD: 0.83
   AttachSpeed: 193.4
+  MegaPunch: {fileID: 0}
+  RopeShift: {fileID: 0}
+  SceneName: 
   HasGun: 0
   BreakIn: 0
   AlreadyPickedGun: 0
@@ -1161,6 +1168,7 @@ MonoBehaviour:
   HasAlreadySeenEmbryTips: 0
   HasAlreadySeenEmbryTipsGlitchPreventer: 0
   FinshedEncounterAfterLab: 0
+  HasBrokeOutOfRope: 0
   LoadingSystem: {fileID: 0}
   XP_Orbs: 0
   Cutscene_IntroFight: 0
@@ -1172,11 +1180,26 @@ MonoBehaviour:
   NoMoreCollected: 0
   Level1: {fileID: 212466453}
   Level2: {fileID: 1917667554}
+  Level1Grass: {fileID: 0}
+  BloodFX: {fileID: 0}
+  Anim_Locked: 0
+  ExamHeliID_Checkpoint: 0
+  LabLevel: {fileID: 0}
+  LabBG_SPRITE: {fileID: 0}
   Cart: {fileID: 963846075}
   AccelerationCart: {x: 66, y: 0}
   Point4Cart: {fileID: 0}
   MinDIS4Cart: 0
   DistanceFromCartPoint: 0
+  HeliLadder: {fileID: 0}
+  UpLadder: {fileID: 0}
+  DownLadder: {fileID: 0}
+  HeliCinematicClimbDestination: {fileID: 0}
+  InHeliPoS: {fileID: 0}
+  MinDisHeliCineClimbDes: 0
+  HasFullyClimbed: 0
+  InHeliCineBeatdown: 0
+  Engine: {fileID: 0}
   WalkOnGrass: 0
   FootP: {fileID: 212466458}
   FootPMetal: {fileID: 212466458}
@@ -1210,6 +1233,39 @@ MonoBehaviour:
   LastULT: 2
   UltCam: {fileID: 0}
   DeathSFX: {fileID: 8300000, guid: 5cadf0d5a63a4b945a31b1bfad240da1, type: 3}
+  PerfectDodge: {fileID: 0}
+  PerfectDodgeSloMO: {fileID: 0}
+  isInPerfectDodge: 0
+  PerfectDodgeCount: 0
+  TimeManager: {fileID: 0}
+  LockedInMeterSlider: {fileID: 0}
+  MaxDodge: 0
+  SloMORate: 0
+  isActive: 0
+  LockedInThunder: {fileID: 0}
+  LockedIN: 0
+  WeAreLockedIn_SFX_ACTIVATE: {fileID: 0}
+  CameraScript: {fileID: 0}
+  GaugeFull: {fileID: 0}
+  Particle4LockingIn: {fileID: 0}
+  LockedThunderAnim: {fileID: 0}
+  MegaHeal: 0
+  OrbSpawn: {fileID: 0}
+  AuraSigmaRizzyDodge: 0
+  DistanceToBook: 0
+  isVoid: 0
+  JumpCD: 0
+  LastJump: 0
+  timeBecameAirborne: 0
+  jumpAnimationHelper: 0.15
+  HeliFinale: 0
+  DashDisDebug: 0
+  HeliForestCheck: {fileID: 0}
+  CineMaticSpeed: 0
+  MaxCineMaticSpeed: 0
+  InCinematic: 0
+  CinematicSlideSpeed: 0
+  MaxCinematicSlideSpeed: 0
   groundCheck: {fileID: 0}
   checkRadius: 0.2
   whatIsGround:
@@ -1217,7 +1273,14 @@ MonoBehaviour:
     m_Bits: 0
   FacingRight: 0
   inSlipperyState: 0
+  PowerfulPunch: 0
+  HasCaughtSniper: 0
+  inRush: 0
+  NeverDoCineBeatDownAgain: 0
+  isFallingHeli: 0
   TouchingATKSight: 0
+  OnLadder: 0
+  UpLadderWant: 0
   HidePosition: {fileID: 0}
   inCombo: 0
   HasKilledYappers_Sciests_WithACart: 0
@@ -1226,6 +1289,9 @@ MonoBehaviour:
     m_Bits: 0
   VolumeFreeFlowCombat: {fileID: 0}
   EnemyRecivedHit: 0
+  StickLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &131488529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6869,7 +6935,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &258020062
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6926,7 +6992,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 6.4
+  m_Intensity: 2.3
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: d132ca20833ddb6433488c5200000000a14ef06e23f59f62571b71c3
@@ -6947,8 +7013,8 @@ MonoBehaviour:
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 53.16
+  m_PointLightInnerRadius: 5.8
+  m_PointLightOuterRadius: 53.73
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -9161,6 +9227,7 @@ Transform:
   - {fileID: 1913239684}
   - {fileID: 248436912}
   - {fileID: 417139337}
+  - {fileID: 720404572}
   - {fileID: 1606548811}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9169,6 +9236,90 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6745691365354339312, guid: e3f1e4efbc2c95344a2a35c7c348e79e, type: 3}
   m_PrefabInstance: {fileID: 7098384192160270399}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &720404571
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 720404572}
+  - component: {fileID: 720404573}
+  m_Layer: 0
+  m_Name: Square (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &720404572
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720404571}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 1.6, y: 17.4, z: 0}
+  m_LocalScale: {x: 92.93285, y: 60.557106, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 682699163}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!212 &720404573
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720404571}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 550122193
+  m_SortingLayer: -4
+  m_SortingOrder: 3245
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Color: {r: 0.04819329, g: 0.08169826, b: 0.5377358, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &741536915
 GameObject:
   m_ObjectHideFlags: 0
@@ -13394,6 +13545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fps: 60
+  pauseManager: {fileID: 0}
 --- !u!1 &1796113461
 GameObject:
   m_ObjectHideFlags: 0
