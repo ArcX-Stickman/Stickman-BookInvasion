@@ -311,7 +311,7 @@ public class Movement : MonoBehaviour
 
     public GameObject TutTXT;
 
-
+    public Vector3 SafePosition;
     void Start()
     {
         Grounded = true;
@@ -740,7 +740,7 @@ public class Movement : MonoBehaviour
 
                 }
 
-               else if (!BackFlip && !isInPerfectDodge)
+                else if (!BackFlip && !isInPerfectDodge)
                 {
                     if (InHeliCineBeatdown)
                     {
@@ -758,7 +758,11 @@ public class Movement : MonoBehaviour
                     }
 
                 }
-                StartCoroutine(PunchFreeFlow());
+                if(Time.time >= lastPunchTime + MeleeCD + 0.4f)
+                {
+                    StartCoroutine(PunchFreeFlow());
+
+                }
 
                 MeleeCD = Mathf.Max(OG_MeleeCD - ComboCount, 0.1f);
                 MeleeCD = MeleeCD - ComboCount;

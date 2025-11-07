@@ -18,6 +18,7 @@ public class StickEnterTree : MonoBehaviour
     public string Txt;
     public KeyCode Kc;
 
+    public bool NeedForCheckPoint_Water;
 
 // sigma 
     private int umIDKMan = 0;
@@ -48,10 +49,16 @@ public class StickEnterTree : MonoBehaviour
     }
 
     private bool AlrTrigAnimTutRest;
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+
+            if(PlayerManager.Grounded && NeedForCheckPoint_Water)
+            {
+                PlayerManager.SafePosition = new Vector3(PlayerManager.transform.position.x,PlayerManager.transform.position.y,0);
+            }
             StickInTree = true;
 
             PlayerManager.InStealth = true;
@@ -104,6 +111,11 @@ public class StickEnterTree : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+
+            if(PlayerManager.Grounded && NeedForCheckPoint_Water)
+            {
+                PlayerManager.SafePosition = new Vector3(PlayerManager.transform.position.x,PlayerManager.transform.position.y,0);
+            }
             StickInTree = true;
 
             PlayerManager.InStealth = true;

@@ -19,6 +19,7 @@ public class SniperBullet : MonoBehaviour
     public AudioSource AudioP;
     public AudioClip BoomSFX;
     private bool AlrFX;
+    private TurnOffRigidBodyIfPlayerFar Rb_Checker;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
@@ -41,7 +42,15 @@ public class SniperBullet : MonoBehaviour
 
     void Update()
     {
-        Distance = Vector2.Distance(transform.position, PlayerManager.transform.position); 
+
+        if(Rb_Checker == null)
+        {
+            Rb_Checker = GetComponent<TurnOffRigidBodyIfPlayerFar>();
+        }
+
+        if(Rb_Checker.Distance >= MinDIS)
+        {
+             Distance = Vector2.Distance(transform.position, PlayerManager.transform.position); 
         if (player != null)
         {
             
@@ -82,6 +91,8 @@ public class SniperBullet : MonoBehaviour
             }
            
         }
+        }
+       
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

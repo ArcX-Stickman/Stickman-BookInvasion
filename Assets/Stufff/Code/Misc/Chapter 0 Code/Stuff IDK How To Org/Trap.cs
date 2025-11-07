@@ -27,14 +27,25 @@ public class Trap : MonoBehaviour
     public bool EndingDemo1;
     public AudioSource Music;
     public GameObject FadeToWhite;
+
+    public bool Teleportable;
+
+    private float LastHit;
+    private float HitCD = 2.2f;
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && ! AlrDid )
+        if (collision.gameObject.CompareTag("Player"))
         {
             if (!EndingDemo1)
             {
                 Debug.Log("VoidKill");
-
+                if (Teleportable)
+                {
+                    TeleportPlayerToSafety();
+                    PlayerHP.PlayerHP -= DMG;
+                }
                 if (isVoid && !ALR_PLAYED_VOID)
                 {
                     PlayerManager.isVoid = true;
@@ -43,8 +54,9 @@ public class Trap : MonoBehaviour
                     // AudioP.PlayOneShot(Fall);
                 }
                 AlrDid = true;
-                if (isWater)
+                if (isWater && !AlrDid)
                 {
+                    AlrDid = true;
                     AudioP.PlayOneShot(WaterSplash);
                 }
                 if (!DoesntOneShot)
@@ -52,9 +64,14 @@ public class Trap : MonoBehaviour
                     PlayerHP.PlayerHP = 0;
 
                 }
-                else
+                else if(!Teleportable)
                 {
-                    PlayerHP.PlayerHP -= DMG;
+                    if(Time.time >= LastHit + HitCD)
+                    {
+                        LastHit = Time.time;    
+                        PlayerHP.PlayerHP -= DMG;
+
+                    }
                     if (AudioP != null)
                     {
                         if (WantToBeDestoryedOnTouch && !PlayerManager.isDashing)
@@ -79,10 +96,10 @@ public class Trap : MonoBehaviour
                 FadeToWhite.gameObject.SetActive(true);
                 StartCoroutine(QuitTitle());
             }
-           
+
         }
 
-        if (collision.CompareTag("Bullet") && CanBeGone_W_Bullet)
+        if (collision.gameObject.CompareTag("Bullet") && CanBeGone_W_Bullet)
         {
             AlrDid = true;
             GameObject FX1 = Instantiate(FX, transform.position, Quaternion.identity);
@@ -90,7 +107,7 @@ public class Trap : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (collision.CompareTag("Book") && !AlrDid && isInEcology && Ecology != null)
+        if (collision.gameObject.CompareTag("Book") && !AlrDid && isInEcology && Ecology != null)
         {
             AlrDid = true;
             GameObject FX1 = Instantiate(FX, transform.position, Quaternion.identity);
@@ -98,7 +115,7 @@ public class Trap : MonoBehaviour
             Ecology.Health -= 5;
             Destroy(gameObject);
         }
-        if (collision.CompareTag("SunRay"))
+        if (collision.gameObject.CompareTag("SunRay"))
         {
             AlrDid = true;
             GameObject FX1 = Instantiate(FX, transform.position, Quaternion.identity);
@@ -122,12 +139,16 @@ public class Trap : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && !AlrDid )
+        if (collision.gameObject.CompareTag("Player"))
         {
             if (!EndingDemo1)
             {
                 Debug.Log("VoidKill");
-
+                if (Teleportable)
+                {
+                    TeleportPlayerToSafety();
+                    PlayerHP.PlayerHP -= DMG;
+                }
                 if (isVoid && !ALR_PLAYED_VOID)
                 {
                     PlayerManager.isVoid = true;
@@ -136,8 +157,9 @@ public class Trap : MonoBehaviour
                     // AudioP.PlayOneShot(Fall);
                 }
                 AlrDid = true;
-                if (isWater)
+                if (isWater && !AlrDid)
                 {
+                    AlrDid = true;
                     AudioP.PlayOneShot(WaterSplash);
                 }
                 if (!DoesntOneShot)
@@ -145,7 +167,7 @@ public class Trap : MonoBehaviour
                     PlayerHP.PlayerHP = 0;
 
                 }
-                else
+                else if(!Teleportable)
                 {
                     PlayerHP.PlayerHP -= DMG;
                     if (AudioP != null)
@@ -198,4 +220,14 @@ public class Trap : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    
+
+    public void TeleportPlayerToSafety()
+    {
+        if (PlayerManager.SafePosition != Vector3.zero)
+        {
+            PlayerManager.transform.position = PlayerManager.SafePosition;
+        }
+    }
+
 }
