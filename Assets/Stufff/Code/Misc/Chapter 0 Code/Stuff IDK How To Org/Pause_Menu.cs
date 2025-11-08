@@ -246,6 +246,17 @@ public class PauseManager : MonoBehaviour
         {
             pauseMenuUI.SetActive(true);
             PauseMusic.gameObject.SetActive(true);
+            if (PlayerManager.StickHP.PlayerHP > 0)
+            {
+                if (EmbryTheme != null && EmbryTheme.gameObject.activeSelf && Audio && !NoHUD)
+                    EmbryTheme.Pause();
+
+                if (Battle.gameObject.activeSelf && !NoHUD && Audio)
+                    Battle.Pause();
+
+                Hypothesis.Pause();
+                BreakIN.Pause();
+            }
         }
 
         Time.fixedDeltaTime = 0f;
@@ -253,17 +264,7 @@ public class PauseManager : MonoBehaviour
 
         Timemanager.SetActive(false);
 
-        if (PlayerManager.StickHP.PlayerHP > 0)
-        {
-            if (EmbryTheme != null && EmbryTheme.gameObject.activeSelf && Audio && !NoHUD)
-                EmbryTheme.Pause();
-
-            if (Battle.gameObject.activeSelf && !NoHUD && Audio)
-                Battle.Pause();
-
-            Hypothesis.Pause();
-            BreakIN.Pause();
-        }
+       
 
         Time.timeScale = 0f;
         isPaused = true;

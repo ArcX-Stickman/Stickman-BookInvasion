@@ -2106,6 +2106,11 @@ public class Movement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground") && !IsFalling)
         {
+            if(Grounded && !JumpDodge && !isDashing && !isSliding)
+            {
+                SafePosition = new Vector3(transform.position.x, transform.position.y, 0);
+
+            }
             Grounded = true;
         }
 

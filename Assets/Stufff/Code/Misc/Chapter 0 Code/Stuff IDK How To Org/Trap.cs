@@ -45,6 +45,7 @@ public class Trap : MonoBehaviour
                 {
                     TeleportPlayerToSafety();
                     PlayerHP.PlayerHP -= DMG;
+                    return;
                 }
                 if (isVoid && !ALR_PLAYED_VOID)
                 {
@@ -59,7 +60,7 @@ public class Trap : MonoBehaviour
                     AlrDid = true;
                     AudioP.PlayOneShot(WaterSplash);
                 }
-                if (!DoesntOneShot)
+                if (!DoesntOneShot && !Teleportable)
                 {
                     PlayerHP.PlayerHP = 0;
 
@@ -135,7 +136,7 @@ public class Trap : MonoBehaviour
         LoadingSystem load = FindAnyObjectByType<LoadingSystem>();
         load.QuitToTitle();
     }
-
+    private bool WaterSplashSFX_Played;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -146,8 +147,14 @@ public class Trap : MonoBehaviour
                 Debug.Log("VoidKill");
                 if (Teleportable)
                 {
+                    if (isWater)
+                    {
+                        AudioP.PlayOneShot(WaterSplash);
+
+                    }
                     TeleportPlayerToSafety();
                     PlayerHP.PlayerHP -= DMG;
+                    return;
                 }
                 if (isVoid && !ALR_PLAYED_VOID)
                 {
@@ -162,7 +169,7 @@ public class Trap : MonoBehaviour
                     AlrDid = true;
                     AudioP.PlayOneShot(WaterSplash);
                 }
-                if (!DoesntOneShot)
+                if (!DoesntOneShot && !Teleportable)
                 {
                     PlayerHP.PlayerHP = 0;
 
