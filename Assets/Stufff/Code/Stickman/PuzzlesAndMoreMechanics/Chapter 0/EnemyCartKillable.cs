@@ -162,9 +162,15 @@ public class EnemyCartKillable : MonoBehaviour
 
     public void MoveAway_Astro()
     {
-        speed = 80;
+        //speed = 80;
         Vector2 targetPosition = new Vector2(PositionMAX.position.x, transform.position.y);
         transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+        float MinDis_DestinDestory = 12;
+        float Distance = Vector2.Distance(transform.position, targetPosition);
+        if(Distance <= MinDis_DestinDestory)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

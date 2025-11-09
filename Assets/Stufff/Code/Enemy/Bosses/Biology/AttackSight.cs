@@ -23,6 +23,10 @@ public class AttackSight : MonoBehaviour
         {
             StickmanIsHERE = true;
         }
+        if(Stickman == null)
+        {
+            Stickman = FindAnyObjectByType<Movement>();
+        }
     }
 
 

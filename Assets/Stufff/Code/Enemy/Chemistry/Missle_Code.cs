@@ -26,6 +26,7 @@ public class Missle_Code : MonoBehaviour
     public float MinDisHeli;
     public GameObject FireHeli;
     public Animator ExamAnim;
+    public Animator Chemistry;
     // Start is called before the first frame update
     void Start()
     {
@@ -78,6 +79,7 @@ public class Missle_Code : MonoBehaviour
             ExamAnim.CrossFade("Exam_Tension", 0, 0);
             FireHeli.gameObject.SetActive(true);
             GameObject boom = Instantiate(ExplosionFX, HelicopterPOS.position, Quaternion.identity);
+            Chemistry.CrossFade("ChemCooked", 0, 0);
             AudioP.PlayOneShot(SFX);
             Destroy(gameObject);
         }

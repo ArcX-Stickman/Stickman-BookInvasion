@@ -34,6 +34,7 @@ public class LabBreakIn : MonoBehaviour
     public GameObject Hypothesis;
 
     public bool BreakIn;
+    private bool AlrBrokeIn;
 
     // Start is called before the first frame update
     void Start()
@@ -64,8 +65,9 @@ public class LabBreakIn : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") || collision.CompareTag("Bullet"))
+        if (collision.CompareTag("Player") || collision.CompareTag("Bullet") && !AlrBrokeIn)
         {
+            AlrBrokeIn = true;
             Stickman.InCinematic = true;
             //AlertUI.SetActive(true);
             AudioP.PlayOneShot(BassDrop);
@@ -83,9 +85,10 @@ public class LabBreakIn : MonoBehaviour
             Stickman.StickHP.changerate = 0.09f;
             GenticIntroAnim = GeneticsBookIntro.GetComponent<Animator>();
             Animator Anim = CamAnimDis.GetComponent<Animator>();
-            GenticIntroAnim.SetTrigger("Turn");
+            //GenticIntroAnim.SetTrigger("Turn");
             Anim.SetBool("InLab", true);
             Instantiate(WindowFX, WindowPos.position, Quaternion.identity);
+            StartCoroutine(Stickman.CameraScript.ShakeCamGroundFeeling(120, 0.3f));
             LabBG.gameObject.SetActive(true);
             AudioP.PlayOneShot(WindowBreak);
             SlideMusic.gameObject.SetActive(false);

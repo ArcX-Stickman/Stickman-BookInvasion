@@ -1,314 +1,247 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class MoveTowardsPosition : MonoBehaviour
 {
+    [Header("Movement")]
     public Transform PlaceToGO;
     public bool WantToGO;
     public float Speed;
     public bool WantAcceleration;
     public bool StickBasedSpeed;
-    public Movement Stick;
-    public float Distance;
-    public float MinDisForStickMove;
-    public bool CanBeStoppedByCollision;
-    public bool WantFx;
-    public bool WantDestroyOnImpact;
-    public GameObject FX;
-    public AudioSource AudioP;
-    public AudioClip SFX;
-    public bool SloMo;
-    public bool CanKillPlayer;
-    public bool FxHasAnimAndFXNeedTOBeFast;
     public bool WantFollowYAxis;
+    public bool FlipScale;
     public bool SlowDownIFPlayerFar;
     public float OriginalSpeed;
+    public float MIN_DIS_ATTRIBUTE_FOR_REFERENCE;
     public bool DestoryOnReach;
     public Transform SecondDes;
     public bool WantSecondDisTrigger;
     public bool SecondDisNow;
-    public float MIN_DIS_ATTRIBUTE_FOR_REFERENCE;
+    public float Distance;
+    public float MinDisForStickMove;
+
+    [Header("Booleans/Conditions")]
+    public bool CanBeStoppedByCollision;
     public bool CanBeDodged;
     public bool CanBeDestroyedGround;
-    public bool FlipScale;
-    private bool Flipped;
-    public float IntensityDestruc_CamShake;
+    public bool CanKillPlayer;
+    public bool SloMo;
+    public bool WantFx;
+    public bool WantDestroyOnImpact;
+    public bool FxHasAnimAndFXNeedTOBeFast;
     public bool WantShakingIntensity;
+    public bool ShakeOnDestroy;
     public bool Grounded;
+    public float DMG_Value;
+    private bool Flipped;
+    private bool alrShookCam;
+
+    [Header("Refer")]
+    public Movement Stick;
+    public AudioSource AudioP;
+    public AudioClip SFX;
+    public GameObject FX;
+    public float IntensityDestruc_CamShake;
+
+    [Header("Chapter 0 - Conditions")]
+    public bool Chem;
+    public Chemistry Chemistry;
+    public GameObject ChemUI_Dodge;
+
     private void Start()
     {
         OriginalSpeed = Speed;
     }
 
-    void Update()
+    private void Update()
     {
+        if (!gameObject.activeSelf) return;
 
-        if (gameObject.activeSelf)
-        {
-
-            if(WantShakingIntensity && Grounded)
-            {
-                StartCoroutine(ShakeLikeCRazYYY());
-            }
-            float DistanceDestin = 0;
-
-            if (WantFollowYAxis)
-            {
-                DistanceDestin = Vector2.Distance(transform.position, PlaceToGO.position);
-                            Distance = DistanceDestin;
-
-            }
-            else
-            {
-                Vector2 fakePOS = new Vector2(PlaceToGO.position.x, transform.position.y);
-
-                DistanceDestin = Vector2.Distance(transform.position, fakePOS);
-            }
-            float MinDisForDestruc = MIN_DIS_ATTRIBUTE_FOR_REFERENCE;
-            Stick = FindAnyObjectByType<Movement>();
-            if (StickBasedSpeed)
-            {
-                Distance = Vector2.Distance(transform.position, Stick.transform.position);
-                if (Distance <= MinDisForStickMove)
-                {
-                    Speed = Stick.MaxSpeed - 15.4f;
-                }
-                else if (Distance >= 65)
-                {
-                    Speed = Stick.MaxSpeed + 13;
-                }
-                else
-                {
-                    Speed = Stick.MaxSpeed - 9.4f; // sum random number i came up with after a lot of attemtps
-                }
-
-            }
-            if (FlipScale && WantToGO && !Flipped)
-            {
-                Flipped = true;
-                Vector2 fakeFlip = new Vector2(transform.localScale.x * -1,transform.localScale.y);
-                transform.localScale = fakeFlip;
-            }
-            if(DistanceDestin <= MinDisForDestruc && DestoryOnReach)
-            {
-                Destroy(gameObject);
-            }
-            if(DistanceDestin <= MinDisForDestruc - 7 && SecondDes != null && SecondDisNow)
-            {
-                PlaceToGO = SecondDes;
-            }
-            if (WantToGO && ! WantFollowYAxis)
-            {
-                Vector2 fakePOS = new Vector2(PlaceToGO.position.x, transform.position.y);
-                transform.position = Vector2.MoveTowards(transform.position, fakePOS, Speed * Time.deltaTime);
-            }
-            else if(WantToGO && WantFollowYAxis)
-            {
-                transform.position = Vector2.MoveTowards(transform.position, PlaceToGO.position, Speed * Time.deltaTime);
-
-            }
-
-            if (SlowDownIFPlayerFar)
-            {
-                SpeedManagerSlo();
-            }
-        }
-
+        HandleMovement();
+        if (SlowDownIFPlayerFar) SpeedManagerSlo();
+        if (WantShakingIntensity && Grounded) StartCoroutine(ShakeLikeCRazYYY());
     }
 
-    IEnumerator ShakeLikeCRazYYY()
+    private void OnTriggerEnter2D(Collider2D collision) => HandleCollision(collision.gameObject);
+    private void OnCollisionEnter2D(Collision2D collision) => HandleCollision(collision.gameObject);
+
+    private void OnDestroy()
+    {
+        if (CanKillPlayer)
+            StartCoroutine(Stick.CameraScript.ShakeCamGroundFeeling(80f, 0.3f));
+    }
+
+    // ?????????????????????????????
+    // ?? MOVEMENT HANDLING
+    // ?????????????????????????????
+    private void HandleMovement()
+    {
+        Stick = FindAnyObjectByType<Movement>();
+        float distanceToTarget = WantFollowYAxis
+            ? Vector2.Distance(transform.position, PlaceToGO.position)
+            : Vector2.Distance(transform.position, new Vector2(PlaceToGO.position.x, transform.position.y));
+
+        Distance = distanceToTarget;
+        float minDestroyDistance = MIN_DIS_ATTRIBUTE_FOR_REFERENCE;
+
+        // Stick-based movement speed
+        if (StickBasedSpeed)
+        {
+            Distance = Vector2.Distance(transform.position, Stick.transform.position);
+            if (Distance <= MinDisForStickMove) Speed = Stick.MaxSpeed - 15.4f;
+            else if (Distance >= 65) Speed = Stick.MaxSpeed + 13f;
+            else Speed = Stick.MaxSpeed - 9.4f;
+        }
+
+        // Flip on movement start
+        if (FlipScale && WantToGO && !Flipped)
+        {
+            Flipped = true;
+            transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
+        }
+
+        // Move toward target
+        if (WantToGO)
+        {
+            Vector2 targetPos = WantFollowYAxis
+                ? PlaceToGO.position
+                : new Vector2(PlaceToGO.position.x, transform.position.y);
+
+            transform.position = Vector2.MoveTowards(transform.position, targetPos, Speed * Time.deltaTime);
+        }
+
+        // Check for reach conditions
+        if (distanceToTarget <= minDestroyDistance && DestoryOnReach) Destroy(gameObject);
+        if (distanceToTarget <= minDestroyDistance - 7 && SecondDes != null && SecondDisNow) PlaceToGO = SecondDes;
+    }
+
+    private IEnumerator ShakeLikeCRazYYY()
     {
         while (Grounded)
         {
-            Stick.CameraScript.StartCoroutine(Stick.CameraScript.ShakeCamGroundFeeling(IntensityDestruc_CamShake, 0.1f));
+            Stick.CameraScript.StartCoroutine(
+                Stick.CameraScript.ShakeCamGroundFeeling(IntensityDestruc_CamShake, 0.1f)
+            );
             yield return null;
         }
     }
 
-    // This is for check to see if it should stop go faster or slower
-    void SpeedManagerSlo()
+    private void SpeedManagerSlo()
     {
         Vector2 directionToStick = (Stick.transform.position - transform.position).normalized;
         float dot = Vector2.Dot(transform.right, directionToStick);
-
         Speed = Mathf.Lerp(OriginalSpeed - 5f, OriginalSpeed + 80f, (dot + 1f) / 0.3f);
     }
-    private bool alrShookCam;
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    // ?????????????????????????????
+    // ?? COLLISION HANDLING
+    // ?????????????????????????????
+    private void HandleCollision(GameObject obj)
     {
-        if(collision.CompareTag("Spec") && CanBeStoppedByCollision)
+        string tag = obj.tag;
+
+        // SPEC collision
+        if (tag == "Spec" && CanBeStoppedByCollision)
         {
-            if (WantFx)
-            {
-                if(AudioP != null && SFX != null)
-                {
-                    AudioP.PlayOneShot(SFX);
-                }
-                if (!alrShookCam)
-                {
-                    alrShookCam = true;
-                    Stick.CameraScript.StartCoroutine(Stick.CameraScript.ShakeCamGroundFeeling(IntensityDestruc_CamShake, 0.5f));
-
-                }
-                GameObject Boom = ObjectPooler.SpawnObj(FX, transform.position, Quaternion.identity, ObjectPooler.PoolType.Partcles);
-                if (WantDestroyOnImpact)
-                {
-                    if (SloMo)
-                    {
-                        Stick.TimeManager.SloMO();
-                    }
-                    Destroy(gameObject);
-
-                }
-            }
-            DeactivateScriptOnCollision dSC = GetComponent<DeactivateScriptOnCollision>();
-            dSC.Deactivate();
+            PlayFXAndShake();
+            GetComponent<DeactivateScriptOnCollision>().Deactivate();
+            return;
         }
 
-
-        if(collision.CompareTag("Player") && CanKillPlayer)
+        // PLAYER collision
+        if (tag == "Player" && CanKillPlayer)
         {
-            if (CanBeDodged && Stick.isDashing || CanBeDodged && Stick.isSliding)
+            HandlePlayerImpact();
+            return;
+        }
+
+        // GROUND collision
+        if (tag == "Ground")
+        {
+            Grounded = true;
+            HandleGroundImpact();
+        }
+    }
+
+    // ?????????????????????????????
+    // ?? IMPACT HELPERS
+    // ?????????????????????????????
+    private void HandlePlayerImpact()
+    {
+        if (Chem)
+        {
+            Chemistry.Chem_Anim.CrossFade("Chem_KnockedOut", 0, 0);
+            ChemUI_Dodge.SetActive(false);
+        }
+
+        bool playerDodged = CanBeDodged && (Stick.isDashing && !Chem || Stick.isSliding);
+        if (playerDodged)
+        {
+            PlayFXAndShake();
+            GetComponent<DeactivateScriptOnCollision>().Deactivate();
+            return;
+        }
+
+        // Apply damage
+        if (WantFx)
+        {
+            if (DMG_Value == 0)
             {
-                if (WantFx)
-                {
-                    if (AudioP != null && SFX != null)
-                    {
-                        AudioP.PlayOneShot(SFX);
-                    }
-
-                    GameObject Boom = ObjectPooler.SpawnObj(FX, transform.position, Quaternion.identity, ObjectPooler.PoolType.Partcles);
-                    if (WantDestroyOnImpact)
-                    {
-                        if (SloMo)
-                        {
-                            Stick.TimeManager.SloMO();
-                        }
-                        Destroy(gameObject);
-
-                    }
-                }
-                DeactivateScriptOnCollision dSC = GetComponent<DeactivateScriptOnCollision>();
-                dSC.Deactivate();
+                Stick.StickHP.PlayerHP = 0;
+                Stick.StickAnim.CrossFade("Dead", 0, 0);
             }
             else
             {
-                if (WantFx)
-                {
-                    Stick.StickHP.PlayerHP = 0;
-                    if (AudioP != null && SFX != null)
-                    {
-                        AudioP.PlayOneShot(SFX);
-                    }
-
-                    GameObject Boom = ObjectPooler.SpawnObj(FX, transform.position, Quaternion.identity, ObjectPooler.PoolType.Partcles);
-                    if (WantDestroyOnImpact)
-                    {
-                        if (SloMo)
-                        {
-                            Stick.TimeManager.SloMO();
-                        }
-                        Destroy(gameObject);
-
-                    }
-                }
+                Stick.StickHP.PlayerHP -= DMG_Value;
             }
 
-           
-        }
-        if (collision.gameObject.CompareTag("Ground") && CanBeDestroyedGround)
-        {
-            if (WantFx)
-            {
-                if (AudioP != null && SFX != null)
-                {
-                    AudioP.PlayOneShot(SFX);
-                }
-
-                GameObject Boom = ObjectPooler.SpawnObj(FX, transform.position, Quaternion.identity, ObjectPooler.PoolType.Partcles);
-                if (WantDestroyOnImpact)
-                {
-                    if (SloMo)
-                    {
-                        Stick.TimeManager.SloMO();
-                    }
-                    Destroy(gameObject);
-
-                }
-            }
-            DeactivateScriptOnCollision dSC = GetComponent<DeactivateScriptOnCollision>();
-            dSC.Deactivate();
+            PlayFXAndShake(true);
         }
     }
 
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void HandleGroundImpact()
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (Chem)
         {
-            Grounded = true;
-        }
-        if (collision.gameObject.CompareTag("Player") && CanKillPlayer)
-        {
-            if (WantFx)
-            {
-                Stick.StickAnim.CrossFade("Dead", 0, 0);
-                Stick.StickHP.PlayerHP = 0;
-                if (AudioP != null && SFX != null)
-                {
-                    AudioP.PlayOneShot(SFX);
-                }
-
-                GameObject Boom = ObjectPooler.SpawnObj(FX, transform.position, Quaternion.identity, ObjectPooler.PoolType.Partcles);
-                if (FxHasAnimAndFXNeedTOBeFast)
-                {
-                    Animator FXAnim = Boom.GetComponent<Animator>();
-                    FXAnim.speed *= 5;
-                }
-                if (WantDestroyOnImpact)
-                {
-                    if (SloMo)
-                    {
-                        Stick.TimeManager.SloMO();
-                    }
-                    Destroy(gameObject);
-
-                }
-            }
+            Chemistry.Chem_Anim.CrossFade("Chem_KnockedOut", 0, 0);
+            ChemUI_Dodge.SetActive(false);
         }
 
-        if (collision.gameObject.CompareTag("Ground") && CanBeDestroyedGround)
+        if (CanBeDestroyedGround || WantFx)
         {
-            if (WantFx)
-            {
-                if (AudioP != null && SFX != null)
-                {
-                    AudioP.PlayOneShot(SFX);
-                }
-
-                GameObject Boom = ObjectPooler.SpawnObj(FX, transform.position, Quaternion.identity, ObjectPooler.PoolType.Partcles);
-                if (WantDestroyOnImpact)
-                {
-                    if (SloMo)
-                    {
-                        Stick.TimeManager.SloMO();
-                    }
-                    Destroy(gameObject);
-
-                }
-            }
-            DeactivateScriptOnCollision dSC = GetComponent<DeactivateScriptOnCollision>();
-            dSC.Deactivate();
+            PlayFXAndShake();
+            if (CanBeDestroyedGround)
+                GetComponent<DeactivateScriptOnCollision>().Deactivate();
         }
     }
 
-    //private void OnCollisionExit2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Ground"))
-    //    {
-    //        Grounded = false;
-    //    }
-    //}
+    private void PlayFXAndShake(bool checkFastAnim = false)
+    {
+        if (!WantFx) return;
+
+        if (AudioP && SFX)
+            AudioP.PlayOneShot(SFX);
+
+        if (!alrShookCam)
+        {
+            alrShookCam = true;
+            Stick.CameraScript.StartCoroutine(
+                Stick.CameraScript.ShakeCamGroundFeeling(IntensityDestruc_CamShake, 0.5f)
+            );
+        }
+
+        GameObject boom = ObjectPooler.SpawnObj(FX, transform.position, Quaternion.identity, ObjectPooler.PoolType.Partcles);
+        if (checkFastAnim && FxHasAnimAndFXNeedTOBeFast)
+        {
+            Animator fxAnim = boom.GetComponent<Animator>();
+            if (fxAnim != null) fxAnim.speed *= 5;
+        }
+
+        if (WantDestroyOnImpact)
+        {
+            if (SloMo) Stick.TimeManager.SloMO();
+            Destroy(gameObject);
+        }
+    }
 }

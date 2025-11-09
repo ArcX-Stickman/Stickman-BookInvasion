@@ -125,3 +125,6 @@ TagManager:
   - name: Other
     uniqueID: 395125691
     locked: 0
+  - name: Foreground
+    uniqueID: 4251689107
+    locked: 0

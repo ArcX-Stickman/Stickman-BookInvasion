@@ -23,6 +23,8 @@ public class PauseManager : MonoBehaviour
     public AudioSource EmbryTheme;
     public AudioSource Hypothesis;
     public AudioSource BreakIN;
+    public AudioSource BattleLow;
+    public AudioSource BGLOW;
     public Movement PlayerManager;
     public GameObject Graphix;
     public GameObject PauseMusic;
@@ -32,6 +34,9 @@ public class PauseManager : MonoBehaviour
     public bool NoPauseSFX;
     public MaxFPS fpsManager;
     public LoadingSystem LoadingSystem;
+
+    [Header("All Music Sources (except AudioP)")]
+    public List<AudioSource> MusicSources; // Add EmbryTheme, Hypothesis, BreakIN, BattleLow, BGLOW, Battle, etc.
 
     private void Start()
     {
@@ -61,16 +66,16 @@ public class PauseManager : MonoBehaviour
         }
         else
         {
-            EmbryTheme.mute = false;
-            Hypothesis.mute = false;
-            BreakIN.mute = false;
+           // EmbryTheme.mute = false;
+            //Hypothesis.mute = false;
+          //BreakIN.mute = false;
         }
 
         if (PlayerManager.StickHP.PlayerHP <= 0)
         {
             EmbryTheme.mute = true;
             BreakIN.mute = true;
-            Hypothesis.mute= true;
+            Hypothesis.mute = true;
             NoHUD = true;
 
         }
@@ -82,7 +87,7 @@ public class PauseManager : MonoBehaviour
             else
                 Pause();
         }
-        if(isPaused && PlayerManager.Dead)
+        if (isPaused && PlayerManager.Dead)
         {
             Resume();
         }
@@ -120,6 +125,13 @@ public class PauseManager : MonoBehaviour
             if (EmbryTheme != null && EmbryTheme.gameObject.activeSelf && Audio)
             {
                 EmbryTheme.gameObject.SetActive(true);
+            }
+
+            // Activate all music sources in the list
+            foreach (var music in MusicSources)
+            {
+                if (music != null)
+                    music.gameObject.SetActive(true);
             }
         }
     }
@@ -174,25 +186,13 @@ public class PauseManager : MonoBehaviour
         Time.fixedDeltaTime = 0.02f;
         isPaused = false;
 
-        if (PlayerManager.StickHP.PlayerHP > 0)
+        if (PlayerManager.StickHP.PlayerHP > 0 && Audio)
         {
-            if (PlayerManager.BreakIn == false && Audio)
+            foreach (var music in MusicSources)
             {
-                if (Battle.gameObject.activeSelf)
-                    Battle.UnPause();
-                else
-                    Hypothesis.UnPause();
-
-                BreakIN.gameObject.SetActive(false);
+                if (music != null && music.gameObject.activeSelf)
+                    music.UnPause();
             }
-            else if (PlayerManager.BreakIn == true && Audio)
-            {
-                Hypothesis.gameObject.SetActive(false);
-                BreakIN.UnPause();
-            }
-
-            if (EmbryTheme != null && PlayerManager.InEmbryBoss && EmbryTheme.gameObject.activeSelf && Audio)
-                EmbryTheme.UnPause();
         }
     }
 
@@ -241,21 +241,18 @@ public class PauseManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-
         if (!NoHUD)
         {
             pauseMenuUI.SetActive(true);
             PauseMusic.gameObject.SetActive(true);
-            if (PlayerManager.StickHP.PlayerHP > 0)
+
+            if (PlayerManager.StickHP.PlayerHP > 0 && Audio)
             {
-                if (EmbryTheme != null && EmbryTheme.gameObject.activeSelf && Audio && !NoHUD)
-                    EmbryTheme.Pause();
-
-                if (Battle.gameObject.activeSelf && !NoHUD && Audio)
-                    Battle.Pause();
-
-                Hypothesis.Pause();
-                BreakIN.Pause();
+                foreach (var music in MusicSources)
+                {
+                    if (music != null && music.gameObject.activeSelf)
+                        music.Pause();
+                }
             }
         }
 
@@ -263,8 +260,6 @@ public class PauseManager : MonoBehaviour
         PauseMenuAnim.SetTrigger("In");
 
         Timemanager.SetActive(false);
-
-       
 
         Time.timeScale = 0f;
         isPaused = true;

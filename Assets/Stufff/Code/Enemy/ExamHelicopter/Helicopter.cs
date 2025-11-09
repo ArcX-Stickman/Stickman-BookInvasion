@@ -44,6 +44,7 @@ public class Helicopter : MonoBehaviour
     public GameObject WhiteFade;
     public bool Failed;
     public AudioSource BG_Music;
+    public AudioSource LowHPCopterThemeVari;
     private void Start()
     {
         ReGen = false;
@@ -223,6 +224,21 @@ public class Helicopter : MonoBehaviour
             PerfectSolu.Play();
             AlrMusic = true;
         }
+
+        if(PerfectSolu.clip == HelicopterAboveTheme)
+        {
+            if(PlayerHP.PlayerHP >= 60)
+            {
+                PerfectSolu.mute = false;
+                LowHPCopterThemeVari.mute = true;
+            }
+            else
+            {
+                LowHPCopterThemeVari.mute = false;
+                PerfectSolu.mute = true;
+            }
+        }
+
 
         float distanceToPlayer = Vector2.Distance(transform.position, StickPOS.position);
         DistanceFromStickBoi = distanceToPlayer;

@@ -85,6 +85,7 @@ public class TimeManager : MonoBehaviour
     private bool Waiting;
     public void FreezeTime(float duration)
     {
+        if (Time.timeScale < 1) return;
         if (Waiting) return;
         Time.timeScale = 0.05f;
         Time.fixedDeltaTime = Time.timeScale * 0.02f;

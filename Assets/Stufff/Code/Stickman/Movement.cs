@@ -65,7 +65,7 @@ public class Movement : MonoBehaviour
     public float Deacceleration;
     public bool isJumping;
     public Biology_AttackZone Streak_Bio;
-    public float shootCooldown = 0.5f; // Cooldown time between shots
+    public float shootCooldown = 0.5f; 
     private float nextShootTime = 0f;
     public bool isShooting;
     [Header("Sliding ")]
@@ -573,21 +573,23 @@ public class Movement : MonoBehaviour
             {
                 LockedInThunder.color = Color.white;
             }
-            if (PerfectDodgeCount == MaxDodge && !PlayedLockedIn_CompletedGauge && Particle4LockingIn != null)
-            {
-                Particle4LockingIn.gameObject.SetActive(true);
-                AudioPlayer.PlayOneShot(GaugeFull);
-                CameraScript.StartCoroutine(CameraScript.ShakeCam(3.5f, 0.15f));
-                PlayedLockedIn_CompletedGauge = true;
-            }
-            if (Input.GetKeyDown(KeyCode.LeftControl) && !LockedIN && PerfectDodgeCount == MaxDodge)
-            {
-                Particle4LockingIn.gameObject.SetActive(true);
-                LockedThunderAnim.SetBool("1", true);
-                LockedIN = true;
-                CameraScript.StartCoroutine(CameraScript.ShakeCam(5.5f, 0.15f));
-                AudioPlayer.PlayOneShot(WeAreLockedIn_SFX_ACTIVATE);
-            }
+            // Enable this and bellow in later builds
+            //if (PerfectDodgeCount == MaxDodge && !PlayedLockedIn_CompletedGauge && Particle4LockingIn != null)
+            //{
+            //    Particle4LockingIn.gameObject.SetActive(true);
+            //    AudioPlayer.PlayOneShot(GaugeFull);
+            //    CameraScript.StartCoroutine(CameraScript.ShakeCam(3.5f, 0.15f));
+            //    PlayedLockedIn_CompletedGauge = true;
+            //}
+            /* TODO: Re-enable this later in the build */
+            //if (Input.GetKeyDown(KeyCode.LeftControl) && !LockedIN && PerfectDodgeCount == MaxDodge)
+            //{
+            //    Particle4LockingIn.gameObject.SetActive(true);
+            //    LockedThunderAnim.SetBool("1", true);
+            //    LockedIN = true;
+            //    CameraScript.StartCoroutine(CameraScript.ShakeCam(5.5f, 0.15f));
+            //    AudioPlayer.PlayOneShot(WeAreLockedIn_SFX_ACTIVATE);
+            //}
             if (Input.GetKeyDown(KeyCode.E) && isInPerfectDodge && !PowerfulPunch && !Dead)
             {
                 ResetAllAnimationStates();
@@ -1324,7 +1326,7 @@ public class Movement : MonoBehaviour
 
     public void HURT_COMBO_MESS_UP_ANIMATION_KEY()
     {
-        TutTXT.gameObject.SetActive(false);
+        ///TutTXT.gameObject.SetActive(false);
         CurrentPunches -= 1;
     }
 
@@ -2099,20 +2101,36 @@ public class Movement : MonoBehaviour
     private float CD_FallOFFHELI = 0.6f;
     private float LastFELLOFFHELI = 0;
     public bool isFallingHeli;
- 
+
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Ground"))
+        {
+            foreach (ContactPoint2D contact in collision.contacts)
+            {
+                if (Vector2.Angle(contact.normal, Vector2.up) < 45f)
+                {
+                    Grounded = true;
+                    if (rb.velocity.y == 0)
+                        SafePosition = transform.position;
+                    return;
+                }
+            }
+        }
+    }
 
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground") && !IsFalling)
-        {
-            if(Grounded && !JumpDodge && !isDashing && !isSliding)
-            {
-                SafePosition = new Vector3(transform.position.x, transform.position.y, 0);
+        //if (collision.gameObject.CompareTag("Ground") && !IsFalling)
+        //{
+        //    if(Grounded && !isDashing && !isSliding && rb.velocity.y == 0 && !JumpDodge )
+        //    {
+        //        SafePosition = new Vector3(transform.position.x, transform.position.y, 0);
 
-            }
-            Grounded = true;
-        }
+        //    }
+        //    Grounded = true;
+        //}
 
         if (collision.gameObject.CompareTag("Tree") && HeliFinale )
         {
@@ -2544,12 +2562,12 @@ public class Movement : MonoBehaviour
 
             if (HasKilledYappers_Sciests_WithACart)
             {
-                MaxPushSpeed = 110;
+                MaxPushSpeed = 135;
 
             }
             else
             {
-                MaxPushSpeed = 80;
+                MaxPushSpeed = 120;
 
             }
             transform.localScale = new Vector3(1, 1, 1);
@@ -3242,7 +3260,7 @@ public class Movement : MonoBehaviour
     {
         Debug.Log("We Want A Flip");
         float horizontalMomentum = 0;
-        if (StickHP.MegaCharge >= 1.3f)
+        if (StickHP.MegaCharge >= 1.3f && !isSliding)
         {
             if(StickHP.MegaCharge <= 5)
             {
@@ -3421,7 +3439,7 @@ public class Movement : MonoBehaviour
 
     private float SlideTime;
     private float SlideDuration;
-    private IEnumerator Slide()
+    public IEnumerator Slide()
     {
 
 

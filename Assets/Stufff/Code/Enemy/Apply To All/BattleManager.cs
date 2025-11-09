@@ -11,11 +11,13 @@ public class BattleManager : MonoBehaviour
     public AudioClip Jingle;
     public AudioSource BG;
     public AudioSource Battle;
+    public AudioSource BattleLow;
     private bool EnemBattle;
     public Movement Stick;
     public AudioClip BassDrop;
     public AudioSource BassDropAudioP;
     public bool NoWantSloMo;
+    public AudioSource BGLow;
 
     public bool BossFight;
 
@@ -48,13 +50,37 @@ public class BattleManager : MonoBehaviour
             EnemBattle = false; 
             AudioP.PlayOneShot(Jingle);
             Battle.gameObject.SetActive(false);
+            BGLow.gameObject.SetActive(true);
+            BattleLow.gameObject.SetActive(false);
             StartCoroutine(WaitForJingleEnd());
         }
 
         else if (EnemBattle)
         {
             BG.gameObject.SetActive(false);
+            BGLow.gameObject.SetActive(false);
             Battle.gameObject.SetActive(true);
+            BattleLow.gameObject.SetActive(true);
+            if (Stick.StickHP.PlayerHP > 0 || Time.timeScale == 0)
+            {
+                if (Stick.StickHP.PlayerHP <= 50)
+                {
+                    Battle.volume = 0;
+                    BattleLow.volume = 1;
+                }
+                else
+                {
+                    Battle.volume = 1;
+                    BattleLow.volume = 0;
+                }
+            }
+            else
+            {
+                BattleLow.mute = true;
+                Battle.mute = true;
+
+            }
+
         }
     }
     private bool NotYetSloMo;

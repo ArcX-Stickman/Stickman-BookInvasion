@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Chemistry : MonoBehaviour
@@ -15,11 +16,13 @@ public class Chemistry : MonoBehaviour
     public Movement StickManager;
     public float HealthBeforeAction;
     public Missle_Code Missle_Code;
-    public GameObject SlideHUD;
     public Movement PlayerIG;
     public bool isShooting;
     public bool NotSecondTime;
     public GameObject Missle_Follow_Type;
+    public string QTE_Text;
+    public TextMeshProUGUI QTE_HUD;
+    private TutorialKeyInput TutorialKeyInput;
     // Update is called once per frame
     void Update()
     {
@@ -45,6 +48,17 @@ public class Chemistry : MonoBehaviour
         if (NotSecondTime)
         {
             Missle_Follow_Type.gameObject.SetActive(true);
+            MoveTowardsPosition MTP = Missle_Follow_Type.GetComponent<MoveTowardsPosition>();
+            MTP.Chem = true;
+            MTP.Chemistry = (this);
+            QTE_HUD.gameObject.SetActive(true);
+            QTE_HUD.text = QTE_Text;
+            TutorialKeyInput = QTE_HUD.GetComponent<TutorialKeyInput>();
+            if(TutorialKeyInput != null)
+            {
+                TutorialKeyInput.InputS = KeyCode.C;
+            }
+            
         }
     }
 
@@ -56,7 +70,9 @@ public class Chemistry : MonoBehaviour
             Missle_Code.gameObject.SetActive(true);
             Missle_Code.Calc_Stick();
             Missle_Code.CanGo = true;
+           
         }
+
 
  
     }
@@ -65,14 +81,6 @@ public class Chemistry : MonoBehaviour
         AudioP.PlayOneShot(SFX);
     }
 
-    public void ActivateHUD()
-    {
-        SlideHUD.gameObject.SetActive(true);
-    }
-    public void DeactivateHUD()
-    {
-        SlideHUD.gameObject.SetActive(false);
-    }
 
     public void SloMo()
     {

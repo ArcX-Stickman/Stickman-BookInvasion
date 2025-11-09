@@ -27,7 +27,7 @@ public class Health : MonoBehaviour
     public AudioClip HealSFX;
     public GameObject HealSpriteOverlay;
     public Image HP_BarIMG;
-    
+    public GameObject LowHP_Graphix;
 
 
     private float DelayWhenDepletedCD = 0.1f;
@@ -84,12 +84,15 @@ public class Health : MonoBehaviour
 
         //Color for HUD
 
-        if(PlayerHP >= 60)
+        if (PlayerHP >= 60 || PlayerHP == 0)
         {
             HP_BarIMG.color = Color.green;
+            LowHP_Graphix.gameObject.SetActive(false);
+
         }
-        else if(PlayerHP <= 40)
+        else if(PlayerHP <= 50)
         {
+            LowHP_Graphix.gameObject.SetActive(true);
             if (PlayerHP <= 25)
             {
                 HP_BarIMG.color = Color.red;

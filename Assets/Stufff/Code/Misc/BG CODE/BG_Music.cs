@@ -9,10 +9,16 @@ public class BG_Music : MonoBehaviour
     //Clips
     public AudioClip IntroTheme;
     public AudioClip Hypothesis;
+    public AudioSource LowHP_BG;
     public AudioClip HypothesizingBeforeMayhem;
+    public AudioSource self;
     void Update()
     {
-        
+        if (PlayerManager.BreakIn)
+        {
+            self.gameObject.SetActive(false);
+            LowHP_BG.gameObject.SetActive(false);
+        }
         ManageMusic();
     }
     public void ManageMusic()
@@ -21,14 +27,36 @@ public class BG_Music : MonoBehaviour
         {
             if (PlayerManager.Checkpoint <= 0)
             {
-                if (AudioP.clip != IntroTheme)
+                if(PlayerManager.StickHP.PlayerHP == 0 || Time.timeScale == 0) 
                 {
-                    AudioP.clip = IntroTheme;
-                    AudioP.Play();
+                    self.mute = true;
+                    LowHP_BG.mute = true;
                 }
+                else
+                {
+                    if (PlayerManager.StickHP.PlayerHP >= 60 && !PlayerManager.BreakIn)
+                    {
+                        self.mute = false;
+                        LowHP_BG.mute = true;
+                        if (AudioP.clip != IntroTheme)
+                        {
+                            AudioP.clip = IntroTheme;
+                            AudioP.Play();
+                        }
+                    }
+                     
+                    else
+                    {
+                        self.mute = true;
+                        LowHP_BG.mute = false;
+                    }
+                }
+               
+               
             }
             else if(PlayerManager.Checkpoint == 726438 && !PlayerManager.BreakIn)
             {
+                LowHP_BG.gameObject.SetActive(false);
                 AudioP.clip = HypothesizingBeforeMayhem;
                 if (!AudioP.isPlaying && Time.timeScale > 0)
                 {

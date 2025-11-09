@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca721137ebf557a4ea2ec26014a0924a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxDis: 190.1
+  MaxDis: 284.7
   Distance: 0
   StickPOS: {fileID: 0}
 --- !u!114 &-984071850539135125
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dff661449cdb3d4c8a9ef1f99d54405, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxDis: 235.2
+  MaxDis: 324.6
   Distance: 0
   StickPOS: {fileID: 0}
   sR: {fileID: 0}

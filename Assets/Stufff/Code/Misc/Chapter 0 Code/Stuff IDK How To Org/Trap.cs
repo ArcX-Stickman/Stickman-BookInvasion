@@ -233,6 +233,8 @@ public class Trap : MonoBehaviour
     {
         if (PlayerManager.SafePosition != Vector3.zero)
         {
+            PlayerManager.rb.velocity = Vector2.zero;
+            StopCoroutine(PlayerManager.Slide());
             PlayerManager.transform.position = PlayerManager.SafePosition;
         }
     }
