@@ -33,6 +33,12 @@ public class Trap : MonoBehaviour
     private float LastHit;
     private float HitCD = 2.2f;
 
+    public Animator RespawnUI_BlackFade;
+
+
+    public RespawnUI_ForTraps respawnUI_ForTraps;
+
+    public GameObject WaterSplashFX;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -43,7 +49,22 @@ public class Trap : MonoBehaviour
                 Debug.Log("VoidKill");
                 if (Teleportable)
                 {
-                    TeleportPlayerToSafety();
+                    if (isWater)
+                    {
+                        AudioP.PlayOneShot(WaterSplash);
+                        if (WaterSplashFX != null)
+                        {
+                            GameObject FX = ObjectPooler.SpawnObj(WaterSplashFX, PlayerManager.transform.position, Quaternion.identity, ObjectPooler.PoolType.Partcles);
+
+                        }
+
+                    }
+                    if(PlayerHP.PlayerHP - DMG > 0)
+                    {
+                        RespawnUI_BlackFade.CrossFade("Respawn_FadeIn_Out_TrapBased", 0, 0);
+                        TeleportPlayerToSafety();
+                    }
+                  
                     PlayerHP.PlayerHP -= DMG;
                     return;
                 }
@@ -65,11 +86,11 @@ public class Trap : MonoBehaviour
                     PlayerHP.PlayerHP = 0;
 
                 }
-                else if(!Teleportable)
+                else if (!Teleportable)
                 {
-                    if(Time.time >= LastHit + HitCD)
+                    if (Time.time >= LastHit + HitCD)
                     {
-                        LastHit = Time.time;    
+                        LastHit = Time.time;
                         PlayerHP.PlayerHP -= DMG;
 
                     }
@@ -147,14 +168,20 @@ public class Trap : MonoBehaviour
                 Debug.Log("VoidKill");
                 if (Teleportable)
                 {
+                   
                     if (isWater)
                     {
                         AudioP.PlayOneShot(WaterSplash);
 
                     }
-                    TeleportPlayerToSafety();
                     PlayerHP.PlayerHP -= DMG;
-                    return;
+                    if(Time.timeScale == 0)
+                    {
+                        TeleportPlayerToSafety();
+                        return;
+                    }
+                    
+                   
                 }
                 if (isVoid && !ALR_PLAYED_VOID)
                 {
@@ -227,16 +254,27 @@ public class Trap : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
+
 
     public void TeleportPlayerToSafety()
     {
+
         if (PlayerManager.SafePosition != Vector3.zero)
         {
             PlayerManager.rb.velocity = Vector2.zero;
             StopCoroutine(PlayerManager.Slide());
-            PlayerManager.transform.position = PlayerManager.SafePosition;
+            SendRespawnToUI_Script(PlayerManager.SafePosition);
+            //PlayerManager.transform.position = PlayerManager.SafePosition;
         }
+    }
+    
+    public void SendRespawnToUI_Script(Vector3 Pos)
+    {
+        if(respawnUI_ForTraps == null)
+        {
+            respawnUI_ForTraps = FindAnyObjectByType<RespawnUI_ForTraps>();
+        }
+        respawnUI_ForTraps.SafePosition = Pos;
     }
 
 }

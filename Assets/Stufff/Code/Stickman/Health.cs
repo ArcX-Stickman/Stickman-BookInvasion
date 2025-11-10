@@ -48,6 +48,8 @@ public class Health : MonoBehaviour
     private float HealTip_CD = 2.5f;
     private float LastHealTip = 0;
 
+    public Animator animator4UI;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,10 +77,23 @@ public class Health : MonoBehaviour
         yield return null;
     }
 
-
     // Update is called once per frame
+    private bool HighHP()
+    {
+        if (PlayerHP >= 60)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     void Update()
     {
+        
+        // This is The Low HP Post Process Volume
+        animator4UI.SetBool("High",HighHP());
 
         if (Input.GetKey(KeyCode.F12) && Input.GetKeyDown(KeyCode.L))
         {
@@ -92,14 +107,18 @@ public class Health : MonoBehaviour
         //Color for HUD
         if(LowHP_Graphix != null)
         {
+            
             if (PlayerHP >= 60 || PlayerHP == 0)
             {
                 HP_BarIMG.color = Color.green;
-                LowHP_Graphix.gameObject.SetActive(false);
+                //LowHP_Graphix.gameObject.SetActive(false);
 
             }
             else if (PlayerHP < 60)
             {
+
+
+
                 if(Time.time >= LastHealTip + HealTip_CD && HealCount > 0)
                 {
                     LastHealTip = Time.time;
@@ -107,7 +126,7 @@ public class Health : MonoBehaviour
                     TextTUT_TXT.text = Direction;
                     TKI.InputS = KeyCode.E;
                 }
-                LowHP_Graphix.gameObject.SetActive(true);
+                //LowHP_Graphix.gameObject.SetActive(true);
                 if (PlayerHP <= 25)
                 {
                     HP_BarIMG.color = Color.red;

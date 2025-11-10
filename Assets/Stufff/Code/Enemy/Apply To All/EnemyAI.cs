@@ -324,7 +324,7 @@ public class EnemyAI : MonoBehaviour
         if(isBoss && isEmbryology)
         {
 
-            if(globaldistance <= 25 && !AlrTaught_Tutorial_Bool)
+            if(globaldistance <= 10 && !TutText.gameObject.activeSelf && !AlrSlidThroughEnemy_TUT)
             {
                 TutorialKeyInput tutorialKeyInput = TutText.gameObject.GetComponent<TutorialKeyInput>();
                 tutorialKeyInput.InputS = KeyCode.LeftShift;
@@ -430,6 +430,7 @@ public class EnemyAI : MonoBehaviour
         if (PlayerManager.isSliding | PlayerManager.isDashing && !PlayerManager.inRush)
         {
             //Debug.Log("fALSE COLLISION");
+            AlrSlidThroughEnemy_TUT = true;
             Physics2D.IgnoreCollision(enemyCollider, playerCollider, true);
         }
         else if (PlayerManager.isUppercut)
@@ -2218,7 +2219,8 @@ public class EnemyAI : MonoBehaviour
     }
 
 
-
+    public bool RepeatedTip;
+    private bool AlrSlidThroughEnemy_TUT = false;
     public void ThrowATK()
     {
 
@@ -2226,16 +2228,26 @@ public class EnemyAI : MonoBehaviour
         // THIS IS THE COUNTER ATTACK IM ALSO TRASH AT NAMING STUFF
         if (PlayerHealth.PlayerHP > 0)
         {
-             if (isTutorial && !AlrTaught_Tutorial_Bool)
-        {
-            AlrTaught_Tutorial_Bool = true;
-            TutTXT = "Counter[R]";
-            TutText.gameObject.SetActive(true);
-            TutKeyInput.SloMo = true;
-            TutKeyInput.InputS = KeyCode.R;
-            TextMeshProUGUI ugi = TutText.gameObject.GetComponent<TextMeshProUGUI>();
-            ugi.text = TutTXT;
-        }
+            if (isTutorial && !AlrTaught_Tutorial_Bool && !TutText.gameObject.activeSelf && !RepeatedTip)
+            {
+
+                AlrTaught_Tutorial_Bool = true;
+                TutTXT = "Counter[R]";
+                TutText.gameObject.SetActive(true);
+                TutKeyInput.SloMo = true;
+                TutKeyInput.InputS = KeyCode.R;
+                TextMeshProUGUI ugi = TutText.gameObject.GetComponent<TextMeshProUGUI>();
+                ugi.text = TutTXT;
+            }
+            else if (RepeatedTip && isTutorial && !TutText.gameObject.activeSelf)
+            {
+                TutTXT = "Counter[R]";
+                TutText.gameObject.SetActive(true);
+                TutKeyInput.SloMo = true;
+                TutKeyInput.InputS = KeyCode.R;
+                TextMeshProUGUI ugi = TutText.gameObject.GetComponent<TextMeshProUGUI>();
+                ugi.text = TutTXT;
+            }
             Vector2 targetPosition = new Vector2(StickmanPOS.position.x, transform.position.y);
             // look at him (stick)
             

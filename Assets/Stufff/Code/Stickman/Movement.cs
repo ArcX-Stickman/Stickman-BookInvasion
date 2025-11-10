@@ -694,20 +694,22 @@ public class Movement : MonoBehaviour
         {
             Footsteps();
         }
-        else if (!Input.GetKey(KeyCode.A))
+        else if (!Input.GetKey(KeyCode.A) )
         {
             StopFootsteps();
         }
 
 
+        // TODO: Disable Late in the game Especially in chapter 4 this can be
+        // after an emotional set piece
         if (Input.GetKey(KeyCode.G))
         {
-            if(Time.time >= LastULT + UltCD && StickHP.Testing)
+            if (Time.time >= LastULT + UltCD && StickHP.Testing)
             {
                 LastULT = Time.time;
                 StickAnim.SetTrigger("Hyper");
             }
-           
+
         }
 
         if (Input.GetKey(KeyCode.A))
@@ -1038,6 +1040,11 @@ public class Movement : MonoBehaviour
         // dead
         if (StickHP.PlayerHP <= 0)
         {
+            if(TutTXT != null)
+            {
+                TutTXT.gameObject.SetActive(false);
+
+            }
             //if (!AlrDid4DeathCor)
             //{
             //    AlrDid4DeathCor = true;
