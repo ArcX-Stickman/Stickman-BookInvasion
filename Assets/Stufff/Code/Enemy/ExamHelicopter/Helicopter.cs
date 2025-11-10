@@ -207,7 +207,7 @@ public class Helicopter : MonoBehaviour
     {
         if (ExplosionTime)
         {
-            StartCoroutine (Explosion());
+            StartCoroutine(Explosion());
             return;
         }
         if (!AlrMusic)
@@ -222,22 +222,37 @@ public class Helicopter : MonoBehaviour
             ExamAnim.SetBool("Sniper", true);
             PerfectSolu.clip = HelicopterAboveTheme;
             PerfectSolu.Play();
+            LowHPCopterThemeVari.gameObject.SetActive(true);
             AlrMusic = true;
         }
-
-        if(PerfectSolu.clip == HelicopterAboveTheme)
+        if (PlayerHP.PlayerHP > 0)
         {
-            if(PlayerHP.PlayerHP >= 60)
+            if (PerfectSolu.clip == HelicopterAboveTheme)
             {
-                PerfectSolu.mute = false;
-                LowHPCopterThemeVari.mute = true;
+                if (PlayerHP.PlayerHP >= 60)
+                {
+                    PerfectSolu.mute = false;
+                    LowHPCopterThemeVari.mute = true;
+                }
+                else
+                {
+                    LowHPCopterThemeVari.mute = false;
+                    PerfectSolu.mute = true;
+                }
             }
             else
             {
-                LowHPCopterThemeVari.mute = false;
-                PerfectSolu.mute = true;
+                LowHPCopterThemeVari.gameObject.SetActive(false);
             }
+
         }
+        else
+        {
+            PerfectSolu.gameObject.SetActive(false);
+            LowHPCopterThemeVari.gameObject.SetActive(false);
+
+        }
+
 
 
         float distanceToPlayer = Vector2.Distance(transform.position, StickPOS.position);

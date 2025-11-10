@@ -83,27 +83,30 @@ public class Health : MonoBehaviour
 
 
         //Color for HUD
-
-        if (PlayerHP >= 60 || PlayerHP == 0)
+        if(LowHP_Graphix != null)
         {
-            HP_BarIMG.color = Color.green;
-            LowHP_Graphix.gameObject.SetActive(false);
-
-        }
-        else if(PlayerHP <= 50)
-        {
-            LowHP_Graphix.gameObject.SetActive(true);
-            if (PlayerHP <= 25)
+            if (PlayerHP >= 60 || PlayerHP == 0)
             {
-                HP_BarIMG.color = Color.red;
+                HP_BarIMG.color = Color.green;
+                LowHP_Graphix.gameObject.SetActive(false);
 
             }
-            else
+            else if (PlayerHP <= 50)
             {
-                HP_BarIMG.color = Color.yellow;
+                LowHP_Graphix.gameObject.SetActive(true);
+                if (PlayerHP <= 25)
+                {
+                    HP_BarIMG.color = Color.red;
 
+                }
+                else
+                {
+                    HP_BarIMG.color = Color.yellow;
+
+                }
             }
         }
+       
         
 
 

@@ -1081793,7 +1081793,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 47
   m_Sprite: {fileID: 21300000, guid: 16fc4785b07b10240a1c07515ee8055b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2461723,6 +2461723,10 @@ PrefabInstance:
       propertyPath: AudioP
       value: 
       objectReference: {fileID: 590502044}
+    - target: {fileID: 1551316828771867676, guid: a881a36805962bc4fa0fc6699f831541, type: 3}
+      propertyPath: BGLOW
+      value: 
+      objectReference: {fileID: 1472256029}
     - target: {fileID: 1551316828771867676, guid: a881a36805962bc4fa0fc6699f831541, type: 3}
       propertyPath: AudioP
       value: 

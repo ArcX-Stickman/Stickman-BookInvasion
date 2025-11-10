@@ -80,7 +80,7 @@ public class PauseManager : MonoBehaviour
 
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape) && PlayerManager.StickHP.PlayerHP >= 0 && !PlayerManager.Dead && !PlayerManager.isInPerfectDodge)
+        if (Input.GetKeyDown(KeyCode.Escape) && PlayerManager.StickHP.PlayerHP >= 0 && !PlayerManager.Dead && !PlayerManager.isInPerfectDodge && Time.timeScale == 1)
         {
             if (isPaused)
                 Resume();

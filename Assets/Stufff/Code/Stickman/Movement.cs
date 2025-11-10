@@ -630,6 +630,7 @@ public class Movement : MonoBehaviour
                 BreakIn = true;
                 LabBG_SPRITE.gameObject.SetActive(true);
                 pm.Hypothesis.gameObject.SetActive(false);
+                pm.BGLOW.gameObject.SetActive(false);
                 pm.BreakIN.gameObject.SetActive(true);
             }
             if(LabLevel != null)
