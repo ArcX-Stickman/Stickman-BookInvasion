@@ -38,9 +38,15 @@ public class Checkpoint : MonoBehaviour
                 AlrDoneit = true;
                 PlayerManager.StickHP.MegaCharge += 5;
                 PlayerManager.SaveProgress();
+                if (PlayerManager.StickHP.HealCount < 3)
+                {
+                    PlayerManager.StickHP.HealCount += 1;
+
+                }
 
 
             }
+            // Just for testing purposes
             else if(OnlyDebuggingPurp && PlayerManager.StickHP.Testing)
             {
                 SaveIcon.gameObject.SetActive(true);

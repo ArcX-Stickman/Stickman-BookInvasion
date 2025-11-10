@@ -63,7 +63,7 @@ public class BattleManager : MonoBehaviour
             BattleLow.gameObject.SetActive(true);
             if (Stick.StickHP.PlayerHP > 0 || Time.timeScale == 0)
             {
-                if (Stick.StickHP.PlayerHP <= 50)
+                if (Stick.StickHP.PlayerHP <= 60)
                 {
                     Battle.volume = 0;
                     BattleLow.volume = 1;

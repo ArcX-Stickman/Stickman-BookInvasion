@@ -12,8 +12,13 @@ public class BG_Music : MonoBehaviour
     public AudioSource LowHP_BG;
     public AudioClip HypothesizingBeforeMayhem;
     public AudioSource self;
+    private PauseManager PM;
     void Update()
     {
+        if (PM == null)
+        {
+            PM = FindAnyObjectByType<PauseManager>();
+        }
         if (PlayerManager.BreakIn)
         {
             self.gameObject.SetActive(false);
@@ -27,7 +32,7 @@ public class BG_Music : MonoBehaviour
         {
             if (PlayerManager.Checkpoint <= 0)
             {
-                if(PlayerManager.StickHP.PlayerHP == 0 || Time.timeScale == 0) 
+                if(PlayerManager.StickHP.PlayerHP == 0 || Time.timeScale == 0 && !PM.NoHUD) 
                 {
                     self.mute = true;
                     LowHP_BG.mute = true;

@@ -8,11 +8,21 @@ public class PopUp : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip SFX;
     public PauseManager Pause;
-
+    private bool Alrdid;
+    public AudioSource BG;
     void Update()
     {
-        if (gameObject.activeSelf)
+        if (gameObject.activeSelf && !Alrdid)
         {
+            if(BG != null)
+            {
+                if(!BG.gameObject.activeSelf || !BG.isPlaying || BG.volume == 0)
+                {
+                    BG.gameObject.SetActive(true);
+                    BG.Play();
+                    BG.volume = 1;
+                }
+            }
             Pause.NoHUD = true;
             Pause.Pause();
         }

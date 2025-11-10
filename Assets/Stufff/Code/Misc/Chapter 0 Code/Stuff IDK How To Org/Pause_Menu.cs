@@ -256,6 +256,7 @@ public class PauseManager : MonoBehaviour
             }
         }
 
+
         Time.fixedDeltaTime = 0f;
         PauseMenuAnim.SetTrigger("In");
 

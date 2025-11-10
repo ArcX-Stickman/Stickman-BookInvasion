@@ -41,6 +41,13 @@ public class Health : MonoBehaviour
     private float OG_MEGA_CHARGE_RATE;
     private float TEMP_MEGA_CHARGE_RATE;
 
+    //Key For TUT
+    public TutorialKeyInput TKI;
+    public TextMeshProUGUI TextTUT_TXT;
+    public string Direction;
+    private float HealTip_CD = 2.5f;
+    private float LastHealTip = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -91,8 +98,15 @@ public class Health : MonoBehaviour
                 LowHP_Graphix.gameObject.SetActive(false);
 
             }
-            else if (PlayerHP <= 50)
+            else if (PlayerHP < 60)
             {
+                if(Time.time >= LastHealTip + HealTip_CD && HealCount > 0)
+                {
+                    LastHealTip = Time.time;
+                    TKI.gameObject.SetActive(true);
+                    TextTUT_TXT.text = Direction;
+                    TKI.InputS = KeyCode.E;
+                }
                 LowHP_Graphix.gameObject.SetActive(true);
                 if (PlayerHP <= 25)
                 {
