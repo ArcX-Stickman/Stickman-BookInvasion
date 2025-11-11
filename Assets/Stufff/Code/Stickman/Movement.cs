@@ -2116,11 +2116,22 @@ public class Movement : MonoBehaviour
         {
             foreach (ContactPoint2D contact in collision.contacts)
             {
-                if (Vector2.Angle(contact.normal, Vector2.up) < 45f)
+                bool animJump = StickAnim.GetBool("Jump");
+
+                // Check if surface is fairly flat and below player
+                bool isGroundSurface = Vector2.Angle(contact.normal, Vector2.up) < 30f;
+                bool contactBelow = contact.point.y < transform.position.y - 0.1f;
+
+                if (isGroundSurface && contactBelow && !animJump)
                 {
                     Grounded = true;
-                    if (rb.velocity.y == 0)
-                        SafePosition = transform.position;
+
+                    // Save only if player is nearly still vertically
+                    if (Mathf.Abs(rb.velocity.y) < 0.05f)
+                    {
+                        // Slightly offset upward so the player doesn't spawn "inside" the collider
+                        SafePosition = new Vector3(transform.position.x, transform.position.y + 0.1f, 0);
+                    }
                     return;
                 }
             }
@@ -2566,8 +2577,13 @@ public class Movement : MonoBehaviour
     {
         if (!inSlipperyState && Cart.activeSelf)
         {
+            StickHP.MegaCharge = 0;
+            Grounded = false;
             float MaxPushSpeed = 0f;
-
+            if(rb.velocity.x < 120)
+            {
+                rb.velocity = new Vector2(120, 0);
+            }
             if (HasKilledYappers_Sciests_WithACart)
             {
                 MaxPushSpeed = 135;
