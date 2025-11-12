@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dff661449cdb3d4c8a9ef1f99d54405, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxDis: 324.6
-  Distance: 0
-  StickPOS: {fileID: 0}
-  sR: {fileID: 0}
+  maxDistance: 350
+  currentDistance: 0
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 0}

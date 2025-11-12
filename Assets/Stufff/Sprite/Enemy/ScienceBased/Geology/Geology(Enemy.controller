@@ -164,7 +164,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Geo_Ranged
-  m_Speed: 1
+  m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 5952142068645944272}
@@ -277,7 +277,7 @@ AnimatorStateMachine:
     m_Position: {x: -1490, y: 630, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3451940454090419282}
-    m_Position: {x: -1680, y: 1570, z: 0}
+    m_Position: {x: -1680, y: 1560, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5898501991050245708}
     m_Position: {x: -770, y: 680, z: 0}

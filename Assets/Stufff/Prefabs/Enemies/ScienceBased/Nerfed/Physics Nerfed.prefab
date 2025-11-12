@@ -611,8 +611,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.16999999, y: 2.55, z: 0}
-    m_Extent: {x: 0.41, y: 1.1949999, z: 0}
+    m_Center: {x: -0.17323773, y: 2.5552564, z: 0}
+    m_Extent: {x: 0.46196723, y: 1.2271005, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -1439,8 +1439,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.16999999, y: 2.55, z: 0}
-    m_Extent: {x: 0.41, y: 1.1949999, z: 0}
+    m_Center: {x: -0.17323773, y: 2.5552564, z: 0}
+    m_Extent: {x: 0.46196723, y: 1.2271005, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -1599,7 +1599,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1933,6 +1933,7 @@ MonoBehaviour:
   V2: 0
   FXPOS: {fileID: 6856853218000531237}
   FX: {fileID: 0}
+  isForced: 0
 --- !u!114 &1407452996207751199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2005,6 +2006,8 @@ MonoBehaviour:
   StunDMG: 0
   HasHeavyAttack: 0
   RushEventEnemy: 0
+  isScientist: 0
+  NoRanged: 0
   cloudOffset: {fileID: 0}
   Cloud: {fileID: 0}
   StormCloud: {fileID: 0}
@@ -2022,6 +2025,8 @@ MonoBehaviour:
   AppleAcceleration: 161
   PhysicsText: {fileID: 5307870338960641769}
   PhysicsUI_HUD: {fileID: 5064542187294791287}
+  EyesList: []
+  AlrPickedEyes: 0
   PlayerShootCount: 0
   CantMeleeATK: 0
   Cooldown_For_Melee_Break: 2.6
@@ -2065,6 +2070,7 @@ MonoBehaviour:
   RippedName: {fileID: 0}
   CurrentPunches: 0
   MaxPunchesBeforeReset: 0
+  BossHP_UI: {fileID: 0}
   Zygote: {fileID: 0}
   Zygotes: []
   StickyCell: {fileID: 0}
@@ -2089,10 +2095,17 @@ MonoBehaviour:
   WaterTeleGraph: {fileID: 0}
   WaterAnimEcology: {fileID: 0}
   DebuffCloudCD: 0
+  isTutorial: 0
+  isCombat: 0
+  AlrAttacked: 0
+  TutText: {fileID: 0}
+  TutTXT: 
+  TutKeyInput: {fileID: 0}
   dashTime: 0
   dashPower: 0
   dashCD: 0
   PlayerPastPosition: {x: 0, y: 0}
+  RepeatedTip: 0
 --- !u!1 &7339056373840386143
 GameObject:
   m_ObjectHideFlags: 0

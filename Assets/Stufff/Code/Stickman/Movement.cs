@@ -2836,6 +2836,7 @@ public class Movement : MonoBehaviour
                     for (int i = list.Count - 1; i >= 0; i--)
                     {
                         float TempDis = Vector2.Distance(transform.position, list[i].position);
+                        Debug.Log("Distance To Enemy From Launching FreeFlow" + TempDis);
                         listDis.Add(TempDis);
                     }
                     for (int i = 0; i < listDis.Count; i++)
@@ -2846,6 +2847,7 @@ public class Movement : MonoBehaviour
                             IndexForGreatest = i;
                         }
                     }
+
                     EmptyBook = list[IndexForGreatest].gameObject;
                     list.Clear();
                     listDis.Clear();
@@ -2862,6 +2864,7 @@ public class Movement : MonoBehaviour
                 Debug.Log("Colliison:" + raycast.collider.gameObject);
                 GameObject book = EmptyBook;
                 float distance = Vector2.Distance(transform.position, book.transform.position);
+                Debug.Log("Distance To Enemy While FreeFlow" + distance);
                 BoxCollider2D BookCollider = book.GetComponent<BoxCollider2D>();
                 // Check if he can dash only if facing him with out this comabat jus spam and spam >:( // i mean it kinda still is 
                 float varfordirec = (book.transform.position.x - transform.position.x);

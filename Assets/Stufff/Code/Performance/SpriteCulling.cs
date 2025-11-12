@@ -1,40 +1,68 @@
-using System.Collections;
-using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
 public class SpriteCulling : MonoBehaviour
 {
-    public float MaxDis;
-    public float Distance;
-    public Transform StickPOS;
-    public SpriteRenderer sR;
-    private float tick = 1f;
-    private float LastTick;
-    void Update()
+    [Header("Culling Settings")]
+    public float maxDistance = 50f;
+
+    [Header("Runtime Debug")]
+    public float currentDistance;
+    public Transform player;
+    public SpriteRenderer spriteRenderer;
+
+    private float nextCheckTime;
+    private const float checkInterval = 1f;
+
+    public Sprite HighQualitySprite;
+
+    private Sprite LowResSprite;
+
+    void Start()
     {
-        if (StickPOS == null)
+        LowResSprite = spriteRenderer.sprite;
+    }
+
+    void OnEnable()
+    {
+        if (player == null)
         {
             Movement stick = FindObjectOfType<Movement>();
-            StickPOS = stick.transform;
+            if (stick != null)
+                player = stick.transform;
         }
-        if (sR == null)
+        if(HighQualitySprite != null)
         {
-            sR = GetComponent<SpriteRenderer>();
+            spriteRenderer.sprite = HighQualitySprite;
 
         }
-        if (Time.time >= tick + LastTick)
+        if (spriteRenderer == null)
+            spriteRenderer = GetComponent<SpriteRenderer>();
+
+        nextCheckTime = Time.time + Random.Range(0f, checkInterval);
+    }
+
+     private void OnDisable() {
+        if(LowResSprite != null && HighQualitySprite != null)
         {
-            LastTick = Time.time;
-            Distance = Vector2.Distance(transform.position, StickPOS.position);
+            spriteRenderer.sprite = LowResSprite;
         }
-        if (Distance > MaxDis)
+    }
+
+
+    void Update()
+    {
+        if (player == null)
         {
-            sR.enabled = false;
+            Movement stick = FindObjectOfType<Movement>();
+            if (stick != null)
+                player = stick.transform;
         }
-        else
+        if (Time.time >= nextCheckTime && player != null)
         {
-            sR.enabled = true;
+            currentDistance = Vector2.Distance(transform.position, player.position);
+            nextCheckTime = Time.time + checkInterval;
+            spriteRenderer.enabled = currentDistance <= maxDistance;
         }
     }
 }

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 65234447004238102}
   - component: {fileID: 6265695444516924548}
+  - component: {fileID: -3189038093154252785}
   m_Layer: 0
   m_Name: PrefabMountain 1
   m_TagString: Untagged
@@ -71,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1692089731
-  m_SortingLayer: -3
+  m_SortingLayer: -4
   m_SortingOrder: -632
   m_Sprite: {fileID: 21300000, guid: 5c977022a8e49894db7a7201b648bdd9, type: 3}
   m_Color: {r: 0.23584908, g: 0.23584908, b: 0.23584908, a: 1}
@@ -84,3 +85,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-3189038093154252785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 793395309987603206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dff661449cdb3d4c8a9ef1f99d54405, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 50
+  currentDistance: 0
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 0}
