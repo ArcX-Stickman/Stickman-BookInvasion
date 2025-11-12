@@ -151,9 +151,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca721137ebf557a4ea2ec26014a0924a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxDis: 284.7
-  Distance: 0
-  StickPOS: {fileID: 0}
+  maxDistance: 340
+  currentDistance: 0
+  player: {fileID: 0}
+  light2D: {fileID: 0}
 --- !u!114 &-1103419776127094617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,3 +171,4 @@ MonoBehaviour:
   currentDistance: 0
   player: {fileID: 0}
   spriteRenderer: {fileID: 0}
+  HighQualitySprite: {fileID: 0}

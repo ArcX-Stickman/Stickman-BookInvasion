@@ -36,6 +36,8 @@ public class LabBreakIn : MonoBehaviour
     public bool BreakIn;
     private bool AlrBrokeIn;
 
+    public GameObject LightinLab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,6 +69,7 @@ public class LabBreakIn : MonoBehaviour
     {
         if (collision.CompareTag("Player") || collision.CompareTag("Bullet") && !AlrBrokeIn)
         {
+            LightinLab.gameObject.SetActive(true);
             AlrBrokeIn = true;
             Stickman.InCinematic = true;
             //AlertUI.SetActive(true);
