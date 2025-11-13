@@ -7791,7 +7791,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1384925235
   m_SortingLayer: -2
-  m_SortingOrder: 0
+  m_SortingOrder: -2566
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 18.699999, y: 10.299999, z: 0}
   m_MaxChunkCount: 16

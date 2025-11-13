@@ -241,10 +241,35 @@ public class EnemyAI : MonoBehaviour
         CamScript = FindObjectOfType<CameraScript>();
     }
 
+
+    private bool PlayerisCloseActivateAI;
+    void FixedUpdate()
+    {
+        // This is for disabling the enemy ai thing to help performance when the enemies are far
+        if(!isBoss)
+        {
+            float distance = Vector2.Distance(transform.position, PlayerManager.transform.position);
+            float MinDIS = 500;
+            if(distance <= MinDIS)
+            {
+                PlayerisCloseActivateAI = true;
+            }
+            else
+            {
+                EnemyAnim.cullingMode = AnimatorCullingMode.CullCompletely;
+                PlayerisCloseActivateAI = false;
+            }
+        }
+        
+        
+
+    }
+
     private bool PlayedHitRushEvent;
     void Update()
     {
 
+        if (!isBoss && !PlayerisCloseActivateAI) return;
         EnemyAnim.SetBool("PlayerSpotted", RangeManager.PlayerSpotted);
 
         if(isCombat && Health <= 0 || isTutorial && Health <= 0)
