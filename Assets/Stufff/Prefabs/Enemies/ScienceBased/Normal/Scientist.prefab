@@ -542,6 +542,7 @@ GameObject:
   - component: {fileID: 2412421986177453105}
   - component: {fileID: 6887708630624898725}
   - component: {fileID: 3525466948935121194}
+  - component: {fileID: 6334074430333836015}
   m_Layer: 17
   m_Name: Scientist
   m_TagString: Untagged
@@ -811,7 +812,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4083457038562122465}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dbb14bd517ede6441acea1725d53e52c, type: 3}
   m_Name: 
@@ -979,6 +980,20 @@ MonoBehaviour:
   dashCD: 0
   PlayerPastPosition: {x: 0, y: 0}
   RepeatedTip: 0
+--- !u!114 &6334074430333836015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4083457038562122465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2d765ea082b28d4faa6d45b61a0b4a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ai: {fileID: 0}
+  tickRate: 0.05
 --- !u!1 &4154086498578741833
 GameObject:
   m_ObjectHideFlags: 0

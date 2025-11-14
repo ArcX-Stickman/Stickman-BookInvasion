@@ -440,7 +440,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1861242529
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 1200
   m_Sprite: {fileID: 21300000, guid: 63459dac1b2519a4eafb2cbf288c4419, type: 3}
   m_Color: {r: 0.9254902, g: 0.9254902, b: 0.9254902, a: 1}
@@ -895,7 +895,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1015997609
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 135
   m_Sprite: {fileID: 21300000, guid: bc146b3ea242dc04099076eaf0d27da1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1145,7 +1145,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1861242529
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 1584
   m_Sprite: {fileID: 21300000, guid: 42103a87d2d018b4caf3b345a450c4df, type: 3}
   m_Color: {r: 0.9254902, g: 0.9254902, b: 0.9254902, a: 1}
@@ -1517,7 +1517,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1861242529
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 620
   m_Sprite: {fileID: 21300000, guid: 63459dac1b2519a4eafb2cbf288c4419, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1848,7 +1848,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1015997609
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 1680
   m_Sprite: {fileID: 21300000, guid: 9d6a0fe29ed40b4488792c02558b9eb0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1876,6 +1876,7 @@ GameObject:
   - component: {fileID: 3219327701763898764}
   - component: {fileID: 1568250624652202418}
   - component: {fileID: 2237450440717992290}
+  - component: {fileID: 2772925485487880754}
   m_Layer: 17
   m_Name: Geology V2
   m_TagString: Book
@@ -2042,6 +2043,7 @@ MonoBehaviour:
   V2: 0
   FXPOS: {fileID: 8250478865225279595}
   FX: {fileID: 0}
+  isForced: 0
 --- !u!114 &2237450440717992290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2049,7 +2051,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7737390963017618015}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dbb14bd517ede6441acea1725d53e52c, type: 3}
   m_Name: 
@@ -2114,6 +2116,8 @@ MonoBehaviour:
   StunDMG: 0
   HasHeavyAttack: 0
   RushEventEnemy: 0
+  isScientist: 0
+  NoRanged: 0
   cloudOffset: {fileID: 0}
   Cloud: {fileID: 0}
   StormCloud: {fileID: 0}
@@ -2131,6 +2135,8 @@ MonoBehaviour:
   AppleAcceleration: 0
   PhysicsText: {fileID: 0}
   PhysicsUI_HUD: {fileID: 0}
+  EyesList: []
+  AlrPickedEyes: 0
   PlayerShootCount: 0
   CantMeleeATK: 0
   Cooldown_For_Melee_Break: 0.1
@@ -2174,6 +2180,7 @@ MonoBehaviour:
   RippedName: {fileID: 0}
   CurrentPunches: 0
   MaxPunchesBeforeReset: 0
+  BossHP_UI: {fileID: 0}
   Zygote: {fileID: 0}
   Zygotes: []
   StickyCell: {fileID: 0}
@@ -2198,10 +2205,31 @@ MonoBehaviour:
   WaterTeleGraph: {fileID: 0}
   WaterAnimEcology: {fileID: 0}
   DebuffCloudCD: 0
+  isTutorial: 0
+  isCombat: 0
+  AlrAttacked: 0
+  TutText: {fileID: 0}
+  TutTXT: 
+  TutKeyInput: {fileID: 0}
   dashTime: 0
   dashPower: 0
   dashCD: 0
   PlayerPastPosition: {x: 0, y: 0}
+  RepeatedTip: 0
+--- !u!114 &2772925485487880754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7737390963017618015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2d765ea082b28d4faa6d45b61a0b4a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ai: {fileID: 0}
+  tickRate: 0.05
 --- !u!1 &7939440121583449555
 GameObject:
   m_ObjectHideFlags: 0

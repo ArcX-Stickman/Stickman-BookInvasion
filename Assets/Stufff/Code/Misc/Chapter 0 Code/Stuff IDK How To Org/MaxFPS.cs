@@ -32,7 +32,7 @@ public class MaxFPS : MonoBehaviour
         Application.targetFrameRate = fps;
         if(Input.GetKeyDown(KeyCode.M))
         {
-            fps = 120;
+            fps = 999;
         }
 
         

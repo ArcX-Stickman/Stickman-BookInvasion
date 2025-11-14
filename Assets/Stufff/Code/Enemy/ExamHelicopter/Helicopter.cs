@@ -60,7 +60,7 @@ public class Helicopter : MonoBehaviour
                     StickManager = PlayerHP.gameObject.GetComponent<Movement>();
 
                 DistanceFromDestination = Vector2.Distance(transform.position, FinalDestination.position);
-                if (DistanceFromDestination <= 30)
+                if (DistanceFromDestination <= 30 && !ExplosionTime)
                 {
                     WhiteFade.gameObject.SetActive(true);
                     Failed = true;
@@ -152,26 +152,19 @@ public class Helicopter : MonoBehaviour
         float distanceToPlayer = Vector2.Distance(transform.position, StickPOS.position);
         ForcedSpeed = true;
         Speed = 140;
-        MinDIS = 15;
-        Vector2 FakeStickPos = new Vector2(StickPOS.position.x,transform.position.y);
-        while (distanceToPlayer >= MinDIS )
-        {
-            distanceToPlayer = Vector2.Distance(transform.position, StickPOS.position);
-            transform.position = Vector2.MoveTowards(transform.position, FakeStickPos, Speed * Time.deltaTime);
-            yield return null;
-        }
-        if(distanceToPlayer <= MinDIS)
-        {
-            HeliAnim.SetTrigger("Boom");
+        //Vector2 FakeStickPos = new Vector2(StickPOS.position.x,transform.position.y);
+        //distanceToPlayer = Vector2.Distance(transform.position, StickPOS.position);
+        //transform.position = Vector2.MoveTowards(transform.position, FakeStickPos, Speed * Time.deltaTime);
+        HeliAnim.SetTrigger("Boom");
+        yield return null;
 
-        }
 
         // SaveSystem.ResetGame();
         //PlayerData data = SaveSystem.LoadSave();
         //data.PlayerPOS[0] = PlayerTeleporter.position.x;
         //data.PlayerPOS[1] = PlayerTeleporter.position.y;
         //data.PlayerPOS[2] = PlayerTeleporter.position.z;
-       
+
     }
 
 

@@ -241,32 +241,85 @@ public class EnemyAI : MonoBehaviour
         CamScript = FindObjectOfType<CameraScript>();
     }
 
-
+    float nextCheckTime = 0f;
+    float checkGap = 0.3f;
     private bool PlayerisCloseActivateAI;
     void FixedUpdate()
     {
-        // This is for disabling the enemy ai thing to help performance when the enemies are far
-        if(!isBoss)
+        if (isBoss) return; 
+
+        if (PlayerManager == null) return; 
+
+        if (Time.time < nextCheckTime) return;
+
+        float distance = (transform.position - PlayerManager.transform.position).sqrMagnitude;
+        
+        float minDIS = 225f;
+        
+        float closeDIS = 100f;
+        float farDIS = 250f;
+
+        if (distance <= closeDIS * closeDIS)
         {
-            float distance = Vector2.Distance(transform.position, PlayerManager.transform.position);
-            float MinDIS = 500;
-            if(distance <= MinDIS)
+            checkGap = 0.02f;
+
+        }
+        else if (distance <= minDIS * minDIS)
+        {
+            checkGap = 0.3f;
+
+        }
+        else if (distance <= farDIS * farDIS)
+        {
+            checkGap = 0.67f;
+
+        }
+        else
+        {
+            checkGap = 3f;
+
+        }
+        nextCheckTime = Time.time + checkGap;
+
+        if (distance <= minDIS * minDIS)
+        {
+            HPSlide.gameObject.SetActive(true);
+            PlayerisCloseActivateAI = true;
+
+            if (rb.bodyType != RigidbodyType2D.Static)
             {
-                PlayerisCloseActivateAI = true;
+                rb.bodyType = RigidbodyType2D.Static;
+
             }
-            else
+
+            if (EnemyAnim.cullingMode != AnimatorCullingMode.AlwaysAnimate)
             {
-                EnemyAnim.cullingMode = AnimatorCullingMode.CullCompletely;
-                PlayerisCloseActivateAI = false;
+                EnemyAnim.cullingMode = AnimatorCullingMode.AlwaysAnimate;
+
             }
         }
-        
-        
+        else
+        {
+            HPSlide.gameObject.SetActive(false);
+            PlayerisCloseActivateAI = false;
 
+            if (rb.bodyType != RigidbodyType2D.Dynamic)
+            {
+                rb.bodyType = RigidbodyType2D.Dynamic;
+
+            }
+
+            if (EnemyAnim.cullingMode != AnimatorCullingMode.CullCompletely)
+            {
+                EnemyAnim.cullingMode = AnimatorCullingMode.CullCompletely;
+
+            }
+        }
     }
 
+
     private bool PlayedHitRushEvent;
-    void Update()
+    public void Update()
     {
 
         if (!isBoss && !PlayerisCloseActivateAI) return;
@@ -1039,7 +1092,7 @@ public class EnemyAI : MonoBehaviour
     public void PlayerSpotted()
     {
 
-        EnemyAnim.cullingMode = AnimatorCullingMode.AlwaysAnimate;
+        //EnemyAnim.cullingMode = AnimatorCullingMode.AlwaysAnimate;
         if (WantMusic && !PlayerManager.InStealthKill && !PlayerManager.InStealth && !PlayerManager.GustOfBullets && PlayerHealth.PlayerHP > 0)
         {
             if (!BattleTheme.gameObject.activeSelf && Health > 0 && !PlayerManager.GustOfBullets && !PlayerManager.isInPerfectDodge && !PlayerManager.BreakIn)
@@ -1149,8 +1202,8 @@ public class EnemyAI : MonoBehaviour
     private bool StopSloMeAgain;
     public void OnDeath()
     {
-
-        if(rb == null)
+        EnemyAnim.cullingMode = AnimatorCullingMode.AlwaysAnimate;
+        if (rb == null)
         {
             rb = GetComponent<Rigidbody2D>();
         }

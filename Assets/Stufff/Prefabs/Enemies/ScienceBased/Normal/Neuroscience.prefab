@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1214597870927283233}
   - component: {fileID: 3228868606710589302}
   - component: {fileID: 3532141178888455613}
+  - component: {fileID: -8428401576925396157}
   m_Layer: 17
   m_Name: Neuroscience
   m_TagString: Book
@@ -173,6 +174,7 @@ MonoBehaviour:
   V2: 0
   FXPOS: {fileID: 7543338351338898669}
   FX: {fileID: 0}
+  isForced: 0
 --- !u!114 &3532141178888455613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,7 +182,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 500937503104350931}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dbb14bd517ede6441acea1725d53e52c, type: 3}
   m_Name: 
@@ -245,6 +247,8 @@ MonoBehaviour:
   StunDMG: 0
   HasHeavyAttack: 0
   RushEventEnemy: 0
+  isScientist: 0
+  NoRanged: 0
   cloudOffset: {fileID: 0}
   Cloud: {fileID: 0}
   StormCloud: {fileID: 0}
@@ -262,6 +266,8 @@ MonoBehaviour:
   AppleAcceleration: 0
   PhysicsText: {fileID: 0}
   PhysicsUI_HUD: {fileID: 0}
+  EyesList: []
+  AlrPickedEyes: 0
   PlayerShootCount: 0
   CantMeleeATK: 0
   Cooldown_For_Melee_Break: 2.2
@@ -305,6 +311,7 @@ MonoBehaviour:
   RippedName: {fileID: 0}
   CurrentPunches: 0
   MaxPunchesBeforeReset: 0
+  BossHP_UI: {fileID: 0}
   Zygote: {fileID: 0}
   Zygotes: []
   StickyCell: {fileID: 0}
@@ -329,10 +336,31 @@ MonoBehaviour:
   WaterTeleGraph: {fileID: 0}
   WaterAnimEcology: {fileID: 0}
   DebuffCloudCD: 0
+  isTutorial: 0
+  isCombat: 0
+  AlrAttacked: 0
+  TutText: {fileID: 0}
+  TutTXT: 
+  TutKeyInput: {fileID: 0}
   dashTime: 0
   dashPower: 0
   dashCD: 0
   PlayerPastPosition: {x: 0, y: 0}
+  RepeatedTip: 0
+--- !u!114 &-8428401576925396157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500937503104350931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2d765ea082b28d4faa6d45b61a0b4a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ai: {fileID: 0}
+  tickRate: 0.05
 --- !u!1 &748011330521789040
 GameObject:
   m_ObjectHideFlags: 0

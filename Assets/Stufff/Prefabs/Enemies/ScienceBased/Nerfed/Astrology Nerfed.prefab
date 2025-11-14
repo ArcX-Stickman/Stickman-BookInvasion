@@ -285,6 +285,7 @@ GameObject:
   - component: {fileID: 363439932100764136}
   - component: {fileID: 3707323542829971301}
   - component: {fileID: 7570698122615339199}
+  - component: {fileID: 1179361114252119092}
   m_Layer: 17
   m_Name: Astrology Nerfed
   m_TagString: Book
@@ -627,6 +628,20 @@ MonoBehaviour:
   dashCD: 0
   PlayerPastPosition: {x: 0, y: 0}
   RepeatedTip: 0
+--- !u!114 &1179361114252119092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2461455739614487433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2d765ea082b28d4faa6d45b61a0b4a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ai: {fileID: 0}
+  tickRate: 0.05
 --- !u!1 &2573141949914783817
 GameObject:
   m_ObjectHideFlags: 0

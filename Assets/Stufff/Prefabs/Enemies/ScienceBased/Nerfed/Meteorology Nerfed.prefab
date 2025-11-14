@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7122605859154107135}
   - component: {fileID: 2647479936044754525}
   - component: {fileID: 3978731183516845589}
+  - component: {fileID: 7589286740039409982}
   m_Layer: 17
   m_Name: Meteorology Nerfed
   m_TagString: Book
@@ -348,6 +349,20 @@ MonoBehaviour:
   dashCD: 0
   PlayerPastPosition: {x: 0, y: 0}
   RepeatedTip: 0
+--- !u!114 &7589286740039409982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56244183231510112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2d765ea082b28d4faa6d45b61a0b4a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ai: {fileID: 0}
+  tickRate: 0.05
 --- !u!1 &1589716277982494162
 GameObject:
   m_ObjectHideFlags: 0
