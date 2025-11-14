@@ -18,9 +18,16 @@ public class DestroyOnCollisionWithTag : MonoBehaviour
     public bool LittleShake;
     public bool isPooledObject;
     public bool NoShake;
+    public bool SpriteShift;
+    private SpriteRenderer spriteRenderer;
+    public Sprite ShiftSprite;
 
     private void Update()
     {
+        if(spriteRenderer == null)
+        {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+        }
         if(Stick == null)
         {
             Stick = FindAnyObjectByType<Movement>();
@@ -32,12 +39,12 @@ public class DestroyOnCollisionWithTag : MonoBehaviour
         if (collision.gameObject.CompareTag(Tag) && !wantDelayForFX)
         {
             SFXPlay();
-            if (!isPooledObject)
+            if (!isPooledObject && !SpriteShift)
             {
                 Destroy(gameObject);
 
             }
-            else
+            else if(!SpriteShift)
             {
                 ObjectPooler.ReturnObjectToPool(gameObject);
             }
@@ -61,6 +68,10 @@ public class DestroyOnCollisionWithTag : MonoBehaviour
         }
         if(FX != null)
         {
+            if (SpriteShift)
+            {
+                spriteRenderer.sprite = ShiftSprite;
+            }
             if (!wantDelayForFX)
             {
                 if (!NoShake)
@@ -88,12 +99,12 @@ public class DestroyOnCollisionWithTag : MonoBehaviour
                     main.startSize = SizeParticle;
                 }
 
-                if (!isPooledObject)
+                if (!isPooledObject && !SpriteShift)
                 {
                     Destroy(gameObject);
 
                 }
-                else
+                else if(!SpriteShift)
                 {
                     ObjectPooler.ReturnObjectToPool(gameObject);
                 }

@@ -72,9 +72,6 @@ public class MoveTowardsPosition : MonoBehaviour
             StartCoroutine(Stick.CameraScript.ShakeCamGroundFeeling(80f, 0.3f));
     }
 
-    // ?????????????????????????????
-    // ?? MOVEMENT HANDLING
-    // ?????????????????????????????
     private void HandleMovement()
     {
         Stick = FindAnyObjectByType<Movement>();
@@ -85,7 +82,6 @@ public class MoveTowardsPosition : MonoBehaviour
         Distance = distanceToTarget;
         float minDestroyDistance = MIN_DIS_ATTRIBUTE_FOR_REFERENCE;
 
-        // Stick-based movement speed
         if (StickBasedSpeed)
         {
             Distance = Vector2.Distance(transform.position, Stick.transform.position);
@@ -94,14 +90,12 @@ public class MoveTowardsPosition : MonoBehaviour
             else Speed = Stick.MaxSpeed - 9.4f;
         }
 
-        // Flip on movement start
         if (FlipScale && WantToGO && !Flipped)
         {
             Flipped = true;
             transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
         }
 
-        // Move toward target
         if (WantToGO)
         {
             Vector2 targetPos = WantFollowYAxis
@@ -111,7 +105,6 @@ public class MoveTowardsPosition : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, targetPos, Speed * Time.deltaTime);
         }
 
-        // Check for reach conditions
         if (distanceToTarget <= minDestroyDistance && DestoryOnReach) Destroy(gameObject);
         if (distanceToTarget <= minDestroyDistance - 7 && SecondDes != null && SecondDisNow) PlaceToGO = SecondDes;
     }
@@ -134,9 +127,7 @@ public class MoveTowardsPosition : MonoBehaviour
         Speed = Mathf.Lerp(OriginalSpeed - 5f, OriginalSpeed + 80f, (dot + 1f) / 0.3f);
     }
 
-    // ?????????????????????????????
-    // ?? COLLISION HANDLING
-    // ?????????????????????????????
+
     private void HandleCollision(GameObject obj)
     {
         string tag = obj.tag;
@@ -149,24 +140,20 @@ public class MoveTowardsPosition : MonoBehaviour
             return;
         }
 
-        // PLAYER collision
         if (tag == "Player" && CanKillPlayer)
         {
             HandlePlayerImpact();
             return;
         }
 
-        // GROUND collision
-        if (tag == "Ground")
+        if (tag == "Ground" && CanBeDestroyedGround)
         {
             Grounded = true;
             HandleGroundImpact();
         }
     }
 
-    // ?????????????????????????????
-    // ?? IMPACT HELPERS
-    // ?????????????????????????????
+
     private void HandlePlayerImpact()
     {
         if (Chem)
@@ -183,7 +170,6 @@ public class MoveTowardsPosition : MonoBehaviour
             return;
         }
 
-        // Apply damage
         if (WantFx)
         {
             if (DMG_Value == 0)

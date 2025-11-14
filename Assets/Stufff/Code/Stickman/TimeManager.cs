@@ -16,7 +16,10 @@ public class TimeManager : MonoBehaviour
     public bool In_SloMo;
     public bool WantAudioSame;
     public Movement StickManager;
-
+    public bool ForceMusicSame;
+    /// <summary>
+    /// 
+    /// </summary>
     private void Start()
     {
         SloMoFX.gameObject.SetActive(false);
@@ -39,7 +42,7 @@ public class TimeManager : MonoBehaviour
             Time.timeScale = Mathf.Clamp(Time.timeScale, 0.1f, 1f); 
             AudioP.pitch += (1f / slomoDelay) * Time.unscaledDeltaTime;
             AudioP.pitch = Mathf.Clamp(AudioP.pitch, 0.5f, 1f);
-            if(SlowChase != null)
+            if(SlowChase != null && !ForceMusicSame)
             {
                 SlowChase.pitch += (1f / slomoDelay) * Time.unscaledDeltaTime;
                 SlowChase.pitch = Mathf.Clamp(SlowChase.pitch, 0.5f, 1f);
@@ -65,12 +68,13 @@ public class TimeManager : MonoBehaviour
 
         Time.timeScale = slomoRate;
         Time.fixedDeltaTime = Time.timeScale * 0.02f;
-        if (!WantAudioSame)
+        if (!WantAudioSame && !ForceMusicSame)
         {
             AudioP.pitch = 0.5f;
+            SlowChase.pitch = 0.5f;
+
 
         }
-        SlowChase.pitch = 0.5f;
         SloMoFX.gameObject.SetActive(true);
     }
 

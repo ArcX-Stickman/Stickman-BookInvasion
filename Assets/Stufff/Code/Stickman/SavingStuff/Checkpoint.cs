@@ -16,10 +16,15 @@ public class Checkpoint : MonoBehaviour
     public bool AlrDoneit;
     public AudioSource AudioP;
     public AudioClip SFX;
+    public bool ForcePlayerGun;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
+            if (ForcePlayerGun)
+            {
+                PlayerManager.HasGun = true;
+            }
             if (!AlrDid && WantSpawnObject)
             {
                 if(AudioP != null && SFX != null)
