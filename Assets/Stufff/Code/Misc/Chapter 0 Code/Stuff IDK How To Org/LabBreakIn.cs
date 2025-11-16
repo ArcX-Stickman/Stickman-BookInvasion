@@ -52,7 +52,22 @@ public class LabBreakIn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Stickman.Checkpoint == Stickman.ExamHeliID_Checkpoint && !AlrBrokeIn)
+        {
+            BG_Music BG_Music = FindAnyObjectByType<BG_Music>();
+            BG_Music.LowHP_BG.gameObject.SetActive(false);
+            BreakInMusic.gameObject.SetActive(true);
+            LightinLab.gameObject.SetActive(true);
+            Stickman.BreakIn = true;
+            AlrBrokeIn = true;
+            Stickman.InCinematic = true;
+            LabBG.gameObject.SetActive(true);
+            StuffInLab.gameObject.SetActive(true);
+            Hypothesis.gameObject.SetActive(false);
+            
 
+
+        }
     }
 
    

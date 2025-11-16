@@ -18,7 +18,8 @@ public class ActivateAnObjectWithCollider : MonoBehaviour
     public KeyCode KeyCodeE;
     public bool Wantonce;
     public bool Alrdid;
-
+    public bool StartActive;
+    
     [Header("Optional Object")]
 
     public GameObject OptionalExtraObject;
@@ -30,12 +31,16 @@ public class ActivateAnObjectWithCollider : MonoBehaviour
 
     void Start()
     {
-        TheObject.SetActive(false);
+        if (!StartActive)
+        {
+            TheObject.SetActive(false);
+
+        }
     }
 
     void Update()
     {
-        if (OptionalExtraObject == null) return;
+        if (TheObject == null) return;
         if(Input.GetKeyDown(KeyCodeE) && OptionalObj_is_TutorialBased)
         {
 

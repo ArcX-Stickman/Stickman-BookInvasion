@@ -19,7 +19,7 @@ public class Movement : MonoBehaviour
     public float JumpForce;
     public Rigidbody2D rb;
     public Animator StickAnim;
-    
+
     public bool Grounded;
     public bool CallJumpDEBUG;
 
@@ -65,7 +65,7 @@ public class Movement : MonoBehaviour
     public float Deacceleration;
     public bool isJumping;
     public Biology_AttackZone Streak_Bio;
-    public float shootCooldown = 0.5f; 
+    public float shootCooldown = 0.5f;
     private float nextShootTime = 0f;
     public bool isShooting;
     [Header("Sliding ")]
@@ -133,6 +133,7 @@ public class Movement : MonoBehaviour
     public AudioSource BackFlipAS;
     public float LastBackflipTime;
     public bool AirBackFlip;
+    public bool TriggerBackflipMovement;
     [Header("Melee Stuff ")]
     // Melee I guess
     public AudioSource PunchAudioP;
@@ -196,7 +197,7 @@ public class Movement : MonoBehaviour
     public bool BackflipCollected;
     public bool InfoCollected;
     public bool NoMoreCollected;
- 
+
     [Header(" Lab Stuff ")]
     public int ExamHeliID_Checkpoint;
     public GameObject LabLevel;
@@ -257,14 +258,14 @@ public class Movement : MonoBehaviour
     public float UltCD;
     public float LastULT;
     public PlayableDirector UltCam;
-  // jump stuff coyote time
+    // jump stuff coyote time
     private float coyoteTime = 0.07f;
     private float coyoteTimerCounter;
 
     private bool AlrPlayedDeath;
     public AudioClip DeathSFX;
     public AudioClip PerfectDodge;
-    
+
     [Header("Perfect Dodge")]
     public AudioSource PerfectDodgeSloMO;
     public bool isInPerfectDodge;
@@ -301,7 +302,7 @@ public class Movement : MonoBehaviour
     public bool InCinematic;
     public float CinematicSlideSpeed;
     public float MaxCinematicSlideSpeed;
-       [Header(" Misc ")]
+    [Header(" Misc ")]
     //Performance level destoryer
     public GameObject Level1;
     public GameObject Level2;
@@ -316,13 +317,13 @@ public class Movement : MonoBehaviour
     {
         Grounded = true;
         Jump();
-        if(Level1 != null && Level2 != null)
+        if (Level1 != null && Level2 != null)
         {
             Level1.gameObject.SetActive(true);
 
             Level2.gameObject.SetActive(true);
         }
- 
+
         //MuzzleFire.gameObject.SetActive(false);
         StickCollider = GetComponent<BoxCollider2D>();
 
@@ -425,12 +426,12 @@ public class Movement : MonoBehaviour
         Vector2 _constantForce = constantForceDirection * constantForce;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
-        float elapsedTime = 0f; 
+        float elapsedTime = 0f;
         while (elapsedTime < knockbackTime)
         {
             elapsedTime += Time.fixedDeltaTime;
 
-         
+
             Vector2 _knockbackForce = _hitForce + _constantForce;
             Vector2 _combinedForce = new Vector2(_knockbackForce.x, Mathf.Min(_knockbackForce.y, 0));
 
@@ -475,7 +476,7 @@ public class Movement : MonoBehaviour
                 StickAnim.SetBool("Jump", false);
             }
         }
-        else if (!Grounded)
+        else if (!Grounded && !BackFlip)
         {
             StickAnim.SetBool("Jump", true);
         }
@@ -494,27 +495,27 @@ public class Movement : MonoBehaviour
 
         if (HeliForestCheck != null || InCinematic)
         {
-            if(MaxSpeed <= CineMaticSpeed)
+            if (MaxSpeed <= CineMaticSpeed)
             {
                 Speed = CineMaticSpeed;
                 MaxSpeed = CineMaticSpeed;
             }
-            if(MaxSpeed >= MaxCineMaticSpeed)
+            if (MaxSpeed >= MaxCineMaticSpeed)
             {
                 MaxSpeed = MaxCineMaticSpeed;
             }
-            if(MaxSlideSpeed <= CinematicSlideSpeed)
+            if (MaxSlideSpeed <= CinematicSlideSpeed)
             {
                 MaxSlideSpeed = CinematicSlideSpeed;
-                
+
             }
-            if(SlideCancelSpeed <= MaxCinematicSlideSpeed)
+            if (SlideCancelSpeed <= MaxCinematicSlideSpeed)
             {
                 SlideCancelSpeed = MaxCinematicSlideSpeed;
             }
-           // rb.gravityScale = 15;
+            // rb.gravityScale = 15;
         }
-        if(OnLadder && !HasFullyClimbed && !NeverDoCineBeatDownAgain)
+        if (OnLadder && !HasFullyClimbed && !NeverDoCineBeatDownAgain)
         {
             StartCoroutine(ClimbHeliCinematic());
         }
@@ -528,36 +529,36 @@ public class Movement : MonoBehaviour
     public bool FacingRight;
     private bool PlayedLockedIn_CompletedGauge;
 
- 
+
     private void Update()
     {
-        if(hingeJoint2D == null)
+        if (hingeJoint2D == null)
         {
             hingeJoint2D = GetComponent<HingeJoint2D>();
         }
         if (OnLadder && !isFallingHeli && HeliFinale)
         {
             StickAnim.SetBool("Heli", true);
-            StickAnim.SetBool("Dash",false);
-           HeliManager();
+            StickAnim.SetBool("Dash", false);
+            HeliManager();
         }
 
-       
+
         if (CallJumpDEBUG)
         {
             Jump();
             CallJumpDEBUG = false;
         }
-        if (!Grounded && timeBecameAirborne == 0f) 
+        if (!Grounded && timeBecameAirborne == 0f)
         {
             timeBecameAirborne = Time.time;
         }
         else if (Grounded)
         {
-            timeBecameAirborne = 0f; 
+            timeBecameAirborne = 0f;
         }
         // Dodge Meter
-        if(LockedInMeterSlider != null)
+        if (LockedInMeterSlider != null)
         {
             if (PerfectDodgeCount >= MaxDodge)
             {
@@ -597,16 +598,16 @@ public class Movement : MonoBehaviour
                 MegaHeal = true;
             }
         }
-       
 
-       
+
+
         // force no gun for the Hideout section
-        if(Checkpoint == 551)
+        if (Checkpoint == 551)
         {
             HasGun = false;
         }
 
-        if(HeCanMove == false  && !IsStunned)
+        if (HeCanMove == false && !IsStunned)
         {
             HeCanMove = true;
         }
@@ -619,7 +620,7 @@ public class Movement : MonoBehaviour
         }
 
         // performance
-        if(Checkpoint == ExamHeliID_Checkpoint && LabLevel != null && LabBG_SPRITE != null)
+        if (Checkpoint == ExamHeliID_Checkpoint && LabLevel != null && LabBG_SPRITE != null)
         {
             Move();
             HasGun = true;
@@ -633,13 +634,13 @@ public class Movement : MonoBehaviour
                 pm.BGLOW.gameObject.SetActive(false);
                 pm.BreakIN.gameObject.SetActive(true);
             }
-            if(LabLevel != null)
+            if (LabLevel != null)
             {
                 LabLevel.gameObject.SetActive(true);
 
             }
         }
-        if(Level1 != null && Level2 != null)
+        if (Level1 != null && Level2 != null)
         {
             if (Checkpoint >= 3 && Checkpoint != 726438 && Checkpoint != ExamHeliID_Checkpoint)
             {
@@ -654,14 +655,14 @@ public class Movement : MonoBehaviour
                 Level1.gameObject.SetActive(true);
             }
         }
-        
 
-        if(InEmbryBoss && MaxSpeed >= 50 )
+
+        if (InEmbryBoss && MaxSpeed >= 50)
         {
             MaxSpeed = 50;
         }
 
-        if(InEmbryBoss && JumpForce >= 50)
+        if (InEmbryBoss && JumpForce >= 50)
         {
             JumpForce = 50;
 
@@ -680,7 +681,7 @@ public class Movement : MonoBehaviour
         {
             StopFootsteps();
         }
-        
+
         if (BackFlip)
         {
             StopFootsteps();
@@ -694,7 +695,7 @@ public class Movement : MonoBehaviour
         {
             Footsteps();
         }
-        else if (!Input.GetKey(KeyCode.A) )
+        else if (!Input.GetKey(KeyCode.A))
         {
             StopFootsteps();
         }
@@ -716,7 +717,7 @@ public class Movement : MonoBehaviour
         {
             Footsteps();
         }
-        else if(!Input.GetKey(KeyCode.D))
+        else if (!Input.GetKey(KeyCode.D))
         {
             StopFootsteps();
         }
@@ -726,7 +727,7 @@ public class Movement : MonoBehaviour
 
 
 
-        if(lastPunchTime + MeleeCD >= Maxdelay4Punch)
+        if (lastPunchTime + MeleeCD >= Maxdelay4Punch)
         {
             MeleeCD = OG_MeleeCD;
             ComboCount = 0;
@@ -736,7 +737,7 @@ public class Movement : MonoBehaviour
         if (Input.GetButton("Fire2"))
         {
 
-            if(Time.time >= lastPunchTime + MeleeCD && !BackFlip || isInPerfectDodge)
+            if (Time.time >= lastPunchTime + MeleeCD && !BackFlip || isInPerfectDodge)
             {
                 if (BackFlip && isInPerfectDodge && !MegaHeal)
                 {
@@ -763,7 +764,7 @@ public class Movement : MonoBehaviour
                     }
 
                 }
-                if(Time.time >= lastPunchTime + MeleeCD + 0.4f)
+                if (Time.time >= lastPunchTime + MeleeCD + 0.4f)
                 {
                     StartCoroutine(PunchFreeFlow());
 
@@ -811,10 +812,10 @@ public class Movement : MonoBehaviour
         //Slidecancel and Move speed min max
 
 
-       
 
 
-       
+
+
         // Handle Max Speed
         if (SlideCancelSpeed < 100)
         {
@@ -835,18 +836,18 @@ public class Movement : MonoBehaviour
             MaxSpeed = 80;
         }
 
-        if(Checkpoint == ExamHeliID_Checkpoint && HeliForestCheck == null)
+        if (Checkpoint == ExamHeliID_Checkpoint && HeliForestCheck == null)
         {
             if (MaxSpeed >= 100 || MaxSpeed <= 100)
             {
                 MaxSpeed = 100;
             }
 
-            if(rb.gravityScale < 15 && !isDashing && HeliForestCheck == null)
+            if (rb.gravityScale < 15 && !isDashing && HeliForestCheck == null)
             {
                 rb.gravityScale = 15;
             }
-            else if(HeliForestCheck == null)
+            else if (HeliForestCheck == null)
             {
                 rb.gravityScale = 20;
 
@@ -855,10 +856,10 @@ public class Movement : MonoBehaviour
 
         }
 
-        if(HeliForestCheck != null)
+        if (HeliForestCheck != null)
         {
-          
-            if(MaxSpeed < 100)
+
+            if (MaxSpeed < 100)
             {
                 MaxSpeed = 100;
             }
@@ -883,7 +884,7 @@ public class Movement : MonoBehaviour
             Helicopter exam = FindFirstObjectByType<Helicopter>();
             if (exam != null)
             {
-                if(exam.ExamHealth <= 1 && !PlayedCutHeli)
+                if (exam.ExamHealth <= 1 && !PlayedCutHeli)
                 {
                     PlayedCutHeli = true;
                     StartCoroutine(EndDemoVersion1());
@@ -911,7 +912,7 @@ public class Movement : MonoBehaviour
             {
                 StickAnim.SetTrigger("Dodge");
 
-                StickAnim.CrossFade("CrazySigmaDodgeYOOOOOO",0,0);
+                StickAnim.CrossFade("CrazySigmaDodgeYOOOOOO", 0, 0);
 
             }
             else
@@ -1036,11 +1037,11 @@ public class Movement : MonoBehaviour
 
 
 
-        
+
         // dead
         if (StickHP.PlayerHP <= 0)
         {
-            if(TutTXT != null)
+            if (TutTXT != null)
             {
                 TutTXT.gameObject.SetActive(false);
 
@@ -1051,7 +1052,7 @@ public class Movement : MonoBehaviour
             //    StartCoroutine(WaitForBit());
 
             //}
-            StickAnim.CrossFade("Dead",0,0);
+            StickAnim.CrossFade("Dead", 0, 0);
             StickAnim.SetTrigger("Dead");
             Speed = 0;
             Dead = true;
@@ -1060,7 +1061,7 @@ public class Movement : MonoBehaviour
                 AlrPlayedDeath = true;
                 AudioPlayer.PlayOneShot(DeathSFX);
             }
-          
+
         }
 
 
@@ -1070,11 +1071,11 @@ public class Movement : MonoBehaviour
             TimeManager.RevertSpeed();
         }
 
-        
+
 
 
         // call move void
-        if(Cart!= null)
+        if (Cart != null)
         {
             if (StickmanGetsKnocked == false && !SlopeSlide && !Cart.gameObject.activeSelf && HeCanMove && !Dead && !PunchBool)
             {
@@ -1084,20 +1085,20 @@ public class Movement : MonoBehaviour
         }
         else
         {
-            if (StickmanGetsKnocked == false && !SlopeSlide  && HeCanMove && !Dead && !PunchBool)
+            if (StickmanGetsKnocked == false && !SlopeSlide && HeCanMove && !Dead && !PunchBool)
             {
 
                 Move();
             }
         }
-       
+
         if (PunchBool && !isInPunchAttach && !isInPerfectDodge)
         {
             rb.velocity = new Vector2(0, rb.velocity.y);
             StopFootsteps();
         }
 
-      
+
 
         if (StickPOS.position.y < resetYPosition)
         {
@@ -1119,6 +1120,8 @@ public class Movement : MonoBehaviour
 
         if (Grounded == true)
         {
+
+
             AirBackFlip = false;
             isJumping = false;
             StickAnim.SetBool("OnGround", true);
@@ -1129,6 +1132,8 @@ public class Movement : MonoBehaviour
             canSlide = true;
 
             StickAnim.SetBool("DodgeLow", false);
+
+
 
             StickAnim.SetBool("Jump", false);
             //StickAnim.ResetTrigger("JumpShoot");
@@ -1143,12 +1148,16 @@ public class Movement : MonoBehaviour
 
         if (!Grounded)
         {
+            if (!Grounded && BackFlip)
+            {
+                StickAnim.SetBool("Backflip", true);
 
+            }
             StickAnim.SetBool("OnGround", false);
             AbleToJump = false;
             canSlide = false;
             //StickAnim.SetBool("Slide", false);
-            if(HeliForestCheck == null) // Helps With Slope Levels
+            if (HeliForestCheck == null) // Helps With Slope Levels
             {
                 isSliding = false;
 
@@ -1190,7 +1199,7 @@ public class Movement : MonoBehaviour
         }
 
 
-        
+
         if (Input.GetButton("Fire1"))
         {
             if (HasGun && StickHP.MegaCharge > 0.5f && Time.deltaTime > 0 && StickHP.MegaCharge >= 5 && !isInPerfectDodge)
@@ -1204,7 +1213,7 @@ public class Movement : MonoBehaviour
                             transform.localScale = new Vector3(1, 1, 1);
                         }
                         Shoot();
-                        
+
                     }
 
                 }
@@ -1216,7 +1225,7 @@ public class Movement : MonoBehaviour
 
         }
 
-        
+
         //if (Input.GetButton("Fire2"))
         //{
         //    if (!isDashing)
@@ -1284,7 +1293,7 @@ public class Movement : MonoBehaviour
 
     public void TURN_OFFF_RBBBBBBBB()
     {
-        rb.simulated = false; 
+        rb.simulated = false;
     }
 
     public void TURN_ONNNNN_RBBBBBB()
@@ -1312,7 +1321,7 @@ public class Movement : MonoBehaviour
     // freeze fram
     public void FreeezeAnimation_KEY()
     {
-        if(Checkpoint != ExamHeliID_Checkpoint)
+        if (Checkpoint != ExamHeliID_Checkpoint)
         {
             TimeManager.FreezeTime(0.2f);
 
@@ -1373,7 +1382,7 @@ public class Movement : MonoBehaviour
                 projectile.GetComponent<Bullet>().SetDirection(shootDirection);
                 projectile.GetComponent<Bullet>().isEnemyCounter = true;
             }
-           
+
         }
 
 
@@ -1455,16 +1464,16 @@ public class Movement : MonoBehaviour
         }
         if (!InSlideAnimation && !SlideJump)
         {
-            if(StickHP.MegaCharge > 1)
+            if (StickHP.MegaCharge > 1)
             {
-                if(Checkpoint != ExamHeliID_Checkpoint || HeliForestCheck != null)
+                if (Checkpoint != ExamHeliID_Checkpoint || HeliForestCheck != null)
                 {
                     JumpForce = Mathf.Max(25, JumpForce * ((MaxSpeed / JumpForce) / 1.5f));
-                    
+
                 }
                 else
                 {
-                    JumpForce = 90; 
+                    JumpForce = 90;
 
                 }
                 MaxSpeed += 0.4f;
@@ -1485,19 +1494,19 @@ public class Movement : MonoBehaviour
             if (AbleToJump && !isSliding)
             {
                 Debug.Log("Jump Void Is Active");
-                if(!isDashing && !isSliding && !IsShooting && !Dead && !inSlipperyState && !Anim_Locked)
+                if (!isDashing && !isSliding && !IsShooting && !Dead && !inSlipperyState && !Anim_Locked && !BackFlip)
                 {
-                    StickAnim.CrossFade("Jump", 0,0);
+                    StickAnim.CrossFade("Jump", 0, 0);
 
                 }
-                else
+                else if (!BackFlip)
                 {
 
                     StickAnim.SetBool("Jump", true);
 
                 }
 
-                if(JumpForce >= 50)
+                if (JumpForce >= 50)
                 {
                     JumpForce = 50; // this is how we limit the jump to not make it crazy
                 }
@@ -1509,7 +1518,7 @@ public class Movement : MonoBehaviour
         }
     }
 
-   public void AnimationKey_UppercutBool()
+    public void AnimationKey_UppercutBool()
     {
         isUppercut = true;
 
@@ -1517,11 +1526,11 @@ public class Movement : MonoBehaviour
 
     public void ShootNPunch()
     {
-        if(CurrentPunches < 0)
+        if (CurrentPunches < 0)
         {
             CurrentPunches = 0;
         }
-        if(CurrentPunches >= MaxPunches && HasGun)
+        if (CurrentPunches >= MaxPunches && HasGun)
         {
             CurrentPunches = 0;
             rb.rotation = 0;
@@ -1553,7 +1562,7 @@ public class Movement : MonoBehaviour
 
     //public IEnumerator ShootNPunchCourtine()
     //{
-        
+
     //}
     public void AnimationKey_UppercutFalse()
     {
@@ -1648,12 +1657,12 @@ public class Movement : MonoBehaviour
 
     public IEnumerator AccelerateSpeed(float MSpeed, float time)
     {
-        if(Speed == MSpeed) yield break;
-        while(Speed != MSpeed && rb.velocity.x > 0) 
+        if (Speed == MSpeed) yield break;
+        while (Speed != MSpeed && rb.velocity.x > 0)
         {
             Speed = Mathf.Lerp(MaxSpeed, MSpeed, time);
-            yield return null ;
-        
+            yield return null;
+
         }
 
         yield break;
@@ -1691,7 +1700,7 @@ public class Movement : MonoBehaviour
         }
         while (PerfectDodgeSloMO.isPlaying)
         {
-            if(Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
                 isInPerfectDodge = false;
                 MegaHeal = false;
@@ -1724,7 +1733,7 @@ public class Movement : MonoBehaviour
             }
             isInPerfectDodge = true;
             yield return null;
-            if(MegaHeal == true)
+            if (MegaHeal == true)
             {
                 rb.rotation = 0;
                 yield return new WaitUntil(() => !MegaHeal);
@@ -1767,7 +1776,7 @@ public class Movement : MonoBehaviour
         inRush = true;
         PerfectDodgeCount = 0;
         float OGsloRate = TimeManager.slomoRate;
-        TimeManager.slomoRate = SloMORate/1.5f;
+        TimeManager.slomoRate = SloMORate / 1.5f;
         TimeManager.SloMO();
         ResetAllAnimationStates();
         StickAnim.SetBool("Slide", true);
@@ -1779,7 +1788,7 @@ public class Movement : MonoBehaviour
             SlideCancelSpeed = 220;
             StickHP.MegaCharge = 30;
             yield return null;
-           
+
         }
         isInPerfectDodge = false;
         MegaHeal = false;
@@ -1798,11 +1807,11 @@ public class Movement : MonoBehaviour
     }
     public void AssignPossibleNulls()
     {
-        if(TimeManager == null)
+        if (TimeManager == null)
         {
             TimeManager = FindAnyObjectByType<TimeManager>();
         }
-        if(CameraScript == null)
+        if (CameraScript == null)
         {
             CameraScript = FindAnyObjectByType<CameraScript>();
         }
@@ -1863,7 +1872,7 @@ public class Movement : MonoBehaviour
 
 
 
-    
+
 
 
 
@@ -1872,7 +1881,7 @@ public class Movement : MonoBehaviour
 
     public void Move()
     {
-        if (HeCanMove == true && StickmanGetsKnocked == false )
+        if (HeCanMove == true && StickmanGetsKnocked == false)
         {
 
             //BuildUp = true;
@@ -1887,13 +1896,13 @@ public class Movement : MonoBehaviour
             //    horizontalInput = 1;
             //}
             rb.velocity = new Vector2(horizontalInput * Speed, rb.velocity.y);
-            FacingRight = transform.localScale.x >= 1 ? true : false; 
+            FacingRight = transform.localScale.x >= 1 ? true : false;
             float targetspeed = horizontalInput * Speed;
 
 
             if (rb.velocity.magnitude > 5.1f && MaxSpeed >= 40)
             {
-                if(isDashing | isSliding | isJumping | BackFlip && StickHP.MegaCharge >= 1)
+                if (isDashing | isSliding | isJumping | BackFlip && StickHP.MegaCharge >= 1)
                 {
                     motionBlurHandler.HandleMotionBlur();
 
@@ -1944,13 +1953,13 @@ public class Movement : MonoBehaviour
             }
             else if (horizontalInput < -0.01 && !BackFlip)
             {
-               // FacingRight = false;
+                // FacingRight = false;
                 StickDirection = -1;
                 transform.localScale = new Vector3(-1, 1, 1);
 
             }
         }
-        
+
 
 
 
@@ -2013,7 +2022,7 @@ public class Movement : MonoBehaviour
         LabTheme.gameObject.SetActive(false);
     }
 
-   
+
     public IEnumerator ClimbHeliCinematic()
     {
         float Distance = Mathf.Abs(transform.position.y - HeliCinematicClimbDestination.position.y);
@@ -2036,7 +2045,7 @@ public class Movement : MonoBehaviour
         OnLadder = false;
         HasFullyClimbed = true;
         yield break;
-       
+
     }
 
     public bool NeverDoCineBeatDownAgain;
@@ -2112,7 +2121,7 @@ public class Movement : MonoBehaviour
 
     void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Ground"))
+        if (collision.collider.CompareTag("Ground") && !BackFlip)
         {
             foreach (ContactPoint2D contact in collision.contacts)
             {
@@ -2151,7 +2160,7 @@ public class Movement : MonoBehaviour
         //    Grounded = true;
         //}
 
-        if (collision.gameObject.CompareTag("Tree") && HeliFinale )
+        if (collision.gameObject.CompareTag("Tree") && HeliFinale)
         {
             if (!isDashing)
             {
@@ -2159,7 +2168,7 @@ public class Movement : MonoBehaviour
                 StickAnim.SetBool("Heli", false);
                 StartCoroutine(FallOfLadder());
             }
-            
+
 
         }
 
@@ -2232,7 +2241,7 @@ public class Movement : MonoBehaviour
     private bool OneTimeHealth_AlarmDoor = false;
     public bool TouchingATKSight;
     public bool OnLadder;
-    
+
     private HingeJoint2D hingeJoint2D;
 
     public bool UpLadderWant;
@@ -2247,7 +2256,7 @@ public class Movement : MonoBehaviour
             rb.bodyType = RigidbodyType2D.Dynamic;
 
         }
-        if(OnLadder && !isFallingHeli)
+        if (OnLadder && !isFallingHeli)
         {
             transform.position = HeliLadder.position;
             rb.gravityScale = 0;
@@ -2258,19 +2267,19 @@ public class Movement : MonoBehaviour
             return;
         }
 
-            isFallingHeli = false;
+        isFallingHeli = false;
         if (isDashing)
         {
             isDashing = false;
             StickAnim.CrossFade("Helicopter", 0, 0);
         }
 
-        
+
         HeCanMove = false;
         StickAnim.SetBool("Heli", true);
 
-       
-        if(Input.GetKeyDown(KeyCode.S))
+
+        if (Input.GetKeyDown(KeyCode.S))
         {
             UpLadderWant = false;
             SwitchHeliPOS();
@@ -2315,7 +2324,7 @@ public class Movement : MonoBehaviour
                 HeliLadder = UpLadder;
             }
         }
-       
+
     }
 
     public Transform HidePosition;
@@ -2330,7 +2339,7 @@ public class Movement : MonoBehaviour
             StickAnim.SetBool("Dash", false);
             OnLadder = true;
             HeliManager();
-            
+
         }
         else if (InHeliCineBeatdown)
         {
@@ -2350,7 +2359,7 @@ public class Movement : MonoBehaviour
         }
         if (MeleeCollider.CompareTag("Book"))
         {
-            if(Time.time >= lastPunchTime + MeleeCD)
+            if (Time.time >= lastPunchTime + MeleeCD)
             {
                 ComboCount += 1;
 
@@ -2426,9 +2435,16 @@ public class Movement : MonoBehaviour
             {
                 StartCoroutine(HideShoot());
             }
-            else if (!Grounded || isDashing)
+            else if (!Grounded && !BackFlip || isDashing)
             {
                 StickAnim.SetTrigger("JumpShoot");
+
+            }
+            else if (BackFlip)
+            {
+                StickAnim.CrossFade("ShootJump", 0, 0);
+                BackFlip = false;
+                //StickAnim.SetTrigger("FlipShoot");   <--- Need TO Make that ANimation
 
             }
             else if (isSliding)
@@ -2539,9 +2555,9 @@ public class Movement : MonoBehaviour
             LastDelay = Time.time;
             StartCoroutine(StickHP.DelayinMegaCharge());
             StartCoroutine(MuzzleFireAnim());
-            
+
             //GameObject bullet = Instantiate(GunBullet, AimPoint.position, Quaternion.identity);
-            GameObject bullet = ObjectPooler.SpawnObj(GunBullet,AimPoint.position,Quaternion.identity,ObjectPooler.PoolType.GamObjects);
+            GameObject bullet = ObjectPooler.SpawnObj(GunBullet, AimPoint.position, Quaternion.identity, ObjectPooler.PoolType.GamObjects);
             Vector2 shootDirection = (transform.localScale.x > 0) ? Vector2.right : Vector2.left;
             bullet.GetComponent<Bullet>().SetDirection(shootDirection);
 
@@ -2554,7 +2570,7 @@ public class Movement : MonoBehaviour
 
         //if (!StickHP.CanSuper)
         //{
-            
+
         //}
         //else // Super bullet
         //{
@@ -2580,7 +2596,7 @@ public class Movement : MonoBehaviour
             StickHP.MegaCharge = 0;
             Grounded = false;
             float MaxPushSpeed = 0f;
-            if(rb.velocity.x < 120)
+            if (rb.velocity.x < 120)
             {
                 rb.velocity = new Vector2(120, 0);
             }
@@ -2605,7 +2621,7 @@ public class Movement : MonoBehaviour
         {
             return;
         }
-        
+
     }
 
     public void ArcBullet()
@@ -2756,17 +2772,17 @@ public class Movement : MonoBehaviour
         PunchAudioP.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
         if (!PowerfulPunch)
         {
-             play = PunchSFX[UnityEngine.Random.Range(0, PunchSFX.Length)];
+            play = PunchSFX[UnityEngine.Random.Range(0, PunchSFX.Length)];
         }
         else
         {
             play = MegaPunch;
         }
-       
+
 
         PunchAudioP.PlayOneShot(play);
         lastPunch = Time.time;
-       
+
     }
 
     public LayerMask WutsEnemy;
@@ -2798,7 +2814,7 @@ public class Movement : MonoBehaviour
         {
             tempRayDistance = RayDistance;
         }
-        if(RaycastableObj != null)
+        if (RaycastableObj != null)
         {
             Vector2 rayDirection = new Vector2(StickDirection, 0f);
             RaycastHit2D raycast = Physics2D.Raycast(RaycastableObj.transform.position, rayDirection, tempRayDistance, WhatsTheBookLayer);
@@ -2983,7 +2999,7 @@ public class Movement : MonoBehaviour
         HeCanMove = true;
         EnemyRecivedHit = false;
         StickAnim.SetBool("Attach", false);
-       
+
 
 
     }
@@ -3047,9 +3063,9 @@ public class Movement : MonoBehaviour
                 float DisToLadder = Vector2.Distance(transform.position, HeliLadder.position);
                 DashDisDebug = DisToLadder;
                 Debug.Log("DashDis" + DisToLadder);
-                while(DisToLadder > 10)
+                while (DisToLadder > 10)
                 {
-                     DisToLadder = Vector2.Distance(transform.position, HeliLadder.position);
+                    DisToLadder = Vector2.Distance(transform.position, HeliLadder.position);
                     DashDisDebug = DisToLadder;
                     Debug.Log("DashDis" + DisToLadder);
 
@@ -3071,7 +3087,7 @@ public class Movement : MonoBehaviour
                 canDash = false;
                 isDashing = true;
                 //dashPower = dashPower * (MaxSpeed / dashPower + 0.5f);
-               // Physics2D.IgnoreLayerCollision(StickLayer,WhatsTheBookLayer,true);
+                // Physics2D.IgnoreLayerCollision(StickLayer,WhatsTheBookLayer,true);
                 float originalGravity = rb.gravityScale;
                 rb.gravityScale = 0f;
                 rb.velocity = new Vector2(transform.localScale.x * dashPower, 0);
@@ -3082,7 +3098,7 @@ public class Movement : MonoBehaviour
                 canDash = true;
                 StickAnim.SetBool("Dash", false);
                 Debug.Log("Dash" + dashPower);
-               // Physics2D.IgnoreLayerCollision(StickLayer, WhatsTheBookLayer, false);
+                // Physics2D.IgnoreLayerCollision(StickLayer, WhatsTheBookLayer, false);
 
             }
             else
@@ -3090,7 +3106,7 @@ public class Movement : MonoBehaviour
                 PressedDash = true;
                 StickHP.MegaCharge = StickHP.MegaCharge - StickHP.MegaCharge;
                 HeCanMove = true;
-               // Physics2D.IgnoreLayerCollision(StickLayer, WhatsTheBookLayer, true);
+                // Physics2D.IgnoreLayerCollision(StickLayer, WhatsTheBookLayer, true);
                 StickAnim.SetBool("Dash", true);
                 canDash = false;
                 isDashing = true;
@@ -3104,7 +3120,7 @@ public class Movement : MonoBehaviour
                 canDash = true;
                 StickAnim.SetBool("Dash", false);
                 PressedDash = false;
-               // Physics2D.IgnoreLayerCollision(StickLayer, WhatsTheBookLayer, false);
+                // Physics2D.IgnoreLayerCollision(StickLayer, WhatsTheBookLayer, false);
 
             }
 
@@ -3131,8 +3147,8 @@ public class Movement : MonoBehaviour
     public IEnumerator MuzzleFireAnim()
     {
 
-        GameObject FX = Instantiate(MuzzleFire,transform.position,Quaternion.identity);
-        FX.transform.localScale =  new Vector3(FacingRight ? 1 : -1, 1, 1);
+        GameObject FX = Instantiate(MuzzleFire, transform.position, Quaternion.identity);
+        FX.transform.localScale = new Vector3(FacingRight ? 1 : -1, 1, 1);
         FX.transform.position = transform.position;
         //rb.gravityScale = slideMomentum >= MaxSlideSpeed ? 4 : 10;
         //MuzzleFire.transform.localScale = new Vector3(FacingRight ? 1 : -1, 1, 1);
@@ -3162,10 +3178,10 @@ public class Movement : MonoBehaviour
         InSlideAnimation = true;
     }
 
-    
+
     public void Footsteps()
     {
-        if (WalkOnGrass && Grounded && !isSliding && !isDashing && !BackFlip  && !Dead)
+        if (WalkOnGrass && Grounded && !isSliding && !isDashing && !BackFlip && !Dead)
         {
             if (BreakIn)
             {
@@ -3182,7 +3198,7 @@ public class Movement : MonoBehaviour
 
 
         }
-        if(WalkOnWood && Grounded && !isSliding && !isDashing && !BackFlip && !Dead)
+        if (WalkOnWood && Grounded && !isSliding && !isDashing && !BackFlip && !Dead)
         {
             WoodP.pitch = Random.Range(1, 1.2f);
             WoodP.gameObject.SetActive(true);
@@ -3204,7 +3220,7 @@ public class Movement : MonoBehaviour
             FootPMetal.gameObject.SetActive(false);
         }
         FootP.gameObject.SetActive(false);
-        WoodP.gameObject.SetActive(false) ;
+        WoodP.gameObject.SetActive(false);
     }
 
     public void StopPunchInMiddle()
@@ -3256,7 +3272,7 @@ public class Movement : MonoBehaviour
             rb.gravityScale = 10.55f;
             rb.mass = 76.55f;
         }
-        
+
 
     }
 
@@ -3282,14 +3298,17 @@ public class Movement : MonoBehaviour
     //Movement Overhaul
 
 
-
     public IEnumerator BackFlipMove()
     {
         Debug.Log("We Want A Flip");
         float horizontalMomentum = 0;
+
+
         if (StickHP.MegaCharge >= 1.3f && !isSliding)
         {
-            if(StickHP.MegaCharge <= 5)
+            StickAnim.SetBool("Backflip", true);
+            StickAnim.CrossFade("Backflip", 0, 0);
+            if (StickHP.MegaCharge <= 5)
             {
                 horizontalMomentum = 10;
             }
@@ -3335,6 +3354,8 @@ public class Movement : MonoBehaviour
             BackFlip = false;
             HeCanMove = true;
             rb.rotation = 0;
+            StickAnim.SetBool("Backflip", false);
+
 
         }
 
@@ -3484,7 +3505,7 @@ public class Movement : MonoBehaviour
             }
 
 
-            if(HeCanMove)
+            if (HeCanMove)
             {
                 AudioPlayer.PlayOneShot(SlideSFX);
                 StartCoroutine(StickHP.DelayinMegaCharge());
@@ -3536,14 +3557,22 @@ public class Movement : MonoBehaviour
                             break;
                         }
                     }
+                    if (slideMomentum <= 0.1f)
+                    {
+                        isSliding = false;
+                        StickAnim.SetBool("Slide", false);
+                        rb.gravityScale = originalGravity;
+                        break;
+                    }
+
 
 
                     yield return null;
                 }
 
-                
+
             }
-            else if(HeCanMove == false)
+            else if (HeCanMove == false)
             {
                 AudioPlayer.PlayOneShot(SlideSFX);
 
@@ -3667,7 +3696,7 @@ public class Movement : MonoBehaviour
                     yield return null;
                 }
             }
-           
+
         }
         else
         {
@@ -3751,7 +3780,7 @@ public class Movement : MonoBehaviour
 
     }
 
-   
+
     public void SaveProgress()
     {
         SaveSystem.SaveProgess(this);
@@ -3765,7 +3794,7 @@ public class Movement : MonoBehaviour
     public void LoadProgress()
     {
         PlayerData data = SaveSystem.LoadSave();
-        HasGun = data.HasGun;   
+        HasGun = data.HasGun;
         SceneName = data.SceneName;
         Checkpoint = data.Checkpoint;
         Cutscene_IntroFight = data.Cutscene_IntroFight;
@@ -3774,7 +3803,7 @@ public class Movement : MonoBehaviour
         position.x = data.PlayerPOS[0];
         position.y = data.PlayerPOS[1];
         position.z = data.PlayerPOS[2];
-        FinshedEncounterAfterLab = data.HasFinishedEncounterAfterLab; 
+        FinshedEncounterAfterLab = data.HasFinishedEncounterAfterLab;
         transform.position = position;
         HasBrokeOutOfRope = data.HasBrokeOutOfRope;
 

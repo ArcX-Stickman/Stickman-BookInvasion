@@ -39,6 +39,7 @@ public class BeakerProjectile : MonoBehaviour
     public bool PerfectDodge;
     private bool AlrDidCD;
     private bool HasBeenCaught;
+    public EnemyAI Embry;
 
     void OnEnable()
     {
@@ -126,11 +127,13 @@ public class BeakerProjectile : MonoBehaviour
         }
         else if (collision.CompareTag("StickCatch") && UsedInEmbry && UsedForCounter)
         {
+            Embry.TimesCaught_Embry += 1;
             HitPlayer = true;
             HasBeenCaught = true;
             PlayerManager.HasCaught = true;
             ReturnToPool();
         }
+
         else if (collision.CompareTag("Ground"))
         {
             HitPlayer = true;
@@ -180,6 +183,12 @@ public class BeakerProjectile : MonoBehaviour
             HasBeenCaught = true;
             PlayerManager.CanCatch = false;
             PlayerManager.HasCaught = true;
+            if(Embry != null)
+            {
+                Embry.TimesCaught_Embry += 1;
+
+            }
+
             ReturnToPool();
         }
         else if (PlayerManager.isDashing)

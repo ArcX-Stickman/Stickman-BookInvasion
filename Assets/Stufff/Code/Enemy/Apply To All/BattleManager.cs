@@ -18,7 +18,7 @@ public class BattleManager : MonoBehaviour
     public AudioSource BassDropAudioP;
     public bool NoWantSloMo;
     public AudioSource BGLow;
-
+    private bool BattleActuallyStarted;
     public bool BossFight;
 
     void Update()
@@ -46,6 +46,7 @@ public class BattleManager : MonoBehaviour
 
         if (!AlrJingle && AllEnemiesDefeated())
         {
+            if (!BattleActuallyStarted) return;
             AlrJingle = true;
             EnemBattle = false; 
             AudioP.PlayOneShot(Jingle);
@@ -97,7 +98,7 @@ public class BattleManager : MonoBehaviour
             }
             return false;
         }
-        if (!NotYetSloMo)
+        if (!NotYetSloMo && BattleActuallyStarted)
         {
             if(BassDropAudioP != null)
             {
@@ -149,6 +150,7 @@ public class BattleManager : MonoBehaviour
 
     public void AlertAllEnemies()
     {
+        BattleActuallyStarted = true;
         foreach (EnemyAI enemy in enemyAIs)
         {
             if (enemy == null) continue;

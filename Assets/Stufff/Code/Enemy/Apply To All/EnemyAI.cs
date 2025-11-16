@@ -177,6 +177,7 @@ public class EnemyAI : MonoBehaviour
     public GameObject BossHP_UI;
 
     [Header("Embryology")]
+    public int TimesCaught_Embry;
     public GameObject Zygote;
     public GameObject[] Zygotes;
     public GameObject StickyCell;
@@ -216,11 +217,18 @@ public class EnemyAI : MonoBehaviour
     public string TutTXT;
     public TutorialKeyInput TutKeyInput;
     private bool AlrTaught_Tutorial_Bool;
+    public bool DodgeTutorial;
+    private bool AlrTaughtDodge;
+    public GameObject DodgeTutVideo;
 
     private float IFrameTime = 0.5f;
     private float LastIFrame;
+
+    //public int CheckPointBased;
+
     void Start()
     {
+
         if (PlayerManager.HasKilledEcology == true && isEcology)
         {
             Destroy(gameObject);
@@ -315,6 +323,9 @@ public class EnemyAI : MonoBehaviour
 
             }
         }
+
+
+       
     }
 
 
@@ -324,7 +335,7 @@ public class EnemyAI : MonoBehaviour
 
         if (!isBoss && !PlayerisCloseActivateAI) return;
         EnemyAnim.SetBool("PlayerSpotted", RangeManager.PlayerSpotted);
-
+        
         if(isCombat && Health <= 0 || isTutorial && Health <= 0)
         {
             TutText.gameObject.SetActive(false);
@@ -505,7 +516,7 @@ public class EnemyAI : MonoBehaviour
     
         globaldistance = Vector2.Distance(transform.position, StickmanPOS.position);
 
-        if (PlayerManager.isSliding | PlayerManager.isDashing && !PlayerManager.inRush)
+        if (PlayerManager.isSliding && !RushEventEnemy || PlayerManager.isDashing && !PlayerManager.inRush)
         {
             //Debug.Log("fALSE COLLISION");
             AlrSlidThroughEnemy_TUT = true;
@@ -972,7 +983,7 @@ public class EnemyAI : MonoBehaviour
 
     public void Embry_Zygote()
     {
-        if (!AlrTaughtEmbry)
+        if (TimesCaught_Embry < 5)
         {
             TutorialKeyInput tutorialKeyInput = TutText.gameObject.GetComponent<TutorialKeyInput>();
             tutorialKeyInput.InputS = KeyCode.R;
@@ -1434,6 +1445,14 @@ public class EnemyAI : MonoBehaviour
                 Health = 0;
             }
         }
+        //if (collision.CompareTag("Player"))
+        //{
+        //    if (RushEventEnemy)
+        //    {
+        //        Health = 0;
+        //        HitMarker.HitMarkerSFX();
+        //    }
+        //}
         if (collision.CompareTag("Spec") && isEmbryology && Time.time >= LastEmbryGlitch + EmbryGlitchCD)
         {
             MainCamAnim.ResetTrigger("ShakeMelee");
@@ -1443,7 +1462,11 @@ public class EnemyAI : MonoBehaviour
         }
         if (collision.CompareTag("StickMelee") && !PlayerManager.isUppercut)
         {
-            
+            if(DodgeTutorial && !AlrTaughtDodge)
+            {
+                AlrTaughtDodge = true;
+                DodgeTutVideo.gameObject.SetActive(true);
+            }
             if (!RangeManager.PlayerSpotted)
             {
                 RangeManager.PlayerSpotted = true;
@@ -1616,8 +1639,14 @@ public class EnemyAI : MonoBehaviour
                 Health -= 0.1f;
                 HitMarker.HitMarkerSFX();
             }
-            
-           
+            if (RushEventEnemy && PlayerManager.isSliding)
+            {
+                Health = 0;
+                HitMarker.HitMarkerSFX();
+
+            }
+
+
 
         }
         
@@ -1628,7 +1657,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-
+    
     
 
 

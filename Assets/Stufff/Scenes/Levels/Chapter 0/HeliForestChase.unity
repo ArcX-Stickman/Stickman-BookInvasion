@@ -278,8 +278,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &2327514
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,8 +643,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &17056261
 GameObject:
   m_ObjectHideFlags: 0
@@ -799,8 +801,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &25106804
 GameObject:
   m_ObjectHideFlags: 0
@@ -956,8 +959,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &26319905
 GameObject:
   m_ObjectHideFlags: 0
@@ -1587,7 +1591,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -1596,8 +1600,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &37193136
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1988,8 +1993,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &46948283
 GameObject:
   m_ObjectHideFlags: 0
@@ -2145,8 +2151,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &46997740
 GameObject:
   m_ObjectHideFlags: 0
@@ -2302,8 +2309,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &47030303
 GameObject:
   m_ObjectHideFlags: 0
@@ -2494,7 +2502,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -2503,8 +2511,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &51598105
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2870,8 +2879,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &53787536
 GameObject:
   m_ObjectHideFlags: 0
@@ -3027,8 +3037,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &55842881
 GameObject:
   m_ObjectHideFlags: 0
@@ -3184,8 +3195,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &56268863
 GameObject:
   m_ObjectHideFlags: 0
@@ -3438,8 +3450,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &60365030
 GameObject:
   m_ObjectHideFlags: 0
@@ -3866,8 +3879,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &62977617
 GameObject:
   m_ObjectHideFlags: 0
@@ -4116,8 +4130,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &63647960
 GameObject:
   m_ObjectHideFlags: 0
@@ -4169,7 +4184,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -4178,8 +4193,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &63647963
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4461,8 +4477,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &72560802
 GameObject:
   m_ObjectHideFlags: 0
@@ -4702,8 +4719,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!4 &74567221 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4038639258917052729, guid: c874eef35a5e57d40976242849937463, type: 3}
@@ -4864,8 +4882,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &75852712
 GameObject:
   m_ObjectHideFlags: 0
@@ -5059,8 +5078,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &76617286
 GameObject:
   m_ObjectHideFlags: 0
@@ -5112,7 +5132,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -5121,8 +5141,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &76617289
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5404,8 +5425,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &77932848
 GameObject:
   m_ObjectHideFlags: 0
@@ -5658,8 +5680,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &82366698
 GameObject:
   m_ObjectHideFlags: 0
@@ -5815,8 +5838,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &84691397
 GameObject:
   m_ObjectHideFlags: 0
@@ -6503,8 +6527,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &99265998
 GameObject:
   m_ObjectHideFlags: 0
@@ -7037,8 +7062,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &103048981
 GameObject:
   m_ObjectHideFlags: 0
@@ -7194,8 +7220,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &103372153
 GameObject:
   m_ObjectHideFlags: 0
@@ -7474,8 +7501,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &120434360
 GameObject:
   m_ObjectHideFlags: 0
@@ -7631,8 +7659,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &120681381
 GameObject:
   m_ObjectHideFlags: 0
@@ -8356,8 +8385,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &150113657
 GameObject:
   m_ObjectHideFlags: 0
@@ -8932,8 +8962,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &160363094
 GameObject:
   m_ObjectHideFlags: 0
@@ -9166,8 +9197,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &164167138
 GameObject:
   m_ObjectHideFlags: 0
@@ -9219,7 +9251,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -9228,8 +9260,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &164167141
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9608,8 +9641,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &177528872
 GameObject:
   m_ObjectHideFlags: 0
@@ -10287,8 +10321,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &185044954
 GameObject:
   m_ObjectHideFlags: 0
@@ -10340,7 +10375,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -10349,8 +10384,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &185044957
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10632,8 +10668,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &188858051
 GameObject:
   m_ObjectHideFlags: 0
@@ -11029,8 +11066,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &192413377
 GameObject:
   m_ObjectHideFlags: 0
@@ -11125,7 +11163,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -11134,8 +11172,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &196654407
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11417,8 +11456,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &202427231
 GameObject:
   m_ObjectHideFlags: 0
@@ -11574,8 +11614,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &204166508
 GameObject:
   m_ObjectHideFlags: 0
@@ -11815,8 +11856,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &208507837
 GameObject:
   m_ObjectHideFlags: 0
@@ -11972,8 +12014,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &210637652
 GameObject:
   m_ObjectHideFlags: 0
@@ -12129,8 +12172,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &218088089
 GameObject:
   m_ObjectHideFlags: 0
@@ -12923,6 +12967,7 @@ MonoBehaviour:
   BackFlipAS: {fileID: 228098107}
   LastBackflipTime: 0
   AirBackFlip: 0
+  TriggerBackflipMovement: 0
   PunchAudioP: {fileID: 228098107}
   PunchSFX:
   - {fileID: 8300000, guid: e09e99d3176c38645bb8e06680a2a34a, type: 3}
@@ -13824,8 +13869,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &235216443
 GameObject:
   m_ObjectHideFlags: 0
@@ -13981,8 +14027,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &235896406
 GameObject:
   m_ObjectHideFlags: 0
@@ -14488,8 +14535,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &240654942
 GameObject:
   m_ObjectHideFlags: 0
@@ -15302,7 +15350,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -15311,8 +15359,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &258579481
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15594,8 +15643,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &262917686
 GameObject:
   m_ObjectHideFlags: 0
@@ -15797,8 +15847,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &270009002
 GameObject:
   m_ObjectHideFlags: 0
@@ -16293,8 +16344,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &279950058
 GameObject:
   m_ObjectHideFlags: 0
@@ -16469,7 +16521,6 @@ MonoBehaviour:
   AlrDoneit: 0
   AudioP: {fileID: 0}
   SFX: {fileID: 0}
-  ForcePlayerGun: 0
 --- !u!61 &281669358
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -17038,8 +17089,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!4 &290755590 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4038639258917052729, guid: c874eef35a5e57d40976242849937463, type: 3}
@@ -17096,7 +17148,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -17105,8 +17157,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &291219820
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -17284,7 +17337,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -17293,8 +17346,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &291960720
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -17472,7 +17526,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -17481,8 +17535,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &293855394
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -17992,8 +18047,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &306459984
 GameObject:
   m_ObjectHideFlags: 0
@@ -18149,8 +18205,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &310263916
 GameObject:
   m_ObjectHideFlags: 0
@@ -18542,8 +18599,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &313411786
 GameObject:
   m_ObjectHideFlags: 0
@@ -18595,7 +18653,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -18604,8 +18662,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &313411789
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -18984,8 +19043,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &321247320
 GameObject:
   m_ObjectHideFlags: 0
@@ -19245,7 +19305,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -19254,8 +19314,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &323898231
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -19742,8 +19803,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &329310994
 GameObject:
   m_ObjectHideFlags: 0
@@ -19899,8 +19961,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &330336942
 GameObject:
   m_ObjectHideFlags: 0
@@ -19952,7 +20015,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -19961,8 +20024,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &330336945
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -21055,8 +21119,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &347903147
 GameObject:
   m_ObjectHideFlags: 0
@@ -21212,8 +21277,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &349358194
 GameObject:
   m_ObjectHideFlags: 0
@@ -21369,8 +21435,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &350116531
 GameObject:
   m_ObjectHideFlags: 0
@@ -21801,8 +21868,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &352294021
 GameObject:
   m_ObjectHideFlags: 0
@@ -21958,8 +22026,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &353436212
 GameObject:
   m_ObjectHideFlags: 0
@@ -22115,8 +22184,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &354927259
 GameObject:
   m_ObjectHideFlags: 0
@@ -22272,8 +22342,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &356643241 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6815087939852038540, guid: c874eef35a5e57d40976242849937463, type: 3}
@@ -22402,7 +22473,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 7245.94, y: -2997.7}
+  m_AnchoredPosition: {x: 7246, y: -3003}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &360747190
@@ -22635,8 +22706,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &361728724
 GameObject:
   m_ObjectHideFlags: 0
@@ -22792,8 +22864,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &364302355
 GameObject:
   m_ObjectHideFlags: 0
@@ -23122,8 +23195,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &373870038 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2221420293650407378, guid: db63169d4379c6e43aae7fb658decdea, type: 3}
@@ -23296,8 +23370,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &375961246
 GameObject:
   m_ObjectHideFlags: 0
@@ -23645,8 +23720,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &378593590
 GameObject:
   m_ObjectHideFlags: 0
@@ -23895,8 +23971,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &385577427
 GameObject:
   m_ObjectHideFlags: 0
@@ -24219,8 +24296,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &394635961
 GameObject:
   m_ObjectHideFlags: 0
@@ -24473,8 +24551,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &400136196
 GameObject:
   m_ObjectHideFlags: 0
@@ -24630,8 +24709,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &400176069
 GameObject:
   m_ObjectHideFlags: 0
@@ -24787,8 +24867,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &400635041
 GameObject:
   m_ObjectHideFlags: 0
@@ -24840,7 +24921,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -24849,8 +24930,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &400635044
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -25132,8 +25214,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &402123673
 GameObject:
   m_ObjectHideFlags: 0
@@ -25516,8 +25599,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &416091265
 GameObject:
   m_ObjectHideFlags: 0
@@ -25673,8 +25757,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &416677043
 GameObject:
   m_ObjectHideFlags: 0
@@ -25830,8 +25915,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &417883383
 GameObject:
   m_ObjectHideFlags: 0
@@ -25994,7 +26080,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -26003,8 +26089,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &418948793
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -26703,7 +26790,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -26712,8 +26799,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &430475017
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -26891,7 +26979,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -26900,8 +26988,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &430900141
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -27183,8 +27272,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &439510422
 GameObject:
   m_ObjectHideFlags: 0
@@ -27340,8 +27430,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &440911686
 GameObject:
   m_ObjectHideFlags: 0
@@ -27715,8 +27806,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &446144388
 GameObject:
   m_ObjectHideFlags: 0
@@ -29193,7 +29285,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -29202,8 +29294,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &461955542
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -29485,8 +29578,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &466746911
 GameObject:
   m_ObjectHideFlags: 0
@@ -29642,8 +29736,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &466883346
 GameObject:
   m_ObjectHideFlags: 0
@@ -29894,7 +29989,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -29903,8 +29998,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &469858036
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -30186,8 +30282,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &476079375
 GameObject:
   m_ObjectHideFlags: 0
@@ -30524,7 +30621,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94eeecd1e09f57942877c65691d0f704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fixedZ: 0
 --- !u!1 &476214189
 GameObject:
   m_ObjectHideFlags: 0
@@ -30777,7 +30873,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -30786,8 +30882,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &480783913
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -30965,7 +31062,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -30974,8 +31071,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &484541361
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -85404,8 +85502,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &491385025
 GameObject:
   m_ObjectHideFlags: 0
@@ -85457,7 +85556,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -85466,8 +85565,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &491385028
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -85754,8 +85854,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &492068862
 GameObject:
   m_ObjectHideFlags: 0
@@ -85911,8 +86012,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &494071794
 GameObject:
   m_ObjectHideFlags: 0
@@ -86066,7 +86168,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -86075,8 +86177,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &498749788
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -86552,8 +86655,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &503779354
 GameObject:
   m_ObjectHideFlags: 0
@@ -86949,7 +87053,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -86958,8 +87062,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &521026645
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -87514,8 +87619,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &530195578
 GameObject:
   m_ObjectHideFlags: 0
@@ -87567,7 +87673,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -87576,8 +87682,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &530195581
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -87961,8 +88068,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &536370570
 GameObject:
   m_ObjectHideFlags: 0
@@ -88118,8 +88226,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &537716372 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6815087939852038540, guid: c874eef35a5e57d40976242849937463, type: 3}
@@ -88461,8 +88570,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &541293587
 GameObject:
   m_ObjectHideFlags: 0
@@ -88618,8 +88728,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &545525519
 GameObject:
   m_ObjectHideFlags: 0
@@ -89206,8 +89317,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &550665682
 GameObject:
   m_ObjectHideFlags: 0
@@ -89363,8 +89475,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &554182256
 GameObject:
   m_ObjectHideFlags: 0
@@ -89949,8 +90062,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &565578770
 GameObject:
   m_ObjectHideFlags: 0
@@ -90106,8 +90220,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &565993693
 GameObject:
   m_ObjectHideFlags: 0
@@ -90159,7 +90274,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -90168,8 +90283,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &565993696
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -90422,7 +90538,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -90431,8 +90547,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &574513928
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -90610,7 +90727,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -90619,8 +90736,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &576483792
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -90983,8 +91101,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &578537860
 GameObject:
   m_ObjectHideFlags: 0
@@ -91237,8 +91356,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &583570198
 GameObject:
   m_ObjectHideFlags: 0
@@ -91529,8 +91649,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &584635630
 GameObject:
   m_ObjectHideFlags: 0
@@ -91686,8 +91807,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &584861328
 GameObject:
   m_ObjectHideFlags: 0
@@ -91843,8 +91965,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &585284437
 GameObject:
   m_ObjectHideFlags: 0
@@ -92168,7 +92291,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48e9ce10ac6a6da40ba2b1c770ab18dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TM: {fileID: 2068938229}
 --- !u!61 &587231626
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -92719,8 +92841,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &595229804
 GameObject:
   m_ObjectHideFlags: 0
@@ -93070,8 +93193,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &598691860
 GameObject:
   m_ObjectHideFlags: 0
@@ -93868,8 +93992,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &619036026
 GameObject:
   m_ObjectHideFlags: 0
@@ -94025,8 +94150,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &621520481
 GameObject:
   m_ObjectHideFlags: 0
@@ -94182,8 +94308,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 55ce044f2cb8c0144a7a99664a36a903, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: c3f562f1727dffd4895b856a99e27e6d, type: 3}
+  SpriteShifter: 1
 --- !u!1 &624994688
 GameObject:
   m_ObjectHideFlags: 0
@@ -96083,8 +96210,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &626131531
 GameObject:
   m_ObjectHideFlags: 0
@@ -96342,8 +96470,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &630539507
 GameObject:
   m_ObjectHideFlags: 0
@@ -96499,8 +96628,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &631594722
 GameObject:
   m_ObjectHideFlags: 0
@@ -96871,7 +97001,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -96880,8 +97010,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &638687130
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -97163,8 +97294,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &645362462
 GameObject:
   m_ObjectHideFlags: 0
@@ -97320,8 +97452,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &651857807
 GameObject:
   m_ObjectHideFlags: 0
@@ -97477,8 +97610,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &651911849
 GameObject:
   m_ObjectHideFlags: 0
@@ -97634,8 +97768,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &659217569
 GameObject:
   m_ObjectHideFlags: 0
@@ -97791,8 +97926,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &662578892
 GameObject:
   m_ObjectHideFlags: 0
@@ -98045,8 +98181,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &667467674
 GameObject:
   m_ObjectHideFlags: 0
@@ -98098,7 +98235,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -98107,8 +98244,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &667467677
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -98296,7 +98434,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -98305,8 +98443,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &672668950
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -98753,8 +98892,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &681116431
 GameObject:
   m_ObjectHideFlags: 0
@@ -98910,8 +99050,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &684323629
 GameObject:
   m_ObjectHideFlags: 0
@@ -98963,7 +99104,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -98972,8 +99113,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &684323632
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -99151,7 +99293,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -99160,8 +99302,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &684492332
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -99545,8 +99688,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &692927927
 GameObject:
   m_ObjectHideFlags: 0
@@ -99804,8 +99948,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &697056593
 GameObject:
   m_ObjectHideFlags: 0
@@ -100275,8 +100420,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &702188375
 GameObject:
   m_ObjectHideFlags: 0
@@ -100432,8 +100578,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &703363284
 GameObject:
   m_ObjectHideFlags: 0
@@ -100635,8 +100782,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &709254472
 GameObject:
   m_ObjectHideFlags: 0
@@ -100889,8 +101037,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &713799803
 GameObject:
   m_ObjectHideFlags: 0
@@ -106033,8 +106182,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &720553108
 GameObject:
   m_ObjectHideFlags: 0
@@ -106086,7 +106236,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -106095,8 +106245,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &720553111
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -106378,8 +106529,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &738896395
 GameObject:
   m_ObjectHideFlags: 0
@@ -106431,7 +106583,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -106440,8 +106592,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &738896398
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -106967,8 +107120,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &745075531
 GameObject:
   m_ObjectHideFlags: 0
@@ -107619,8 +107773,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &756118788
 GameObject:
   m_ObjectHideFlags: 0
@@ -107776,8 +107931,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &757296617
 GameObject:
   m_ObjectHideFlags: 0
@@ -108207,8 +108363,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &760689719
 GameObject:
   m_ObjectHideFlags: 0
@@ -108364,8 +108521,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &764704825
 GameObject:
   m_ObjectHideFlags: 0
@@ -108742,8 +108900,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &767567510
 GameObject:
   m_ObjectHideFlags: 0
@@ -109139,8 +109298,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &773408679
 GameObject:
   m_ObjectHideFlags: 0
@@ -109296,8 +109456,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1001 &773650473
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -109521,8 +109682,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &773997665
 GameObject:
   m_ObjectHideFlags: 0
@@ -109678,8 +109840,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &776365728
 GameObject:
   m_ObjectHideFlags: 0
@@ -110075,8 +110238,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &779198356
 GameObject:
   m_ObjectHideFlags: 0
@@ -110692,8 +110856,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &786636117
 GameObject:
   m_ObjectHideFlags: 0
@@ -110849,8 +111014,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &786867823
 GameObject:
   m_ObjectHideFlags: 0
@@ -111219,8 +111385,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &793504835
 GameObject:
   m_ObjectHideFlags: 0
@@ -111490,6 +111657,157 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &800730842
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 800730846}
+  - component: {fileID: 800730845}
+  - component: {fileID: 800730844}
+  - component: {fileID: 800730843}
+  m_Layer: 0
+  m_Name: ForceStickAnim
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &800730843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800730842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0948152ed03a82642af26fa31851089a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Anim_Name: StickTransitionToFall
+  isTrigger: 0
+  isBool: 0
+  isCrossfade: 1
+  animator: {fileID: 228098101}
+  Gtag: Player
+  ForceStickAnim: 0
+  StickScript: {fileID: 0}
+--- !u!61 &800730844
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800730842}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 622.15234, y: -40.85034}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1245.3047, y: 82.70068}
+  m_EdgeRadius: 0
+--- !u!212 &800730845
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800730842}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &800730846
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800730842}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 21951.6, y: -799, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &801488789
 GameObject:
   m_ObjectHideFlags: 0
@@ -111729,8 +112047,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &804211707
 GameObject:
   m_ObjectHideFlags: 0
@@ -112694,8 +113013,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &818753604
 GameObject:
   m_ObjectHideFlags: 0
@@ -112851,8 +113171,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &821129758
 GameObject:
   m_ObjectHideFlags: 0
@@ -113138,8 +113459,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &822663533
 GameObject:
   m_ObjectHideFlags: 0
@@ -113229,6 +113551,7 @@ MonoBehaviour:
   KeyCodeE: 0
   Wantonce: 0
   Alrdid: 0
+  StartActive: 0
   OptionalExtraObject: {fileID: 0}
   OptionalObj_is_TutorialBased: 0
   Opt_Activate: 0
@@ -113521,8 +113844,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &827755669
 GameObject:
   m_ObjectHideFlags: 0
@@ -113993,8 +114317,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &838140933
 GameObject:
   m_ObjectHideFlags: 0
@@ -114046,7 +114371,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -114055,8 +114380,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &838140936
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -114338,8 +114664,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &840206299
 GameObject:
   m_ObjectHideFlags: 0
@@ -114495,8 +114822,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &842085609
 GameObject:
   m_ObjectHideFlags: 0
@@ -114652,8 +114980,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &842380108
 GameObject:
   m_ObjectHideFlags: 0
@@ -114809,8 +115138,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &843203796
 GameObject:
   m_ObjectHideFlags: 0
@@ -115104,8 +115434,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &861744324
 GameObject:
   m_ObjectHideFlags: 0
@@ -115261,8 +115592,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &867456360
 GameObject:
   m_ObjectHideFlags: 0
@@ -115511,8 +115843,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &873359671
 GameObject:
   m_ObjectHideFlags: 0
@@ -115668,8 +116001,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &873451145
 GameObject:
   m_ObjectHideFlags: 0
@@ -116016,8 +116350,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &874875633
 GameObject:
   m_ObjectHideFlags: 0
@@ -117234,8 +117569,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &895021035
 GameObject:
   m_ObjectHideFlags: 0
@@ -117682,8 +118018,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &904885709
 GameObject:
   m_ObjectHideFlags: 0
@@ -117839,8 +118176,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &909691998
 GameObject:
   m_ObjectHideFlags: 0
@@ -118125,8 +118463,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &914639118
 GameObject:
   m_ObjectHideFlags: 0
@@ -118282,8 +118621,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &918571297
 GameObject:
   m_ObjectHideFlags: 0
@@ -118439,8 +118779,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &925421014
 GameObject:
   m_ObjectHideFlags: 0
@@ -119252,8 +119593,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &934540104
 GameObject:
   m_ObjectHideFlags: 0
@@ -120078,8 +120420,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!114 &951307573 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7206978861400738283, guid: c874eef35a5e57d40976242849937463, type: 3}
@@ -120695,8 +121038,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &960798868
 GameObject:
   m_ObjectHideFlags: 0
@@ -121011,8 +121355,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &964640473 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6815087939852038540, guid: c874eef35a5e57d40976242849937463, type: 3}
@@ -121291,7 +121636,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -121300,8 +121645,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &975028738
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -121583,8 +121929,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &976639302
 GameObject:
   m_ObjectHideFlags: 0
@@ -121828,7 +122175,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -121837,8 +122184,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &978992647
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -122120,8 +122468,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &983559834
 GameObject:
   m_ObjectHideFlags: 0
@@ -122277,8 +122626,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 55ce044f2cb8c0144a7a99664a36a903, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: c3f562f1727dffd4895b856a99e27e6d, type: 3}
+  SpriteShifter: 1
 --- !u!1 &991776418
 GameObject:
   m_ObjectHideFlags: 0
@@ -122434,8 +122784,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &991904010
 GameObject:
   m_ObjectHideFlags: 0
@@ -122487,7 +122838,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -122496,8 +122847,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &991904013
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -122950,7 +123302,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -122959,8 +123311,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1002127174
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -124463,8 +124816,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1021849556
 GameObject:
   m_ObjectHideFlags: 0
@@ -124620,8 +124974,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1024568651
 GameObject:
   m_ObjectHideFlags: 0
@@ -124777,8 +125132,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1030586714
 GameObject:
   m_ObjectHideFlags: 0
@@ -125153,8 +125509,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1031763092
 GameObject:
   m_ObjectHideFlags: 0
@@ -125412,8 +125769,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1036295509
 GameObject:
   m_ObjectHideFlags: 0
@@ -125569,8 +125927,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1041127863
 GameObject:
   m_ObjectHideFlags: 0
@@ -125622,7 +125981,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -125631,8 +125990,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1041127866
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -126096,8 +126456,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1043734061
 GameObject:
   m_ObjectHideFlags: 0
@@ -126149,7 +126510,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -126158,8 +126519,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1043734064
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -126538,8 +126900,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1064536193
 GameObject:
   m_ObjectHideFlags: 0
@@ -126695,8 +127058,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1066240276
 GameObject:
   m_ObjectHideFlags: 0
@@ -126852,8 +127216,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1066864684
 GameObject:
   m_ObjectHideFlags: 0
@@ -127213,7 +127578,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -127222,8 +127587,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1074008052
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -127760,8 +128126,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1083803622
 GameObject:
   m_ObjectHideFlags: 0
@@ -128249,8 +128616,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1086262233
 GameObject:
   m_ObjectHideFlags: 0
@@ -128406,8 +128774,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 55ce044f2cb8c0144a7a99664a36a903, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: c3f562f1727dffd4895b856a99e27e6d, type: 3}
+  SpriteShifter: 1
 --- !u!1 &1089609050 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6815087939852038540, guid: c874eef35a5e57d40976242849937463, type: 3}
@@ -128607,7 +128976,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -128616,8 +128985,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1100956875
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -128983,8 +129353,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1110051669
 GameObject:
   m_ObjectHideFlags: 0
@@ -129140,8 +129511,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1113234324
 GameObject:
   m_ObjectHideFlags: 0
@@ -129297,8 +129669,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1118145332
 GameObject:
   m_ObjectHideFlags: 0
@@ -129350,7 +129723,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -129359,8 +129732,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1118145335
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -129642,8 +130016,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1126864507
 GameObject:
   m_ObjectHideFlags: 0
@@ -129992,7 +130367,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -130001,8 +130376,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1131029320
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -131998,8 +132374,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1141049464
 GameObject:
   m_ObjectHideFlags: 0
@@ -132155,8 +132532,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1142368399
 GameObject:
   m_ObjectHideFlags: 0
@@ -132312,8 +132690,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1150524460 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6815087939852038540, guid: c874eef35a5e57d40976242849937463, type: 3}
@@ -132428,6 +132807,7 @@ MonoBehaviour:
   KeyCodeE: 0
   Wantonce: 0
   Alrdid: 0
+  StartActive: 0
   OptionalExtraObject: {fileID: 0}
   OptionalObj_is_TutorialBased: 0
   Opt_Activate: 0
@@ -132804,8 +133184,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1157150442
 GameObject:
   m_ObjectHideFlags: 0
@@ -133058,8 +133439,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1158894047
 GameObject:
   m_ObjectHideFlags: 0
@@ -133215,8 +133597,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1160093880
 GameObject:
   m_ObjectHideFlags: 0
@@ -133506,8 +133889,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1162746679
 GameObject:
   m_ObjectHideFlags: 0
@@ -134075,8 +134459,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1001 &1177689257
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -134891,7 +135276,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -134900,8 +135285,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1191721626
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -135214,8 +135600,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1194821068
 GameObject:
   m_ObjectHideFlags: 0
@@ -135591,8 +135978,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1199741598
 GameObject:
   m_ObjectHideFlags: 0
@@ -135823,7 +136211,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -135832,8 +136220,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1200201301
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -136290,7 +136679,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -136299,8 +136688,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1205563189
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -136714,7 +137104,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -136723,8 +137113,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1210902179
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -137403,8 +137794,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1219147204
 GameObject:
   m_ObjectHideFlags: 0
@@ -137633,7 +138025,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -137642,8 +138034,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1230666879
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -137925,8 +138318,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1231361365
 GameObject:
   m_ObjectHideFlags: 0
@@ -138467,7 +138861,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -138476,8 +138870,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1237128328
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -138871,7 +139266,6 @@ MonoBehaviour:
   AlrDoneit: 0
   AudioP: {fileID: 0}
   SFX: {fileID: 0}
-  ForcePlayerGun: 1
 --- !u!61 &1246142457
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -139141,8 +139535,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1249926519
 GameObject:
   m_ObjectHideFlags: 0
@@ -139278,7 +139673,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -139287,8 +139682,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1250050443
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -139638,8 +140034,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1257817366
 GameObject:
   m_ObjectHideFlags: 0
@@ -139691,7 +140088,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -139700,8 +140097,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1257817369
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -140113,8 +140511,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1265940654
 GameObject:
   m_ObjectHideFlags: 0
@@ -140345,8 +140744,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1267960232
 GameObject:
   m_ObjectHideFlags: 0
@@ -140398,7 +140798,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -140407,8 +140807,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1267960235
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -140586,7 +140987,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -140595,8 +140996,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1270690280
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -141049,8 +141451,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1278441243
 GameObject:
   m_ObjectHideFlags: 0
@@ -141308,8 +141711,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1279160398
 GameObject:
   m_ObjectHideFlags: 0
@@ -141514,8 +141918,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1282538805
 GameObject:
   m_ObjectHideFlags: 0
@@ -141671,8 +142076,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1283752982
 GameObject:
   m_ObjectHideFlags: 0
@@ -142148,7 +142554,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -142157,8 +142563,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1288403795
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -142639,8 +143046,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1290740194
 GameObject:
   m_ObjectHideFlags: 0
@@ -143286,8 +143694,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1296869060
 GameObject:
   m_ObjectHideFlags: 0
@@ -143550,8 +143959,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1308976675
 GameObject:
   m_ObjectHideFlags: 0
@@ -143782,8 +144192,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1315308186
 GameObject:
   m_ObjectHideFlags: 0
@@ -143937,7 +144348,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -143946,8 +144357,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1315538762
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -144125,7 +144537,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -144134,8 +144546,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1316796174
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -144946,8 +145359,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1330968926
 GameObject:
   m_ObjectHideFlags: 0
@@ -145893,8 +146307,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1341092142
 GameObject:
   m_ObjectHideFlags: 0
@@ -146058,7 +146473,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -146067,8 +146482,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1344895136
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -146350,8 +146766,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1346710933
 GameObject:
   m_ObjectHideFlags: 0
@@ -146409,6 +146826,7 @@ MonoBehaviour:
   KeyCodeE: 0
   Wantonce: 0
   Alrdid: 0
+  StartActive: 0
   OptionalExtraObject: {fileID: 0}
   OptionalObj_is_TutorialBased: 0
   Opt_Activate: 0
@@ -146794,8 +147212,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1350494825
 GameObject:
   m_ObjectHideFlags: 0
@@ -147501,8 +147920,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1354809096
 GameObject:
   m_ObjectHideFlags: 0
@@ -147964,8 +148384,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1359814156
 GameObject:
   m_ObjectHideFlags: 0
@@ -148121,8 +148542,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1001 &1361159444
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -148514,8 +148936,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1364840589
 GameObject:
   m_ObjectHideFlags: 0
@@ -148870,6 +149293,7 @@ MonoBehaviour:
   KeyCodeE: 0
   Wantonce: 0
   Alrdid: 0
+  StartActive: 0
   OptionalExtraObject: {fileID: 0}
   OptionalObj_is_TutorialBased: 0
   Opt_Activate: 0
@@ -149353,8 +149777,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1372196143
 GameObject:
   m_ObjectHideFlags: 0
@@ -149503,7 +149928,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -149512,8 +149937,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1372696908
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -150022,8 +150448,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1381788730
 GameObject:
   m_ObjectHideFlags: 0
@@ -150802,7 +151229,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -150811,8 +151238,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1390377462
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -151191,8 +151619,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1393152398
 GameObject:
   m_ObjectHideFlags: 0
@@ -151328,7 +151757,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -151337,8 +151766,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1395878365
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -151880,8 +152310,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1413329402
 GameObject:
   m_ObjectHideFlags: 0
@@ -152037,8 +152468,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1413823822
 GameObject:
   m_ObjectHideFlags: 0
@@ -152194,8 +152626,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1414943946
 GameObject:
   m_ObjectHideFlags: 0
@@ -157813,8 +158246,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1448501489
 GameObject:
   m_ObjectHideFlags: 0
@@ -158025,8 +158459,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1452374833
 GameObject:
   m_ObjectHideFlags: 0
@@ -158182,8 +158617,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1454571504
 GameObject:
   m_ObjectHideFlags: 0
@@ -158339,8 +158775,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1457033413
 GameObject:
   m_ObjectHideFlags: 0
@@ -158434,6 +158871,7 @@ MonoBehaviour:
   KeyCodeE: 0
   Wantonce: 0
   Alrdid: 0
+  StartActive: 0
   OptionalExtraObject: {fileID: 0}
   OptionalObj_is_TutorialBased: 0
   Opt_Activate: 0
@@ -158735,8 +159173,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1461338386
 GameObject:
   m_ObjectHideFlags: 0
@@ -159534,8 +159973,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1485602815
 GameObject:
   m_ObjectHideFlags: 0
@@ -160804,8 +161244,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1505681603
 GameObject:
   m_ObjectHideFlags: 0
@@ -161142,8 +161583,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1517364814
 GameObject:
   m_ObjectHideFlags: 0
@@ -161299,8 +161741,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1521420385
 GameObject:
   m_ObjectHideFlags: 0
@@ -161540,8 +161983,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1526954961
 GameObject:
   m_ObjectHideFlags: 0
@@ -161697,8 +162141,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1535286075
 GameObject:
   m_ObjectHideFlags: 0
@@ -161854,8 +162299,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1537604794
 GameObject:
   m_ObjectHideFlags: 0
@@ -162147,8 +162593,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1544691856
 GameObject:
   m_ObjectHideFlags: 0
@@ -162304,8 +162751,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1546082618
 GameObject:
   m_ObjectHideFlags: 0
@@ -162660,8 +163108,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1552147087
 GameObject:
   m_ObjectHideFlags: 0
@@ -162914,8 +163363,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1563078804
 GameObject:
   m_ObjectHideFlags: 0
@@ -163068,7 +163518,6 @@ MonoBehaviour:
   AlrDoneit: 0
   AudioP: {fileID: 0}
   SFX: {fileID: 0}
-  ForcePlayerGun: 1
 --- !u!61 &1564513056
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -163326,8 +163775,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 55ce044f2cb8c0144a7a99664a36a903, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: c3f562f1727dffd4895b856a99e27e6d, type: 3}
+  SpriteShifter: 1
 --- !u!1 &1568288869
 GameObject:
   m_ObjectHideFlags: 0
@@ -163646,8 +164096,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1576823319
 GameObject:
   m_ObjectHideFlags: 0
@@ -163803,8 +164254,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1579961416
 GameObject:
   m_ObjectHideFlags: 0
@@ -164035,8 +164487,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1582299033
 GameObject:
   m_ObjectHideFlags: 0
@@ -164088,7 +164541,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -164097,8 +164550,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1582299036
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -164276,7 +164730,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -164285,8 +164739,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1583247215
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -164847,8 +165302,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1589236411
 GameObject:
   m_ObjectHideFlags: 0
@@ -165033,6 +165489,7 @@ MonoBehaviour:
   KeyCodeE: 0
   Wantonce: 0
   Alrdid: 0
+  StartActive: 0
   OptionalExtraObject: {fileID: 0}
   OptionalObj_is_TutorialBased: 0
   Opt_Activate: 0
@@ -165289,8 +165746,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1596450473
 GameObject:
   m_ObjectHideFlags: 0
@@ -165446,8 +165904,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1598124199
 GameObject:
   m_ObjectHideFlags: 0
@@ -165700,8 +166159,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1604072107
 GameObject:
   m_ObjectHideFlags: 0
@@ -165857,8 +166317,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1604189032
 GameObject:
   m_ObjectHideFlags: 0
@@ -166014,8 +166475,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1605357477
 GameObject:
   m_ObjectHideFlags: 0
@@ -166171,8 +166633,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1608758926
 GameObject:
   m_ObjectHideFlags: 0
@@ -166328,8 +166791,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1608979554
 GameObject:
   m_ObjectHideFlags: 0
@@ -166569,8 +167033,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1609706855
 GameObject:
   m_ObjectHideFlags: 0
@@ -166836,8 +167301,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1616529886
 GameObject:
   m_ObjectHideFlags: 0
@@ -167167,8 +167633,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1625317873 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2916841061207459641, guid: 69cdb35b9abec3c4784bd4889b4860a5, type: 3}
@@ -167334,8 +167801,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1630300324
 GameObject:
   m_ObjectHideFlags: 0
@@ -167387,7 +167855,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -167396,8 +167864,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1630300327
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -167892,8 +168361,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1638432901
 GameObject:
   m_ObjectHideFlags: 0
@@ -168370,7 +168840,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -168379,8 +168849,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1647423710
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -169216,8 +169687,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1662051855
 GameObject:
   m_ObjectHideFlags: 0
@@ -169373,8 +169845,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1662112874
 GameObject:
   m_ObjectHideFlags: 0
@@ -169530,8 +170003,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1662274316
 GameObject:
   m_ObjectHideFlags: 0
@@ -169687,8 +170161,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1668401777
 GameObject:
   m_ObjectHideFlags: 0
@@ -169824,7 +170299,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -169833,8 +170308,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1669175420
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -170314,8 +170790,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 55ce044f2cb8c0144a7a99664a36a903, type: 3}
+  spriteRenderer: {fileID: 1672465314}
+  Sprite: {fileID: 21300000, guid: c3f562f1727dffd4895b856a99e27e6d, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1672465317
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -170516,8 +170993,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1676630041
 GameObject:
   m_ObjectHideFlags: 0
@@ -170673,8 +171151,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1678132202
 GameObject:
   m_ObjectHideFlags: 0
@@ -170830,8 +171309,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1682505616
 GameObject:
   m_ObjectHideFlags: 0
@@ -171071,8 +171551,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1688218794
 GameObject:
   m_ObjectHideFlags: 0
@@ -171228,8 +171709,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1688746465
 GameObject:
   m_ObjectHideFlags: 0
@@ -171281,7 +171763,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -171290,8 +171772,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1688746468
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -176484,8 +176967,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1692207688
 GameObject:
   m_ObjectHideFlags: 0
@@ -177054,8 +177538,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1703916870
 GameObject:
   m_ObjectHideFlags: 0
@@ -177308,8 +177793,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1712317681
 GameObject:
   m_ObjectHideFlags: 0
@@ -177858,8 +178344,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1720284448
 GameObject:
   m_ObjectHideFlags: 0
@@ -178112,8 +178599,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1726090891
 GameObject:
   m_ObjectHideFlags: 0
@@ -178344,8 +178832,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1730666101
 GameObject:
   m_ObjectHideFlags: 0
@@ -178501,8 +178990,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1731993719
 GameObject:
   m_ObjectHideFlags: 0
@@ -178735,8 +179225,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1737308373
 GameObject:
   m_ObjectHideFlags: 0
@@ -178892,8 +179383,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1749776215
 GameObject:
   m_ObjectHideFlags: 0
@@ -179325,7 +179817,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -179334,8 +179826,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1756485891
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -180123,8 +180616,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1763776673
 GameObject:
   m_ObjectHideFlags: 0
@@ -180415,8 +180909,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1767043948
 GameObject:
   m_ObjectHideFlags: 0
@@ -180572,8 +181067,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1767128906
 GameObject:
   m_ObjectHideFlags: 0
@@ -180729,8 +181225,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1772137153
 GameObject:
   m_ObjectHideFlags: 0
@@ -181133,8 +181630,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1777774542
 GameObject:
   m_ObjectHideFlags: 0
@@ -181636,8 +182134,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1796155784
 GameObject:
   m_ObjectHideFlags: 0
@@ -182174,8 +182673,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1806259094
 GameObject:
   m_ObjectHideFlags: 0
@@ -182574,8 +183074,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1812318375
 GameObject:
   m_ObjectHideFlags: 0
@@ -182833,8 +183334,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1814761480
 GameObject:
   m_ObjectHideFlags: 0
@@ -183096,8 +183598,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1816791425
 GameObject:
   m_ObjectHideFlags: 0
@@ -183253,8 +183756,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1818979872
 GameObject:
   m_ObjectHideFlags: 0
@@ -183803,7 +184307,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -183812,8 +184316,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1827059757
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -184095,8 +184600,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1827657921
 GameObject:
   m_ObjectHideFlags: 0
@@ -184252,8 +184758,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1828214566
 GameObject:
   m_ObjectHideFlags: 0
@@ -184305,7 +184812,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -184314,8 +184821,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1828214569
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -184830,8 +185338,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1842926113
 GameObject:
   m_ObjectHideFlags: 0
@@ -185261,8 +185770,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1851392122
 GameObject:
   m_ObjectHideFlags: 0
@@ -185418,8 +185928,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1852201438
 GameObject:
   m_ObjectHideFlags: 0
@@ -185677,8 +186188,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1853230881 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2221420293650407378, guid: db63169d4379c6e43aae7fb658decdea, type: 3}
@@ -216776,8 +217288,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1863048348
 GameObject:
   m_ObjectHideFlags: 0
@@ -216840,7 +217353,7 @@ Transform:
   m_GameObject: {fileID: 1863180916}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.55, y: -0.71, z: 0}
+  m_LocalPosition: {x: 1.01, y: 0.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -216952,7 +217465,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8de14b8d1360deb45900298fcaaf4204, type: 2}
+  - {fileID: 2100000, guid: b7c68a0e69687d143a2876c15f89955e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -221996,7 +222509,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -222005,8 +222518,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1873651974
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -222288,8 +222802,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1881891902
 GameObject:
   m_ObjectHideFlags: 0
@@ -222744,8 +223259,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1892025587
 GameObject:
   m_ObjectHideFlags: 0
@@ -222797,7 +223313,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -222806,8 +223322,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1892025590
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -222985,7 +223502,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -222994,8 +223511,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1892860031
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -223507,8 +224025,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1899340383 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3156840290197246236, guid: db63169d4379c6e43aae7fb658decdea, type: 3}
@@ -223898,8 +224417,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1901360960
 GameObject:
   m_ObjectHideFlags: 0
@@ -223951,7 +224471,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -223960,8 +224480,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1901360963
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -224243,8 +224764,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1902977853
 GameObject:
   m_ObjectHideFlags: 0
@@ -224296,7 +224818,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -224305,8 +224827,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1902977856
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -224902,8 +225425,9 @@ MonoBehaviour:
   LittleShake: 0
   isPooledObject: 0
   NoShake: 1
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1909996975
 GameObject:
   m_ObjectHideFlags: 0
@@ -225059,8 +225583,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1912474552
 GameObject:
   m_ObjectHideFlags: 0
@@ -225216,8 +225741,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1913235473
 GameObject:
   m_ObjectHideFlags: 0
@@ -225457,8 +225983,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1917844794
 GameObject:
   m_ObjectHideFlags: 0
@@ -225614,8 +226141,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1918552983
 GameObject:
   m_ObjectHideFlags: 0
@@ -225771,8 +226299,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1923300591
 GameObject:
   m_ObjectHideFlags: 0
@@ -226005,8 +226534,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1927665751
 GameObject:
   m_ObjectHideFlags: 0
@@ -226064,6 +226594,7 @@ MonoBehaviour:
   KeyCodeE: 0
   Wantonce: 0
   Alrdid: 0
+  StartActive: 0
   OptionalExtraObject: {fileID: 0}
   OptionalObj_is_TutorialBased: 0
   Opt_Activate: 0
@@ -226697,8 +227228,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1932043918
 GameObject:
   m_ObjectHideFlags: 0
@@ -226854,8 +227386,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1933381031
 GameObject:
   m_ObjectHideFlags: 0
@@ -227011,8 +227544,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1934574229
 GameObject:
   m_ObjectHideFlags: 0
@@ -227304,8 +227838,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1937732869
 GameObject:
   m_ObjectHideFlags: 0
@@ -227461,8 +227996,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1946984611
 GameObject:
   m_ObjectHideFlags: 0
@@ -228061,8 +228597,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1958217428
 GameObject:
   m_ObjectHideFlags: 0
@@ -228218,8 +228755,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1960065130
 GameObject:
   m_ObjectHideFlags: 0
@@ -228743,8 +229281,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1966732011
 GameObject:
   m_ObjectHideFlags: 0
@@ -229332,8 +229871,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1976199331
 GameObject:
   m_ObjectHideFlags: 0
@@ -229489,8 +230029,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1977775747
 GameObject:
   m_ObjectHideFlags: 0
@@ -229542,7 +230083,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -229551,8 +230092,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1977775750
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -230152,8 +230694,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1986191745
 GameObject:
   m_ObjectHideFlags: 0
@@ -230309,8 +230852,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1988294622
 GameObject:
   m_ObjectHideFlags: 0
@@ -230707,7 +231251,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -230716,8 +231260,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1992281094
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -230895,7 +231440,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -230904,8 +231449,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1997420471
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -231187,8 +231733,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &1997874419
 GameObject:
   m_ObjectHideFlags: 0
@@ -231376,7 +231923,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -231385,8 +231932,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1999295696
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -231666,7 +232214,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -231675,8 +232223,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &1999897590
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -231958,8 +232507,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &2002929358
 GameObject:
   m_ObjectHideFlags: 0
@@ -232334,8 +232884,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &2005568323
 GameObject:
   m_ObjectHideFlags: 0
@@ -232634,8 +233185,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &2013417174
 GameObject:
   m_ObjectHideFlags: 0
@@ -232996,6 +233548,7 @@ MonoBehaviour:
   KeyCodeE: 0
   Wantonce: 0
   Alrdid: 0
+  StartActive: 0
   OptionalExtraObject: {fileID: 0}
   OptionalObj_is_TutorialBased: 0
   Opt_Activate: 0
@@ -233252,8 +233805,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &2024434359
 GameObject:
   m_ObjectHideFlags: 0
@@ -233409,8 +233963,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &2024946032
 GameObject:
   m_ObjectHideFlags: 0
@@ -233589,7 +234144,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -233598,8 +234153,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &2025452552
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -233881,8 +234437,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &2028847353
 GameObject:
   m_ObjectHideFlags: 0
@@ -234038,8 +234595,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &2032750333
 GameObject:
   m_ObjectHideFlags: 0
@@ -234195,8 +234753,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &2033543587
 GameObject:
   m_ObjectHideFlags: 0
@@ -234352,8 +234911,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &2041595023
 GameObject:
   m_ObjectHideFlags: 0
@@ -234411,6 +234971,7 @@ MonoBehaviour:
   KeyCodeE: 0
   Wantonce: 0
   Alrdid: 0
+  StartActive: 0
   OptionalExtraObject: {fileID: 0}
   OptionalObj_is_TutorialBased: 0
   Opt_Activate: 0
@@ -234712,8 +235273,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &2057759951
 GameObject:
   m_ObjectHideFlags: 0
@@ -235242,8 +235804,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &2060877726
 GameObject:
   m_ObjectHideFlags: 0
@@ -235399,8 +235962,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &2062186391
 GameObject:
   m_ObjectHideFlags: 0
@@ -235556,8 +236120,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &2064357660
 GameObject:
   m_ObjectHideFlags: 0
@@ -235713,8 +236278,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &2065873476
 GameObject:
   m_ObjectHideFlags: 0
@@ -235766,7 +236332,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -235775,8 +236341,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &2065873479
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -236058,8 +236625,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &2067818139
 GameObject:
   m_ObjectHideFlags: 0
@@ -236215,8 +236783,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &2068938228
 GameObject:
   m_ObjectHideFlags: 0
@@ -236258,7 +236827,6 @@ MonoBehaviour:
   In_SloMo: 0
   WantAudioSame: 0
   StickManager: {fileID: 228098106}
-  ForceMusicSame: 1
 --- !u!4 &2068938230
 Transform:
   m_ObjectHideFlags: 0
@@ -236429,8 +236997,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &2072865728
 GameObject:
   m_ObjectHideFlags: 0
@@ -236711,8 +237280,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &2076418177
 GameObject:
   m_ObjectHideFlags: 0
@@ -236835,7 +237405,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -236844,8 +237414,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &2077637774
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -237023,7 +237594,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -237032,8 +237603,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &2081077497
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -237346,8 +237918,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &2085138515
 GameObject:
   m_ObjectHideFlags: 0
@@ -237503,8 +238076,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &2088496131
 GameObject:
   m_ObjectHideFlags: 0
@@ -237660,8 +238234,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &2088760308 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6815087939852038540, guid: c874eef35a5e57d40976242849937463, type: 3}
@@ -237827,7 +238402,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -237836,8 +238411,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &2100473392
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -238310,8 +238886,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &2110188319
 GameObject:
   m_ObjectHideFlags: 0
@@ -238576,7 +239153,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -238585,8 +239162,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &2113272201
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -238764,7 +239342,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -238773,8 +239351,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &2113653837
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -239529,8 +240108,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &2129419426
 GameObject:
   m_ObjectHideFlags: 0
@@ -239783,8 +240363,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &2130733808
 GameObject:
   m_ObjectHideFlags: 0
@@ -239940,8 +240521,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &2132645282
 GameObject:
   m_ObjectHideFlags: 0
@@ -239993,7 +240575,7 @@ MonoBehaviour:
   Tag: SuperB
   AudioP: {fileID: 590502044}
   SFX: {fileID: 8300000, guid: ac451491f79b4db41b71db5467805f11, type: 3}
-  FX: {fileID: 5374391606856123136, guid: edbb0d7c00b7b9442a648751092d64d2, type: 3}
+  FX: {fileID: 5374391606856123136, guid: 538eac80995d6be4c9f362c159510a03, type: 3}
   ColorFX: {r: 0, g: 0, b: 0, a: 1}
   wantDelayForFX: 0
   SizeParticle: 10.55
@@ -240002,8 +240584,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 1
-  ShiftSprite: {fileID: 21300000, guid: 59721b557cea5974a9c3965564cf328b, type: 3}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 2613a0bc8bfd55b4eba3f1a895d13569, type: 3}
+  SpriteShifter: 1
 --- !u!61 &2132645285
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -240285,8 +240868,9 @@ MonoBehaviour:
   LittleShake: 1
   isPooledObject: 0
   NoShake: 0
-  SpriteShift: 0
-  ShiftSprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprite: {fileID: 0}
+  SpriteShifter: 0
 --- !u!1 &2141052391
 GameObject:
   m_ObjectHideFlags: 0
@@ -240684,3 +241268,4 @@ SceneRoots:
   - {fileID: 764704827}
   - {fileID: 1863048349}
   - {fileID: 1389507286}
+  - {fileID: 800730846}

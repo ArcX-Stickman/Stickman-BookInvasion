@@ -20,6 +20,9 @@ public class LazerPole : MonoBehaviour
     public Animator ScienceAnimator;
     public bool LazersUp;
     public bool Player_Rush_Start;
+    public GameObject RushEnemies;
+    private bool AlrDid;
+    public AudioClip BassDrop;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +45,12 @@ public class LazerPole : MonoBehaviour
         if (LazersUp)
         {
             SpriteRenderer.sprite = WithLazer;
+            RushEnemies.gameObject.SetActive(true);
+            if (!AlrDid)
+            {
+                AlrDid = true;
+                AudioP.PlayOneShot(BassDrop);
+            }
 
         }
         if (SpriteRenderer.sprite == WithLazer)
@@ -51,6 +60,7 @@ public class LazerPole : MonoBehaviour
         }
         else
         {
+            RushEnemies.gameObject.SetActive(false) ;
             Lazer1.gameObject.SetActive(false);
             Lazer2.gameObject.SetActive(false);
         }

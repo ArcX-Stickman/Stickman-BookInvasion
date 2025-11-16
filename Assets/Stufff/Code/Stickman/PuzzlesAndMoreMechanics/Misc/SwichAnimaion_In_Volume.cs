@@ -11,6 +11,8 @@ public class SwichAnimaion_In_Volume : MonoBehaviour
     public bool isCrossfade;
     public Animator animator;
     public string Gtag = "";
+    public bool ForceStickAnim;
+    public Movement StickScript;
 
     private void Update()
     {

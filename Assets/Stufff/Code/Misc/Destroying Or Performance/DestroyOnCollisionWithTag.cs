@@ -18,20 +18,20 @@ public class DestroyOnCollisionWithTag : MonoBehaviour
     public bool LittleShake;
     public bool isPooledObject;
     public bool NoShake;
-    public bool SpriteShift;
-    private SpriteRenderer spriteRenderer;
-    public Sprite ShiftSprite;
+    public SpriteRenderer spriteRenderer;
+    public Sprite Sprite;
+    public bool SpriteShifter;
 
     private void Update()
     {
-        if(spriteRenderer == null)
-        {
-            spriteRenderer = GetComponent<SpriteRenderer>();
-        }
         if(Stick == null)
         {
             Stick = FindAnyObjectByType<Movement>();
 
+        }
+        if(spriteRenderer == null && SpriteShifter)
+        {
+            spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -39,14 +39,21 @@ public class DestroyOnCollisionWithTag : MonoBehaviour
         if (collision.gameObject.CompareTag(Tag) && !wantDelayForFX)
         {
             SFXPlay();
-            if (!isPooledObject && !SpriteShift)
+            if (!SpriteShifter)
             {
-                Destroy(gameObject);
+                if (!isPooledObject)
+                {
+                    Destroy(gameObject);
 
+                }
+                else
+                {
+                    ObjectPooler.ReturnObjectToPool(gameObject);
+                }
             }
-            else if(!SpriteShift)
+            else
             {
-                ObjectPooler.ReturnObjectToPool(gameObject);
+                spriteRenderer.sprite = Sprite;
             }
         }
     }
@@ -68,10 +75,6 @@ public class DestroyOnCollisionWithTag : MonoBehaviour
         }
         if(FX != null)
         {
-            if (SpriteShift)
-            {
-                spriteRenderer.sprite = ShiftSprite;
-            }
             if (!wantDelayForFX)
             {
                 if (!NoShake)
@@ -99,15 +102,23 @@ public class DestroyOnCollisionWithTag : MonoBehaviour
                     main.startSize = SizeParticle;
                 }
 
-                if (!isPooledObject && !SpriteShift)
+                if (!SpriteShifter)
                 {
-                    Destroy(gameObject);
+                    if (!isPooledObject)
+                    {
+                        Destroy(gameObject);
 
+                    }
+                    else
+                    {
+                        ObjectPooler.ReturnObjectToPool(gameObject);
+                    }
                 }
-                else if(!SpriteShift)
+                else
                 {
-                    ObjectPooler.ReturnObjectToPool(gameObject);
+                    spriteRenderer.sprite = Sprite;
                 }
+
 
 
             }

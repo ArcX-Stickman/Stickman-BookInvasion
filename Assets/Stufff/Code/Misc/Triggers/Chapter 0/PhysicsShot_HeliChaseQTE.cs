@@ -35,7 +35,6 @@ public class PhysicsShot_HeliChaseQTE : MonoBehaviour
    
         if (ImportantTreeReference.StickInTree && PhysicsPara != null && !ExamFlee.Alr_Did)
         {
-            Stickman.TimeManager.ForceMusicSame = false;
             ExamManager.Speed = 35;
             ExamManager.SecondDisNow = true;
             Exam.SetTrigger("Mad");
