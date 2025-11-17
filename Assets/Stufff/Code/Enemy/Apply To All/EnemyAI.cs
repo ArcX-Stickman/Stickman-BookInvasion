@@ -158,7 +158,9 @@ public class EnemyAI : MonoBehaviour
     public float DistanceOfRaycast;
     private float BookDirection;
     public bool isStunnable;
-    
+    public enum EnemyStates { Idle, BasicAttack,VariedAttack,};
+    public float VariedAttackCD;
+    private float LastVariedAttack;
 
     [Header("Boss Values")]
     public bool isBoss;

@@ -36,6 +36,7 @@ public class MoveTowardsPosition : MonoBehaviour
     public float DMG_Value;
     private bool Flipped;
     private bool alrShookCam;
+    public bool WantMuiscSameSlo;
 
     [Header("Refer")]
     public Movement Stick;
@@ -240,6 +241,7 @@ public class MoveTowardsPosition : MonoBehaviour
 
         if (WantDestroyOnImpact)
         {
+            if(SloMo && WantMuiscSameSlo) Stick.TimeManager.ForceMusicSame = true;
             if (SloMo) Stick.TimeManager.SloMO();
             Destroy(gameObject);
         }

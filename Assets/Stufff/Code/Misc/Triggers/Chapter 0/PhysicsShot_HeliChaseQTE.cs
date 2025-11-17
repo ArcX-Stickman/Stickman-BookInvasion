@@ -40,6 +40,7 @@ public class PhysicsShot_HeliChaseQTE : MonoBehaviour
             Exam.SetTrigger("Mad");
             Stickman.StickHP.MegaCharge = 100;
             UI_PopUp.gameObject.SetActive(true);
+            Stickman.TimeManager.ForceMusicSame = false;
             Stickman.TimeManager.SloMO();
             PhysicsParaBXCD.enabled = true;
         }

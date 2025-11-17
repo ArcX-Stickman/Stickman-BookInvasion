@@ -27,6 +27,8 @@ public class PhysicsParachute : MonoBehaviour
         {
             QTE_Manager.AudioP.PlayOneShot(QTE_Manager.HurtSFX);
             PhysicsFall.transform.position = transform.position;
+            QTE_Manager.Stickman.TimeManager.SlowChase.pitch = 1;
+            QTE_Manager.Stickman.TimeManager.ForceMusicSame = true;
             Destroy(gameObject);
         }
     }
