@@ -1283,7 +1283,7 @@ public class EnemyAI : MonoBehaviour
         {
             EnemyAnim.enabled = false;
         }
-        GameObject effect = Instantiate(Dead, FX_POS.position, Quaternion.identity);
+        GameObject effect = Instantiate(Dead, HitMarker.FXPOS.position, Quaternion.identity);
 
     }
 
@@ -1460,7 +1460,8 @@ public class EnemyAI : MonoBehaviour
             MainCamAnim.ResetTrigger("ShakeMelee");
             MainCamAnim.SetTrigger("ShakeMelee");
             LastEmbryGlitch = Time.time;
-            Health -= 3.98f;
+            BookFetusHit Projectile = collision.gameObject.GetComponent<BookFetusHit>();
+            Health -= Projectile.DMG;
         }
         if (collision.CompareTag("StickMelee") && !PlayerManager.isUppercut)
         {

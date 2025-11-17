@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Rendering;
@@ -302,6 +303,14 @@ public class Movement : MonoBehaviour
     public bool InCinematic;
     public float CinematicSlideSpeed;
     public float MaxCinematicSlideSpeed;
+    
+    [Header(" FX and Graphical Enhancements ")]
+    public ParticleSystem JumpSmoke;
+    public ParticleSystem SlideSmoke;
+    public ParticleSystem GrassBlades;
+
+    public ParticleSystem DashSmoke;
+
     [Header(" Misc ")]
     //Performance level destoryer
     public GameObject Level1;
@@ -313,6 +322,9 @@ public class Movement : MonoBehaviour
     public GameObject TutTXT;
 
     public Vector3 SafePosition;
+
+
+
     void Start()
     {
         Grounded = true;
@@ -1014,6 +1026,7 @@ public class Movement : MonoBehaviour
 
         if (!isSliding)
         {
+            SlideSmoke.gameObject.SetActive(false);
             StickAnim.SetBool("Slide", false);
         }
 
@@ -1121,7 +1134,7 @@ public class Movement : MonoBehaviour
         if (Grounded == true)
         {
 
-
+      
             AirBackFlip = false;
             isJumping = false;
             StickAnim.SetBool("OnGround", true);
@@ -1451,6 +1464,11 @@ public class Movement : MonoBehaviour
     }
     public void Jump()
     {
+        if(JumpSmoke != null)
+        {
+            ObjectPooler.SpawnObj(JumpSmoke.gameObject, JumpSmoke.gameObject.transform.position,Quaternion.identity,ObjectPooler.PoolType.Partcles);
+
+        }
         Grounded = false;
         coyoteTimerCounter = 0;
         BackFlipAS.pitch = Random.Range(0.7f, 1.5f);
@@ -1899,16 +1917,28 @@ public class Movement : MonoBehaviour
             FacingRight = transform.localScale.x >= 1 ? true : false;
             float targetspeed = horizontalInput * Speed;
 
-
-            if (rb.velocity.magnitude > 5.1f && MaxSpeed >= 40)
+            if(Grounded && FootP.gameObject.activeSelf && rb.velocity.x > 0 ||Grounded && FootP.gameObject.activeSelf && rb.velocity.x < 0 )
             {
-                if (isDashing | isSliding | isJumping | BackFlip && StickHP.MegaCharge >= 1)
+                GrassBlades.gameObject.SetActive(true);
+                GrassBlades.gameObject.transform.localScale = new Vector3 (GrassBlades.gameObject.transform.localScale.x * -transform.localScale.x,GrassBlades.transform.localScale.y,GrassBlades.transform.localScale.z);
+            }
+            else if(!isSliding)
+            {
+                GrassBlades.gameObject.SetActive(false);
+            }
+            if (rb.velocity.magnitude > 0.1f )
+            {
+                if(BackFlip || isDashing || isSliding || PunchBool || isShooting)
                 {
                     motionBlurHandler.HandleMotionBlur();
 
                 }
             }
+        //    if (isDashing | isSliding | isJumping | BackFlip && StickHP.MegaCharge >= 1)
+        //         {
+        //             motionBlurHandler.HandleMotionBlur();
 
+        //         }
             if (StickmanGetsKnocked == false && !isInPunchAttach && !BackFlip)
             {
                 if (horizontalInput > 0.01)
@@ -3049,6 +3079,7 @@ public class Movement : MonoBehaviour
 
         if (StickHP.MegaCharge > NecessaryAmount)
         {
+            GameObject DashSmokeClone = ObjectPooler.SpawnObj(DashSmoke.gameObject,DashSmoke.transform.position,Quaternion.identity,ObjectPooler.PoolType.Partcles);
             StartCoroutine(StickHP.DelayinMegaCharge());
 
             if (HeliFinale && HeliLadder != null)
@@ -3306,6 +3337,12 @@ public class Movement : MonoBehaviour
 
         if (StickHP.MegaCharge >= 1.3f && !isSliding)
         {
+             if(JumpSmoke != null)
+        {
+            ObjectPooler.SpawnObj(JumpSmoke.gameObject, JumpSmoke.gameObject.transform.position,Quaternion.identity,ObjectPooler.PoolType.Partcles);
+           // StartCoroutine(CameraScript.ShakeCamGroundFeeling(14,0.02f));
+
+        }
             StickAnim.SetBool("Backflip", true);
             StickAnim.CrossFade("Backflip", 0, 0);
             if (StickHP.MegaCharge <= 5)
@@ -3527,6 +3564,9 @@ public class Movement : MonoBehaviour
 
                 while (isSliding)
                 {
+                    SlideSmoke.gameObject.SetActive(true);
+                    GrassBlades.gameObject.SetActive(true);
+                    GrassBlades.gameObject.transform.localScale = new Vector3 (GrassBlades.gameObject.transform.localScale.x * transform.localScale.x,GrassBlades.transform.localScale.y,GrassBlades.transform.localScale.z);
                     SlideMomentum = slideMomentum;
 
                     SlopeSlide = false;
@@ -3562,6 +3602,8 @@ public class Movement : MonoBehaviour
                         isSliding = false;
                         StickAnim.SetBool("Slide", false);
                         rb.gravityScale = originalGravity;
+                        GrassBlades.gameObject.SetActive(false);
+
                         break;
                     }
 
@@ -3576,10 +3618,10 @@ public class Movement : MonoBehaviour
             {
                 AudioPlayer.PlayOneShot(SlideSFX);
 
-                if (rb.velocity.magnitude > 0.1f)
-                {
-                    motionBlurHandler.HandleMotionBlur();
-                }
+                // if (rb.velocity.magnitude > 0.1f)
+                // {
+                //     motionBlurHandler.HandleMotionBlur();
+                // }
 
                 StickAnim.SetBool("Slide", true);
                 canSlide = false;

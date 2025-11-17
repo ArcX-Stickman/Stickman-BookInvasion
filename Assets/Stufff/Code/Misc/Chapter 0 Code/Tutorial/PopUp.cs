@@ -26,6 +26,11 @@ public class PopUp : MonoBehaviour
             Pause.NoHUD = true;
             Pause.Pause();
         }
+        if(gameObject.activeSelf && Input.GetKey(KeyCode.Escape))
+        {
+            Close();
+        }
+        
     }
 
     public void Close()

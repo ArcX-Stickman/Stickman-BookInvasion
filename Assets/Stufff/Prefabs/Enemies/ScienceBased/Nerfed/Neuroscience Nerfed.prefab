@@ -300,6 +300,7 @@ MonoBehaviour:
     m_Bits: 131072
   DistanceOfRaycast: 50
   isStunnable: 0
+  VariedAttackCD: 0
   isBoss: 0
   PhaseNum: 0
   isEmbryology: 0
@@ -312,6 +313,7 @@ MonoBehaviour:
   CurrentPunches: 0
   MaxPunchesBeforeReset: 0
   BossHP_UI: {fileID: 0}
+  TimesCaught_Embry: 0
   Zygote: {fileID: 0}
   Zygotes: []
   StickyCell: {fileID: 0}
@@ -342,6 +344,8 @@ MonoBehaviour:
   TutText: {fileID: 0}
   TutTXT: 
   TutKeyInput: {fileID: 0}
+  DodgeTutorial: 0
+  DodgeTutVideo: {fileID: 0}
   dashTime: 0
   dashPower: 0
   dashCD: 0
@@ -359,8 +363,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2d765ea082b28d4faa6d45b61a0b4a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ai: {fileID: 0}
-  tickRate: 0.05
+  MInDIS: 270
+  WakeUpDIS: 180
 --- !u!1 &748011330521789040
 GameObject:
   m_ObjectHideFlags: 0
@@ -1241,7 +1245,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 44.92, y: 132.63013}
+  m_AnchoredPosition: {x: 44.92, y: 131.03}
   m_SizeDelta: {x: 290.2402, y: 86.193}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1411966777401707493
@@ -2377,8 +2381,8 @@ Transform:
   m_GameObject: {fileID: 8838217436935033245}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.24, y: 8.02, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.24, y: 8.79, z: 0}
+  m_LocalScale: {x: 11.954774, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4479084004745585544}
@@ -2424,8 +2428,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 243
-  m_Sprite: {fileID: 21300000, guid: b24d93a5b3e45e8408e221687f983cf9, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 6758475d1d2824b9db492d566467a9bc, type: 3}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
