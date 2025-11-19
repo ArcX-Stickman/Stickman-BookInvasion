@@ -1917,7 +1917,7 @@ public class Movement : MonoBehaviour
             FacingRight = transform.localScale.x >= 1 ? true : false;
             float targetspeed = horizontalInput * Speed;
 
-            if(Grounded && FootP.gameObject.activeSelf && rb.velocity.x > 0 ||Grounded && FootP.gameObject.activeSelf && rb.velocity.x < 0 )
+            if(Grounded && FootP.gameObject.activeSelf && rb.velocity.x > 0 && FootP.clip == GrassFootSFX||Grounded && FootP.gameObject.activeSelf && rb.velocity.x < 0 && FootP.clip == GrassFootSFX )
             {
                 GrassBlades.gameObject.SetActive(true);
                 GrassBlades.gameObject.transform.localScale = new Vector3 (GrassBlades.gameObject.transform.localScale.x * -transform.localScale.x,GrassBlades.transform.localScale.y,GrassBlades.transform.localScale.z);
@@ -2952,7 +2952,7 @@ public class Movement : MonoBehaviour
 
                         float x = Mathf.Cos(angle) * 350;
                         float y = Mathf.Sin(angle) * 350;
-
+                        GameObject DashSmokeClone = ObjectPooler.SpawnObj(DashSmoke.gameObject,DashSmoke.transform.position,Quaternion.identity,ObjectPooler.PoolType.Partcles);
                         Vector3 MovementThing = new Vector3(x, y, 0f) * Time.deltaTime;
                         motionBlurHandler.HandleMotionBlur();
                         transform.position -= MovementThing;
@@ -3565,8 +3565,12 @@ public class Movement : MonoBehaviour
                 while (isSliding)
                 {
                     SlideSmoke.gameObject.SetActive(true);
-                    GrassBlades.gameObject.SetActive(true);
-                    GrassBlades.gameObject.transform.localScale = new Vector3 (GrassBlades.gameObject.transform.localScale.x * transform.localScale.x,GrassBlades.transform.localScale.y,GrassBlades.transform.localScale.z);
+                    if(FootP.clip = GrassFootSFX)
+                    {
+                        GrassBlades.gameObject.SetActive(true);
+                        GrassBlades.gameObject.transform.localScale = new Vector3 (GrassBlades.gameObject.transform.localScale.x * transform.localScale.x,GrassBlades.transform.localScale.y,GrassBlades.transform.localScale.z);
+                    }
+                   
                     SlideMomentum = slideMomentum;
 
                     SlopeSlide = false;

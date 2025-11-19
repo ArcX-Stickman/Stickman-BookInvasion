@@ -7,6 +7,28 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
+using UnityEngine.Windows.Speech;
+
+
+public enum EnemyStatesEnum
+{
+    // Idle - Just normal boi
+    // Melee Boi come at you like a brawler and beating the heck outta yo
+    // Ranged - boi Throwing at you like crazzyyy
+    // Counter - 
+
+
+    // Advanced Ai
+    // Ranged in Back - If other enemies are close to this guy he tries to get back and 
+    // starts standing still to start shooting ranged projectiles
+    // Hit and Flee (HIGHLY ADVANCED TO CODE) - Enemy does a quick jab and retreats a little back
+    
+    // Advanced Counter - (This Should Realistically be Only used For Bosses or Heavy Enemies)
+    // This is basically the enemy counters you counter and you both start playing catch and the bullet gets
+    // rapidly faster.
+
+    Idle, Melee, Ranged, Counter, RangedInBack, HitAndFlee, AdvancedCounter, MovingBack
+}
 
 // this code is for all futurte enemies after the lab chase makes so much easier to implement new mechanics
 public class EnemyAI : MonoBehaviour
@@ -153,12 +175,16 @@ public class EnemyAI : MonoBehaviour
     private float LastMeleeThresholdCalled;
     public Transform BookDetectorRayCast;
     private EnemyAI[] enemyAIs;
+
+    public List<EnemyAI> TotalListOfEnemies = new List<EnemyAI>();
     public bool AbleToStrike;
     public LayerMask WutsABook;
     public float DistanceOfRaycast;
     private float BookDirection;
     public bool isStunnable;
-    public enum EnemyStates { Idle, BasicAttack,VariedAttack,};
+
+    public EnemyStatesEnum enemyStatus;
+
     public float VariedAttackCD;
     private float LastVariedAttack;
 
@@ -337,7 +363,8 @@ public class EnemyAI : MonoBehaviour
 
         if (!isBoss && !PlayerisCloseActivateAI) return;
         EnemyAnim.SetBool("PlayerSpotted", RangeManager.PlayerSpotted);
-        
+        // Run the brain of AI
+        AI_Brain();
         if(isCombat && Health <= 0 || isTutorial && Health <= 0)
         {
             TutText.gameObject.SetActive(false);
@@ -581,7 +608,7 @@ public class EnemyAI : MonoBehaviour
 
         // Make Enemy Kinda Smart
 
-        if (PlayerShootCount > PlayerPunchCount)
+        if (PlayerShootCount > PlayerPunchCount || enemyStatus == EnemyStatesEnum.RangedInBack)
         {
             RangedATK_CD = RangedCD_Dominant;
             MeleeCD = MeleeCD_Recesive;
@@ -687,52 +714,57 @@ public class EnemyAI : MonoBehaviour
     }
     public void CheckIfOtherBooksExist()
     {
-        //Vector2 rayDirection = new Vector2(BookDirection, 0f);
-        //RaycastHit2D[] BookRay = Physics2D.RaycastAll(BookDetectorRayCast.position, rayDirection, DistanceOfRaycast, WutsABook);
-        //Debug.DrawRay(BookDetectorRayCast.position, rayDirection * DistanceOfRaycast, Color.gray);
+        Vector2 rayDirection = new Vector2(BookDirection, 0f);
+        RaycastHit2D[] BookRay = Physics2D.RaycastAll(BookDetectorRayCast.position, rayDirection, DistanceOfRaycast, WutsABook);
+        Debug.DrawRay(BookDetectorRayCast.position, rayDirection * DistanceOfRaycast, Color.gray);
 
-        //if (BookRay.Length > 0)
-        //{
-        //    List<EnemyAI> BookAIs = new List<EnemyAI>();
-        //    List<float> AtkTimes = new List<float>();
-        //    float LongestIdleTime = Mathf.Infinity;
-        //    int DatBookWhoAttacks = -1;
-        //    foreach (RaycastHit2D hit in BookRay)
-        //    {
-        //        EnemyAI ai = hit.collider.gameObject.GetComponent<EnemyAI>();
-        //        if (ai != null)
-        //        {
-        //            BookAIs.Add(ai);
+        if (BookRay.Length > 0)
+        {
+           List<EnemyAI> BookAIs = new List<EnemyAI>();
+           List<float> AtkTimes = new List<float>();
+           float LongestIdleTime = Mathf.Infinity;
+           int DatBookWhoAttacks = -1;
+           foreach (RaycastHit2D hit in BookRay)
+           {
+               EnemyAI ai = hit.collider.gameObject.GetComponent<EnemyAI>();
+               if (ai != null)
+               {
+                    if(!TotalListOfEnemies.Contains(ai))
+                    {
+                        TotalListOfEnemies.Add(ai);
 
-        //            float lastMelee = ai.LastMeleeCDTime;
-        //            float lastRanged = ai.LastRangedATK;
-        //            float oldestTime = Mathf.Min(lastMelee, lastRanged);
+                    }
+                   BookAIs.Add(ai);
 
-        //            AtkTimes.Add(oldestTime);
+                   float lastMelee = ai.LastMeleeCDTime;
+                   float lastRanged = ai.LastRangedATK;
+                   float oldestTime = Mathf.Min(lastMelee, lastRanged);
 
-        //            if (oldestTime < LongestIdleTime)
-        //            {
-        //                LongestIdleTime = oldestTime;
-        //                DatBookWhoAttacks = BookAIs.Count - 1;
-        //            }
-        //        }
-        //    }
-        //    for (int i = 0; i < BookAIs.Count; i++)
-        //    {
-        //        BookAIs[i].AbleToStrike = false;
-        //    }
+                   AtkTimes.Add(oldestTime);
 
-        //    if (DatBookWhoAttacks >= 0)
-        //    {
-        //        BookAIs[DatBookWhoAttacks].AbleToStrike = true;
-        //    }
-        //    AtkTimes.Clear();
-        //    BookAIs.Clear();
-        //}
-        //else
-        //{
-        //    AbleToStrike = true;
-        //}
+                   if (oldestTime < LongestIdleTime)
+                   {
+                       LongestIdleTime = oldestTime;
+                       DatBookWhoAttacks = BookAIs.Count - 1;
+                   }
+               }
+           }
+           for (int i = 0; i < BookAIs.Count; i++)
+           {
+               BookAIs[i].AbleToStrike = false;
+           }
+
+           if (DatBookWhoAttacks >= 0)
+           {
+               BookAIs[DatBookWhoAttacks].AbleToStrike = true;
+           }
+           AtkTimes.Clear();
+           BookAIs.Clear();
+        }
+        else
+        {
+           AbleToStrike = true;
+        }
     }
 
     public void PickEyes()
@@ -1171,7 +1203,7 @@ public class EnemyAI : MonoBehaviour
 
 
 
-        if (PlayerHealth.PlayerHP > 0 && speed > 1 && !isAttacking && !PlayerManager.GustOfBullets)
+        if (PlayerHealth.PlayerHP > 0 && speed > 1 && !isAttacking && !PlayerManager.GustOfBullets && enemyStatus != EnemyStatesEnum.MovingBack && enemyStatus != EnemyStatesEnum.RangedInBack)
         {
             float distanceToPlayer = Vector2.Distance(transform.position, StickmanPOS.position);
 
@@ -1694,6 +1726,8 @@ public class EnemyAI : MonoBehaviour
   
     public void RangedAttack()
     {
+        enemyStatus = EnemyStatesEnum.Ranged;
+
         if(isEmbryology && !NoThrow)
         {
             EnemyAnim.SetTrigger("Ranged");
@@ -2050,6 +2084,9 @@ public class EnemyAI : MonoBehaviour
     }
     public void MeleeAttack()
     {
+
+        
+        enemyStatus = EnemyStatesEnum.Melee;
         // This is for the Tutorial in Chapter 0
         if (isCombat && !PlayerManager.BackFlip)
         {
@@ -2334,7 +2371,7 @@ public class EnemyAI : MonoBehaviour
     public void ThrowATK()
     {
 
-
+        enemyStatus = EnemyStatesEnum.Counter;
         // THIS IS THE COUNTER ATTACK IM ALSO TRASH AT NAMING STUFF
         if (PlayerHealth.PlayerHP > 0)
         {
@@ -2493,6 +2530,154 @@ public class EnemyAI : MonoBehaviour
 
 
         }
+    }
+
+    public void ResetStatus()
+    {
+        if(!isAttacking)
+        {
+            if(Time.time - LastCounterCDTime >= 3 || Time.time - LastRangedATK >= 3 || Time.time - LastMeleeCDTime >= 3) 
+            {
+                enemyStatus = EnemyStatesEnum.Idle;            
+
+            }
+
+        }
+
+    }
+
+    private EnemyAI aiClosestToPlayer = null;
+
+    // This The Ai's Actual Intelligence - Flanking and all of that
+    public void AI_Brain()
+    {
+
+
+        float DistanceTempPlayer = 0;
+     
+        // Multiple Enemie
+        if(TotalListOfEnemies.Count > 0)
+        {
+            for(int i = TotalListOfEnemies.Count - 1; i >= 0; i--)
+            {
+                if(TotalListOfEnemies[i].Health <= 0)
+                {
+                    TotalListOfEnemies.RemoveAt(i);
+                }
+            }
+            if(Time.time >= EnemyCloseCalc_Tick + LastEnemyCloseCalc_Tick)
+            {
+                EnemyClosestToPlayer();
+            }
+            // Now We calculate all the enemies and what they're doin
+            if(aiClosestToPlayer != null)
+            {
+                // Change Behavoir or attitude based on what he's doing
+                switch(aiClosestToPlayer.enemyStatus)
+                {
+                case EnemyStatesEnum.Melee:
+                    DistantRange();
+            
+
+                    break;
+                default:
+                    speed = OGSpeed;
+                    break;      
+
+                }
+                    
+
+                }
+                else
+                {
+                    EnemyClosestToPlayer();
+                }
+            }
+        else
+        {
+            //Resort To Normal AI
+        
+        }
+
+        
+
+    }
+
+    private float EnemyCloseCalc_Tick = 0.5f;
+    private float LastEnemyCloseCalc_Tick = 0;
+
+    public void EnemyClosestToPlayer()
+    {
+        LastEnemyCloseCalc_Tick = Time.time;
+        float TempDisCal = float.MaxValue;
+        foreach(EnemyAI ai in TotalListOfEnemies)
+        {
+            if(ai.globaldistance < TempDisCal)
+            {
+                aiClosestToPlayer = ai;
+                TempDisCal = ai.globaldistance;
+            }
+
+        }
+        if(globaldistance > aiClosestToPlayer.globaldistance)
+        {
+            // Slo Down to Be able to Range as melee enemy rushes in
+            speed -= 1.5f;
+        }
+    }
+
+    public void DistantRange()
+    {
+        if(globaldistance <= 54.66228f)
+        {
+            enemyStatus = EnemyStatesEnum.RangedInBack;
+            speed = 0;
+            //MaxSpeed = 0;
+            EnemyAnim.ResetTrigger("Melee");
+            EnemyAnim.SetBool("Run",false);
+
+        }
+        else
+        {
+            if(enemyStatus != EnemyStatesEnum.MovingBack)
+            {
+                 StartCoroutine(MoveBackOrForward());
+
+            }
+        }
+        
+
+    }
+
+    public IEnumerator MoveBackOrForward()
+    {
+        speed = OGSpeed;
+        enemyStatus = EnemyStatesEnum.MovingBack;
+        Vector2 Target;
+        // Boi is facing right
+        if(transform.localScale.x > 0)
+        {
+            Target = new Vector2(transform.position.x - 29.88f, transform.position.y);
+
+        }
+        else
+        {
+            Target = new Vector2(transform.position.x + 29.88f, transform.position.y);
+
+        }
+        float MinDisBack = 3.5f;
+        while (Vector2.Distance(transform.position, Target) > MinDisBack)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, Target, speed * Time.deltaTime);
+            yield return null;
+        }
+        enemyStatus = EnemyStatesEnum.Idle;
+
+
+        
+
+        yield break;
+
     }
 
 }
