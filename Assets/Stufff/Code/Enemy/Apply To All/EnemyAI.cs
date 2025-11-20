@@ -7,7 +7,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
-using UnityEngine.Windows.Speech;
 
 
 public enum EnemyStatesEnum
@@ -224,6 +223,10 @@ public class EnemyAI : MonoBehaviour
     public AudioClip ShockSound;
     public float DashCD;
     public float LastDash;
+    public GameObject BloodParticles;
+    public GameObject DirtParticles;
+    public Transform Embry_Partcle_Pos;
+
     [Header("Ecology")]
     public GameObject Spore;
     public SunLogic SunManager;
@@ -626,6 +629,9 @@ public class EnemyAI : MonoBehaviour
 
         if (Health <= 0)
         {
+            speed = 0;
+            MaxSpeed = 0;
+            OGSpeed = 0;
             if (isBoss && !AlrDid_Slo_MO)
             {
                 AlrDid_Slo_MO = true;
@@ -856,10 +862,10 @@ public class EnemyAI : MonoBehaviour
             // Phase 3
             RangedATK_CD = 0.9f;
             MeleeCD = 0.88f;
-            StunCD = 534453434575676;
+            StunCD = float.MaxValue;
             PhaseNum = 3;
             //FossilSpeed = 90;
-            CellWallCD = 6.5f;
+            CellWallCD = float.MaxValue;
             FossilSpeed = 105;
 
             if (NoThrow)
@@ -880,10 +886,10 @@ public class EnemyAI : MonoBehaviour
             MaxSpeed = 30;
             RangedATK_CD = 3.4f;
             MeleeCD = 0.89f;
-            StunCD = 534453434575676;
+            StunCD = float.MaxValue;
             PhaseNum = 2;
             FossilSpeed = 100;
-            CellWallCD = 10;
+            CellWallCD = float.MaxValue;
             FossilSpeed = 100;
         }
         else
@@ -893,10 +899,10 @@ public class EnemyAI : MonoBehaviour
             MaxSpeed = 30;
             RangedATK_CD = 2.5f;
             MeleeCD = 0.9f;
-            StunCD = 534453434575676;
+            StunCD = float.MaxValue;
             PhaseNum = 1;
             FossilSpeed = 80;
-            CellWallCD = 99999;
+            CellWallCD = float.MaxValue;
             FossilSpeed = 90;
         }
 
@@ -921,6 +927,9 @@ public class EnemyAI : MonoBehaviour
         ShockRScript.isOG = false;
         ShockLScript.isRight = false;
         ShockRScript.isRight = true;
+        GameObject PartclDirt = ObjectPooler.SpawnObj(DirtParticles , Embry_Partcle_Pos.position, Quaternion.identity, ObjectPooler.PoolType.Partcles);
+        GameObject BludPartclDirt = ObjectPooler.SpawnObj(BloodParticles, Embry_Partcle_Pos.position, Quaternion.identity, ObjectPooler.PoolType.Partcles);
+
 
 
     }

@@ -27,10 +27,19 @@ public class Embry_IntroCinematic : MonoBehaviour
 
     public BattleManager battleManager;
     public AudioClip Wind;
-
+    public GameObject bossTxt;
+    public AudioSource AudioP;
+    public AudioClip CinematicBassDrop;
+    public DeactivateCinematicEnemyTrigger WindSFX;
+    public AudioSource HeartBeart;
+    public bool Turned;
     void OnEnable()
     {
+        StickScirpt.TimeManager.WantAudioSame = true;
 
+        bossTxt.gameObject.SetActive(false);
+        StickScirpt.GrassBlades.gameObject.SetActive(false);
+        StickScirpt.FootP.mute = true;
         battleManager.enabled = false;
         BG_Theme.enabled = false;   
         BG_ThemeLow.enabled = false;
@@ -57,23 +66,21 @@ public class Embry_IntroCinematic : MonoBehaviour
 
     public IEnumerator Thing()
     {
-
         StickScirpt.HeCanMove = false;
         StickScirpt.enabled = false;
         stickMoveGlitch.enabled = false;
 
-
-        yield return new WaitForSecondsRealtime(DelayCourintine);
+        yield return new WaitForSecondsRealtime(2);
         if(WantDirfferentFace)
         {
-            transform.localScale = new Vector3(transform.localScale.x * -StartDirec, transform.localScale.y,transform.localScale.z);
-
+            transform.localScale = new Vector3(transform.localScale.x * StartDirec, transform.localScale.y,transform.localScale.z);
+            Turned = true;
         }
-
-        yield return new WaitForSecondsRealtime(DelayCourintine);
+        HeartBeart.gameObject.SetActive(true);
+        yield return new WaitForSecondsRealtime(3);
         // Attack Anim
         Anim.enabled = true;
-
+     
         Anim.SetTrigger("Ranged");
         StickScirpt.enabled = true;
         stickMoveGlitch.enabled = true;
@@ -91,13 +98,21 @@ public class Embry_IntroCinematic : MonoBehaviour
         // }
         EnemyAI.enabled = true;
         EnemyAI.HPSlide.gameObject.SetActive(false);
+        yield return new WaitForSecondsRealtime(0.00001f);
+        Anim.SetBool("Run", false);
+        EnemyAI.enabled = false;
 
 
 
         EnemyAI.RangeManager.enabled = true;
         yield return new WaitForSecondsRealtime(1);
-        while(!StickScirpt.CanCatch)
+        if (CinematicBassDrop != null && AudioP != null)
         {
+            AudioP.PlayOneShot(CinematicBassDrop);
+        }
+        while (!StickScirpt.CanCatch)
+        {
+
             EnemyAI.enabled = false;
 
             StickScirpt.TimeManager.SloMO();
@@ -108,8 +123,12 @@ public class Embry_IntroCinematic : MonoBehaviour
         BG_ThemeLow.enabled = true;
         EnemyAI.enabled = true;
         EnemyAI.HPSlide.gameObject.SetActive(true);
-
-
+        StickScirpt.FootP.mute = false;
+        bossTxt.gameObject.SetActive(false);
+        StickScirpt.TimeManager.WantAudioSame = false;
+        bossTxt.gameObject.SetActive(true) ;
+        WindSFX.DestroyThisThing();
+        Destroy(HeartBeart);
         this.enabled = false;
         yield return null;
     }

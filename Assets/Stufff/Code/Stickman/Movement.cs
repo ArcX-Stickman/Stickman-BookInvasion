@@ -3565,7 +3565,7 @@ public class Movement : MonoBehaviour
                 while (isSliding)
                 {
                     SlideSmoke.gameObject.SetActive(true);
-                    if(FootP.clip = GrassFootSFX)
+                    if(FootP.clip == GrassFootSFX && BreakIn) // TODO: Replace the break in var with a bool called on grass on wood on metal etc to differentiate surfaces
                     {
                         GrassBlades.gameObject.SetActive(true);
                         GrassBlades.gameObject.transform.localScale = new Vector3 (GrassBlades.gameObject.transform.localScale.x * transform.localScale.x,GrassBlades.transform.localScale.y,GrassBlades.transform.localScale.z);
