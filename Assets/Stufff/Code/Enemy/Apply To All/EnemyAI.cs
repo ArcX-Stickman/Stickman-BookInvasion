@@ -204,6 +204,10 @@ public class EnemyAI : MonoBehaviour
     public GameObject BossHP_UI;
 
     [Header("Embryology")]
+
+    public GameObject FirstZygote;
+    public bool AlrDidFirstZygoteSloMo_Embry;
+    
     public int TimesCaught_Embry;
     public GameObject Zygote;
     public GameObject[] Zygotes;
@@ -854,7 +858,7 @@ public class EnemyAI : MonoBehaviour
 
     }
     private float Phase2StartHP = 70;
-    private float Phase3StartHP = 45;
+    private float Phase3StartHP = 55;
     public void EmbryPhaseManager()
     {
         if (Health <= Phase3StartHP)
@@ -1056,6 +1060,13 @@ public class EnemyAI : MonoBehaviour
             else
             {
                 projectile = ObjectPooler.SpawnObj(Zygote, AimPoint.position, Quaternion.identity, ObjectPooler.PoolType.GamObjects);
+
+                if(!AlrDidFirstZygoteSloMo_Embry)
+                {
+                    AlrDidFirstZygoteSloMo_Embry = true;
+                    FirstZygote = projectile;   
+
+                }
 
             }
             BeakerProjectile Script = projectile.GetComponent<BeakerProjectile>();

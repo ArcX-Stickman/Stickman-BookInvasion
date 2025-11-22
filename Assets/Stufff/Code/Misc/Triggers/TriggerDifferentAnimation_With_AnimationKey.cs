@@ -14,6 +14,7 @@ public class TriggerDifferentAnimation_With_AnimationKey : MonoBehaviour
         {
             foreach(var anim in animator)
             {
+                anim.cullingMode = AnimatorCullingMode.AlwaysAnimate;
                 anim.CrossFade(AnimationName, 0, 0);
             }
         }

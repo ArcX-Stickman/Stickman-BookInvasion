@@ -52,6 +52,7 @@ public class BeakerProjectile : MonoBehaviour
 
     void Start()
     {
+        HitPlayer = false;
         XSTart = transform.localScale.x;
         YSTart = transform.localScale.y;
 
@@ -123,7 +124,48 @@ public class BeakerProjectile : MonoBehaviour
 
         if (collision.CompareTag("Player"))
         {
+            if (PlayerManager.isDashing)
+        {
+            PlayerHP.MegaCharge += 2.3f;
+            HitPlayer = true;
+            HasBeenCaught = true;
+            PlayerManager.CanCatch = false;
+            PlayerManager.HasCaught = true;
+            AudioP.PlayOneShot(BreakSFX);
+            ReturnToPool();
+        }
+        else
+        {
+            Instantiate(FX, BeakerPOS.position, Quaternion.identity);
+
+            PlayerHP.PlayerHP -= DMG;
+            HitPlayer = true;
+            if (!UsedInEmbry)
+            {
+                PlayerManager.StickAnim.SetTrigger("Hurt");
+
+            }
+            Instantiate(FX, PlayerPOS.position, Quaternion.identity);
+            GetComponent<Collider2D>().enabled = false;
+            PlayBreakSound();
+            if (UsedInEmbry && !PlayerManager.Dead)
+            {
+                PlayerManager.StickAnim.CrossFade("Stick_Mega_Hurt", 0, 0);
+                PlayerManager.CameraScript.StartCoroutine(PlayerManager.CameraScript.ShakeCam(3.5f, 0.15f));
+
+            }
+            ReturnToPool();
+
+        }
             HandlePlayerCatch();
+
+             if (PlayerManager.BackFlip  )
+        {
+            HitPlayer = true;
+            PlayerHP.MegaCharge += 2;
+            AudioP.PlayOneShot(Miss);
+        }
+
         }
         else if (collision.CompareTag("StickCatch") && UsedInEmbry && UsedForCounter)
         {
@@ -134,7 +176,7 @@ public class BeakerProjectile : MonoBehaviour
             ReturnToPool();
         }
 
-        else if (collision.CompareTag("Ground"))
+        if (collision.CompareTag("Ground"))
         {
             HitPlayer = true;
             Instantiate(FX, BeakerPOS.position, Quaternion.identity);
@@ -142,7 +184,7 @@ public class BeakerProjectile : MonoBehaviour
             PlayBreakSound();
             ReturnToPool();
         }
-        else if (collision.CompareTag("Bullet"))
+        if (collision.CompareTag("Bullet"))
         {
             HitPlayer = true;
             PlayerHP.MegaCharge += 0.01f;
@@ -160,14 +202,8 @@ public class BeakerProjectile : MonoBehaviour
 
     private void HandlePlayerCatch()
     {
-        if (PlayerManager.BackFlip  )
-        {
-            HitPlayer = true;
-            PlayerHP.MegaCharge += 2;
-            AudioP.PlayOneShot(Miss);
-        }
-
-        else if (PlayerManager.CanCatch && UsedForCounter)
+       
+        if (PlayerManager.CanCatch && UsedForCounter && !HitPlayer)
         {
             if (Decoy)
             {
@@ -191,41 +227,11 @@ public class BeakerProjectile : MonoBehaviour
 
             ReturnToPool();
         }
-        else if (PlayerManager.isDashing)
-        {
-            PlayerHP.MegaCharge += 2.3f;
-            HitPlayer = true;
-            HasBeenCaught = true;
-            PlayerManager.CanCatch = false;
-            PlayerManager.HasCaught = true;
-            AudioP.PlayOneShot(BreakSFX);
-            ReturnToPool();
-        }
         else
         {
-            PlayerHP.PlayerHP -= DMG;
-            HitPlayer = true;
-            if (!UsedInEmbry)
-            {
-                PlayerManager.StickAnim.SetTrigger("Hurt");
-
-            }
-            if (!UsedInEmbry)
-            {
-                Instantiate(FX, PlayerPOS.position, Quaternion.identity);
-
-            }
-            GetComponent<Collider2D>().enabled = false;
-            PlayBreakSound();
-            if (UsedInEmbry && !PlayerManager.Dead)
-            {
-                PlayerManager.StickAnim.CrossFade("Stick_Mega_Hurt", 0, 0);
-                PlayerManager.CameraScript.StartCoroutine(PlayerManager.CameraScript.ShakeCam(3.5f, 0.15f));
-
-            }
-            if (!UsedInEmbry)
-                ReturnToPool();
+            return;
         }
+        
     }
 
     private IEnumerator WaitToGetCollision()
