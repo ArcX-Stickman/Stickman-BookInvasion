@@ -234,10 +234,13 @@ public class Movement : MonoBehaviour
     public GameObject EmbryProjectile;
     public Transform EmbryPOS;
     public bool CanCatch;
+    public bool StickPlayerWannaCatch;
     public Transform CounterAimPoint;
     public AudioClip ThrowSFX;
     public GameObject ExamBullet;
     public Transform Helicopter;
+    public float catchWindow;
+
     //Encounters
     public bool InEmbryBoss;
     public bool InBIO_Boss;
@@ -889,6 +892,17 @@ public class Movement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             StickAnim.SetTrigger("Catch");
+            catchWindow = 0.25f;
+            StickPlayerWannaCatch = true;
+            CanCatch = true;
+        }
+        if(catchWindow > 0) 
+        {
+            catchWindow -= Time.deltaTime;
+        }
+        else
+        {
+            StickPlayerWannaCatch = false;
         }
 
         if (HasCaught)
@@ -1134,7 +1148,7 @@ public class Movement : MonoBehaviour
         if (Grounded == true)
         {
 
-      
+            ForcedJumpMegaHurtBool = false;
             AirBackFlip = false;
             isJumping = false;
             StickAnim.SetBool("OnGround", true);
@@ -1363,7 +1377,8 @@ public class Movement : MonoBehaviour
     public bool HasCaughtSniper;
     public IEnumerator CounterAttack()
     {
-
+        StartCoroutine(CameraScript.ShakeCamGroundFeeling(15.5f, 0.2f));
+        IsInThrowAnim = false;
         if (InExamBoss)
         {
             //yield return new WaitForSecondsRealtime(0.1f);
@@ -1415,6 +1430,8 @@ public class Movement : MonoBehaviour
             rb.velocity = new Vector2(velocityX, velocityY);
             //rb.AddTorque(570f);  // fix this later tooo many visual bugs that make it not gucci :/
         }
+
+        yield break;
 
     }
 
@@ -1512,7 +1529,7 @@ public class Movement : MonoBehaviour
             if (AbleToJump && !isSliding)
             {
                 Debug.Log("Jump Void Is Active");
-                if (!isDashing && !isSliding && !IsShooting && !Dead && !inSlipperyState && !Anim_Locked && !BackFlip)
+                if (!isDashing && !isSliding && !IsShooting && !Dead && !inSlipperyState && !Anim_Locked && !BackFlip && !ForcedJumpMegaHurtBool)
                 {
                     StickAnim.CrossFade("Jump", 0, 0);
 
@@ -3344,7 +3361,11 @@ public class Movement : MonoBehaviour
 
         }
             StickAnim.SetBool("Backflip", true);
-            StickAnim.CrossFade("Backflip", 0, 0);
+            if(catchWindow == 0)
+            {
+                StickAnim.CrossFade("Backflip", 0, 0);
+
+            }
             if (StickHP.MegaCharge <= 5)
             {
                 horizontalMomentum = 10;
@@ -3513,8 +3534,81 @@ public class Movement : MonoBehaviour
 
 
 
+    private bool ForcedJumpMegaHurtBool;
+    public void ForcedJumpMegaHurt()
+    {
+        StickAnim.CrossFade("Stick_Mega_Hurt", 0, 0);
+        if (JumpSmoke != null)
+        {
+            ObjectPooler.SpawnObj(JumpSmoke.gameObject, JumpSmoke.gameObject.transform.position, Quaternion.identity, ObjectPooler.PoolType.Partcles);
+
+        }
+        Grounded = false;
+        coyoteTimerCounter = 0;
+        BackFlipAS.pitch = Random.Range(0.7f, 1.5f);
+        BackFlipAS.PlayOneShot(BackFlipSFX);
+        rb.gravityScale = 20;
+        isJumping = true;
+
+        if (rb.velocity.magnitude > 5.1f && MaxSpeed >= 40 && StickHP.MegaCharge > 1)
+        {
+            motionBlurHandler.HandleMotionBlur();
+        }
+        if (!InSlideAnimation && !SlideJump)
+        {
+            if (StickHP.MegaCharge > 1)
+            {
+                if (Checkpoint != ExamHeliID_Checkpoint || HeliForestCheck != null)
+                {
+                    JumpForce = Mathf.Max(25, JumpForce * ((MaxSpeed / JumpForce) / 1.5f));
+
+                }
+                else
+                {
+                    JumpForce = 90;
+
+                }
+                MaxSpeed += 0.4f;
+                StickHP.MegaCharge -= 2.5f;
+                //StickHP.StartCoroutine(StickHP.DelayinMegaCharge());
+            }
+            else
+            {
+                float TempJumpForce = Mathf.Max(25, JumpForce * ((MaxSpeed / JumpForce) / 1.5f));
+                float MinimizedForce = TempJumpForce / 2;
+                JumpForce = MinimizedForce;
+                MaxSpeed -= 0.7f;
 
 
+            }
+            Debug.Log("Jump Void()");
+
+            if (AbleToJump && !isSliding)
+            {
+                Debug.Log("Jump Void Is Active");
+                if (!isDashing && !isSliding && !IsShooting && !Dead && !inSlipperyState && !Anim_Locked && !BackFlip)
+                {
+                    StickAnim.CrossFade("Jump", 0, 0);
+
+                }
+                else if (!BackFlip)
+                {
+
+                    StickAnim.SetBool("Jump", true);
+
+                }
+
+                if (JumpForce >= 50)
+                {
+                    JumpForce = 50; // this is how we limit the jump to not make it crazy
+                }
+                float horizontalMomentum = rb.velocity.x;
+                rb.velocity = new Vector2(horizontalMomentum, JumpForce);
+
+                Grounded = false;
+            }
+        }
+    }
 
     public void InSlideAnimationFalse()
     {

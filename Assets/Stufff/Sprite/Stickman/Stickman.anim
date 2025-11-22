@@ -432,13 +432,6 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: YeaSlide
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0
     functionName: InSlideAnimationFalse
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -461,6 +454,13 @@ AnimationClip:
     messageOptions: 0
   - time: 0
     functionName: CanJump
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0
+    functionName: YeaSlide
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -517,6 +517,13 @@ AnimationClip:
     messageOptions: 0
   - time: 0.5
     functionName: CanCatchBoolIsFalse
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.5833333
+    functionName: InCounterAnimBoolFalse
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

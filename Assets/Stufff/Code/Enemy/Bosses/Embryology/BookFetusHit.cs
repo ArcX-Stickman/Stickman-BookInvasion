@@ -7,7 +7,7 @@ public class BookFetusHit : MonoBehaviour
 {
 
     public float DMG;
-    public Embryology EmbryologyManager;
+    public EnemyAI EmbryologyManager;
     public AudioClip SFX;
     public AudioSource AudioP;
     public GameObject FX;
@@ -22,7 +22,18 @@ public class BookFetusHit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(EmbryologyManager.PhaseNum == 1)
+        {
+            DMG = 4;
+        }
+        else if(EmbryologyManager.PhaseNum == 2)
+        {
+            DMG = 3.5f;
+        }
+        else
+        {
+            DMG = 3;
+        }
     }
 
 

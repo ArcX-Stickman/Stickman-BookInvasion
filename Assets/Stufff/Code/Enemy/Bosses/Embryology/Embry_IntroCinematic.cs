@@ -39,6 +39,7 @@ public class Embry_IntroCinematic : MonoBehaviour
     public GameObject BordersBoss;
     void OnEnable()
     {
+        stickMoveGlitch.enabled = false;
         StickScirpt.TimeManager.WantAudioSame = true;
         EnemyAI.HPSlide.gameObject.SetActive(false);
         bossTxt.gameObject.SetActive(false);
@@ -50,8 +51,7 @@ public class Embry_IntroCinematic : MonoBehaviour
         StickScirpt.ResetAllAnimationStates();
         StickScirpt.rb.velocity = Vector3.zero;
         StickScirpt.enabled = false;
-
-        stickMoveGlitch.enabled = false;
+        StickScirpt.transform.localScale = new Vector3(1, 1, 1);
         EnemyAI.enabled = false;
         Anim.enabled = false;
         if(WantDirfferentFace)
@@ -139,6 +139,7 @@ public class Embry_IntroCinematic : MonoBehaviour
         WindSFX.DestroyThisThing();
         Destroy(HeartBeart);
         this.enabled = false;
+        StickScirpt.FootP.mute = false;
         yield return null;
     }
 }

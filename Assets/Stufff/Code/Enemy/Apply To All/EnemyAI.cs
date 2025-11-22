@@ -857,8 +857,8 @@ public class EnemyAI : MonoBehaviour
         }
 
     }
-    private float Phase2StartHP = 70;
-    private float Phase3StartHP = 55;
+    private float Phase2StartHP = 100;
+    private float Phase3StartHP = 67;
     public void EmbryPhaseManager()
     {
         if (Health <= Phase3StartHP)

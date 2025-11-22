@@ -23,7 +23,7 @@ public class Shockwave : MonoBehaviour
             float distance = Vector2.Distance(transform.position, target);
             target.y = transform.position.y;
             transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
-            if (distance <= 22 && !isOG)
+            if (distance <= 45 && !isOG)
             {
                 Destroy(gameObject);
             }

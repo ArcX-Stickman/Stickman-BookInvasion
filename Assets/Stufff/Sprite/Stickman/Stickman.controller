@@ -4119,7 +4119,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Catch
-  m_Speed: 1
+  m_Speed: 0.7
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -2992071490794566284}
@@ -6202,7 +6202,7 @@ AnimatorStateMachine:
     m_Position: {x: -5830, y: 780, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3358581955932061184}
-    m_Position: {x: -9600, y: 3370, z: 0}
+    m_Position: {x: -8610, y: 470, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7451609462201475738}
     m_Position: {x: -4230, y: 1970, z: 0}
@@ -6226,7 +6226,7 @@ AnimatorStateMachine:
     m_Position: {x: -3530, y: 2750, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5684452304298422278}
-    m_Position: {x: -4180, y: 1040, z: 0}
+    m_Position: {x: -6050, y: 140, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4943838144814873154}
     m_Position: {x: -5190, y: 1960, z: 0}

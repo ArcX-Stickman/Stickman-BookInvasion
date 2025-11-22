@@ -43,6 +43,7 @@ public class BeakerProjectile : MonoBehaviour
 
     void OnEnable()
     {
+        AlrShook = false;
         HitPlayer = false;
         CanCollide = !WantCollisionCD;
         AlrDidCD = false;
@@ -61,6 +62,18 @@ public class BeakerProjectile : MonoBehaviour
             float facing = PlayerPOS.position.x < transform.position.x ? 1 : -1;
             transform.localScale = new Vector3(facing * Mathf.Abs(XSTart), YSTart, 1);
         }
+    }
+
+    public bool StickBoiCanCatch() 
+    {
+       if(PlayerManager.CanCatch && PlayerManager.IsInThrowAnim && UsedForCounter && !HitPlayer && PlayerManager.StickPlayerWannaCatch)
+       {
+            return true;
+       }
+       else
+       {
+            return false;
+       }
     }
 
     void Update()
@@ -98,7 +111,7 @@ public class BeakerProjectile : MonoBehaviour
 
             if (PlayerManager.BackFlip
                 && Distance <= MinDisForPerfect
-                && Time.time - PlayerManager.LastBackflipTime <= 0.1f) // window fore perfect dodging
+                && Time.time - PlayerManager.LastBackflipTime <= 0.1f) 
             {
                 PerfectDodge = true;
                 PlayerManager.PerfectDodgeCount += 1;
@@ -124,56 +137,45 @@ public class BeakerProjectile : MonoBehaviour
 
         if (collision.CompareTag("Player"))
         {
+            if (StickBoiCanCatch())
+            {
+                HandlePlayerCatch();
+                return;
+            }
+
             if (PlayerManager.isDashing)
-        {
-            PlayerHP.MegaCharge += 2.3f;
+            {
+                PlayerHP.MegaCharge += 2.3f;
+            }
+            else
+            {
+                PlayerHP.PlayerHP -= DMG;
+                if (!UsedInEmbry)
+                    PlayerManager.StickAnim.SetTrigger("Hurt");
+                else if (!PlayerManager.Dead)
+                {
+                    PlayerManager.StickAnim.CrossFade("Stick_Mega_Hurt", 0, 0);
+                    PlayerManager.CameraScript.StartCoroutine(PlayerManager.CameraScript.ShakeCam(3.5f, 0.15f));
+                }
+                Instantiate(FX, PlayerPOS.position, Quaternion.identity);
+            }
+
             HitPlayer = true;
             HasBeenCaught = true;
-            PlayerManager.CanCatch = false;
-            PlayerManager.HasCaught = true;
-            AudioP.PlayOneShot(BreakSFX);
-            ReturnToPool();
-        }
-        else
-        {
-            Instantiate(FX, BeakerPOS.position, Quaternion.identity);
-
-            PlayerHP.PlayerHP -= DMG;
-            HitPlayer = true;
-            if (!UsedInEmbry)
-            {
-                PlayerManager.StickAnim.SetTrigger("Hurt");
-
-            }
-            Instantiate(FX, PlayerPOS.position, Quaternion.identity);
-            GetComponent<Collider2D>().enabled = false;
             PlayBreakSound();
-            if (UsedInEmbry && !PlayerManager.Dead)
-            {
-                PlayerManager.StickAnim.CrossFade("Stick_Mega_Hurt", 0, 0);
-                PlayerManager.CameraScript.StartCoroutine(PlayerManager.CameraScript.ShakeCam(3.5f, 0.15f));
-
-            }
+            GetComponent<Collider2D>().enabled = false;
             ReturnToPool();
-
-        }
-            HandlePlayerCatch();
-
-             if (PlayerManager.BackFlip  )
-        {
-            HitPlayer = true;
-            PlayerHP.MegaCharge += 2;
-            AudioP.PlayOneShot(Miss);
+            return;
         }
 
-        }
-        else if (collision.CompareTag("StickCatch") && UsedInEmbry && UsedForCounter)
+        if (collision.CompareTag("StickCatch") && UsedInEmbry && UsedForCounter)
         {
             Embry.TimesCaught_Embry += 1;
             HitPlayer = true;
             HasBeenCaught = true;
             PlayerManager.HasCaught = true;
             ReturnToPool();
+            return;
         }
 
         if (collision.CompareTag("Ground"))
@@ -183,7 +185,9 @@ public class BeakerProjectile : MonoBehaviour
             GetComponent<Collider2D>().enabled = false;
             PlayBreakSound();
             ReturnToPool();
+            return;
         }
+
         if (collision.CompareTag("Bullet"))
         {
             HitPlayer = true;
@@ -192,19 +196,40 @@ public class BeakerProjectile : MonoBehaviour
             GetComponent<Collider2D>().enabled = false;
             PlayBreakSound();
             ReturnToPool();
+            return;
+        }
+
+        if (PlayerManager.BackFlip)
+        {
+            Distance = Vector2.Distance(transform.position, PlayerPOS.position);
+            if (Distance <= MinDisForPerfect && Time.time - PlayerManager.LastBackflipTime <= 0.1f)
+            {
+                PerfectDodge = true;
+                PlayerManager.PerfectDodgeCount += 1;
+                AudioP.PlayOneShot(PlayerManager.PerfectDodge);
+            }
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        OnTriggerEnter2D(collision.collider); // reuse logic
+        OnTriggerEnter2D(collision.collider);
     }
 
+
+
+    private bool AlrShook;
     private void HandlePlayerCatch()
     {
-       
-        if (PlayerManager.CanCatch && UsedForCounter && !HitPlayer)
+        if (HitPlayer || HasBeenCaught || !UsedForCounter) return;
+
+
+        if (StickBoiCanCatch())
         {
+           
+
+            PlayerManager.CanCatch = false;
+            PlayerManager.IsInThrowAnim = false;
             if (Decoy)
             {
                 PlayerHP.PlayerHP -= 20;
@@ -214,7 +239,9 @@ public class BeakerProjectile : MonoBehaviour
             {
                 PlayerHP.MegaCharge += 0.2f;
             }
-
+            PlayerManager.CanCatch = false;
+            PlayerManager.IsInThrowAnim = false;
+            PlayerManager.catchWindow = 0;
             HitPlayer = true;
             HasBeenCaught = true;
             PlayerManager.CanCatch = false;
