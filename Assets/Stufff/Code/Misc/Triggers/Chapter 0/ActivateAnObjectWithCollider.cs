@@ -19,6 +19,7 @@ public class ActivateAnObjectWithCollider : MonoBehaviour
     public bool Wantonce;
     public bool Alrdid;
     public bool StartActive;
+    public bool WantMuteAudio;
     
     [Header("Optional Object")]
 
@@ -73,6 +74,11 @@ public class ActivateAnObjectWithCollider : MonoBehaviour
     {
         if (collision.CompareTag("Player") && !Alrdid)
         {
+            if (WantMuteAudio)
+            {
+                AudioSource audioSource = TheObject.GetComponent<AudioSource>();
+                audioSource.mute = true;
+            }
             if(OptionalExtraObject != null)
             {
                 OptionalExtraObject.gameObject.SetActive(true);
