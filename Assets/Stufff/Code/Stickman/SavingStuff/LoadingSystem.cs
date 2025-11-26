@@ -112,7 +112,12 @@ public class LoadingSystem : MonoBehaviour
     IEnumerator LoadScene()
     {
         PlayerData data = SaveSystem.LoadSave();
+        
         string sceneToLoad = data?.SceneName ?? "Game";
+        if(sceneToLoad == " ")
+        {
+            sceneToLoad = "Game";
+        }
 
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync(sceneToLoad);
         loadOperation.allowSceneActivation = false;

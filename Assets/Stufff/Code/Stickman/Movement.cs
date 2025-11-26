@@ -1,5 +1,3 @@
-
-
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -184,6 +182,13 @@ public class Movement : MonoBehaviour
     public bool FinshedEncounterAfterLab;
     public bool HasBrokeOutOfRope;
     public LoadingSystem LoadingSystem;
+    
+    [Header("Progression For Abilites ")]
+    public bool UnlockedBackflip;
+    public bool UnlockedDash;
+    public bool UnlockedSlide;
+
+
     [Header("PerkTree Values ")]
     public int XP_Orbs;
 
@@ -306,6 +311,8 @@ public class Movement : MonoBehaviour
     public bool InCinematic;
     public float CinematicSlideSpeed;
     public float MaxCinematicSlideSpeed;
+
+    public bool inQTE;
     
     [Header(" FX and Graphical Enhancements ")]
     public ParticleSystem JumpSmoke;
@@ -547,6 +554,7 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
+        AbilityInputHandler();
         if (hingeJoint2D == null)
         {
             hingeJoint2D = GetComponent<HingeJoint2D>();
@@ -923,60 +931,8 @@ public class Movement : MonoBehaviour
 
 
 
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            if (StickHP.PlayerHP > 0 && canSlide == true)
-            {
-                StartCoroutine(Slide());
-
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            if (InHeliCineBeatdown)
-            {
-                StickAnim.SetTrigger("Dodge");
-
-                StickAnim.CrossFade("CrazySigmaDodgeYOOOOOO", 0, 0);
-
-            }
-            else
-            {
-                StickAnim.SetTrigger("Dodge");
-
-                if (PerfectDodgeCount == MaxDodge && LockedIN && !inRush)
-                {
-                    StartedDecay = false;
-                    StartCoroutine(PerfectDodge_SloMO());
-                }
-                else if (StickHP.PlayerHP > 0 && Time.time >= LastBackFlip + BackFlipCD && !inSlipperyState && !inCombo && !isJumping && Grounded && !inRush)
-                {
-                    LastBackFlip = Time.time;
-                    StartCoroutine(BackFlipMove());
-
-                }
-                else if (StickHP.PlayerHP > 0 && Time.time >= LastBackFlip + BackFlipCD && !inSlipperyState && !inCombo && !AirBackFlip && !inRush)
-                {
-                    AirBackFlip = true;
-                    LastBackFlip = Time.time;
-                    StartCoroutine(BackFlipMove());
-                }
-                //else if (StickHP.PlayerHP > 0 && Time.time >= LastBackFlip + BackFlipCD && isJumping && !inSlipperyState)
-                //{
-                //    isJumping = false;
-                //    LastBackFlip = Time.time;
-                //    StartCoroutine(BackFlipMove());
-                //}
-
-            }
-
-
-
-
-        }
-
-
+        
+       
 
 
         //hide
@@ -1068,6 +1024,7 @@ public class Movement : MonoBehaviour
         // dead
         if (StickHP.PlayerHP <= 0)
         {
+            rb.velocity = new Vector2(0,rb.velocity.y);
             if (TutTXT != null)
             {
                 TutTXT.gameObject.SetActive(false);
@@ -1267,10 +1224,7 @@ public class Movement : MonoBehaviour
             StickAnim.SetTrigger("Crouch");
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && !Dead && !BackFlip && !isInPerfectDodge && !OnLadder || Input.GetKeyDown(KeyCode.LeftShift) && canDash && HeliFinale && !OnLadder)
-        {
-            StartCoroutine(Dash());
-        }
+      
 
         if (StickmanGetsKnocked == true)
         {
@@ -1977,7 +1931,7 @@ public class Movement : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.C))
             {
-                if (StickHP.PlayerHP > 0 && canSlide == true && !isInPerfectDodge)
+                if (StickHP.PlayerHP > 0 && canSlide == true && !isInPerfectDodge && UnlockedSlide)
                 {
                     BuildUp = true;
                     StartCoroutine(Slide());
@@ -3079,7 +3033,7 @@ public class Movement : MonoBehaviour
 
     private bool PressedDash;
     public LayerMask StickLayer;
-    private IEnumerator Dash()
+    public IEnumerator Dash()
     {
         AirBackFlip = false;
         StickCollider.enabled = true;
@@ -3962,6 +3916,11 @@ public class Movement : MonoBehaviour
         HasKilledEmbry = data.HasKilledEmbry;
         HasKilledEcology = data.HasKilledEcology;
 
+        //Abilities
+        UnlockedBackflip = data.UnlockedBackflip;
+        UnlockedDash = data.UnlockedDash;
+        UnlockedSlide = data.UnlockedSlide;
+
     }
 
     public void OverrideSave_Position(float x, float y, float z)
@@ -3978,6 +3937,68 @@ public class Movement : MonoBehaviour
     }
 
 
+    public void AbilityInputHandler()
+    {
+          if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && !Dead && !BackFlip && !isInPerfectDodge && !OnLadder && UnlockedDash|| Input.GetKeyDown(KeyCode.LeftShift) && canDash && HeliFinale && !OnLadder)
+        {
+            StartCoroutine(Dash());
+        }
+
+        if (Input.GetKeyDown(KeyCode.C) && UnlockedSlide)
+        {
+            if (StickHP.PlayerHP > 0 && canSlide == true)
+            {
+                StartCoroutine(Slide());
+
+            }
+        }
+
+         if (Input.GetKeyDown(KeyCode.Q) && UnlockedBackflip || Input.GetKeyDown(KeyCode.Q) && inQTE)
+        {
+            if (InHeliCineBeatdown)
+            {
+                StickAnim.SetTrigger("Dodge");
+
+                StickAnim.CrossFade("CrazySigmaDodgeYOOOOOO", 0, 0);
+
+            }
+            else
+            {
+                StickAnim.SetTrigger("Dodge");
+
+                if (PerfectDodgeCount == MaxDodge && LockedIN && !inRush)
+                {
+                    StartedDecay = false;
+                    StartCoroutine(PerfectDodge_SloMO());
+                }
+                else if (StickHP.PlayerHP > 0 && Time.time >= LastBackFlip + BackFlipCD && !inSlipperyState && !inCombo && !isJumping && Grounded && !inRush)
+                {
+                    LastBackFlip = Time.time;
+                    StartCoroutine(BackFlipMove());
+
+                }
+                else if (StickHP.PlayerHP > 0 && Time.time >= LastBackFlip + BackFlipCD && !inSlipperyState && !inCombo && !AirBackFlip && !inRush)
+                {
+                    AirBackFlip = true;
+                    LastBackFlip = Time.time;
+                    StartCoroutine(BackFlipMove());
+                }
+                //else if (StickHP.PlayerHP > 0 && Time.time >= LastBackFlip + BackFlipCD && isJumping && !inSlipperyState)
+                //{
+                //    isJumping = false;
+                //    LastBackFlip = Time.time;
+                //    StartCoroutine(BackFlipMove());
+                //}
+
+            }
+
+
+
+
+        }
+
+
+    }
 
 
 

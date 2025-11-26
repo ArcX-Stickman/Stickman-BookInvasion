@@ -15,6 +15,12 @@ public class PlayerData
     public bool HasKilledEmbry;
     public bool HasFinishedEncounterAfterLab;
     public bool HasKilledEcology;
+
+    // Abilities
+    public bool UnlockedBackflip;
+    public bool UnlockedSlide;
+
+    public bool UnlockedDash;
     
 
     //Cutscenes And Stuff
@@ -42,6 +48,11 @@ public class PlayerData
         PlayerPOS[1] = PlayerManager.transform.position.y;
         PlayerPOS[2] = PlayerManager.transform.position.z;
         HasBrokeOutOfRope = PlayerManager.HasBrokeOutOfRope;
+
+        // Player Ability
+        UnlockedBackflip = PlayerManager.UnlockedBackflip;
+        UnlockedDash = PlayerManager.UnlockedDash;
+        UnlockedSlide = PlayerManager.UnlockedSlide;
 
         // Collectables
         Backflip = PlayerManager.BackflipCollected;

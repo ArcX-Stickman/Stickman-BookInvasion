@@ -5,9 +5,7 @@ using UnityEngine;
 
 public class ActivateAnObjectWithCollider : MonoBehaviour
 {
-
     [Header("Main Object")]
-
     public GameObject TheObject;
     public GameObject Enemies;
     public bool wantAlrDid;
@@ -20,100 +18,121 @@ public class ActivateAnObjectWithCollider : MonoBehaviour
     public bool Alrdid;
     public bool StartActive;
     public bool WantMuteAudio;
-    
+
     [Header("Optional Object")]
-
     public GameObject OptionalExtraObject;
-
     public bool OptionalObj_is_TutorialBased;
     public bool Opt_Activate;
-
     public string AnimTrans;
+
+    [Header("Timer Based Settings")]
+    public bool WantDelayForActivation;
+    public float Delay;
+
+    private bool TimerStart;
+
 
     void Start()
     {
-        if (!StartActive)
-        {
+        if (!StartActive && TheObject != null)
             TheObject.SetActive(false);
-
-        }
     }
 
     void Update()
     {
         if (TheObject == null) return;
-        if(Input.GetKeyDown(KeyCodeE) && OptionalObj_is_TutorialBased)
+
+        if (OptionalObj_is_TutorialBased && Input.GetKeyDown(KeyCodeE))
+            HandleOptionalObject();
+    }
+
+
+    private void HandleOptionalObject()
+    {
+        if (OptionalExtraObject == null) 
+            return;
+
+        Animator anim = OptionalExtraObject.GetComponent<Animator>();
+
+        if (anim != null)
         {
-
-            Animator anim = OptionalExtraObject.GetComponent<Animator>();
-            if (anim != null)
-            {
-                if (!Opt_Activate)
-                {
-                    // The animtion name can change anytime so remeber to change this if needed
-                    anim.CrossFade(AnimTrans, 0, 0);
-                }
-            }
-            else
-            {
-                 if (Opt_Activate)
-                {
-                    OptionalExtraObject.gameObject.SetActive(true);
-                }
-                else
-                {
-                    OptionalExtraObject.gameObject.SetActive(false);
-
-                }
-            }
-           
+            if (!Opt_Activate)
+                anim.CrossFade(AnimTrans, 0, 0);
+        }
+        else
+        {
+            OptionalExtraObject.SetActive(Opt_Activate);
         }
     }
 
+  
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && !Alrdid)
+        if (!collision.CompareTag("Player")) return;
+        if (Alrdid) return;
+
+        if (Wantonce)
+            Alrdid = true;
+
+        if (WantMuteAudio && TheObject != null)
         {
-            if (WantMuteAudio)
-            {
-                AudioSource audioSource = TheObject.GetComponent<AudioSource>();
+            AudioSource audioSource = TheObject.GetComponent<AudioSource>();
+            if (audioSource != null)
                 audioSource.mute = true;
-            }
-            if(OptionalExtraObject != null)
-            {
-                OptionalExtraObject.gameObject.SetActive(true);
-            }
-            if (Wantonce)
-            {
-                Alrdid = true;
-            }
-            if(isTut && !WantDeactivate)
-            {
-                TextMeshProUGUI txt = TheObject.gameObject.GetComponent<TextMeshProUGUI>();
-                txt.text = txtt;
-                TutorialKeyInput keyCode = TheObject.gameObject.GetComponent<TutorialKeyInput>();
-                keyCode.InputS = KeyCodeE;
-            }
-            if (WantDeactivate)
-            {
-                TheObject.SetActive(false);
-
-            }
-            else
-            {
-                if (wantAlrDid && !AlrDid)
-                {
-                    TheObject.SetActive(true);
-
-                    AlrDid = true;
-                }
-                else if (!wantAlrDid)
-                {
-                    TheObject.SetActive(true);
-
-                }
-            }
-            
         }
+
+        if (OptionalExtraObject != null)
+            OptionalExtraObject.SetActive(true);
+
+        if (isTut && !WantDeactivate && TheObject != null)
+        {
+            TextMeshProUGUI txt = TheObject.GetComponent<TextMeshProUGUI>();
+            if (txt != null)
+                txt.text = txtt;
+
+            TutorialKeyInput keyCode = TheObject.GetComponent<TutorialKeyInput>();
+            if (keyCode != null)
+                keyCode.InputS = KeyCodeE;
+        }
+
+        if (WantDeactivate)
+        {
+            if (TheObject != null)
+                TheObject.SetActive(false);
+            return;
+        }
+
+        if (WantDelayForActivation)
+        {
+            if (!TimerStart)
+                StartCoroutine(TimerBased());
+            return;
+        }
+
+        if (wantAlrDid)
+        {
+            if (!AlrDid && TheObject != null)
+            {
+                TheObject.SetActive(true);
+                AlrDid = true;
+            }
+        }
+        else
+        {
+            if (TheObject != null)
+                TheObject.SetActive(true);
+        }
+    }
+
+
+    public IEnumerator TimerBased()
+    {
+        TimerStart = true;
+        yield return new WaitForSecondsRealtime(Delay);
+
+        if (TheObject != null)
+            TheObject.SetActive(true);
+
+        TimerStart = false;
     }
 }

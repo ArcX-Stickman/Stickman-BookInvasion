@@ -938,6 +938,11 @@ MonoBehaviour:
   HealSFX: {fileID: 8300000, guid: 7eed9d7710263674a947e3aacd8ee2e0, type: 3}
   HealSpriteOverlay: {fileID: 212466453}
   HP_BarIMG: {fileID: 421559502}
+  LowHP_Graphix: {fileID: 0}
+  TKI: {fileID: 0}
+  TextTUT_TXT: {fileID: 0}
+  Direction: 
+  animator4UI: {fileID: 0}
 --- !u!114 &131488528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1041,6 +1046,7 @@ MonoBehaviour:
   BackFlipAS: {fileID: 131488524}
   LastBackflipTime: 0
   AirBackFlip: 0
+  TriggerBackflipMovement: 0
   PunchAudioP: {fileID: 131488524}
   PunchSFX:
   - {fileID: 8300000, guid: e09e99d3176c38645bb8e06680a2a34a, type: 3}
@@ -1086,6 +1092,9 @@ MonoBehaviour:
   FinshedEncounterAfterLab: 0
   HasBrokeOutOfRope: 0
   LoadingSystem: {fileID: 0}
+  UnlockedBackflip: 0
+  UnlockedDash: 0
+  UnlockedSlide: 0
   XP_Orbs: 0
   Cutscene_IntroFight: 0
   NeedsToViewDirecFirstIntro: 0
@@ -1122,10 +1131,12 @@ MonoBehaviour:
   EmbryProjectile: {fileID: 0}
   EmbryPOS: {fileID: 0}
   CanCatch: 0
+  StickPlayerWannaCatch: 0
   CounterAimPoint: {fileID: 442845401}
   ThrowSFX: {fileID: 8300000, guid: 5d283d7e5b847ee478d64dbf285aed58, type: 3}
   ExamBullet: {fileID: 0}
   Helicopter: {fileID: 0}
+  catchWindow: 0
   InEmbryBoss: 0
   InBIO_Boss: 0
   InScienceBoss: 0
@@ -1177,6 +1188,11 @@ MonoBehaviour:
   InCinematic: 0
   CinematicSlideSpeed: 0
   MaxCinematicSlideSpeed: 0
+  inQTE: 0
+  JumpSmoke: {fileID: 0}
+  SlideSmoke: {fileID: 0}
+  GrassBlades: {fileID: 0}
+  DashSmoke: {fileID: 0}
   Level1: {fileID: 212466453}
   Level2: {fileID: 1917667554}
   Level1Grass: {fileID: 0}
@@ -1279,7 +1295,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6.4100003, y: 10.570294}
+    oldSize: {x: 6.4198055, y: 10.57}
     newSize: {x: 6.4100003, y: 10.570294}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

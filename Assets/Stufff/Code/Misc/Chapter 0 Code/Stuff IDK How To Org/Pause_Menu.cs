@@ -17,6 +17,7 @@ public class PauseManager : MonoBehaviour
 
     // Audio
     public bool NoHUD;
+    public bool NoMusicOnPauseForced;
     public GameObject Collectables;
     public bool Audio;
     public AudioSource AudioP;
@@ -255,6 +256,15 @@ public class PauseManager : MonoBehaviour
                 }
             }
         }
+
+        if (PlayerManager.StickHP.PlayerHP > 0 && Audio && NoHUD && NoMusicOnPauseForced)
+            {
+                foreach (var music in MusicSources)
+                {
+                    if (music != null && music.gameObject.activeSelf)
+                        music.Pause();
+                }
+            }
 
 
         Time.fixedDeltaTime = 0f;
