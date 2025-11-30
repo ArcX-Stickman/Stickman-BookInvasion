@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ChemicalExhaustManager : MonoBehaviour
@@ -35,86 +34,131 @@ public class ChemicalExhaustManager : MonoBehaviour
     public GameObject Smoke9;
 
     public AudioSource AudioP;
+    public AudioSource AudioBassdrop;
     public AudioClip Explosion;
-    public Vision PlayerVolume;
-    private bool AlrRunningQTE;
     public AudioClip BassDrop;
     public AudioSource BGMusic;
-    
+
+    public Vision PlayerVolume1;
+    public Vision PlayerVolume2;
+    public Vision PlayerVolume3;
+    public Vision PlayerVolume4;
+    public Vision PlayerVolume5;
+    public Vision PlayerVolume6;
+    public Vision PlayerVolume7;
+    public Vision PlayerVolume8;
+    public Vision PlayerVolume9;
+    public Vision PlayerVolume10;
+    public Vision PlayerVolume11;
+    public Vision PlayerVolume12;
+    public Vision PlayerVolume13;
+
     void Update()
     {
-        if(!AlrRunning && Touched)
+        if (!AlrRunning && Touched)
         {
             AlrRunning = true;
             StartCoroutine(PLatQTE());
         }
-       
+    }
+
+    IEnumerator WaitForPlayer(Vision vol, float minWait)
+    {
+        float timer = 0f;
+
+        // lil  delay
+        while (timer < minWait)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        // safe sone
+        while (!vol.PlayerSpotted)
+        {
+            yield return null;
+        }
     }
 
     public IEnumerator PLatQTE()
     {
-        Smoke1.gameObject.SetActive(true);
-        yield return new WaitForSecondsRealtime(1.2f);
+        Smoke1.SetActive(true);
+        yield return StartCoroutine(WaitForPlayer(PlayerVolume1, 0.5f));
+
         AudioP.PlayOneShot(Explosion);
-        Explosion1.gameObject.SetActive(true);
+        Explosion1.SetActive(true);
         Destroy(Vent1);
-        yield return new WaitForSecondsRealtime(0.2f);
-        Smoke2.gameObject.SetActive(true);
-        yield return new WaitForSecondsRealtime(0.5f);
-        Smoke3.gameObject.SetActive(true);
-        yield return new WaitForSecondsRealtime(1F);
-        Explosion2.gameObject.SetActive(true);
-        AudioP.PlayOneShot(Explosion);
 
+
+        yield return StartCoroutine(WaitForPlayer(PlayerVolume2, 0.1f));
+        Smoke2.SetActive(true);
+
+        yield return StartCoroutine(WaitForPlayer(PlayerVolume3, 0.1f));
+        Smoke3.SetActive(true);
+
+        yield return StartCoroutine(WaitForPlayer(PlayerVolume4, 0.6f));
+
+        Explosion2.SetActive(true);
+        AudioP.PlayOneShot(Explosion);
         Destroy(Vent2);
-        yield return new WaitForSecondsRealtime(0.3f);
-        Smoke4.gameObject.SetActive(true);
-        yield return new WaitForSecondsRealtime(0.1f);
-        Smoke5.gameObject.SetActive(true);
-        yield return new WaitForSecondsRealtime(0.5f);
-        Explosion3.gameObject.SetActive(true);
-        AudioP.PlayOneShot(Explosion);
 
+        yield return StartCoroutine(WaitForPlayer(PlayerVolume5, 0.01f));
+        Smoke4.SetActive(true);
+
+        yield return StartCoroutine(WaitForPlayer(PlayerVolume6, 0.1f));
+        Smoke5.SetActive(true);
+
+        yield return StartCoroutine(WaitForPlayer(PlayerVolume7, 0.6f));
+
+        Explosion3.SetActive(true);
+        AudioP.PlayOneShot(Explosion); 
         Destroy(Vent3);
-        yield return new WaitForSecondsRealtime(0.1f);
-        Smoke6.gameObject.SetActive(true);
-        yield return new WaitForSecondsRealtime(0.3f);
-        Smoke7.gameObject.SetActive(true);
-        yield return new WaitForSecondsRealtime(1f);
-        Explosion4.gameObject.SetActive(true);
+
+        yield return StartCoroutine(WaitForPlayer(PlayerVolume8, 0.1f));
+        Smoke6.SetActive(true);
+
+        yield return StartCoroutine(WaitForPlayer(PlayerVolume9, 0.1f));
+        Smoke7.SetActive(true);
+
+        yield return StartCoroutine(WaitForPlayer(PlayerVolume10, 0.6f));
+
+        Explosion4.SetActive(true);
         AudioP.PlayOneShot(Explosion);
         Movement stick = FindAnyObjectByType<Movement>();
-        AudioP.PlayOneShot(BassDrop);
+        bool Dive = stick.StickAnim.GetBool("Dive");
+
+        yield return new WaitUntil(() => (Dive == true));
+
+        AudioBassdrop.PlayOneShot(BassDrop);
         stick.TimeManager.WantAudioSame = true;
         stick.TimeManager.SloMO();
-        while (stick.Grounded)
+        BGMusic.Pause();
+        if (AudioBassdrop.isPlaying)
         {
-            yield return null;
+            Debug.Log("Yuh u just deaf my boy bassdrop is indeed workin");
         }
-        //yield return new WaitForSecondsRealtime(1.2f);
+        AudioP.volume = 0.3f;
+        AudioBassdrop.volume = 1;
 
-        Explosion5.gameObject.SetActive(true);
+        Explosion5.SetActive(true);
         AudioP.PlayOneShot(Explosion);
         Destroy(Vent5);
-        BGMusic.gameObject.SetActive(false);
         yield return new WaitForSecondsRealtime(0.3f);
 
-        Explosion6.gameObject.SetActive(true);
+        Explosion6.SetActive(true);
         AudioP.PlayOneShot(Explosion);
         Destroy(Vent6);
-        yield return new WaitForSecondsRealtime(0.2f);
 
-        Explosion7.gameObject.SetActive(true);
+        yield return new WaitForSecondsRealtime(0.3f);
+
+        Explosion7.SetActive(true);
         AudioP.PlayOneShot(Explosion);
-
         Destroy(Vent7);
-        BGMusic.gameObject.SetActive(true);
+        yield return new WaitUntil(() => (Explosion7 == null));
+
+        BGMusic.UnPause();
         stick.TimeManager.WantAudioSame = false;
-
-
 
         yield break;
     }
-
-    
 }

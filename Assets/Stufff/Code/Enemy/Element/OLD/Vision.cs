@@ -4,21 +4,43 @@ using UnityEngine;
 
 public class Vision : MonoBehaviour
 {
-
     public bool PlayerSpotted;
     public Health MusicTrigg;
     public bool Immediate;
     public bool UsedFor1stCut;
+
     public Movement Player;
     public bool PlayerExitedVision;
-    // Start is called before the first frame update
+
+    public bool IsUsedAsDistanceBasedTrigger;
+    public float Distance;
+    public float MinDIS;
+    public Movement Stick;
+
     void Start()
     {
         PlayerSpotted = false;
     }
 
+    void Update()
+    {
+        if (IsUsedAsDistanceBasedTrigger)
+        {
+            Distance = Vector2.Distance(transform.position, Stick.transform.position);
+            PlayerSpotted = Distance <= MinDIS;
+            return;
+        }
+
+        if (Immediate)
+        {
+            PlayerSpotted = true;
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (IsUsedAsDistanceBasedTrigger) return;
+
         if (collision.CompareTag("Player"))
         {
             if (UsedFor1stCut)
@@ -26,7 +48,6 @@ public class Vision : MonoBehaviour
                 if (Player.Cutscene_IntroFight)
                 {
                     PlayerSpotted = true;
-
                 }
                 else
                 {
@@ -37,29 +58,17 @@ public class Vision : MonoBehaviour
             {
                 PlayerSpotted = true;
                 PlayerExitedVision = false;
-
-
             }
         }
-        
     }
-
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (IsUsedAsDistanceBasedTrigger) return;
+
         if (collision.CompareTag("Player"))
         {
             PlayerExitedVision = true;
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //hi
-        if (Immediate)
-        {
-            PlayerSpotted = true;
         }
     }
 }
