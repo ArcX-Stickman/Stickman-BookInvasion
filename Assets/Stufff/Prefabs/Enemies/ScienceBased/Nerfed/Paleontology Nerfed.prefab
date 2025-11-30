@@ -136,6 +136,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3315367333163192508}
   - component: {fileID: 1248267413872661763}
+  - component: {fileID: 7731850631063369036}
   m_Layer: 17
   m_Name: R_HAND
   m_TagString: Untagged
@@ -165,7 +166,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1141647848539123687}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -210,6 +211,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7731850631063369036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141647848539123687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9105bfaded2a4ac08799e31adf0712c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 350
+  currentDistance: 1218.509
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 1248267413872661763}
+  HighQualitySprite: {fileID: 0}
 --- !u!1 &1440088167809966949
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,6 +238,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6717248840676465903}
   - component: {fileID: 6496056727958942791}
+  - component: {fileID: 5860615218370339677}
   m_Layer: 17
   m_Name: L_LEG
   m_TagString: Untagged
@@ -249,7 +268,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1440088167809966949}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -294,6 +313,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5860615218370339677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1440088167809966949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9105bfaded2a4ac08799e31adf0712c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 350
+  currentDistance: 1218.4435
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 6496056727958942791}
+  HighQualitySprite: {fileID: 0}
 --- !u!1 &2364855638356798372
 GameObject:
   m_ObjectHideFlags: 0
@@ -627,6 +663,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4102150496366591802}
   - component: {fileID: 7540795260967196915}
+  - component: {fileID: 2553620216338868338}
   m_Layer: 17
   m_Name: R_LEG
   m_TagString: Untagged
@@ -656,7 +693,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3537248796891230592}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -701,6 +738,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2553620216338868338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3537248796891230592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9105bfaded2a4ac08799e31adf0712c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 350
+  currentDistance: 1218.4435
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 7540795260967196915}
+  HighQualitySprite: {fileID: 0}
 --- !u!1 &3652606895260935925
 GameObject:
   m_ObjectHideFlags: 0
@@ -796,6 +850,8 @@ GameObject:
   - component: {fileID: 2033770778923712671}
   - component: {fileID: 2936587091572599933}
   - component: {fileID: 8862278092171952256}
+  - component: {fileID: 4545225576683105657}
+  - component: {fileID: 5526421281962633888}
   m_Layer: 17
   m_Name: Ouch
   m_TagString: Untagged
@@ -825,7 +881,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3865129996354568219}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -877,7 +933,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3865129996354568219}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
   m_Name: 
@@ -928,6 +984,39 @@ MonoBehaviour:
   - {x: -2.9799805, y: 1.9214058, z: 0}
   - {x: -2.7664185, y: 1.4179878, z: 0}
   - {x: -2.5685272, y: 1.314373, z: 0}
+--- !u!114 &4545225576683105657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3865129996354568219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca721137ebf557a4ea2ec26014a0924a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 250
+  currentDistance: 1218.352
+  player: {fileID: 0}
+  light2D: {fileID: 8862278092171952256}
+--- !u!114 &5526421281962633888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3865129996354568219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9105bfaded2a4ac08799e31adf0712c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 350
+  currentDistance: 1218.352
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 2936587091572599933}
+  HighQualitySprite: {fileID: 0}
 --- !u!1 &3955955713417054035
 GameObject:
   m_ObjectHideFlags: 0
@@ -938,6 +1027,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5065029611524432684}
   - component: {fileID: 1646674656473081975}
+  - component: {fileID: 6882843467392354541}
   m_Layer: 17
   m_Name: MUSTACHE
   m_TagString: Untagged
@@ -967,7 +1057,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3955955713417054035}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -1012,6 +1102,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6882843467392354541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3955955713417054035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9105bfaded2a4ac08799e31adf0712c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 350
+  currentDistance: 1218.4435
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 1646674656473081975}
+  HighQualitySprite: {fileID: 0}
 --- !u!1 &4199593238791907898
 GameObject:
   m_ObjectHideFlags: 0
@@ -1112,6 +1219,8 @@ GameObject:
   - component: {fileID: 7984084974498942829}
   - component: {fileID: 4770505024058350436}
   - component: {fileID: 5308541831680238740}
+  - component: {fileID: 5590325087117722046}
+  - component: {fileID: 4814903012024863118}
   m_Layer: 17
   m_Name: L_EYE
   m_TagString: Untagged
@@ -1141,7 +1250,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4453168406078204105}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -1193,7 +1302,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4453168406078204105}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
   m_Name: 
@@ -1244,6 +1353,39 @@ MonoBehaviour:
   - {x: -2.9799805, y: 1.9214058, z: 0}
   - {x: -2.7664185, y: 1.4179878, z: 0}
   - {x: -2.5685272, y: 1.314373, z: 0}
+--- !u!114 &5590325087117722046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4453168406078204105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca721137ebf557a4ea2ec26014a0924a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 250
+  currentDistance: 1218.4435
+  player: {fileID: 0}
+  light2D: {fileID: 5308541831680238740}
+--- !u!114 &4814903012024863118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4453168406078204105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9105bfaded2a4ac08799e31adf0712c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 350
+  currentDistance: 1218.4435
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 4770505024058350436}
+  HighQualitySprite: {fileID: 0}
 --- !u!1 &4587139459991251677
 GameObject:
   m_ObjectHideFlags: 0
@@ -1462,6 +1604,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6817752057707123292}
   - component: {fileID: 6318191107857127846}
+  - component: {fileID: 7669983716621507140}
   m_Layer: 17
   m_Name: WRDS
   m_TagString: Untagged
@@ -1491,7 +1634,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5808286472768216643}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -1536,6 +1679,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7669983716621507140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5808286472768216643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9105bfaded2a4ac08799e31adf0712c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 350
+  currentDistance: 1218.4435
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 6318191107857127846}
+  HighQualitySprite: {fileID: 0}
 --- !u!1 &6027469261431747637
 GameObject:
   m_ObjectHideFlags: 0
@@ -1882,12 +2042,14 @@ MonoBehaviour:
   isOneShot: 0
   Threshold4RangedAfterMelee: 0
   BookDetectorRayCast: {fileID: 6947952992513666308}
+  TotalListOfEnemies: []
   AbleToStrike: 0
   WutsABook:
     serializedVersion: 2
     m_Bits: 131072
   DistanceOfRaycast: 50
   isStunnable: 0
+  enemyStatus: 0
   VariedAttackCD: 0
   isBoss: 0
   PhaseNum: 0
@@ -1901,6 +2063,8 @@ MonoBehaviour:
   CurrentPunches: 0
   MaxPunchesBeforeReset: 0
   BossHP_UI: {fileID: 0}
+  FirstZygote: {fileID: 0}
+  AlrDidFirstZygoteSloMo_Embry: 0
   TimesCaught_Embry: 0
   Zygote: {fileID: 0}
   Zygotes: []
@@ -1918,6 +2082,9 @@ MonoBehaviour:
   ShockSound: {fileID: 0}
   DashCD: 0
   LastDash: 0
+  BloodParticles: {fileID: 0}
+  DirtParticles: {fileID: 0}
+  Embry_Partcle_Pos: {fileID: 0}
   Spore: {fileID: 0}
   SunManager: {fileID: 0}
   SolarSFX: {fileID: 0}
@@ -1963,6 +2130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8176105606872708315}
   - component: {fileID: 5569353881996098286}
+  - component: {fileID: 1417038476007897813}
   m_Layer: 17
   m_Name: R_HAND2
   m_TagString: Untagged
@@ -1992,7 +2160,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6251998120239272190}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -2037,6 +2205,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1417038476007897813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6251998120239272190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9105bfaded2a4ac08799e31adf0712c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 350
+  currentDistance: 1218.4435
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 5569353881996098286}
+  HighQualitySprite: {fileID: 0}
 --- !u!1 &6818228939329779186
 GameObject:
   m_ObjectHideFlags: 0
@@ -2047,6 +2232,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1545628753176250823}
   - component: {fileID: 6067359553035537807}
+  - component: {fileID: 6294505395262665768}
   m_Layer: 17
   m_Name: L_HAND
   m_TagString: Untagged
@@ -2076,7 +2262,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6818228939329779186}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -2121,6 +2307,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6294505395262665768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6818228939329779186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9105bfaded2a4ac08799e31adf0712c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 350
+  currentDistance: 1218.2145
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 6067359553035537807}
+  HighQualitySprite: {fileID: 0}
 --- !u!1 &6847985241617995165
 GameObject:
   m_ObjectHideFlags: 0
@@ -2131,6 +2334,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1592402783561369410}
   - component: {fileID: 1577959781330688979}
+  - component: {fileID: 8117076418774302130}
   m_Layer: 17
   m_Name: R_HAND3
   m_TagString: Untagged
@@ -2160,7 +2364,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6847985241617995165}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -2205,6 +2409,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8117076418774302130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6847985241617995165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9105bfaded2a4ac08799e31adf0712c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 350
+  currentDistance: 1218.4435
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 1577959781330688979}
+  HighQualitySprite: {fileID: 0}
 --- !u!1 &6875279436541775830
 GameObject:
   m_ObjectHideFlags: 0
@@ -2215,6 +2436,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7632279097928047224}
   - component: {fileID: 8821347919786355158}
+  - component: {fileID: 6824496711230945281}
   m_Layer: 17
   m_Name: Glasses
   m_TagString: Untagged
@@ -2244,7 +2466,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6875279436541775830}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -2289,6 +2511,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6824496711230945281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6875279436541775830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9105bfaded2a4ac08799e31adf0712c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 350
+  currentDistance: 1218.2924
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 8821347919786355158}
+  HighQualitySprite: {fileID: 0}
 --- !u!1 &6900063095575376894
 GameObject:
   m_ObjectHideFlags: 0
@@ -2384,6 +2623,8 @@ GameObject:
   - component: {fileID: 565792456700670934}
   - component: {fileID: 1853282084289229454}
   - component: {fileID: 6477092805590612735}
+  - component: {fileID: 6386719776647678869}
+  - component: {fileID: 2175131772279193830}
   m_Layer: 17
   m_Name: R_EYE
   m_TagString: Untagged
@@ -2413,7 +2654,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7756760868048639746}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -2465,7 +2706,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7756760868048639746}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
   m_Name: 
@@ -2516,6 +2757,39 @@ MonoBehaviour:
   - {x: -2.9799805, y: 1.9214058, z: 0}
   - {x: -2.7664185, y: 1.4179878, z: 0}
   - {x: -2.5685272, y: 1.314373, z: 0}
+--- !u!114 &6386719776647678869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7756760868048639746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca721137ebf557a4ea2ec26014a0924a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 250
+  currentDistance: 1218.4435
+  player: {fileID: 0}
+  light2D: {fileID: 6477092805590612735}
+--- !u!114 &2175131772279193830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7756760868048639746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9105bfaded2a4ac08799e31adf0712c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 350
+  currentDistance: 1218.4435
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 1853282084289229454}
+  HighQualitySprite: {fileID: 0}
 --- !u!1 &7808916706991187770
 GameObject:
   m_ObjectHideFlags: 0
@@ -2695,6 +2969,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2218139147498502203}
   - component: {fileID: 1769316659570674210}
+  - component: {fileID: 7257601892756099757}
   m_Layer: 0
   m_Name: MeleeBone
   m_TagString: Untagged
@@ -2724,7 +2999,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9210235204880833719}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -2769,3 +3044,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7257601892756099757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9210235204880833719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9105bfaded2a4ac08799e31adf0712c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 250
+  currentDistance: 1217.3835
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 1769316659570674210}
+  HighQualitySprite: {fileID: 0}

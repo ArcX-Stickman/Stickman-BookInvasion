@@ -10,6 +10,7 @@ public class Vision : MonoBehaviour
     public bool Immediate;
     public bool UsedFor1stCut;
     public Movement Player;
+    public bool PlayerExitedVision;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,10 +36,21 @@ public class Vision : MonoBehaviour
             else
             {
                 PlayerSpotted = true;
+                PlayerExitedVision = false;
+
 
             }
         }
         
+    }
+
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            PlayerExitedVision = true;
+        }
     }
 
     // Update is called once per frame

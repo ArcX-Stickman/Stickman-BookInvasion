@@ -38,6 +38,8 @@ public class LabBreakIn : MonoBehaviour
 
     public GameObject LightinLab;
 
+    public BG_Music BG_Music;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,7 +56,6 @@ public class LabBreakIn : MonoBehaviour
     {
         if(Stickman.Checkpoint == Stickman.ExamHeliID_Checkpoint && !AlrBrokeIn)
         {
-            BG_Music BG_Music = FindAnyObjectByType<BG_Music>();
             BG_Music.LowHP_BG.gameObject.SetActive(false);
             BreakInMusic.gameObject.SetActive(true);
             LightinLab.gameObject.SetActive(true);

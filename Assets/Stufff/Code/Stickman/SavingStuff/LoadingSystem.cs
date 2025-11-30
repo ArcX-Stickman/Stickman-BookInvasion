@@ -20,6 +20,14 @@ public class LoadingSystem : MonoBehaviour
     public GameObject Player;
     public GameObject Level1;
     public GameObject Level2;
+
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.F1))
+        {
+
+        }
+    }
     public void LoadGameScene()
     {
         if (ForTitle)
@@ -114,10 +122,11 @@ public class LoadingSystem : MonoBehaviour
         PlayerData data = SaveSystem.LoadSave();
         
         string sceneToLoad = data?.SceneName ?? "Game";
-        if(sceneToLoad == " ")
+        if(sceneToLoad == " " || sceneToLoad == "" || sceneToLoad == null)
         {
             sceneToLoad = "Game";
         }
+        Debug.Log(SceneManager.GetSceneByName(sceneToLoad).buildIndex);
 
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync(sceneToLoad);
         loadOperation.allowSceneActivation = false;

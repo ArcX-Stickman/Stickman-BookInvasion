@@ -93,7 +93,11 @@ public class Health : MonoBehaviour
     {
         
         // This is The Low HP Post Process Volume
-        animator4UI.SetBool("High",HighHP());
+        if(animator4UI != null)
+        {
+            animator4UI.SetBool("High", HighHP());
+
+        }
 
         if (Input.GetKey(KeyCode.F12) && Input.GetKeyDown(KeyCode.L))
         {

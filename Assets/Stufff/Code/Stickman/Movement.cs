@@ -994,9 +994,13 @@ public class Movement : MonoBehaviour
             return;
         }
 
-        if (!isSliding)
+        if (!isSliding )
         {
-            SlideSmoke.gameObject.SetActive(false);
+            if(SlideSmoke != null)
+            {
+                SlideSmoke.gameObject.SetActive(false);
+
+            }
             StickAnim.SetBool("Slide", false);
         }
 
@@ -1893,7 +1897,7 @@ public class Movement : MonoBehaviour
                 GrassBlades.gameObject.SetActive(true);
                 GrassBlades.gameObject.transform.localScale = new Vector3 (GrassBlades.gameObject.transform.localScale.x * -transform.localScale.x,GrassBlades.transform.localScale.y,GrassBlades.transform.localScale.z);
             }
-            else if(!isSliding)
+            else if(!isSliding && GrassBlades != null)
             {
                 GrassBlades.gameObject.SetActive(false);
             }

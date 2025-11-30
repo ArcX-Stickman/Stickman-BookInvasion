@@ -15,54 +15,75 @@ public class SpriteCulling : MonoBehaviour
     private const float checkInterval = 1f;
 
     public Sprite HighQualitySprite;
-
     private Sprite LowResSprite;
+
+    private bool isCulled;
+
+    public bool useManager = true;
 
     void Start()
     {
+        if (spriteRenderer == null)
+            spriteRenderer = GetComponent<SpriteRenderer>();
+
         LowResSprite = spriteRenderer.sprite;
+
+        if (player == null)
+        {
+            Movement stick = FindObjectOfType<Movement>();
+            if (stick != null)
+                player = stick.transform;
+        }
     }
 
     void OnEnable()
     {
-        if (player == null)
-        {
-            Movement stick = FindObjectOfType<Movement>();
-            if (stick != null)
-                player = stick.transform;
-        }
-        if(HighQualitySprite != null)
-        {
-            spriteRenderer.sprite = HighQualitySprite;
-
-        }
-        if (spriteRenderer == null)
-            spriteRenderer = GetComponent<SpriteRenderer>();
-
+       
         nextCheckTime = Time.time + Random.Range(0f, checkInterval);
     }
 
-     private void OnDisable() {
-        if(LowResSprite != null && HighQualitySprite != null)
-        {
+    private void OnDisable()
+    {
+        if (LowResSprite != null && HighQualitySprite != null)
             spriteRenderer.sprite = LowResSprite;
-        }
     }
-
 
     void Update()
     {
+
+        if (useManager) return;
+
         if (player == null)
+            return;
+
+        if (Time.time < nextCheckTime)
+            return;
+
+        nextCheckTime = Time.time + checkInterval;
+
+        float distSqr = (transform.position - player.position).sqrMagnitude;
+        float maxDistSqr = maxDistance * maxDistance;
+
+        currentDistance = Mathf.Sqrt(distSqr);
+        if (distSqr > maxDistSqr)
         {
-            Movement stick = FindObjectOfType<Movement>();
-            if (stick != null)
-                player = stick.transform;
+            if (!isCulled)
+            {
+                spriteRenderer.sprite = LowResSprite;
+                spriteRenderer.enabled = false;
+                isCulled = true;
+            }
         }
-        if (Time.time >= nextCheckTime && player != null)
+        else
         {
-            currentDistance = Vector2.Distance(transform.position, player.position);
-            nextCheckTime = Time.time + checkInterval;
-            spriteRenderer.enabled = currentDistance <= maxDistance;
+            if (isCulled)
+            {
+                if (HighQualitySprite != null)
+                    spriteRenderer.sprite = HighQualitySprite;
+
+                spriteRenderer.enabled = true;
+                isCulled = false;
+            }
         }
     }
 }

@@ -1,7 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
-
+[ExecuteAlways]
 public class LightCulling : MonoBehaviour
 {
     [Header("Culling Settings")]

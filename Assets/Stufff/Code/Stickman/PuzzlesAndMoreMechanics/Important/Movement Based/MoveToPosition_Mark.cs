@@ -29,6 +29,8 @@ public class MoveToPosition_Mark : MonoBehaviour
 
     public string AnimBool;
 
+    public bool DisableRB;
+
     public void Update()
     {
         if (Triggered && !Reached)
@@ -42,6 +44,10 @@ public class MoveToPosition_Mark : MonoBehaviour
         if (ForcePlayerLookDirection)
         {
             StickPOS.transform.localScale = new Vector3(Direc, StickPOS.transform.localScale.y, StickPOS.transform.localScale.z);
+        }
+        if (DisableRB)
+        {
+            StickScript.rb.simulated = false;
         }
         Distance = Vector2.Distance(TargetPOS.position, StickPOS.position);
         if (Distance > MINDIS)
@@ -72,6 +78,7 @@ public class MoveToPosition_Mark : MonoBehaviour
         }
         if(Distance < MINDIS)
         {
+            StickScript.rb.simulated = true;
             if (TurnOffMoveScript)
             {
                 StickScript.enabled = true;

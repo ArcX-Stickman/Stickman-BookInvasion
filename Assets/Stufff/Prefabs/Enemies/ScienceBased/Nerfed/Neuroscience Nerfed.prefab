@@ -294,12 +294,14 @@ MonoBehaviour:
   isOneShot: 0
   Threshold4RangedAfterMelee: 0
   BookDetectorRayCast: {fileID: 7336858636997991800}
+  TotalListOfEnemies: []
   AbleToStrike: 0
   WutsABook:
     serializedVersion: 2
     m_Bits: 131072
   DistanceOfRaycast: 50
   isStunnable: 0
+  enemyStatus: 0
   VariedAttackCD: 0
   isBoss: 0
   PhaseNum: 0
@@ -313,6 +315,8 @@ MonoBehaviour:
   CurrentPunches: 0
   MaxPunchesBeforeReset: 0
   BossHP_UI: {fileID: 0}
+  FirstZygote: {fileID: 0}
+  AlrDidFirstZygoteSloMo_Embry: 0
   TimesCaught_Embry: 0
   Zygote: {fileID: 0}
   Zygotes: []
@@ -330,6 +334,9 @@ MonoBehaviour:
   ShockSound: {fileID: 0}
   DashCD: 0
   LastDash: 0
+  BloodParticles: {fileID: 0}
+  DirtParticles: {fileID: 0}
+  Embry_Partcle_Pos: {fileID: 0}
   Spore: {fileID: 0}
   SunManager: {fileID: 0}
   SolarSFX: {fileID: 0}
@@ -375,6 +382,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8207905592785744358}
   - component: {fileID: 3949046148229862487}
+  - component: {fileID: 8305770182668397023}
   m_Layer: 17
   m_Name: R_HAND_CLAP
   m_TagString: Book
@@ -404,7 +412,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 748011330521789040}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -449,6 +457,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8305770182668397023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 748011330521789040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9105bfaded2a4ac08799e31adf0712c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 350
+  currentDistance: 5448.8784
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 3949046148229862487}
+  HighQualitySprite: {fileID: 0}
 --- !u!1 &1670161410275403151
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,6 +579,8 @@ GameObject:
   - component: {fileID: 5824746572063324384}
   - component: {fileID: 4153843210951375798}
   - component: {fileID: 545323601269552974}
+  - component: {fileID: 3603630623684125534}
+  - component: {fileID: 7977080334080574557}
   m_Layer: 17
   m_Name: L_EYE_NOR
   m_TagString: Book
@@ -583,7 +610,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2074881150093680561}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -678,6 +705,39 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &3603630623684125534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074881150093680561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca721137ebf557a4ea2ec26014a0924a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 350
+  currentDistance: 0
+  player: {fileID: 0}
+  light2D: {fileID: 0}
+--- !u!114 &7977080334080574557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074881150093680561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9105bfaded2a4ac08799e31adf0712c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 350
+  currentDistance: 5448.8022
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 4153843210951375798}
+  HighQualitySprite: {fileID: 0}
 --- !u!1 &3021854364969232749
 GameObject:
   m_ObjectHideFlags: 0
@@ -688,6 +748,7 @@ GameObject:
   m_Component:
   - component: {fileID: 779785534015989786}
   - component: {fileID: 1981252446746341273}
+  - component: {fileID: 2160647443225599641}
   m_Layer: 17
   m_Name: MOUTH_NOR
   m_TagString: Book
@@ -717,7 +778,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3021854364969232749}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -762,6 +823,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2160647443225599641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3021854364969232749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9105bfaded2a4ac08799e31adf0712c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 350
+  currentDistance: 5448.5684
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 1981252446746341273}
+  HighQualitySprite: {fileID: 0}
 --- !u!1 &3081985655034617631
 GameObject:
   m_ObjectHideFlags: 0
@@ -967,6 +1045,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3614432880907227466}
   - component: {fileID: 5795521299671334740}
+  - component: {fileID: 4598840623340844841}
   m_Layer: 17
   m_Name: R_LEG
   m_TagString: Book
@@ -996,7 +1075,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3539664311261036261}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -1041,6 +1120,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4598840623340844841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3539664311261036261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9105bfaded2a4ac08799e31adf0712c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 350
+  currentDistance: 5448.5967
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 5795521299671334740}
+  HighQualitySprite: {fileID: 0}
 --- !u!1 &3545388216630204557
 GameObject:
   m_ObjectHideFlags: 0
@@ -1051,6 +1147,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2569456242594008536}
   - component: {fileID: 7050603456028223482}
+  - component: {fileID: 7989115733121465660}
   m_Layer: 17
   m_Name: L_Hand_ABT_ToClap
   m_TagString: Book
@@ -1080,7 +1177,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3545388216630204557}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -1125,6 +1222,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7989115733121465660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3545388216630204557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9105bfaded2a4ac08799e31adf0712c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 350
+  currentDistance: 5448.4126
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 7050603456028223482}
+  HighQualitySprite: {fileID: 0}
 --- !u!1 &4012136622332650784
 GameObject:
   m_ObjectHideFlags: 0
@@ -1135,6 +1249,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1384275200325943454}
   - component: {fileID: 4247457666049204837}
+  - component: {fileID: 939230107632907617}
   m_Layer: 17
   m_Name: R_HAND_ABT_CLAP
   m_TagString: Book
@@ -1164,7 +1279,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4012136622332650784}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -1209,6 +1324,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &939230107632907617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4012136622332650784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9105bfaded2a4ac08799e31adf0712c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 350
+  currentDistance: 5448.6616
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 4247457666049204837}
+  HighQualitySprite: {fileID: 0}
 --- !u!1 &4070953280779683118
 GameObject:
   m_ObjectHideFlags: 0
@@ -1321,6 +1453,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1412157620394292263}
   - component: {fileID: 6531363161667473477}
+  - component: {fileID: 943819791409792300}
   m_Layer: 17
   m_Name: L_HAND_CLAP
   m_TagString: Book
@@ -1350,7 +1483,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4484107560619679817}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -1395,6 +1528,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &943819791409792300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4484107560619679817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9105bfaded2a4ac08799e31adf0712c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 350
+  currentDistance: 5448.7085
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 6531363161667473477}
+  HighQualitySprite: {fileID: 0}
 --- !u!1 &6137208102545676940
 GameObject:
   m_ObjectHideFlags: 0
@@ -1405,6 +1555,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3315732522323691561}
   - component: {fileID: 6017130973482001019}
+  - component: {fileID: 2227752180882111965}
   m_Layer: 17
   m_Name: R_HAND
   m_TagString: Book
@@ -1434,7 +1585,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6137208102545676940}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -1479,6 +1630,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2227752180882111965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6137208102545676940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9105bfaded2a4ac08799e31adf0712c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 350
+  currentDistance: 5448.6587
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 6017130973482001019}
+  HighQualitySprite: {fileID: 0}
 --- !u!1 &6267982064492018614
 GameObject:
   m_ObjectHideFlags: 0
@@ -1490,6 +1658,8 @@ GameObject:
   - component: {fileID: 1816350560899371922}
   - component: {fileID: 393680548473648140}
   - component: {fileID: 499259578955580461}
+  - component: {fileID: 4023161420345570519}
+  - component: {fileID: 527979140938028282}
   m_Layer: 17
   m_Name: R_EYE_CLAP
   m_TagString: Book
@@ -1519,7 +1689,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6267982064492018614}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -1614,6 +1784,39 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &4023161420345570519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6267982064492018614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca721137ebf557a4ea2ec26014a0924a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 350
+  currentDistance: 0
+  player: {fileID: 0}
+  light2D: {fileID: 0}
+--- !u!114 &527979140938028282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6267982064492018614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9105bfaded2a4ac08799e31adf0712c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 350
+  currentDistance: 5448.8384
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 393680548473648140}
+  HighQualitySprite: {fileID: 0}
 --- !u!1 &6304309824157349957
 GameObject:
   m_ObjectHideFlags: 0
@@ -1625,6 +1828,8 @@ GameObject:
   - component: {fileID: 7601653727740767075}
   - component: {fileID: 9151707010918060028}
   - component: {fileID: 1688308848332411379}
+  - component: {fileID: 279387905305245024}
+  - component: {fileID: 3495557330184785662}
   m_Layer: 17
   m_Name: R_EYE_NOR
   m_TagString: Book
@@ -1654,7 +1859,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6304309824157349957}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -1749,6 +1954,39 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &279387905305245024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6304309824157349957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca721137ebf557a4ea2ec26014a0924a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 350
+  currentDistance: 0
+  player: {fileID: 0}
+  light2D: {fileID: 0}
+--- !u!114 &3495557330184785662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6304309824157349957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9105bfaded2a4ac08799e31adf0712c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 350
+  currentDistance: 5448.8384
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 9151707010918060028}
+  HighQualitySprite: {fileID: 0}
 --- !u!1 &6704516760259370943
 GameObject:
   m_ObjectHideFlags: 0
@@ -1903,6 +2141,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1276507250546600667}
   - component: {fileID: 4425486668399719138}
+  - component: {fileID: 6726673191132780804}
   m_Layer: 17
   m_Name: L_Hand
   m_TagString: Book
@@ -1932,7 +2171,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8048641867283684273}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -1977,6 +2216,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6726673191132780804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8048641867283684273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9105bfaded2a4ac08799e31adf0712c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 350
+  currentDistance: 5448.9185
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 4425486668399719138}
+  HighQualitySprite: {fileID: 0}
 --- !u!1 &8163738791290263993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1988,6 +2244,8 @@ GameObject:
   - component: {fileID: 4918784475168123384}
   - component: {fileID: 8291696406790551865}
   - component: {fileID: 8009512732073916435}
+  - component: {fileID: 7656671772952151732}
+  - component: {fileID: 6627103594581092140}
   m_Layer: 17
   m_Name: L_EYE_CLAP
   m_TagString: Book
@@ -2017,7 +2275,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8163738791290263993}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -2112,6 +2370,39 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &7656671772952151732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8163738791290263993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca721137ebf557a4ea2ec26014a0924a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 350
+  currentDistance: 0
+  player: {fileID: 0}
+  light2D: {fileID: 0}
+--- !u!114 &6627103594581092140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8163738791290263993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9105bfaded2a4ac08799e31adf0712c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 350
+  currentDistance: 5448.899
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 8291696406790551865}
+  HighQualitySprite: {fileID: 0}
 --- !u!1 &8209429893097571178
 GameObject:
   m_ObjectHideFlags: 0
@@ -2197,6 +2488,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4914216555519651411}
   - component: {fileID: 4434465118234696443}
+  - component: {fileID: 8289468793035574253}
   m_Layer: 17
   m_Name: STRUGGLE_MOUTH
   m_TagString: Book
@@ -2226,7 +2518,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8263054331976429653}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -2271,6 +2563,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8289468793035574253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8263054331976429653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9105bfaded2a4ac08799e31adf0712c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 350
+  currentDistance: 5449.0884
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 4434465118234696443}
+  HighQualitySprite: {fileID: 0}
 --- !u!1 &8759960608554226299
 GameObject:
   m_ObjectHideFlags: 0
@@ -2281,6 +2590,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6991408491367010192}
   - component: {fileID: 7205657224048913631}
+  - component: {fileID: 3385431059491396875}
   m_Layer: 17
   m_Name: L_LEG
   m_TagString: Book
@@ -2310,7 +2620,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8759960608554226299}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -2355,6 +2665,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3385431059491396875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8759960608554226299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9105bfaded2a4ac08799e31adf0712c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 350
+  currentDistance: 5448.8486
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 7205657224048913631}
+  HighQualitySprite: {fileID: 0}
 --- !u!1 &8838217436935033245
 GameObject:
   m_ObjectHideFlags: 0
@@ -2654,6 +2981,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4117304987995042150}
   - component: {fileID: 336991250986650648}
+  - component: {fileID: 6593617463059315716}
   m_Layer: 17
   m_Name: Glasses
   m_TagString: Book
@@ -2683,7 +3011,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9025247178386233396}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -2728,6 +3056,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6593617463059315716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9025247178386233396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9105bfaded2a4ac08799e31adf0712c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 250
+  currentDistance: 5448.739
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 336991250986650648}
+  HighQualitySprite: {fileID: 0}
 --- !u!1 &9177336948114840374
 GameObject:
   m_ObjectHideFlags: 0
@@ -2738,6 +3083,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7543338351338898669}
   - component: {fileID: 4105248688730018732}
+  - component: {fileID: 2048531974357825776}
   m_Layer: 17
   m_Name: Book
   m_TagString: Book
@@ -2767,7 +3113,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9177336948114840374}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -2812,3 +3158,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2048531974357825776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9177336948114840374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9105bfaded2a4ac08799e31adf0712c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 350
+  currentDistance: 5448.6963
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 4105248688730018732}
+  HighQualitySprite: {fileID: 0}

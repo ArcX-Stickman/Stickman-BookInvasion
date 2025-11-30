@@ -955,7 +955,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65af19aef471244c2ac684827cbbf614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 24.7
+  Speed: 35.52
   JumpForce: 31.5
   rb: {fileID: 131488525}
   StickAnim: {fileID: 131488532}
@@ -985,7 +985,7 @@ MonoBehaviour:
   Graphix: {fileID: 212466453}
   HeCanMove: 0
   GraphixOn: 0
-  AbleToJump: 0
+  AbleToJump: 1
   StickPOS: {fileID: 131488535}
   EarthQ: 0
   EarthQ_Dodge: 0
@@ -999,8 +999,8 @@ MonoBehaviour:
   StickCollider: {fileID: 0}
   SlideJump: 0
   IsStunned: 0
-  Acceleration: 35.52
-  Deacceleration: 35.52
+  Acceleration: 7.2710047
+  Deacceleration: 7.2710047
   isJumping: 0
   Streak_Bio: {fileID: 0}
   shootCooldown: 0.41
@@ -1009,7 +1009,7 @@ MonoBehaviour:
   SlideCancelSpeed: 86.9
   cancelCD: 0.1
   SlideGravity: 32.46
-  canSlide: 0
+  canSlide: 1
   canCancel: 0
   isSliding: 0
   MaxSlideSpeed: 67.1
@@ -1079,7 +1079,7 @@ MonoBehaviour:
   AttachSpeed: 193.4
   MegaPunch: {fileID: 0}
   RopeShift: {fileID: 0}
-  SceneName: 
+  SceneName: Game
   HasGun: 0
   BreakIn: 0
   AlreadyPickedGun: 0
@@ -1358,7 +1358,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7433,7 +7433,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &442845401
 Transform:
   m_ObjectHideFlags: 0
@@ -7443,7 +7443,7 @@ Transform:
   m_GameObject: {fileID: 442845400}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.4902344, y: -2.4112957, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12964,13 +12964,14 @@ GameObject:
   - component: {fileID: 1848041199}
   - component: {fileID: 1848041198}
   - component: {fileID: 1848041201}
+  - component: {fileID: 1848041202}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1848041197
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13068,6 +13069,19 @@ MonoBehaviour:
   AudioP: {fileID: 0}
   WantASFX: 0
   Yo_You_Want: 1
+--- !u!114 &1848041202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848041196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b17e54d13d88fa419867422998a7b6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StickManager: {fileID: 131488528}
 --- !u!1 &1853667925
 GameObject:
   m_ObjectHideFlags: 0
