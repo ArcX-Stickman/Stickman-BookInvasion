@@ -38,6 +38,7 @@ public class ChemicalExhaustManager : MonoBehaviour
     public AudioClip Explosion;
     public AudioClip BassDrop;
     public AudioSource BGMusic;
+    public AudioSource HeliAudio;
 
     public Vision PlayerVolume1;
     public Vision PlayerVolume2;
@@ -73,15 +74,18 @@ public class ChemicalExhaustManager : MonoBehaviour
             yield return null;
         }
 
-        // safe sone
-        while (!vol.PlayerSpotted)
+        float failSafe = 6f;
+        while (!vol.PlayerSpotted && failSafe > 0f)
         {
+            failSafe -= Time.deltaTime;
             yield return null;
         }
+        yield break;
     }
 
     public IEnumerator PLatQTE()
     {
+        AudioBassdrop.Stop();
         Smoke1.SetActive(true);
         yield return StartCoroutine(WaitForPlayer(PlayerVolume1, 0.5f));
 
@@ -125,11 +129,11 @@ public class ChemicalExhaustManager : MonoBehaviour
         Explosion4.SetActive(true);
         AudioP.PlayOneShot(Explosion);
         Movement stick = FindAnyObjectByType<Movement>();
-        bool Dive = stick.StickAnim.GetBool("Dive");
-
-        yield return new WaitUntil(() => (Dive == true));
+        yield return new WaitUntil(() => stick.StickAnim.GetBool("Dive"));
+        
 
         AudioBassdrop.PlayOneShot(BassDrop);
+        HeliAudio.enabled = false;
         stick.TimeManager.WantAudioSame = true;
         stick.TimeManager.SloMO();
         BGMusic.Pause();
@@ -137,7 +141,7 @@ public class ChemicalExhaustManager : MonoBehaviour
         {
             Debug.Log("Yuh u just deaf my boy bassdrop is indeed workin");
         }
-        AudioP.volume = 0.3f;
+        AudioP.volume = 0.2f;
         AudioBassdrop.volume = 1;
 
         Explosion5.SetActive(true);
@@ -158,6 +162,7 @@ public class ChemicalExhaustManager : MonoBehaviour
 
         BGMusic.UnPause();
         stick.TimeManager.WantAudioSame = false;
+        HeliAudio.enabled = true;
 
         yield break;
     }

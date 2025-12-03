@@ -15,7 +15,7 @@ public class Vision : MonoBehaviour
     public bool IsUsedAsDistanceBasedTrigger;
     public float Distance;
     public float MinDIS;
-    public Movement Stick;
+    public Transform Stick;
 
     void Start()
     {
@@ -26,10 +26,11 @@ public class Vision : MonoBehaviour
     {
         if (IsUsedAsDistanceBasedTrigger)
         {
-            Distance = Vector2.Distance(transform.position, Stick.transform.position);
+            Distance = Vector2.Distance(transform.position, Stick.position);
             PlayerSpotted = Distance <= MinDIS;
             return;
         }
+
 
         if (Immediate)
         {
@@ -41,7 +42,7 @@ public class Vision : MonoBehaviour
     {
         if (IsUsedAsDistanceBasedTrigger) return;
 
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && !IsUsedAsDistanceBasedTrigger)
         {
             if (UsedFor1stCut)
             {
@@ -66,7 +67,7 @@ public class Vision : MonoBehaviour
     {
         if (IsUsedAsDistanceBasedTrigger) return;
 
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && !IsUsedAsDistanceBasedTrigger)
         {
             PlayerExitedVision = true;
         }
