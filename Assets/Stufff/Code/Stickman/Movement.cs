@@ -1287,7 +1287,7 @@ public class Movement : MonoBehaviour
     }
     private bool CheckIfGrounded()
     {
-        float extraHeight = 0.4f;
+        float extraHeight = 1.3f;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, GetComponent<BoxCollider2D>().bounds.extents.y + extraHeight, WhatsGround);
         Debug.DrawRay(transform.position, Vector2.down * (GetComponent<BoxCollider2D>().bounds.extents.y + extraHeight), Color.red);
         return hit.collider != null;
