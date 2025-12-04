@@ -87,7 +87,7 @@ public class ChemicalExhaustManager : MonoBehaviour
     {
         AudioBassdrop.Stop();
         Smoke1.SetActive(true);
-        yield return StartCoroutine(WaitForPlayer(PlayerVolume1, 0.5f));
+        yield return StartCoroutine(WaitForPlayer(PlayerVolume1, 0.65f));
 
         AudioP.PlayOneShot(Explosion);
         Explosion1.SetActive(true);
