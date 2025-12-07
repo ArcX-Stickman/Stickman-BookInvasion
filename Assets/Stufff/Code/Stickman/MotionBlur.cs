@@ -15,6 +15,7 @@ public class MotionBlur : MonoBehaviour
 
     public void HandleMotionBlur()
     {
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         if (isDestroyed)
             return;
 

@@ -63,68 +63,67 @@ public class ChemicalExhaustManager : MonoBehaviour
         }
     }
 
-    IEnumerator WaitForPlayer(Vision vol, float minWait)
+    IEnumerator WaitForPlayer(Vision vol, float minWait, float maxWait)
     {
-        float timer = 0f;
+        float time = 0f;
 
-        // lil  delay
-        while (timer < minWait)
+        while (time < minWait)
         {
-            timer += Time.deltaTime;
+            time += Time.deltaTime;
             yield return null;
         }
 
-        float failSafe = 6f;
-        while (!vol.PlayerSpotted && failSafe > 0f)
+        float elapsed = 0f;
+        while (!vol.PlayerSpotted && elapsed < maxWait)
         {
-            failSafe -= Time.deltaTime;
+            elapsed += Time.deltaTime;
             yield return null;
         }
-        yield break;
     }
+
 
     public IEnumerator PLatQTE()
     {
         AudioBassdrop.Stop();
         Smoke1.SetActive(true);
-        yield return StartCoroutine(WaitForPlayer(PlayerVolume1, 0.65f));
+        yield return StartCoroutine(WaitForPlayer(PlayerVolume1, 0.65f,1));
 
         AudioP.PlayOneShot(Explosion);
         Explosion1.SetActive(true);
         Destroy(Vent1);
 
 
-        yield return StartCoroutine(WaitForPlayer(PlayerVolume2, 0.1f));
+        yield return StartCoroutine(WaitForPlayer(PlayerVolume2, 0.1f, 1));
         Smoke2.SetActive(true);
 
-        yield return StartCoroutine(WaitForPlayer(PlayerVolume3, 0.1f));
+        yield return StartCoroutine(WaitForPlayer(PlayerVolume3, 0.1f, 1));
         Smoke3.SetActive(true);
 
-        yield return StartCoroutine(WaitForPlayer(PlayerVolume4, 0.6f));
+        yield return StartCoroutine(WaitForPlayer(PlayerVolume4, 0.6f, 1));
 
         Explosion2.SetActive(true);
         AudioP.PlayOneShot(Explosion);
         Destroy(Vent2);
 
-        yield return StartCoroutine(WaitForPlayer(PlayerVolume5, 0.01f));
+        yield return StartCoroutine(WaitForPlayer(PlayerVolume5, 0.01f, 1));
         Smoke4.SetActive(true);
 
-        yield return StartCoroutine(WaitForPlayer(PlayerVolume6, 0.1f));
+        yield return StartCoroutine(WaitForPlayer(PlayerVolume6, 0.1f, 1));
         Smoke5.SetActive(true);
 
-        yield return StartCoroutine(WaitForPlayer(PlayerVolume7, 0.6f));
+        yield return StartCoroutine(WaitForPlayer(PlayerVolume7, 0.6f, 1));
 
         Explosion3.SetActive(true);
         AudioP.PlayOneShot(Explosion); 
         Destroy(Vent3);
 
-        yield return StartCoroutine(WaitForPlayer(PlayerVolume8, 0.1f));
+        yield return StartCoroutine(WaitForPlayer(PlayerVolume8, 0.1f, 1));
         Smoke6.SetActive(true);
 
-        yield return StartCoroutine(WaitForPlayer(PlayerVolume9, 0.1f));
+        yield return StartCoroutine(WaitForPlayer(PlayerVolume9, 0.1f, 1));
         Smoke7.SetActive(true);
 
-        yield return StartCoroutine(WaitForPlayer(PlayerVolume10, 0.6f));
+        yield return StartCoroutine(WaitForPlayer(PlayerVolume10, 0.6f, 1));
 
         Explosion4.SetActive(true);
         AudioP.PlayOneShot(Explosion);

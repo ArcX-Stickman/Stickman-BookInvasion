@@ -24,6 +24,9 @@ public class CameraScript : MonoBehaviour
 
     public Transform Stick;
     // Start is called before the first frame update
+
+    // Helicopter Chapter 0 - Notes
+    // Glass QTE Casm size: 35.3
     void Start()
     {
         StickCam = GetComponent<CinemachineVirtualCamera>();
@@ -36,6 +39,16 @@ public class CameraScript : MonoBehaviour
     private bool ALr_StartedDeath;
     private bool isDoingSomething;
 
+
+
+    private void OnEnable()
+    {
+        if(StickManager.StickHP.PlayerHP > 0)
+        {
+            StopAllCoroutines();
+
+        }
+    }
     void Update()
     {
        
@@ -119,6 +132,22 @@ public class CameraScript : MonoBehaviour
         yield return null;
 
     }
+
+    public IEnumerator SmoothZoomIn(float targetSize, int duration)
+    {
+        float startCam = CamSize;
+        float timer = 0;
+        CamSize = Mathf.Lerp(CamSize, targetSize, duration);
+
+        //while (timer <= duration)
+        //{
+        //    timer += 1 * Time.deltaTime;
+        //    CamSize = Mathf.Lerp(CamSize,targetSize, duration);
+        //    yield return null;
+        //}
+        yield return null;
+    }
+
 
     public IEnumerator ZoomOut( float time) 
     {
