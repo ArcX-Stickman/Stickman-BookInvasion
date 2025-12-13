@@ -210,11 +210,11 @@ public class Helicopter : MonoBehaviour
             StickManager.InCinematic = true;
             StickManager.InExamBoss = true;
             PlayerManager.SceneName = SceneManager.GetActiveScene().name;
-            StickManager.Checkpoint = StickManager.ExamHeliID_Checkpoint;
-            StickManager.SaveProgress();
+            //.Checkpoint = StickManager.ExamHeliID_Checkpoint;
+            //StickManager.SaveProgress();
             ExamAnim.SetBool("Sniper", true);
-            PerfectSolu.clip = HelicopterAboveTheme;
-            PerfectSolu.Play();
+            //PerfectSolu.clip = HelicopterAboveTheme;
+            //PerfectSolu.Play();
             LowHPCopterThemeVari.gameObject.SetActive(true);
             AlrMusic = true;
         }

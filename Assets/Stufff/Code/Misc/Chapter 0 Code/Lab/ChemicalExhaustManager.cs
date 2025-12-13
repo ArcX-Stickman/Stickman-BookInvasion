@@ -157,7 +157,8 @@ public class ChemicalExhaustManager : MonoBehaviour
         Explosion7.SetActive(true);
         AudioP.PlayOneShot(Explosion);
         Destroy(Vent7);
-        yield return new WaitUntil(() => (Explosion7 == null));
+        //yield return new WaitUntil(() => (Explosion7 == null));
+        yield return new WaitForSecondsRealtime(0.7f);
 
         BGMusic.UnPause();
         stick.TimeManager.WantAudioSame = false;
