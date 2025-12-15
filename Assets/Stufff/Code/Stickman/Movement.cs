@@ -496,11 +496,29 @@ public class Movement : MonoBehaviour
             else if (timeBecameAirborne == 0f)
             {
                 StickAnim.SetBool("Jump", false);
+                StickAnim.SetBool("Airborne", false);
+
             }
         }
         else if (!Grounded && !BackFlip)
         {
-            StickAnim.SetBool("Jump", true);
+            if (rb.velocity.y > 0.1f)
+            {
+                StickAnim.SetBool("Jump",true);
+                StickAnim.SetBool("Airborne", false);
+
+            }
+            else if (rb.velocity.y < -0.1f && !BackFlip && !isDashing && !Shooting && !PunchBool && !Grounded)
+            {
+                StickAnim.SetBool("Airborne", true);
+                StickAnim.SetBool("Jump", false);
+
+            }
+            else
+            {
+                StickAnim.SetBool("Airborne", false);
+
+            }
         }
 
         SlopeCheck();
@@ -1108,6 +1126,7 @@ public class Movement : MonoBehaviour
 
         if (Grounded == true)
         {
+            StickAnim.SetBool("Airborne", false);
 
             ForcedJumpMegaHurtBool = false;
             AirBackFlip = false;
@@ -1943,8 +1962,11 @@ public class Movement : MonoBehaviour
                 }
             }
 
+            if (Grounded)
+            {
+                StickAnim.SetBool("Walking", horizontalInput != 0);
 
-            StickAnim.SetBool("Walking", horizontalInput != 0);
+            }
         }
         else
         {
@@ -2254,6 +2276,7 @@ public class Movement : MonoBehaviour
     {
         if (!OnLadder || isFallingHeli || InHeliCineBeatdown) Debug.Log("Heli Failed Stick Falling nOw");
         if (!OnLadder || isFallingHeli || InHeliCineBeatdown || !HeliFinale) return;
+        StickAnim.SetBool("Walking", false);
         Debug.Log("HeliManager On");
         canDash = true;
         if (!InHeliCineBeatdown)
@@ -2447,7 +2470,7 @@ public class Movement : MonoBehaviour
             }
             else if (BackFlip)
             {
-                StickAnim.CrossFade("ShootJump", 0, 0);
+                StickAnim.CrossFade("Backflip_Shooting",0,0);
                 BackFlip = false;
                 //StickAnim.SetTrigger("FlipShoot");   <--- Need TO Make that ANimation
 
@@ -3355,12 +3378,12 @@ public class Movement : MonoBehaviour
                 HeCanMove = false;
                 if (StickDirection >= 0)
                 {
-                    rb.rotation += 10;
+                   //rb.rotation += 10;
                     rb.velocity = new Vector2(-Mathf.Abs(-horizontalMomentum), rb.velocity.y);
                 }
                 else
                 {
-                    rb.rotation -= 10;
+                    //rb.rotation -= 10;
                     rb.velocity = new Vector2(Mathf.Abs(horizontalMomentum), rb.velocity.y);
                 }
                 elapsedTime += Time.deltaTime;

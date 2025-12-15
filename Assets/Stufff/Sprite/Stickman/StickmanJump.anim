@@ -21,23 +21,33 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 513480298, guid: 8e4e59c46c422f347b1d17f8bcedc5fd, type: 3}
-    - time: 0.083333336
-      value: {fileID: 513480298, guid: 8e4e59c46c422f347b1d17f8bcedc5fd, type: 3}
-    - time: 0.16666667
-      value: {fileID: 44708601, guid: 8e4e59c46c422f347b1d17f8bcedc5fd, type: 3}
+      value: {fileID: 21300000, guid: f5326c16dca48cc4b8ca31f53531ddfc, type: 3}
+    - time: 0.016666668
+      value: {fileID: 21300000, guid: 9c129efd9f38bce4f8fd6eb5df2c4eae, type: 3}
+    - time: 0.033333335
+      value: {fileID: 21300000, guid: fe8d0a0a367bb7f4e81b3acb6088a21d, type: 3}
+    - time: 0.06666667
+      value: {fileID: 21300000, guid: e652db90896f2cf429a416483ac29357, type: 3}
+    - time: 0.15
+      value: {fileID: 21300000, guid: 6e9b5c50168408e479a3033076bdc022, type: 3}
     - time: 0.25
-      value: {fileID: 339375638, guid: 8e4e59c46c422f347b1d17f8bcedc5fd, type: 3}
+      value: {fileID: 21300000, guid: a4fd487d0a689464990ed9f46a6c24c6, type: 3}
     - time: 0.33333334
-      value: {fileID: 1159082840, guid: 8e4e59c46c422f347b1d17f8bcedc5fd, type: 3}
-    - time: 0.41666666
-      value: {fileID: 1159082840, guid: 8e4e59c46c422f347b1d17f8bcedc5fd, type: 3}
+      value: {fileID: 21300000, guid: 46c91d25476b846418da1b4a661ad1da, type: 3}
+    - time: 0.43333334
+      value: {fileID: 21300000, guid: 3ac64e9d7dedfe54eab493d822a4fa18, type: 3}
+    - time: 0.5
+      value: {fileID: 21300000, guid: bcf2713dc1a43b94b97278c25ef39b23, type: 3}
+    - time: 0.5833333
+      value: {fileID: 21300000, guid: e4ab65033666a004ba63b29f99331880, type: 3}
+    - time: 0.6666667
+      value: {fileID: 21300000, guid: 843da525a7d818c488c5e24534c2095b, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
     flags: 2
-  m_SampleRate: 12
+  m_SampleRate: 60
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -54,18 +64,23 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 513480298, guid: 8e4e59c46c422f347b1d17f8bcedc5fd, type: 3}
-    - {fileID: 513480298, guid: 8e4e59c46c422f347b1d17f8bcedc5fd, type: 3}
-    - {fileID: 44708601, guid: 8e4e59c46c422f347b1d17f8bcedc5fd, type: 3}
-    - {fileID: 339375638, guid: 8e4e59c46c422f347b1d17f8bcedc5fd, type: 3}
-    - {fileID: 1159082840, guid: 8e4e59c46c422f347b1d17f8bcedc5fd, type: 3}
-    - {fileID: 1159082840, guid: 8e4e59c46c422f347b1d17f8bcedc5fd, type: 3}
+    - {fileID: 21300000, guid: f5326c16dca48cc4b8ca31f53531ddfc, type: 3}
+    - {fileID: 21300000, guid: 9c129efd9f38bce4f8fd6eb5df2c4eae, type: 3}
+    - {fileID: 21300000, guid: fe8d0a0a367bb7f4e81b3acb6088a21d, type: 3}
+    - {fileID: 21300000, guid: e652db90896f2cf429a416483ac29357, type: 3}
+    - {fileID: 21300000, guid: 6e9b5c50168408e479a3033076bdc022, type: 3}
+    - {fileID: 21300000, guid: a4fd487d0a689464990ed9f46a6c24c6, type: 3}
+    - {fileID: 21300000, guid: 46c91d25476b846418da1b4a661ad1da, type: 3}
+    - {fileID: 21300000, guid: 3ac64e9d7dedfe54eab493d822a4fa18, type: 3}
+    - {fileID: 21300000, guid: bcf2713dc1a43b94b97278c25ef39b23, type: 3}
+    - {fileID: 21300000, guid: e4ab65033666a004ba63b29f99331880, type: 3}
+    - {fileID: 21300000, guid: 843da525a7d818c488c5e24534c2095b, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.5
+    m_StopTime: 0.68333334
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -127,28 +142,28 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.016666668
+    functionName: RunSpeedUp
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.05
+    functionName: RunSpeedUp
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.06666667
+    functionName: RunSpeedUp
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.083333336
-    functionName: RunSpeedUp
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.25
-    functionName: RunSpeedUp
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.33333334
-    functionName: RunSpeedUp
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.41666666
     functionName: AnimationKey_UppercutFalse
     data: 
     objectReferenceParameter: {fileID: 0}
