@@ -3173,9 +3173,18 @@ public class Movement : MonoBehaviour
 
 
     private bool AlrMuzzle;
+    private Shake_AnimationKey shake_AnimationKey;
     public IEnumerator MuzzleFireAnim()
     {
+        if(shake_AnimationKey == null)
+        {
+            shake_AnimationKey = GetComponent<Shake_AnimationKey>();
 
+        }
+        if(shake_AnimationKey != null)
+        {
+            shake_AnimationKey.ShakeWithSpecificGivenAmount(15.5f,0.3f);
+        }
         GameObject FX = Instantiate(MuzzleFire, transform.position, Quaternion.identity);
         FX.transform.localScale = new Vector3(FacingRight ? 1 : -1, 1, 1);
         FX.transform.position = transform.position;

@@ -22,4 +22,12 @@ public class Shake_AnimationKey : MonoBehaviour
 
         Stick.CameraScript.StartCoroutine(Stick.CameraScript.ShakeCamGroundFeeling(ShakeAmount, Duration));
     }
+
+    public void ShakeWithSpecificGivenAmount(float GivenShakeAmount, float GivenDuration)
+    {
+        // USE THIS ONLY AS A CALLING METHOD
+        Stick = FindAnyObjectByType<Movement>();
+
+        Stick.CameraScript.StartCoroutine(Stick.CameraScript.ShakeCamGroundFeeling(GivenShakeAmount, GivenDuration));
+    }
 }
