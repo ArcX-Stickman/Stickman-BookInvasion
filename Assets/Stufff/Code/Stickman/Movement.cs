@@ -1458,7 +1458,28 @@ public class Movement : MonoBehaviour
     }
     public void Jump()
     {
-        if(JumpSmoke != null)
+
+        // Shaking stuff
+        if (shake_AnimationKey == null)
+        {
+            shake_AnimationKey = GetComponent<Shake_AnimationKey>();
+
+        }
+        if (shake_AnimationKey != null)
+        {
+            if(MaxSpeed >= 100)
+            {
+                shake_AnimationKey.ShakeWithSpecificGivenAmount(15.5f, 0.3f);
+
+            }
+            else
+            {
+                shake_AnimationKey.ShakeWithSpecificGivenAmount(10.5f, 0.34f);
+
+            }
+        }
+
+        if (JumpSmoke != null)
         {
             ObjectPooler.SpawnObj(JumpSmoke.gameObject, JumpSmoke.gameObject.transform.position,Quaternion.identity,ObjectPooler.PoolType.Partcles);
 
@@ -3344,7 +3365,35 @@ public class Movement : MonoBehaviour
 
         if (StickHP.MegaCharge >= 1.3f && !isSliding)
         {
-             if(JumpSmoke != null)
+
+
+            // CamShake stuff
+            if (shake_AnimationKey == null)
+            {
+                shake_AnimationKey = GetComponent<Shake_AnimationKey>();
+
+            }
+            if (shake_AnimationKey != null)
+            {
+                if (!Grounded)
+                {
+                    shake_AnimationKey.ShakeWithSpecificGivenAmount(13.5f, 0.2f);
+
+                }
+                else if (MaxSpeed >= 100)
+                {
+                    shake_AnimationKey.ShakeWithSpecificGivenAmount(25, 0.2f);
+
+                }
+                
+                else
+                {
+                    shake_AnimationKey.ShakeWithSpecificGivenAmount(18.5f, 0.2f);
+
+                }
+            }
+
+            if (JumpSmoke != null)
         {
             ObjectPooler.SpawnObj(JumpSmoke.gameObject, JumpSmoke.gameObject.transform.position,Quaternion.identity,ObjectPooler.PoolType.Partcles);
            // StartCoroutine(CameraScript.ShakeCamGroundFeeling(14,0.02f));
@@ -3648,6 +3697,33 @@ public class Movement : MonoBehaviour
 
                 while (isSliding)
                 {
+                    // Shake the cam
+                    if (shake_AnimationKey == null)
+                    {
+                        shake_AnimationKey = GetComponent<Shake_AnimationKey>();
+
+                    }
+                    if (shake_AnimationKey != null)
+                    {
+                        if (!Grounded)
+                        {
+                            shake_AnimationKey.ShakeWithSpecificGivenAmount(13.5f, 0.12f);
+
+                        }
+                        else if (SlideCancelSpeed >= 100)
+                        {
+                            shake_AnimationKey.ShakeWithSpecificGivenAmount(15, 0.1f);
+
+                        }
+
+                        else
+                        {
+                            shake_AnimationKey.ShakeWithSpecificGivenAmount(8.5f, 0.1f);
+
+                        }
+                    }
+
+
                     SlideSmoke.gameObject.SetActive(true);
                     if(FootP.clip == GrassFootSFX && BreakIn) // TODO: Replace the break in var with a bool called on grass on wood on metal etc to differentiate surfaces
                     {

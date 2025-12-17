@@ -9,6 +9,11 @@ using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 
+
+// Well Game development is actual pain but fun its like being deku using one for all is tuff but messes up your body just
+// like how this code wants me to jump off a building going plus ultra because i am litteraly gettign rid of this damn script after working on this crap for 1 year and all it has
+// beeen doing me is killing the happyness of a teeneager who wants to make the best gfame in the world which prob not gonna happen but for dreams to occur ya gotta go beyond so once again PLUS ULTRAAAAAA
+
 public enum EnemyStatesEnum
 {
     // Idle - Just normal boi
