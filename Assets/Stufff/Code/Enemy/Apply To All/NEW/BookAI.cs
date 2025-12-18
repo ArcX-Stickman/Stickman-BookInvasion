@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.Rendering;
 [System.Serializable]
@@ -22,7 +21,7 @@ public enum StickmanBehavior
 }
 public enum StickmanState
 {
-    Neutral, InAir
+    Neutral, InAir, Pushing
 }
 public class BookAI : MonoBehaviour
 {
@@ -52,6 +51,13 @@ public class BookAI : MonoBehaviour
    
 
     [Header("Enemy Basic Data")]
+    public float Health;
+    public HitMarker HitMarker;
+    public Animator EnemyAnim;
+
+    
+    [Header("Enemy Distance Data")]
+
     public float DistanceFromPlayer;
     public float MinMeleeDistance;
     public float MinDIS_Movement; // This is the min dis for book appraching the player
@@ -72,6 +78,11 @@ public class BookAI : MonoBehaviour
     [Header("Enemy FX")]
     public float MeleeAttackFX;
 
+
+    [Header("Enemy Knowledge On The Player")]
+    public float PlayerEvasiveActionCount;
+    public float PlayerPunchCount;
+    public float PlayerAcrobaticActionCount;
 
 
 
@@ -95,9 +106,33 @@ public class BookAI : MonoBehaviour
 
     public void AttackManager()
     {
+        if(!EnemVision.PlayerSpotted) return;
         // This is solely animaiton based attacks all the attacks are done by using animation key frames
-        // This function/void is pretty much just to tell the enemy to do which attack based on what behavior or state the enemy brain is thinking
+        // This function/void is pretty much just to tell the enemy to do which attack based on what behavior
+        //  or state the enemy brain is thinking
+
+        if(EnemyState == EnemyState.GoingToPlayer)
+        {
+            HandleGoingToPlayer();
+            return;
+        }
+
+        if(EnemyState == EnemyState.Idle)
+        {
+            HandleIdle();
+            return;
+        }
     }
+
+
+
+
+
+
+
+
+
+
 
     public void MoveTowardsPlayer()
     {
@@ -112,6 +147,10 @@ public class BookAI : MonoBehaviour
                     transform.position = Vector2.MoveTowards(transform.position, StickPOS.position, Speed * Time.deltaTime);
 
                 }
+            }
+            if(EnemyBehavior == EnemyBehavior.Surrender)
+            {
+                // he gonna dip or he gonna like beg for mercy
             }
 
 
@@ -172,7 +211,13 @@ public class BookAI : MonoBehaviour
     public void DesperateRangedAttack()
     {
         // This is going to be a pain in the butt to code but these attacks shouldnt "actually hit" the player mostly meant to miss on purpose
+    
     }
+
+    // --------------------------RANGED---------------------------------------------
+
+
+
 
     // --------------------------COUNTERING--------------------------------------------------------
 
@@ -206,11 +251,212 @@ public class BookAI : MonoBehaviour
     }
 
 
+
+    /// ---------------------- AI Attack Decisions------------------------------------
+    
+    void HandleGoingToPlayer()
+    {
+        // This is when The Enemy is Going Towards the player while on the move and has a distance
+        // from the player
+
+        if(DistanceFromPlayer > MinDIS_Movement)
+        {
+            HandleFarFromPlayer();
+        }
+        else
+        {
+            HandleCloseToPlayer();
+        }
+    }
+
+        
+    void HandleFarFromPlayer()
+    {
+        if(EnemyBehavior == EnemyBehavior.Neutral)
+        {
+            HandleNeutralFar();
+        }
+
+        if(EnemyBehavior == EnemyBehavior.Desperate)
+        {
+            HandleDesperateFar();
+        }
+
+        if(EnemyBehavior == EnemyBehavior.OverConfident)
+        {
+            HandleOverConfidentFar();
+        }
+    }
+
+    void HandleNeutralFar()
+    {
+        if(StickmanState == StickmanState.Pushing)
+        {
+            // Do a charge up melee attack or a high power ranged
+        }
+    }
+
+    void HandleDesperateFar()
+    {
+        if(StickmanState == StickmanState.Pushing)
+        {   
+            // Start Spaming random stuff 
+            // Or Litteraly just dip and run
+        }
+    }
+
+    void HandleOverConfidentFar()
+    {
+        if(StickmanState == StickmanState.Pushing)
+        {
+            // High action pack enviorment based actions
+        }
+
+        if(StickmanState == StickmanState.Pushing && DistanceFromPlayer < 20 && 
+        StickmanBehavior == StickmanBehavior.NoSkill_Spammer)
+        {
+            // Charge Up Knockback Melee Attack
+        }
+    }
+
+    void HandleCloseToPlayer()
+    {
+        // This is when enemy is close enough for player to do melee attacks
+
+        if(EnemyBehavior == EnemyBehavior.Neutral)
+        {
+            HandleNeutralClose();
+        }
+    }
+
+    void HandleNeutralClose()
+    {
+        if(StickmanState == StickmanState.InAir && StickmanBehavior == StickmanBehavior.Acrobatic)
+        {
+            // Do an Air block attack that knockbacks player
+        }
+
+        if(StickManager.isSliding && StickmanBehavior == StickmanBehavior.NoSkill_Spammer 
+        && StickmanBehavior == StickmanBehavior.Evasive)
+        {
+            // Punish for player for being too evasive and only relying on evasion
+        }
+        else if(StickmanState == StickmanState.Neutral)
+        {
+            // either do first melee attack or second one
+        }
+        else if(StickmanState == StickmanState.Pushing)// like when the player is tryna aggresive head towards the enemy
+        {      
+            //  Quick Jab 
+        }
+    }
+
+    void HandleIdle()
+    {
+    
+    }
+
+
+
+
+
+
+    //-------------------------ANIMATIONS------------------------------------------------------
+
+
     // --------------------- MISC. ----------------------------------------------------------------
 
     public void DistanceCalc()
     {
         DistanceFromPlayer =  Vector2.Distance(transform.position, StickPOS.position);
+    }
+
+
+
+
+
+    private float ObserverCD = 0.2f;
+    private float LastObserve = 0;
+    public void PlayerObserver()
+    {
+        // This is what the enemy sees the player doing
+        if(Time.time >= ObserverCD + LastObserve)
+        {
+            // Stickman Action Observer
+            if(StickManager.PunchBool)
+            {
+                PlayerPunchCount +=1;
+                LastObserve = Time.time;
+            }
+            if(StickManager.isSliding || StickManager.isDashing)
+            {
+                PlayerEvasiveActionCount += 1;
+            }
+            if(StickManager.BackFlip || StickManager.isDashing)
+            {
+                PlayerAcrobaticActionCount += 1;
+            }
+            
+
+        }
+        RegisterPlayerActionsInBrain();
+
+        
+
+    }
+
+    public void RegisterPlayerActionsInBrain()
+    {
+        if(PlayerPunchCount >= 5)
+        {
+            StickmanBehavior = StickmanBehavior.NoSkill_Spammer;
+        }
+        if(PlayerEvasiveActionCount >= 4)
+        {
+            StickmanBehavior = StickmanBehavior.Evasive;
+        }
+        if(PlayerAcrobaticActionCount >= 8)
+        {
+            StickmanBehavior = StickmanBehavior.Acrobatic;
+        }
+        if(StickmanCharging())
+        {
+            StickmanBehavior = StickmanBehavior.onAdrenaline;
+        }
+
+    }
+
+    public bool StickmanCharging()
+    {
+        bool StickRunAnim = StickManager.StickAnim.GetBool("Walking");
+        if(StickManager.rb.velocity.x == StickManager.MaxSpeed && StickAnimsChargeChecker() && StickManager.rb.velocity.y <= 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+
+        }
+    }
+
+    private bool StickAnimsChargeChecker()
+    {
+        bool StickRun = StickManager.StickAnim.GetBool("Walking");
+        bool JumpStickAnim = StickManager.StickAnim.GetBool("Jump");
+        bool BackflipStick = StickManager.StickAnim.GetBool("Backflip");
+        bool Airbone = StickManager.StickAnim.GetBool("Airbone");
+        if(StickRun || JumpStickAnim || BackflipStick || Airbone)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+
+        
     }
 
  
