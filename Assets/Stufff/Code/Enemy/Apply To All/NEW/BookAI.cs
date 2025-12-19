@@ -76,7 +76,9 @@ public class BookAI : MonoBehaviour
 
 
     [Header("Enemy FX")]
-    public float MeleeAttackFX;
+    public GameObject MeleeAttackFX;
+    public GameObject MeleeAttackImpactFX;
+    public float RangedAttackFX;
 
 
     [Header("Enemy Knowledge On The Player")]
@@ -84,6 +86,10 @@ public class BookAI : MonoBehaviour
     public float PlayerPunchCount;
     public float PlayerAcrobaticActionCount;
 
+
+    [Header("Enemy Colliders")]
+    public BoxCollider2D MeleeCollider;
+    public BoxCollider2D SelfCollider;
 
 
 
@@ -123,15 +129,6 @@ public class BookAI : MonoBehaviour
             return;
         }
     }
-
-
-
-
-
-
-
-
-
 
 
     public void MoveTowardsPlayer()
@@ -175,20 +172,27 @@ public class BookAI : MonoBehaviour
     }
 
 
-
-
-
-
     // ---------------------------MELEE----------------------------------------------------------
 
     public void NormalMeleeAttack()
     {
         // litteraly a punch what did ya think
+        EnemyAnim.SetTrigger("NormMelee");
+
+
+    }
+
+    public void ChargedMelee()
+    {
+        EnemyAnim.SetTrigger("CharMelee");
+
     }
 
     public void AirPunch()
     {
         // This Occurs is Player Loves Being in the Sky
+        EnemyAnim.SetTrigger("AirMelee");
+
     }
 
     // --------------------------RANGED-----------------------------------------------------------
@@ -196,6 +200,7 @@ public class BookAI : MonoBehaviour
     public void NormalRangedAttack()
     {
         // Predicable basic ranged attack
+        EnemyAnim.SetTrigger("NormRanged");
     }
 
     public void MiniRangedAttack()
