@@ -1176,10 +1176,10 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && !isSliding && !SlideJump && !InSlideAnimation && !Dead && Time.time >= LastJump + JumpCD && Grounded)
         {
             LastJump = Time.time;
-            Debug.Log("Jump Has Been Requested");
+//            Debug.Log("Jump Has Been Requested");
             if (StickmanGetsKnocked == false && !InSlideAnimation && !inRush)
             {
-                Debug.Log("Jump Has Went Through");
+                //Debug.Log("Jump Has Went Through");
                 coyoteTimerCounter = 0;
                 Jump();
 
@@ -1522,11 +1522,11 @@ public class Movement : MonoBehaviour
 
 
             }
-            Debug.Log("Jump Void()");
+           // Debug.Log("Jump Void()");
 
             if (AbleToJump && !isSliding)
             {
-                Debug.Log("Jump Void Is Active");
+//                Debug.Log("Jump Void Is Active");
                 if (!isDashing && !isSliding && !IsShooting && !Dead && !inSlipperyState && !Anim_Locked && !BackFlip && !ForcedJumpMegaHurtBool)
                 {
                     StickAnim.CrossFade("Jump", 0, 0);
@@ -3359,7 +3359,7 @@ public class Movement : MonoBehaviour
 
     public IEnumerator BackFlipMove()
     {
-        Debug.Log("We Want A Flip");
+        //Debug.Log("We Want A Flip");
         float horizontalMomentum = 0;
 
 

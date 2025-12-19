@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -48,12 +49,19 @@ public class BookAI : MonoBehaviour
 
 
     [Header("Enemy Booleans")]
+    public bool HighEnergyHappened;
+    private bool isAttackingHighEnergy;
    
 
     [Header("Enemy Basic Data")]
     public float Health;
+
+    private float StartHP;
     public HitMarker HitMarker;
     public Animator EnemyAnim;
+
+
+    private float TimeSincePlayerSpotted;
 
     
     [Header("Enemy Distance Data")]
@@ -71,9 +79,20 @@ public class BookAI : MonoBehaviour
     
     [Header("Enemy Cooldowns")]
     public float MeleeCD;
+    public float HighEnergyAttackCD;
+    public float ChargedMeleeCD;
     public float RangedCD;
+    public float MiniRangedAttackCD;
     public float CounterCD;
 
+    [Header("Enemy Attack Times")]
+
+    public float LastMelee;
+    public float LastHighEnergyAttack;
+    public float LastChargedMelee;
+    public float LastRanged;
+    public float LastMiniRangedAttack;
+    public float LastCounter;
 
     [Header("Enemy FX")]
     public GameObject MeleeAttackFX;
@@ -91,20 +110,33 @@ public class BookAI : MonoBehaviour
     public BoxCollider2D MeleeCollider;
     public BoxCollider2D SelfCollider;
 
+    public AttackSight MeleeRange;
+
+    [Header("Audio Stuff")]
+    public AudioSource AudioP;
+    public AudioClip MeleeImpact;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartHP = Health;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(StickHP.PlayerHP <= 0) return;
         AttackManager();
         MoveTowardsPlayer();
         DistanceCalc();
+        PlayerStateManager(); 
+        PlayerObserver();
+        EnemyBehaviorDecider();
+
+        /// Time and Stuff
+        CalcTimeAlive();
+        
     }
 
 
@@ -133,18 +165,32 @@ public class BookAI : MonoBehaviour
 
     public void MoveTowardsPlayer()
     {
-        if (EnemVision.PlayerSpotted)
+        if (EnemVision.PlayerSpotted && EnemyState != EnemyState.Attacking)
         {
+            EnemyState = EnemyState.GoingToPlayer;
 
             if(EnemyBehavior == EnemyBehavior.Neutral)
             {
+                Vector2 FakeStickMan = new Vector2(StickPOS.position.x,transform.position.y);
                 // This is normal walk up to player and meant for direct Melee combat
                 if(DistanceFromPlayer >= MinDIS_Movement)
                 {
-                    transform.position = Vector2.MoveTowards(transform.position, StickPOS.position, Speed * Time.deltaTime);
+                    transform.position = Vector2.MoveTowards(transform.position, FakeStickMan, Speed * Time.deltaTime);
 
                 }
             }
+            if(EnemyBehavior == EnemyBehavior.OverConfident && HighEnergyHappened)
+            {
+                Vector2 FakeStickMan = new Vector2(StickPOS.position.x,transform.position.y);
+                // This is normal walk up to player and meant for direct Melee combat
+                if(DistanceFromPlayer >= MinDIS_Movement)
+                {
+                    transform.position = Vector2.MoveTowards(transform.position, FakeStickMan, MaxSpeed * Time.deltaTime);
+
+                }
+            }
+        
+        
             if(EnemyBehavior == EnemyBehavior.Surrender)
             {
                 // he gonna dip or he gonna like beg for mercy
@@ -177,6 +223,8 @@ public class BookAI : MonoBehaviour
     public void NormalMeleeAttack()
     {
         // litteraly a punch what did ya think
+        LastMelee = Time.time;
+        isAttackingHighEnergy = false;
         EnemyAnim.SetTrigger("NormMelee");
 
 
@@ -184,6 +232,8 @@ public class BookAI : MonoBehaviour
 
     public void ChargedMelee()
     {
+        isAttackingHighEnergy = false;
+        LastChargedMelee = Time.time;
         EnemyAnim.SetTrigger("CharMelee");
 
     }
@@ -200,6 +250,7 @@ public class BookAI : MonoBehaviour
     public void NormalRangedAttack()
     {
         // Predicable basic ranged attack
+        LastRanged = Time.time;
         EnemyAnim.SetTrigger("NormRanged");
     }
 
@@ -210,12 +261,19 @@ public class BookAI : MonoBehaviour
 
     public void HighEnergyRangedAttack()
     {
+        if(HighEnergyHappened) return;
        // this unfortanelty even though is the hardest to prgram has to be a rare occurance and if so one of the enemies in a wave should eb doing this
+        LastHighEnergyAttack = Time.time;
+        isAttackingHighEnergy = true;
+        HighEnergyHappened = true;
+        EnemyAnim.SetTrigger("HighEnergy");
+
     }
 
     public void DesperateRangedAttack()
     {
         // This is going to be a pain in the butt to code but these attacks shouldnt "actually hit" the player mostly meant to miss on purpose
+        LastRanged = Time.time;
     
     }
 
@@ -312,17 +370,34 @@ public class BookAI : MonoBehaviour
 
     void HandleOverConfidentFar()
     {
-        if(StickmanState == StickmanState.Pushing)
-        {
-            // High action pack enviorment based actions
-        }
+        Debug.Log("Handling Over Confident Enemy Far");
+
 
         if(StickmanState == StickmanState.Pushing && DistanceFromPlayer < 20 && 
         StickmanBehavior == StickmanBehavior.NoSkill_Spammer)
         {
             // Charge Up Knockback Melee Attack
         }
+        else if(StickmanState == StickmanState.Pushing && EnemyBehavior == EnemyBehavior.OverConfident 
+        && Time.time >= LastHighEnergyAttack + HighEnergyAttackCD )// like when the player is tryna aggresive head towards the enemy
+        {      
+            HighEnergyRangedAttack();
+        }
     }
+
+    void HandleOverConfidentClose()
+    {
+        Debug.Log("Handling Over Confident Enemy Close");
+
+
+        if(Time.time >= 0.6f + LastMelee)
+        {
+            NormalMeleeAttack();
+        }
+     
+       
+    }
+
 
     void HandleCloseToPlayer()
     {
@@ -332,10 +407,15 @@ public class BookAI : MonoBehaviour
         {
             HandleNeutralClose();
         }
+        if(EnemyBehavior == EnemyBehavior.OverConfident)
+        {
+            HandleOverConfidentClose();
+        }
     }
 
     void HandleNeutralClose()
     {
+        Debug.Log("Hangling Enemy's Neutral Close");
         if(StickmanState == StickmanState.InAir && StickmanBehavior == StickmanBehavior.Acrobatic)
         {
             // Do an Air block attack that knockbacks player
@@ -350,10 +430,11 @@ public class BookAI : MonoBehaviour
         {
             // either do first melee attack or second one
         }
-        else if(StickmanState == StickmanState.Pushing)// like when the player is tryna aggresive head towards the enemy
+        else if(StickmanState == StickmanState.Pushing && EnemyBehavior != EnemyBehavior.OverConfident)// like when the player is tryna aggresive head towards the enemy
         {      
-            //  Quick Jab 
+            NormalMeleeAttack();
         }
+        
     }
 
     void HandleIdle()
@@ -367,6 +448,66 @@ public class BookAI : MonoBehaviour
 
 
     //-------------------------ANIMATIONS------------------------------------------------------
+
+
+    // -------------------------- IMPORTANT STUFF-------------------------------------
+
+
+    public void EnemyBehaviorDecider()
+    {
+        // OverConfidence can happen only once with the attack but if the player gets hit by the high energy attack overconfidence may come back
+
+
+
+
+        if(TimeSincePlayerSpotted >= 6 && Health >= StartHP - 4 && LastHighEnergyAttack == 0)
+        {
+            EnemyBehavior = EnemyBehavior.OverConfident;
+        }
+        else if(TimeSincePlayerSpotted >= 14 && Health <= StartHP - 6)
+        {
+            int randomDecision = UnityEngine.Random.Range(0, 10);
+            if(randomDecision == 2)
+            {
+                EnemyBehavior = EnemyBehavior.Surrender;
+
+            }
+            else
+            {
+                EnemyBehavior = EnemyBehavior.Desperate;
+
+            }
+        }
+    }
+
+    public void DamagePlayer(float DMG)
+    {
+        if(PlayerIsVulnerable())
+        {
+            EnemyState = EnemyState.Idle;
+            StickManager.StickAnim.SetTrigger("Hurt");
+            StickHP.PlayerHP -= DMG;
+            AudioP.PlayOneShot(MeleeImpact); // TODO: Change this so you can use a audioclip in the input
+            if(isAttackingHighEnergy)
+            {
+                isAttackingHighEnergy = false;
+                HighEnergyHappened = false;
+            }
+        }
+
+    }
+
+    public bool PlayerIsVulnerable()
+    {
+        if(!StickManager.BackFlip && !StickManager.isSliding && !StickManager.isDashing && MeleeRange.StickmanIsHERE)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
 
     // --------------------- MISC. ----------------------------------------------------------------
@@ -427,6 +568,7 @@ public class BookAI : MonoBehaviour
         if(StickmanCharging())
         {
             StickmanBehavior = StickmanBehavior.onAdrenaline;
+            StickmanState = StickmanState.Pushing;
         }
 
     }
@@ -434,7 +576,7 @@ public class BookAI : MonoBehaviour
     public bool StickmanCharging()
     {
         bool StickRunAnim = StickManager.StickAnim.GetBool("Walking");
-        if(StickManager.rb.velocity.x == StickManager.MaxSpeed && StickAnimsChargeChecker() && StickManager.rb.velocity.y <= 0)
+        if(Math.Abs(StickManager.rb.velocity.x) == StickManager.MaxSpeed && StickAnimsChargeChecker() && StickManager.rb.velocity.y <= 0)
         {
             return true;
         }
@@ -463,6 +605,13 @@ public class BookAI : MonoBehaviour
 
         
     }
+
+    public void CalcTimeAlive()
+    {
+        if(!EnemVision.PlayerSpotted) return;
+        TimeSincePlayerSpotted += Time.deltaTime;
+    }
+
 
  
 
