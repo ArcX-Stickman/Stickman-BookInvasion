@@ -127,7 +127,12 @@ public class BookAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(StickHP.PlayerHP <= 0) return;
+        if(StickHP.PlayerHP <= 0)
+        {
+            EnemyAnim.SetBool("Moving",false);
+            this.enabled = false; 
+
+        }    
         AttackManager();
         MoveTowardsPlayer();
         DistanceCalc();
@@ -228,12 +233,27 @@ public class BookAI : MonoBehaviour
 
     // ---------------------------MELEE----------------------------------------------------------
 
+    public bool FollowUpPunchFinish;
     public void NormalMeleeAttack()
     {
         // litteraly a punch what did ya think
         LastMelee = Time.time;
         isAttackingHighEnergy = false;
-        EnemyAnim.SetTrigger("NormMelee");
+        //FollowUpPunchFinish = false;
+
+        // Follow Up
+        if(FollowUpPunchFinish)
+        {
+            EnemyAnim.SetTrigger("NormMelee");
+            FollowUpPunchFinish = false; 
+
+
+        }
+        else
+        {
+            EnemyAnim.SetTrigger("MeleeFollow");
+
+        }
 
 
     }
@@ -423,7 +443,7 @@ public class BookAI : MonoBehaviour
         }
 
 
-        if (Time.time >= 0.6f + LastMelee)
+        if (Time.time >= MeleeCD + LastMelee)
         {
             NormalMeleeAttack();
         }
@@ -530,6 +550,12 @@ public class BookAI : MonoBehaviour
                 isAttackingHighEnergy = false;
             }
         }
+
+    }
+
+    public void AnimationKey_FollowUp_Finished()
+    {
+        FollowUpPunchFinish = true;
 
     }
 

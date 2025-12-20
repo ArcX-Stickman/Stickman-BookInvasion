@@ -1111138,9 +1111138,10 @@ GameObject:
   - component: {fileID: 175024554}
   - component: {fileID: 175024557}
   - component: {fileID: 175024558}
-  m_Layer: 0
+  - component: {fileID: 175024559}
+  m_Layer: 17
   m_Name: PhysicsEnemy
-  m_TagString: Untagged
+  m_TagString: Book
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1111290,14 +1111291,14 @@ MonoBehaviour:
   StickmanBehavior: 0
   StickmanState: 0
   Health: 10
-  HitMarker: {fileID: 1877763648}
+  HitMarker: {fileID: 175024559}
   EnemyAnim: {fileID: 175024553}
   DistanceFromPlayer: 0
   MinMeleeDistance: 0
   MinDIS_Movement: 8.08
   Speed: 25
   MaxSpeed: 40
-  MeleeCD: 1.37
+  MeleeCD: 2.5
   HighEnergyAttackCD: 5
   ChargedMeleeCD: 0
   RangedCD: 0
@@ -1111321,6 +1111322,7 @@ MonoBehaviour:
   MeleeRange: {fileID: 2018726879}
   AudioP: {fileID: 590502044}
   MeleeImpact: {fileID: 8300000, guid: 07c32f61fc533475e85a549b4793eda4, type: 3}
+  FollowUpPunchFinish: 0
 --- !u!114 &175024558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1111335,6 +1111337,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShakeAmount: 60
   Duration: 0.3
+--- !u!114 &175024559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175024551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44603f4360c710645b7f0329286823e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AudioP: {fileID: 590502044}
+  SFX:
+  - {fileID: 8300000, guid: 84d7f44e978433f4abc93926c9e33089, type: 3}
+  - {fileID: 8300000, guid: 5b82c3b777ea3664a8b4e7471f46c5fc, type: 3}
+  - {fileID: 8300000, guid: 63d68bb9a6b6f8c4788b6137d7b7572d, type: 3}
+  V2: 0
+  FXPOS: {fileID: 1877763646}
+  FX: {fileID: 6126206662861723998, guid: 244fd29425436334d8cdf679cba5aa86, type: 3}
+  isForced: 0
 --- !u!1 &175455972 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3361925072440373440, guid: 4846695946c15454a84df098b55e0375, type: 3}
@@ -2681909,7 +2681932,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1877763646}
   - component: {fileID: 1877763647}
-  - component: {fileID: 1877763648}
   m_Layer: 0
   m_Name: PhysicsV2
   m_TagString: Untagged
@@ -2681991,27 +2682013,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1877763648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1877763645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44603f4360c710645b7f0329286823e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AudioP: {fileID: 590502044}
-  SFX:
-  - {fileID: 8300000, guid: 84d7f44e978433f4abc93926c9e33089, type: 3}
-  - {fileID: 8300000, guid: 5b82c3b777ea3664a8b4e7471f46c5fc, type: 3}
-  - {fileID: 8300000, guid: 63d68bb9a6b6f8c4788b6137d7b7572d, type: 3}
-  V2: 0
-  FXPOS: {fileID: 1877763646}
-  FX: {fileID: 6126206662861723998, guid: 244fd29425436334d8cdf679cba5aa86, type: 3}
-  isForced: 0
 --- !u!1 &1879483489
 GameObject:
   m_ObjectHideFlags: 0
@@ -2723817,7 +2723818,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -3.763568, y: 0.8872757}
+  m_Offset: {x: -3.089058, y: 0.8872757}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2723828,7 +2723829,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 7.586235, y: 10.059643}
+  m_Size: {x: 14.898222, y: 10.059643}
   m_EdgeRadius: 0
 --- !u!1 &2019356909
 GameObject:
