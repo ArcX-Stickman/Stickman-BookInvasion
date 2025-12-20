@@ -2840,7 +2840,7 @@ public class Movement : MonoBehaviour
     public bool EnemyRecivedHit;
     private float SFXCDFREEFLOWCD = 1.2f;
     private float LastCalledSFXCDFREEFLOW;
-    private float StickDirection;
+    public float StickDirection;
     public IEnumerator PunchFreeFlow()
     {
 
@@ -3430,7 +3430,7 @@ public class Movement : MonoBehaviour
             float elapsedTime = 0f;
             while (flipTime > elapsedTime && !InHeliCineBeatdown)
             {
-                Debug.Log("We Want A Flip Flippppp");
+                //Debug.Log("We Want A Flip Flippppp");
 
                 motionBlurHandler.HandleMotionBlur();
                 HeCanMove = false;
