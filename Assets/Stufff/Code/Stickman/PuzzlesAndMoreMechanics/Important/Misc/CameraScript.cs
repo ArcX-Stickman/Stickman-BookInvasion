@@ -105,6 +105,47 @@ public class CameraScript : MonoBehaviour
         FullyZoomed = true;
     }
 
+
+    public IEnumerator ZoomCam(float Size,float Duration)
+    {
+        MainCam.orthographic = true;
+        while (CamSize >= Size && elapsedTime <= Duration)
+        {
+            elapsedTime += Time.deltaTime;
+            CamSize = Mathf.Lerp(StickCam.m_Lens.OrthographicSize, Size, elapsedTime / Duration);
+
+
+            StickCam.m_Lens.OrthographicSize = CamSize;
+            yield return null;
+        }
+
+
+        elapsedTime = 0f;
+
+
+        //FullyZoomed = true;
+    }
+
+
+    public IEnumerator ZoomOutCam(float Size, float Duration)
+    {
+        MainCam.orthographic = true;
+        while (CamSize <= Size && elapsedTime <= Duration)
+        {
+            elapsedTime += Time.deltaTime;
+            CamSize = Mathf.Lerp(StickCam.m_Lens.OrthographicSize, Size, elapsedTime / Duration);
+
+
+            StickCam.m_Lens.OrthographicSize = CamSize;
+            yield return null;
+        }
+
+        elapsedTime = 0f;
+
+
+        //FullyZoomed = true;
+    }
+
     public IEnumerator StickBrainWakeUp_Event()
     {
         //extend to 3492.2

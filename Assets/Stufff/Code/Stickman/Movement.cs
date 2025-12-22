@@ -318,6 +318,7 @@ public class Movement : MonoBehaviour
     public ParticleSystem JumpSmoke;
     public ParticleSystem SlideSmoke;
     public ParticleSystem GrassBlades;
+    public bool PlayerReadyForImpactFrame;
 
     public ParticleSystem DashSmoke;
 
@@ -1312,6 +1313,17 @@ public class Movement : MonoBehaviour
         return hit.collider != null;
     }
 
+    public void ReadyForImpactFrame()
+    {
+        PlayerReadyForImpactFrame = true;
+    }
+
+    public void NotReadyImpactFrame()
+    {
+        PlayerReadyForImpactFrame = false;
+
+    }
+
     public void AnimationKey_StunTrue()
     {
         IsStunned = true;
@@ -1527,7 +1539,7 @@ public class Movement : MonoBehaviour
             if (AbleToJump && !isSliding)
             {
 //                Debug.Log("Jump Void Is Active");
-                if (!isDashing && !isSliding && !IsShooting && !Dead && !inSlipperyState && !Anim_Locked && !BackFlip && !ForcedJumpMegaHurtBool)
+                if (!isDashing && !isSliding && !IsShooting && !Dead && !inSlipperyState && !Anim_Locked && !BackFlip && !ForcedJumpMegaHurtBool && !Falling_KnockBack)
                 {
                     StickAnim.CrossFade("Jump", 0, 0);
 
@@ -4111,6 +4123,29 @@ public class Movement : MonoBehaviour
 
 
     }
+
+    public bool Falling_KnockBack;
+
+    public IEnumerator PlayerKnockBack(float horizontalForce, float verticalForce, float duration)
+    {
+        float timer = 0f;
+
+        float dir = transform.localScale.x > 0 ? 1f : -1f;
+
+
+        while (timer < duration)
+        {
+            Falling_KnockBack = true;
+            StickAnim.CrossFade("StickKnockBack", 0, 0);
+            rb.velocity = new Vector2(horizontalForce * -dir, verticalForce);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        Falling_KnockBack = false;
+        StickAnim.SetBool("KnockedBack", false);
+        rb.velocity = Vector2.zero;
+    }
+
 
 
 

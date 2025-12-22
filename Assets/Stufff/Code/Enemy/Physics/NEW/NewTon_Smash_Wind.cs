@@ -47,15 +47,19 @@ public class NewTon_Smash_Wind : MonoBehaviour
         Vector2 direction = PhysicsBookPOS.localScale.x > 0 ? Vector2.right : Vector2.left;
         Debug.Log("Direction Of ViolentWind Push:  " + direction);
         float timer = 0;
-        StickManager.StickAnim.CrossFade("Backflip", 0, 0);
+       // StickManager.StickAnim.CrossFade("Backflip", 0, 0);
         while(timer < MaxTime)
         {
+            StickManager.StickAnim.CrossFade("StickKnockBack", 0, 0);
+
             StickManager.rb.velocity = new Vector2(transform.localScale.x * ((StickManager.StickDirection)), StickManager.BackFlipForce);
             timer += Time.deltaTime;
             PushBack.x += Multiplier * Time.deltaTime;
             StickManager.rb.AddForce(-direction * Multiplier,ForceMode2D.Force);
             yield return null;
         }
+        StickManager.Falling_KnockBack = false;
+
         yield return null;
     }
 }

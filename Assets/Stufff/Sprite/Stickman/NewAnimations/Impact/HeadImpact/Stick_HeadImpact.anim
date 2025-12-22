@@ -1,0 +1,119 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!74 &7400000
+AnimationClip:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Stick_HeadImpact
+  serializedVersion: 7
+  m_Legacy: 0
+  m_Compressed: 0
+  m_UseHighQualityCurve: 1
+  m_RotationCurves: []
+  m_CompressedRotationCurves: []
+  m_EulerCurves: []
+  m_PositionCurves: []
+  m_ScaleCurves: []
+  m_FloatCurves: []
+  m_PPtrCurves:
+  - serializedVersion: 2
+    curve:
+    - time: 0
+      value: {fileID: 21300000, guid: c1bd9280b69587a4bbb32b4bc012b088, type: 3}
+    - time: 0.083333336
+      value: {fileID: 21300000, guid: 0eb30dcd50f2f784e966fee2965993a0, type: 3}
+    - time: 0.11666667
+      value: {fileID: 21300000, guid: 9b7bdceab8b0d724283b2742349898be, type: 3}
+    - time: 0.18333334
+      value: {fileID: 21300000, guid: ad76a4f9b4dde6047aafed3924a450e3, type: 3}
+    - time: 0.26666668
+      value: {fileID: 21300000, guid: 2fd4b848fe544e845ac5e5a5055277d2, type: 3}
+    - time: 0.36666667
+      value: {fileID: 21300000, guid: 9fcda84f09550924e969ed69194bfc58, type: 3}
+    - time: 0.48333332
+      value: {fileID: 21300000, guid: c0198addedfdb144d94bf93ee32cb506, type: 3}
+    - time: 0.6333333
+      value: {fileID: 21300000, guid: 4fae9f505410d44478a49753f74fc26e, type: 3}
+    - time: 0.7
+      value: {fileID: 21300000, guid: 0ec3b9e872b1549429f70da87d51dff6, type: 3}
+    - time: 0.78333336
+      value: {fileID: 21300000, guid: 6a785333f33ba4346b1becb0ca6b5c7b, type: 3}
+    - time: 0.8666667
+      value: {fileID: 21300000, guid: 061548f7622ffd04a9edd1a108af0321, type: 3}
+    - time: 0.9166667
+      value: {fileID: 21300000, guid: 061548f7622ffd04a9edd1a108af0321, type: 3}
+    attribute: m_Sprite
+    path: 
+    classID: 212
+    script: {fileID: 0}
+    flags: 2
+  m_SampleRate: 60
+  m_WrapMode: 0
+  m_Bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_ClipBindingConstant:
+    genericBindings:
+    - serializedVersion: 2
+      path: 0
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 212
+      customType: 23
+      isPPtrCurve: 1
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
+    pptrCurveMapping:
+    - {fileID: 21300000, guid: c1bd9280b69587a4bbb32b4bc012b088, type: 3}
+    - {fileID: 21300000, guid: 0eb30dcd50f2f784e966fee2965993a0, type: 3}
+    - {fileID: 21300000, guid: 9b7bdceab8b0d724283b2742349898be, type: 3}
+    - {fileID: 21300000, guid: ad76a4f9b4dde6047aafed3924a450e3, type: 3}
+    - {fileID: 21300000, guid: 2fd4b848fe544e845ac5e5a5055277d2, type: 3}
+    - {fileID: 21300000, guid: 9fcda84f09550924e969ed69194bfc58, type: 3}
+    - {fileID: 21300000, guid: c0198addedfdb144d94bf93ee32cb506, type: 3}
+    - {fileID: 21300000, guid: 4fae9f505410d44478a49753f74fc26e, type: 3}
+    - {fileID: 21300000, guid: 0ec3b9e872b1549429f70da87d51dff6, type: 3}
+    - {fileID: 21300000, guid: 6a785333f33ba4346b1becb0ca6b5c7b, type: 3}
+    - {fileID: 21300000, guid: 061548f7622ffd04a9edd1a108af0321, type: 3}
+    - {fileID: 21300000, guid: 061548f7622ffd04a9edd1a108af0321, type: 3}
+  m_AnimationClipSettings:
+    serializedVersion: 2
+    m_AdditiveReferencePoseClip: {fileID: 0}
+    m_AdditiveReferencePoseTime: 0
+    m_StartTime: 0
+    m_StopTime: 0.93333334
+    m_OrientationOffsetY: 0
+    m_Level: 0
+    m_CycleOffset: 0
+    m_HasAdditiveReferencePose: 0
+    m_LoopTime: 0
+    m_LoopBlend: 0
+    m_LoopBlendOrientation: 0
+    m_LoopBlendPositionY: 0
+    m_LoopBlendPositionXZ: 0
+    m_KeepOriginalOrientation: 0
+    m_KeepOriginalPositionY: 1
+    m_KeepOriginalPositionXZ: 0
+    m_HeightFromFeet: 0
+    m_Mirror: 0
+  m_EditorCurves: []
+  m_EulerEditorCurves: []
+  m_HasGenericRootTransform: 0
+  m_HasMotionFloatCurves: 0
+  m_Events:
+  - time: 0.11666667
+    functionName: ReadyForImpactFrame
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.36666667
+    functionName: NotReadyImpactFrame
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

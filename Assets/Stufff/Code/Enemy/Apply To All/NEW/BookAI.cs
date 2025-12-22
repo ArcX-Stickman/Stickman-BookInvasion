@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.Rendering;
 [System.Serializable]
 
@@ -85,6 +86,9 @@ public class BookAI : MonoBehaviour
     public float MiniRangedAttackCD;
     public float CounterCD;
 
+    public float LastDodge;
+    public float DodgeCD;
+
     [Header("Enemy Attack Times")]
 
     public float LastMelee;
@@ -113,10 +117,40 @@ public class BookAI : MonoBehaviour
 
     public AttackSight MeleeRange;
 
+
+    [Header("Attack Data")]
+    public float KnockbackOnMeleeHorizontalVelocity;
+    public float KnockbackOnMeleeVerticalVelocity;
+    public float DurationOfKnockbackMelee;
+
+
+
     [Header("Audio Stuff")]
     public AudioSource AudioP;
     public AudioClip MeleeImpact;
+    public AudioClip CounterMeleeSFX;
 
+
+
+    [Header("Camera Angle")]
+    public bool WantZoomOnCounter;
+    public float ZoomInValue_On_Counter;
+    public float DurationZoomInValue_On_Counter;
+   
+
+    [Header("Impact Frame")]
+    public GameObject ImpactFrameBG;
+    public string StickAnim_Impact;
+    public GameObject Graphix;
+    public SpriteRenderer SelfRender;
+    public GameObject ImpactCam;
+    public GameObject MainCam;
+
+    public GameObject ImpactFrameEffect; // This are like the comic lines
+
+    public Material UnlitRender;
+
+    public Material LitRender;
 
     // Start is called before the first frame update
     void Start()
@@ -140,9 +174,16 @@ public class BookAI : MonoBehaviour
         PlayerObserver();
         EnemyBehaviorDecider();
         LookAtPlayer();
+        
+        
         /// Time and Stuff
         CalcTimeAlive();
-        
+
+        if(Time.time >= ResetCD + LastReset)
+        {
+            EvasionManager();
+
+        }
     }
 
 
@@ -337,8 +378,24 @@ public class BookAI : MonoBehaviour
 
     public void CounterPlayerMelee()
     {
+        // Use this thing on The Animation Key Not as calling\
+        StartCoroutine(StickManager.CameraScript.ZoomCam(ZoomInValue_On_Counter, DurationZoomInValue_On_Counter));
+
 
     }
+
+
+
+    public void ZoomOut_Camera()
+    {
+        // Use this thing on The Animation Key Not as calling\
+
+        StartCoroutine(StickManager.CameraScript.ZoomCam(StickManager.CameraScript.OG_CAM_SIZE, DurationZoomInValue_On_Counter));
+
+
+    }
+
+
 
     public void ParryMeleeAttack()
     {
@@ -348,9 +405,76 @@ public class BookAI : MonoBehaviour
 
     // --------------------------Evading-----------------------------------------------------------
 
+
+    private float LastReset;
+    private float ResetCD = 4;
+    private float DodgeCount;
+    private bool RunningEvasionManagerTimer;
+    public void EvasionManager()
+    {
+        if (Time.time >= LastReset + ResetCD && DistanceFromPlayer <= MinMeleeDistance && StickManager.PunchBool)
+        {
+            DodgeMelee();
+        }
+        if (!RunningEvasionManagerTimer)
+        {
+            RunningEvasionManagerTimer = true;
+            StartCoroutine(RunEvasionTimer());
+            
+        }
+    }
+
+    public IEnumerator RunEvasionTimer()
+    {
+        float Timer = 0;
+        while(Timer < 10)
+        {
+            Debug.Log("RunEvasionTimer: " + Timer);
+            Timer += Time.deltaTime;
+            yield return null;
+        }
+        LastReset = Time.time;
+        DodgeCount = 0;
+
+    }
+
+    private bool isDodging;
     public void DodgeMelee()
     {
         // mostly to punish spam
+        int randint = UnityEngine.Random.Range(1, 3);
+
+        if(DodgeCount <= 2 && !isAttackingHighEnergy)
+        {
+            DodgeCount += 1;
+            if (randint == 1)
+            {
+                EnemyAnim.SetTrigger("Dodge1");
+
+            }
+            else
+            {
+                EnemyAnim.SetTrigger("Dodge2");
+
+            }
+        }
+        else if(!isAttackingHighEnergy)
+        {
+            EnemyAnim.SetTrigger("Dodge3");
+            DodgeCount = 0;
+            LastReset = Time.time;
+            LastDodge = Time.time;
+
+        }
+
+
+      
+    }
+
+
+    public void DodgeFalse()
+    {
+        isDodging = false;
     }
 
     public void DodgeBullet()
@@ -545,7 +669,9 @@ public class BookAI : MonoBehaviour
             StickManager.StickAnim.SetTrigger("Hurt");
             StickHP.PlayerHP -= DMG;
             AudioP.PlayOneShot(MeleeImpact); // TODO: Change this so you can use a audioclip in the input
-            if(isAttackingHighEnergy)
+            StickManager.StartCoroutine(StickManager.PlayerKnockBack(KnockbackOnMeleeHorizontalVelocity,KnockbackOnMeleeVerticalVelocity ,DurationOfKnockbackMelee));
+
+            if (isAttackingHighEnergy)
             {
                 isAttackingHighEnergy = false;
             }
@@ -570,6 +696,13 @@ public class BookAI : MonoBehaviour
             return false;
         }
     }
+    // --------------------- SFX. ----------------------------------------------------------------
+
+    public void PlayCounterMeleeSFX()
+    {
+        AudioP.PlayOneShot(CounterMeleeSFX);
+    }
+
 
 
     // --------------------- MISC. ----------------------------------------------------------------
@@ -689,6 +822,72 @@ public class BookAI : MonoBehaviour
     }
 
 
- 
+    public IEnumerator ImpactFrame(float DelayIfWanted)
+    {
+        float EnemAnimOGSpeed = EnemyAnim.speed;
+
+        Animator StickAnim = StickManager.GetComponent<Animator>();
+        StickManager.enabled = false;
+        StickAnim.CrossFade(StickAnim_Impact, 0, 0);
+
+        float timeoutTimer = 0;
+
+        while (!StickManager.PlayerReadyForImpactFrame)
+        {
+            timeoutTimer += Time.deltaTime;
+            if(timeoutTimer > 2)
+            {
+                EnemyAnim.speed = EnemAnimOGSpeed;
+
+                yield break;
+
+            }
+            EnemyAnim.speed = 0;
+            yield return null;
+        }
+        EnemyAnim.speed = EnemAnimOGSpeed;
+
+
+        SpriteRenderer StickSprite = StickManager.GetComponent<SpriteRenderer>();
+        SelfRender.material = UnlitRender;
+        StickSprite.material = UnlitRender;
+
+        //CameraScript ImpactCamSctiptCam = ImpactCam.GetComponent<CameraScript>();
+
+        //StartCoroutine(StickManager.CameraScript.ShakeCam(4, 0.3f));
+        float timer = 0;
+        ImpactFrameBG.gameObject.SetActive(true);
+        ImpactFrameEffect.gameObject.SetActive(true);
+        StickManager.TimeManager.FreezeTime(0.1f);
+       
+        MainCam.gameObject.SetActive(false);
+        ImpactCam.gameObject.SetActive(true);
+
+
+        
+
+        Graphix.gameObject.SetActive(false);
+
+
+
+
+        yield return new WaitForSecondsRealtime(DelayIfWanted);
+        while (StickManager.PlayerReadyForImpactFrame)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+            
+        }
+        MainCam.gameObject.SetActive(true);
+        ImpactCam.gameObject.SetActive(false);
+        ImpactFrameBG.gameObject.SetActive(false);
+        ImpactFrameEffect.gameObject.SetActive(false);
+        StartCoroutine(StickManager.CameraScript.ZoomOutCam(59.9f, 1f));
+        Graphix.gameObject.SetActive(true);
+        SelfRender.material = LitRender;
+        StickSprite.material = LitRender;
+        StickManager.enabled = true;
+        yield return null;
+    }
 
 }
