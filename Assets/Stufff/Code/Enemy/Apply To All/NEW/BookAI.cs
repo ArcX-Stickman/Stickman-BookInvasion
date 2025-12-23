@@ -687,7 +687,7 @@ public class BookAI : MonoBehaviour
 
     public bool PlayerIsVulnerable()
     {
-        if(!StickManager.BackFlip && !StickManager.isSliding && !StickManager.isDashing && MeleeRange.StickmanIsHERE)
+        if(!StickManager.BackFlip && !StickManager.isSliding && !StickManager.isDashing && MeleeRange.StickmanIsHERE && DistanceFromPlayer <= MinMeleeDistance)
         {
             return true;
         }
@@ -824,70 +824,97 @@ public class BookAI : MonoBehaviour
 
     public IEnumerator ImpactFrame(float DelayIfWanted)
     {
+
+
+
+        if (!PlayerIsVulnerable()) yield break;
         float EnemAnimOGSpeed = EnemyAnim.speed;
-
-        Animator StickAnim = StickManager.GetComponent<Animator>();
-        StickManager.enabled = false;
-        StickAnim.CrossFade(StickAnim_Impact, 0, 0);
-
-        float timeoutTimer = 0;
-
-        while (!StickManager.PlayerReadyForImpactFrame)
+        if(PlayerIsVulnerable() )
         {
-            timeoutTimer += Time.deltaTime;
-            if(timeoutTimer > 2)
-            {
-                EnemyAnim.speed = EnemAnimOGSpeed;
+            CounterPlayerMelee();
+            Animator StickAnim = StickManager.GetComponent<Animator>();
+            StickManager.enabled = false;
+            StickAnim.CrossFade(StickAnim_Impact, 0, 0);
 
-                yield break;
+            float timeoutTimer = 0;
+
+            while (!StickManager.PlayerReadyForImpactFrame)
+            {
+                timeoutTimer += Time.deltaTime;
+                if (timeoutTimer > 1.3f)
+                {
+                    EnemyAnim.speed = EnemAnimOGSpeed;
+                    StartCoroutine(StickManager.CameraScript.ZoomOutCam(59.9f, 1f));
+
+                    yield break;
+
+                }
+                EnemyAnim.speed = 0;
+                yield return null;
+            }
+            EnemyAnim.speed = EnemAnimOGSpeed;
+
+
+            SpriteRenderer StickSprite = StickManager.GetComponent<SpriteRenderer>();
+            SelfRender.material = UnlitRender;
+            StickSprite.material = UnlitRender;
+
+            //CameraScript ImpactCamSctiptCam = ImpactCam.GetComponent<CameraScript>();
+
+            //StartCoroutine(StickManager.CameraScript.ShakeCam(4, 0.3f));
+            float timer = 0;
+            ImpactFrameBG.gameObject.SetActive(true);
+            ImpactFrameEffect.gameObject.SetActive(true);
+            StickManager.TimeManager.FreezeTime(0.1f);
+
+            MainCam.gameObject.SetActive(false);
+            ImpactCam.gameObject.SetActive(true);
+
+
+
+
+            Graphix.gameObject.SetActive(false);
+
+
+
+
+            yield return new WaitForSecondsRealtime(DelayIfWanted);
+            float timer2 = 0;
+            while (StickManager.PlayerReadyForImpactFrame)
+            {
+                timer2 += Time.deltaTime;
+                yield return null;
+                // ts helps with timeouts like if player somehow miracoulddsy ( <--- how the hell u spell this) switched animation it wouldnt be nice >:(
+                if (timer2 > 1.3f)
+                {
+                    
+                    MainCam.gameObject.SetActive(true);
+                    ImpactCam.gameObject.SetActive(false);
+                    ImpactFrameBG.gameObject.SetActive(false);
+                    ImpactFrameEffect.gameObject.SetActive(false);
+                    StartCoroutine(StickManager.CameraScript.ZoomOutCam(59.9f, 1f));
+                    Graphix.gameObject.SetActive(true);
+                    SelfRender.material = LitRender;
+                    StickSprite.material = LitRender;
+                    StickManager.enabled = true;
+                    yield break;
+
+                }
+
 
             }
-            EnemyAnim.speed = 0;
+            MainCam.gameObject.SetActive(true);
+            ImpactCam.gameObject.SetActive(false);
+            ImpactFrameBG.gameObject.SetActive(false);
+            ImpactFrameEffect.gameObject.SetActive(false);
+            StartCoroutine(StickManager.CameraScript.ZoomOutCam(59.9f, 1f));
+            Graphix.gameObject.SetActive(true);
+            SelfRender.material = LitRender;
+            StickSprite.material = LitRender;
+            StickManager.enabled = true;
             yield return null;
         }
-        EnemyAnim.speed = EnemAnimOGSpeed;
-
-
-        SpriteRenderer StickSprite = StickManager.GetComponent<SpriteRenderer>();
-        SelfRender.material = UnlitRender;
-        StickSprite.material = UnlitRender;
-
-        //CameraScript ImpactCamSctiptCam = ImpactCam.GetComponent<CameraScript>();
-
-        //StartCoroutine(StickManager.CameraScript.ShakeCam(4, 0.3f));
-        float timer = 0;
-        ImpactFrameBG.gameObject.SetActive(true);
-        ImpactFrameEffect.gameObject.SetActive(true);
-        StickManager.TimeManager.FreezeTime(0.1f);
-       
-        MainCam.gameObject.SetActive(false);
-        ImpactCam.gameObject.SetActive(true);
-
-
         
-
-        Graphix.gameObject.SetActive(false);
-
-
-
-
-        yield return new WaitForSecondsRealtime(DelayIfWanted);
-        while (StickManager.PlayerReadyForImpactFrame)
-        {
-            timer += Time.deltaTime;
-            yield return null;
-            
-        }
-        MainCam.gameObject.SetActive(true);
-        ImpactCam.gameObject.SetActive(false);
-        ImpactFrameBG.gameObject.SetActive(false);
-        ImpactFrameEffect.gameObject.SetActive(false);
-        StartCoroutine(StickManager.CameraScript.ZoomOutCam(59.9f, 1f));
-        Graphix.gameObject.SetActive(true);
-        SelfRender.material = LitRender;
-        StickSprite.material = LitRender;
-        StickManager.enabled = true;
-        yield return null;
     }
 
 }
