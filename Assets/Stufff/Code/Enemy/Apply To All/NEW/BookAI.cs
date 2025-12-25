@@ -34,7 +34,6 @@ public class BookAI : MonoBehaviour
 
     [Header("Enemy References")]
     public Vision EnemVision;
-    public Animator BookAnim;
 
     [Header("Enemy State Manager")]
     private float HeyImJustHereForFormattingIMeanNothing;
@@ -108,7 +107,8 @@ public class BookAI : MonoBehaviour
     public float PlayerEvasiveActionCount;
     public float PlayerPunchCount;
     public float PlayerAcrobaticActionCount;
-
+    public float TimesDamagedPlayer;
+    public float TimesPlayerDamagedEnemy;
 
     [Header("Enemy Colliders")]
     public BoxCollider2D MeleeCollider;
@@ -122,6 +122,14 @@ public class BookAI : MonoBehaviour
     public float KnockbackOnMeleeHorizontalVelocity;
     public float KnockbackOnMeleeVerticalVelocity;
     public float DurationOfKnockbackMelee;
+    public int TimesHighEnergyAttack;
+
+
+    [Header("Projectiles")]
+
+    public GameObject NormProjectile;
+    public GameObject MiniProjectile;
+    public Transform AimPoint;
 
 
 
@@ -152,9 +160,23 @@ public class BookAI : MonoBehaviour
 
     public Material LitRender;
 
+
+    [Header("Audio")]
+
+    public AudioClip ThrowSFX;
+
+    [Header("ExtraAnimattions")]
+    public AnimationClip IdleNormal;
+    public AnimationClip IdleTired;
+    private AnimatorOverrideController overrideController;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
+        overrideController = new AnimatorOverrideController(EnemyAnim.runtimeAnimatorController);
+        EnemyAnim.runtimeAnimatorController = overrideController;
         StartHP = Health;
     }
 
@@ -183,6 +205,11 @@ public class BookAI : MonoBehaviour
         {
             EvasionManager();
 
+        }
+
+        if(IdleNormal != null && IdleTired != null)
+        {
+            IdleAnimationManager();
         }
     }
 
@@ -314,7 +341,36 @@ public class BookAI : MonoBehaviour
 
     }
 
+
+
+
+    // --------------------------- Collisions --------------------------------------
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        HandleCollision(collision);
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        HandleCollision(collision.collider);
+    }
+
+    public void HandleCollision(Collider2D collion)
+    {
+        if (collion.CompareTag("StickMelee") && Time.time >= lastTick + Tick || collion.CompareTag("Bullet") && Time.time >= lastTick + Tick)
+        {
+            TimesPlayerDamagedEnemy += 1;
+            Health -= 1;
+        }
+    }
+
+
     // --------------------------RANGED-----------------------------------------------------------
+
+
+
 
     public void NormalRangedAttack()
     {
@@ -324,21 +380,52 @@ public class BookAI : MonoBehaviour
     }
 
     public void MiniRangedAttack()
-        // A Fast Projectile thats small and follows the same  path
+    // A Fast Projectile thats small and follows the same  path
     {
+
+        LastMiniRangedAttack = Time.time;
+        EnemyAnim.SetTrigger("MiniRanged");
+
+
     }
+
+
+    public void AnimationKeyRangedProjectile()
+    {
+
+    }
+
+    public void AnimationKeyMiniRangedProjectile()
+    {
+        AudioP.PlayOneShot(ThrowSFX);
+        GameObject Projectile = ObjectPooler.SpawnObj(MiniProjectile, AimPoint.position, Quaternion.identity, ObjectPooler.PoolType.GamObjects);
+        Vector2 shootDirection = (transform.localScale.x > 0) ? Vector2.right : Vector2.left;
+        Projectile.GetComponent<Projectiles>().SetDirection(shootDirection);
+        Projectile.GetComponent<Projectiles>().Accelerating = true;
+
+    }
+
 
     private float Tick = 0.5f;
     private float lastTick;
     public void HighEnergyRangedAttack()
     {
-        Debug.Log("High Energy Ranged Called");
-       // this unfortanelty even though is the hardest to prgram has to be a rare occurance and if so one of the enemies in a wave should eb doing this
+        if (StickHP.Testing)
+        {
+            Debug.Log("High Energy Ranged Called");
+
+        }
+        // this unfortanelty even though is the hardest to prgram has to be a rare occurance and if so one of the enemies in a wave should eb doing this
         LastHighEnergyAttack = Time.time;
         isAttackingHighEnergy = true;
+        TimesHighEnergyAttack += 1;
         if(HighEnergyAttackCollider_IfNeeded != null && Time.time >= Tick + lastTick)
         {
-            Debug.Log("HighEnergyCollider Is Not Null Yessirrrr");
+            if (StickHP.Testing)
+            {
+                Debug.Log("HighEnergyCollider Is Not Null Yessirrrr");
+
+            }
             lastTick = Time.time;
             if (HighEnergyAttackCollider_IfNeeded.IsTouching(StickManager.gameObject.GetComponent<BoxCollider2D>()) && !StickManager.BackFlip)
             {
@@ -429,7 +516,7 @@ public class BookAI : MonoBehaviour
         float Timer = 0;
         while(Timer < 10)
         {
-            Debug.Log("RunEvasionTimer: " + Timer);
+            //Debug.Log("RunEvasionTimer: " + Timer);
             Timer += Time.deltaTime;
             yield return null;
         }
@@ -534,6 +621,15 @@ public class BookAI : MonoBehaviour
         {   
             // Start Spaming random stuff 
             // Or Litteraly just dip and run
+            if(Time.time >= LastHighEnergyAttack + HighEnergyAttackCD - 5)
+            {
+                HighEnergyRangedAttack();
+            }
+            if (Time.time >= LastMiniRangedAttack + MiniRangedAttackCD && Time.time < LastHighEnergyAttack + HighEnergyAttackCD - 3)
+            {
+                MiniRangedAttack();
+            }
+            EnemyAnim.SetBool("Moving", false);
         }
     }
 
@@ -546,15 +642,20 @@ public class BookAI : MonoBehaviour
         }
 
 
-        if (StickmanState == StickmanState.Pushing && DistanceFromPlayer < 20 && 
-        StickmanBehavior == StickmanBehavior.NoSkill_Spammer)
-        {
-            // Charge Up Knockback Melee Attack
-        }
+        //if (StickmanState == StickmanState.Pushing && DistanceFromPlayer < 20 && 
+        //StickmanBehavior == StickmanBehavior.NoSkill_Spammer)
+        //{
+        //    // Charge Up Knockback Melee Attack
+        //}
         else if(StickmanState == StickmanState.Pushing && EnemyBehavior == EnemyBehavior.OverConfident 
         && Time.time >= LastHighEnergyAttack + HighEnergyAttackCD )// like when the player is tryna aggresive head towards the enemy
         {      
             HighEnergyRangedAttack();
+        }
+
+        if(Time.time >= LastMiniRangedAttack + MiniRangedAttackCD && Time.time < LastHighEnergyAttack + HighEnergyAttackCD)
+        {
+            MiniRangedAttack();
         }
     }
 
@@ -631,6 +732,20 @@ public class BookAI : MonoBehaviour
     //-------------------------ANIMATIONS------------------------------------------------------
 
 
+    public void IdleAnimationManager()
+    {
+        if(Health / StartHP <= 0.50)
+        {
+            overrideController["Idle"] = IdleTired;
+        }
+        else
+        {
+            overrideController["Idle"] = IdleNormal;
+
+        }
+    }
+
+
     // -------------------------- IMPORTANT STUFF-------------------------------------
 
 
@@ -645,7 +760,7 @@ public class BookAI : MonoBehaviour
         {
             EnemyBehavior = EnemyBehavior.OverConfident;
         }
-        else if(TimeSincePlayerSpotted >= 14 && Health <= StartHP - 6)
+        else if(TimeSincePlayerSpotted >= 14 && Health / StartHP <= 0.2f)
         {
             int randomDecision = UnityEngine.Random.Range(0, 10);
             if(randomDecision == 2)
@@ -670,6 +785,7 @@ public class BookAI : MonoBehaviour
             StickHP.PlayerHP -= DMG;
             AudioP.PlayOneShot(MeleeImpact); // TODO: Change this so you can use a audioclip in the input
             StickManager.StartCoroutine(StickManager.PlayerKnockBack(KnockbackOnMeleeHorizontalVelocity,KnockbackOnMeleeVerticalVelocity ,DurationOfKnockbackMelee));
+            TimesDamagedPlayer += 1;
 
             if (isAttackingHighEnergy)
             {
