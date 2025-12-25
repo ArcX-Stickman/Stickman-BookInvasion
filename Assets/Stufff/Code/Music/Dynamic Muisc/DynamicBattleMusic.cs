@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum StateOfFight
@@ -9,8 +10,7 @@ public enum StateOfFight
 
 public class DynamicBattleMusic : MonoBehaviour
 {
-
-    public BookAI[] Enemies;
+    public List<BookAI> Enemies;
     public Movement Stickman;
 
     public float AverageDis;
@@ -18,51 +18,40 @@ public class DynamicBattleMusic : MonoBehaviour
     public StateOfFight currentState;
 
     public AudioSource BattleAudioP;
-
+    public AudioSource AudioP;
     public AudioClip Riser;
     public AudioClip BattleStart;
 
     public AudioClip BattleIntensifyingStart;
-
     public AudioClip StringsEssemble1;
-
     public AudioClip EnemyDominance;
-
     public AudioClip CallForHeroismRedemptionComeback;
-
     public AudioClip PlayerComback;
-
     public AudioClip AlmostConcluding;
-
     public AudioClip OddsAreInPlayer;
     public AudioClip StringsEssemble2;
 
-
-
-
     public float DurationOfFight;
-
-
+    public AudioClip Jingle;
     private float StartAveragesOfEnemiesHealth;
     private StateOfFight lastState;
 
+    public AudioSource DefaultBG_Music;
+
     public int HighEnergyAttackTimesForTrueHype;
 
-
-    // Start is called before the first frame update
     void Start()
     {
         float healthAccum = 0;
         foreach (BookAI bookAIai in Enemies)
         {
             healthAccum += bookAIai.Health;
-
         }
-        StartAveragesOfEnemiesHealth = healthAccum / Enemies.Length;
+        StartAveragesOfEnemiesHealth = healthAccum / Enemies.Count;
     }
+
     private bool battleStarted;
 
-    // Update is called once per frame
     void Update()
     {
         bool spotted = PlayerSpotted();
@@ -97,10 +86,41 @@ public class DynamicBattleMusic : MonoBehaviour
             HandleStateMusic(currentState);
             lastState = currentState;
         }
+
+        RemoveDeadEnemies();
+
+        if(!AlrJingle && Enemies.Count <= 0)
+        {
+            AlrJingle = true;
+            BattleAudioP.enabled = false;
+            StartCoroutine(WaitForAudioPStopPlay());
+        }
     }
 
+    private bool AlrJingle;
 
+    public IEnumerator WaitForAudioPStopPlay()
+    {
+        while (Stickman.PlayerReadyForImpactFrame)
+        {
+            yield return null;
+        }
+        AudioP.PlayOneShot(Jingle);
+        yield return new WaitForSecondsRealtime(3f);
+        DefaultBG_Music.gameObject.SetActive(true);
 
+        yield break;
+    }
+    public void RemoveDeadEnemies()
+    {
+        for (int i = 0; i < Enemies.Count; i++)
+        {
+            if (Enemies[i] != null && Enemies[i].Health <= 0)
+            {
+                Enemies.RemoveAt(i);
+            }
+        }
+    }
 
     void HandleStateMusic(StateOfFight state)
     {
@@ -116,7 +136,7 @@ public class DynamicBattleMusic : MonoBehaviour
                 StartCoroutine(SwitchMusic(
                     BattleIntensifyingStart,
                     true,
-                    StringsEssemble1   
+                    StringsEssemble1
                 ));
                 break;
 
@@ -128,7 +148,7 @@ public class DynamicBattleMusic : MonoBehaviour
                 StartCoroutine(SwitchMusic(
                     CallForHeroismRedemptionComeback,
                     true,
-                    PlayerComback     
+                    PlayerComback
                 ));
                 break;
 
@@ -136,7 +156,7 @@ public class DynamicBattleMusic : MonoBehaviour
                 StartCoroutine(SwitchMusic(
                     AlmostConcluding,
                     true,
-                    OddsAreInPlayer  
+                    OddsAreInPlayer
                 ));
                 break;
         }
@@ -150,8 +170,8 @@ public class DynamicBattleMusic : MonoBehaviour
         BattleAudioP.Play();
     }
 
-
     private bool RunningSwitchMusicInstance;
+
     public IEnumerator SwitchMusic(AudioClip Music, bool TransitionAudioNeeded, AudioClip TransitionMusic)
     {
         Debug.Log("Entered Switch Music");
@@ -165,6 +185,7 @@ public class DynamicBattleMusic : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
+
         BattleAudioP.clip = Music;
         Debug.Log(" Switched Music!!");
 
@@ -172,39 +193,33 @@ public class DynamicBattleMusic : MonoBehaviour
         {
             BattleAudioP.Play();
         }
+
         RunningSwitchMusicInstance = false;
+
         if (TransitionAudioNeeded)
         {
             StartCoroutine(SwitchMusic(TransitionMusic, false, null));
         }
+
         yield break;
     }
 
-   
-
-
-    private bool StartedBattleTheme;
     public bool PlayerSpotted()
     {
-        foreach(BookAI  bookAIai in Enemies)
+        foreach (BookAI bookAIai in Enemies)
         {
             if (bookAIai.EnemVision.PlayerSpotted)
             {
-                //if (!StartedBattleTheme)
-                //{
-                //    BattleAudioP.clip = BattleStart;
-                //    if(!BattleAudioP.isPlaying)
-                //    {
-                //        BattleAudioP.Play();
-                //    }
-                //    StartedBattleTheme = true;
-                //}
+                if (DefaultBG_Music.gameObject.activeSelf)
+                {
+                    DefaultBG_Music.gameObject.SetActive(false);
+                    BattleAudioP.gameObject.SetActive(true);
+
+                }
                 return true;
-                
             }
         }
         return false;
-
     }
 
     public float AveragesOfEnemyHealth()
@@ -213,33 +228,30 @@ public class DynamicBattleMusic : MonoBehaviour
         foreach (BookAI bookAIai in Enemies)
         {
             healthAccum += bookAIai.Health;
-
         }
-         return healthAccum / Enemies.Length;
+        return healthAccum / Enemies.Count;
     }
 
     public void AverageDIS_Calc()
     {
         float DisCalcTemp = 0;
-        for(int i = 0; i < Enemies.Length; i++)
+        for (int i = 0; i < Enemies.Count; i++)
         {
             DisCalcTemp += Enemies[i].DistanceFromPlayer;
         }
-
-        AverageDis = DisCalcTemp / Enemies.Length;
-
-
+        AverageDis = DisCalcTemp / Enemies.Count;
     }
 
     public int TimesEnemiesReleasedHighEnergyAttacks()
     {
         int times = 0;
-        foreach(BookAI bookAI in Enemies)
+        foreach (BookAI bookAI in Enemies)
         {
             times += bookAI.TimesHighEnergyAttack;
         }
         return times;
     }
+
     public void PlayClipSection(AudioClip clip, float startTime = 0f)
     {
         BattleAudioP.clip = clip;
@@ -249,9 +261,8 @@ public class DynamicBattleMusic : MonoBehaviour
 
     public float AveragePlayerHits()
     {
-        // the amount of times the enemies hit the player
         float times = 0;
-        foreach(BookAI ai in Enemies)
+        foreach (BookAI ai in Enemies)
         {
             times += ai.TimesDamagedPlayer;
         }
@@ -260,7 +271,6 @@ public class DynamicBattleMusic : MonoBehaviour
 
     public float AverageEnemyHits()
     {
-        // the amount of times the player hit the enemies
         float times = 0;
         foreach (BookAI ai in Enemies)
         {
@@ -268,16 +278,18 @@ public class DynamicBattleMusic : MonoBehaviour
         }
         return times;
     }
+
     public void SwitchState()
     {
-        if(AveragesOfEnemyHealth() / StartAveragesOfEnemiesHealth < 0.90f && currentState == StateOfFight.EnemyDominance)
+        if (AveragesOfEnemyHealth() / StartAveragesOfEnemiesHealth < 0.90f && currentState == StateOfFight.EnemyDominance)
         {
             currentState = StateOfFight.Instability;
         }
+
         if (
-     currentState == StateOfFight.Instability &&
-     AverageEnemyHits() + 5 < AveragePlayerHits()
- )
+            currentState == StateOfFight.Instability &&
+            AverageEnemyHits() + 5 < AveragePlayerHits()
+        )
         {
             currentState = StateOfFight.PlayerTurningPoint;
         }
@@ -289,31 +301,44 @@ public class DynamicBattleMusic : MonoBehaviour
             currentState = StateOfFight.EnemyDominace2;
         }
 
-
-        if (currentState == StateOfFight.EnemyDominace2 && AveragesOfEnemyHealth() / StartAveragesOfEnemiesHealth < 0.30f && BattleAudioP.clip == PlayerComback ||
-            currentState == StateOfFight.EnemyDominace2 && AveragesOfEnemyHealth() / StartAveragesOfEnemiesHealth < 0.30f && BattleAudioP.clip == EnemyDominance) // if enemy healths are bellow 30% fights almost over
+        if (
+            currentState == StateOfFight.EnemyDominace2 &&
+            AveragesOfEnemyHealth() / StartAveragesOfEnemiesHealth < 0.30f &&
+            (BattleAudioP.clip == PlayerComback || BattleAudioP.clip == EnemyDominance)
+        )
         {
             currentState = StateOfFight.Finale;
-
         }
-        if (currentState == StateOfFight.PlayerTurningPoint && AveragesOfEnemyHealth() / StartAveragesOfEnemiesHealth < 0.30f && BattleAudioP.clip == PlayerComback ||
-            currentState == StateOfFight.PlayerTurningPoint && AveragesOfEnemyHealth() / StartAveragesOfEnemiesHealth < 0.30f && BattleAudioP.clip == EnemyDominance) // if enemy healths are bellow 30% fights almost over
+
+        if (
+            currentState == StateOfFight.PlayerTurningPoint &&
+            AveragesOfEnemyHealth() / StartAveragesOfEnemiesHealth < 0.30f &&
+            (BattleAudioP.clip == PlayerComback || BattleAudioP.clip == EnemyDominance)
+        )
         {
             currentState = StateOfFight.Finale;
-
         }
 
-        if(Stickman.StickHP.PlayerHP <= 50 && AveragesOfEnemyHealth() / StartAveragesOfEnemiesHealth < 0.30f || AveragePlayerHits() > 30 && currentState == StateOfFight.EnemyDominace2 || AveragePlayerHits() > 30 && currentState == StateOfFight.PlayerTurningPoint 
-            || Enemies[UnityEngine.Random.Range(0,Enemies.Length)].StickmanState == StickmanState.Pushing && AveragesOfEnemyHealth() / StartAveragesOfEnemiesHealth < 0.30f ||
-            Enemies[UnityEngine.Random.Range(0, Enemies.Length)].StickmanBehavior == StickmanBehavior.onAdrenaline && AveragesOfEnemyHealth() / StartAveragesOfEnemiesHealth < 0.30f || TimesEnemiesReleasedHighEnergyAttacks() >= HighEnergyAttackTimesForTrueHype )
+        if (
+            Stickman.StickHP.PlayerHP <= 50 &&
+            AveragesOfEnemyHealth() / StartAveragesOfEnemiesHealth < 0.30f ||
+
+            AveragePlayerHits() > 30 &&
+            currentState == StateOfFight.EnemyDominace2 ||
+
+            AveragePlayerHits() > 30 &&
+            currentState == StateOfFight.PlayerTurningPoint ||
+
+            Enemies[UnityEngine.Random.Range(0, Enemies.Count)].StickmanState == StickmanState.Pushing &&
+            AveragesOfEnemyHealth() / StartAveragesOfEnemiesHealth < 0.30f ||
+
+            Enemies[UnityEngine.Random.Range(0, Enemies.Count)].StickmanBehavior == StickmanBehavior.onAdrenaline &&
+            AveragesOfEnemyHealth() / StartAveragesOfEnemiesHealth < 0.30f ||
+
+            TimesEnemiesReleasedHighEnergyAttacks() >= HighEnergyAttackTimesForTrueHype
+        )
         {
             currentState = StateOfFight.Finale;
-
         }
-
-       
-
     }
-
-
 }

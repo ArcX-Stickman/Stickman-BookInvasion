@@ -319,7 +319,8 @@ public class Movement : MonoBehaviour
     public ParticleSystem SlideSmoke;
     public ParticleSystem GrassBlades;
     public bool PlayerReadyForImpactFrame;
-
+    public GameObject GroundImpactFX;
+    public GameObject GroundImpactFXSmoke;
     public ParticleSystem DashSmoke;
 
     [Header(" Misc ")]
@@ -332,9 +333,12 @@ public class Movement : MonoBehaviour
     public PhysicsMaterial2D BouncyMat;
     public PhysicsMaterial2D StickmanMat;
     public GameObject TutTXT;
-
+    
     public Vector3 SafePosition;
 
+
+    [Header("Misc SFX")]
+    public AudioClip GroundImpact;
 
 
     void Start()
@@ -1540,6 +1544,7 @@ public class Movement : MonoBehaviour
             {
                 float TempJumpForce = Mathf.Max(25, JumpForce * ((MaxSpeed / JumpForce) / 1.5f));
                 float MinimizedForce = TempJumpForce / 2;
+
                 JumpForce = MinimizedForce;
                 MaxSpeed -= 0.7f;
 
@@ -4154,16 +4159,27 @@ public class Movement : MonoBehaviour
 
         float dir = transform.localScale.x > 0 ? 1f : -1f;
 
-
-        while (timer < duration)
+        float timeout = 2;
+        while (timer < duration && timer <timeout)
         {
+            Debug.Log("Finishing up the timer part in Knockback ");
+
             Falling_KnockBack = true;
             StickAnim.CrossFade("StickKnockBack", 0, 0);
             rb.velocity = new Vector2(horizontalForce * -dir, verticalForce);
             timer += Time.deltaTime;
             yield return null;
         }
-        Debug.Log("Sucessfully Knockbacked Player ");
+        if(timer >= timeout)
+        {
+            Debug.Log("unsucessfully Knockbacked Player Had to timeout ");
+
+        }
+        else
+        {
+            Debug.Log("Sucessfully Knockbacked Player ");
+
+        }
 
         Falling_KnockBack = false;
         StickAnim.SetBool("KnockedBack", false);
@@ -4171,10 +4187,24 @@ public class Movement : MonoBehaviour
     }
 
     public bool inPlayerKnockbackAlt;
+
+
+    private float LastForceJumpKnockBack = 0;
+    private float ForceJumpKnockBackCD = 0.2f;
+    public bool isinFriction;
+    public bool isPlayerKnockbackFinished { get; private set; }
+
     public IEnumerator PlayerKnockBackAltered(float horizontalForce, float verticalForce, float duration)
     {
+        isPlayerKnockbackFinished = false;
+
+        isinFriction = false;
         inPlayerKnockbackAlt = true;
-        Debug.Log("PlayerKnockBack Was Called!!");
+        if (StickHP.Testing)
+        {
+            Debug.Log("PlayerKnockBack Was Called!!");
+
+        }
         float timer = 0f;
 
         float dir = transform.localScale.x > 0 ? 1f : -1f;
@@ -4182,6 +4212,11 @@ public class Movement : MonoBehaviour
 
         while (timer < duration)
         {
+
+            if(StickHP.PlayerHP <= 0)
+            {
+                yield break;
+            }
             //if (!InKnockbackTimeoutCor)
             //{
             //   break;
@@ -4190,16 +4225,71 @@ public class Movement : MonoBehaviour
             StickAnim.CrossFade("StickKnockBack", 0, 0);
             rb.velocity = new Vector2(horizontalForce * -dir, rb.velocity.y);
             timer += Time.deltaTime;
-            yield return null;
-            if (GetDistanceToGround() <= 1.5f)
+            if (GetDistanceToGround() <= 1.5f && Time.time >= ForceJumpKnockBackCD + LastForceJumpKnockBack)
             {
+                LastForceJumpKnockBack = Time.time;
                 //rb.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
-
-                Jump();
+                float TempJumpForce = Mathf.Max(25, JumpForce * ((MaxSpeed / JumpForce) / 1.5f));
+                float MinimizedForce = TempJumpForce / 2;
+                shake_AnimationKey.ShakeWithSpecificGivenAmount(90.5f, 0.1f);
+                JumpForce = MinimizedForce;
+                float horizontalMomentum = rb.velocity.x;
+                rb.velocity = new Vector2(horizontalMomentum, JumpForce);
+                BackFlipAS.pitch = Random.Range(0.7f, 1.5f);
+                ObjectPooler.SpawnObj(GroundImpactFX.gameObject, LastGroundPos,Quaternion.identity,ObjectPooler.PoolType.Partcles);
+                BackFlipAS.PlayOneShot(GroundImpact);
             }
-        }
+            yield return null;
+            inPlayerKnockbackAlt = false;
+            isPlayerKnockbackFinished = true;  
 
-        Debug.Log("PlayerKnockBackAltered ");
+        }
+        isinFriction = true;
+
+        yield return new WaitForSecondsRealtime(0.2f);
+        float Momentum = 160;
+
+        ObjectPooler.SpawnObj(GroundImpactFX.gameObject, LastGroundPos, Quaternion.identity, ObjectPooler.PoolType.Partcles);
+        BackFlipAS.PlayOneShot(GroundImpact);
+        float LastFX = 0;
+        float FXCD = 0.1f;
+        float reducer = 70;
+        AudioPlayer.PlayOneShot(SlideSFX);
+        while (Momentum > 0)
+        {
+            StickAnim.SetBool("Friction", true);
+            reducer += 5 * Time.deltaTime;
+            Momentum -= reducer * Time.deltaTime;
+            rb.velocity = new Vector2(Momentum * Mathf.Sign(-transform.localScale.x), rb.velocity.y);
+            if(!BackFlip && !JumpDodge && StickHP.PlayerHP > 0)
+            {
+                StickAnim.CrossFade("StickFriction", 0, 0);
+                if (Time.time >= LastFX + FXCD)
+                {
+                    LastFX = Time.time;
+                    shake_AnimationKey.ShakeWithSpecificGivenAmount(20.5f, 0.1f);
+                    ObjectPooler.SpawnObj(GroundImpactFXSmoke.gameObject, LastGroundPos, Quaternion.identity, ObjectPooler.PoolType.Partcles);
+
+
+                }
+            }
+           
+
+
+
+
+            //float tempVx = rb.velocity.x;
+            //float velX = tempVx -= 5 * Time.deltaTime;
+            //rb.velocity = new Vector2(rb.velocity.x - 5f * Time.deltaTime, rb.velocity.y);
+            yield return null;
+        }
+        isinFriction = false;
+        StickAnim.SetBool("Friction", false);
+        if (StickHP.Testing)
+        {
+            Debug.Log("PlayerKnockBackAltered ");
+
+        }
         inPlayerKnockbackAlt = false;
         yield break;
         //rb.velocity = Vector2.zero;
@@ -4211,79 +4301,79 @@ public class Movement : MonoBehaviour
 
 
 
-    public IEnumerator PlayerKnockbackBouncy2(float horizontalForce, float verticalForce, float durationOfEachKnockback, float duration, float ForceWhenLandedForY)
-    {
-        if (isBouncyKnockbackActive)
-            yield break;
+    //public IEnumerator PlayerKnockbackBouncy2(float horizontalForce, float verticalForce, float durationOfEachKnockback, float duration, float ForceWhenLandedForY)
+    //{
+    //    if (isBouncyKnockbackActive)
+    //        yield break;
 
-        isBouncyKnockbackActive = true;
-        Falling_KnockBack = true;
-        if (!InKnockbackTimeoutCor)
-        {
-            StartCoroutine(TimerKnockbackBouncy(duration));
+    //    isBouncyKnockbackActive = true;
+    //    Falling_KnockBack = true;
+    //    if (!InKnockbackTimeoutCor)
+    //    {
+    //        StartCoroutine(TimerKnockbackBouncy(duration));
 
-        }
-        while (InKnockbackTimeoutCor)
-        {
+    //    }
+    //    while (InKnockbackTimeoutCor)
+    //    {
 
-            rb.sharedMaterial = BouncyMat;
-            StickAnim.CrossFade("StickKnockBack", 0, 0);
+    //        rb.sharedMaterial = BouncyMat;
+    //        StickAnim.CrossFade("StickKnockBack", 0, 0);
 
-            if (!inPlayerKnockbackAlt)
-            {
-                StartCoroutine(PlayerKnockBackAltered(horizontalForce, verticalForce, durationOfEachKnockback));
+    //        if (!inPlayerKnockbackAlt)
+    //        {
+    //            StartCoroutine(PlayerKnockBackAltered(horizontalForce, verticalForce, durationOfEachKnockback));
 
-            }
-            Debug.Log("if u see this while Knockback ain it");
+    //        }
+    //        Debug.Log("if u see this while Knockback ain it");
 
-            while (inPlayerKnockbackAlt)
-            {
-                Debug.Log("if u see this we yielding it");
+    //        while (inPlayerKnockbackAlt)
+    //        {
+    //            Debug.Log("if u see this we yielding it");
 
-                yield return null;
-            }
-            Debug.Log("if u see this while loop ain it");
+    //            yield return null;
+    //        }
+    //        Debug.Log("if u see this while loop ain it");
 
-            float timeoutTimer = 0f;
-            float groundedWait = 0f;
-            while (!Grounded && groundedWait < 1.5f)
-            {
-                groundedWait += Time.deltaTime;
-                yield return null;
-            }
-            Debug.Log("if u see this 2ND while loop ain it");
+    //        float timeoutTimer = 0f;
+    //        float groundedWait = 0f;
+    //        while (!Grounded && groundedWait < 1.5f)
+    //        {
+    //            groundedWait += Time.deltaTime;
+    //            yield return null;
+    //        }
+    //        Debug.Log("if u see this 2ND while loop ain it");
 
-            Jump();
-            StickAnim.CrossFade("StickKnockBack", 0, 0);
+    //        Jump();
+    //        StickAnim.CrossFade("StickKnockBack", 0, 0);
 
-        }
+    //    }
 
-        Debug.Log("PlayerKnockbackBouncy finished all iterations");
+    //    Debug.Log("PlayerKnockbackBouncy finished all iterations");
 
-        rb.sharedMaterial = StickmanMat;
-        Falling_KnockBack = false;
+    //    rb.sharedMaterial = StickmanMat;
+    //    Falling_KnockBack = false;
 
-        float finalTimeout = 0f;
-        while (!Grounded)
-        {
-            finalTimeout += Time.deltaTime;
-            if (finalTimeout > 3f)
-            {
-                Debug.LogWarning("Final grounded wait timed out");
-                isBouncyKnockbackActive = false;
-                InKnockbackTimeoutCor = false;
+    //    float finalTimeout = 0f;
+    //    while (!Grounded)
+    //    {
+    //        finalTimeout += Time.deltaTime;
+    //        if (finalTimeout > 3f)
+    //        {
+    //            Debug.LogWarning("Final grounded wait timed out");
+    //            isBouncyKnockbackActive = false;
+    //            InKnockbackTimeoutCor = false;
 
-                break;
-            }
-            yield return null;
-        }
+    //            break;
+    //        }
+    //        yield return null;
+    //    }
 
-        StickAnim.SetBool("KnockedBack", false);
-        isBouncyKnockbackActive = false;
+    //    StickAnim.SetBool("KnockedBack", false);
+    //    isBouncyKnockbackActive = false;
 
-        Debug.Log("PlayerKnockbackBouncy finished all iterations");
-        yield break;
-    }
+    //    Debug.Log("PlayerKnockbackBouncy finished all iterations");
+    //    yield break;
+    //}
 
 
     public IEnumerator PlayerKnockbackBouncy(float horizontalForce, float verticalForce, float durationOfEachKnockback, float duration, float ForceWhenLandedForY)
@@ -4342,6 +4432,9 @@ public class Movement : MonoBehaviour
 
 
     public float DistanceToGroundRefer;
+
+
+    private Vector3 LastGroundPos;
     public float GetDistanceToGround()
     {
         Vector2 origin = (Vector2)transform.position + Vector2.down * (GetComponent<BoxCollider2D>().bounds.extents.y);
@@ -4352,6 +4445,7 @@ public class Movement : MonoBehaviour
 
         if (hit.collider != null)
         {
+            LastGroundPos = new Vector3(hit.point.x, hit.point.y,0);
             return hit.distance; 
         }
         else

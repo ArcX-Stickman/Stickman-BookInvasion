@@ -34,9 +34,9 @@ public class NewTon_Smash_Wind : MonoBehaviour
             else if(!Hit)
             {
                 Hit = true;
-                StickManager.StickHP.PlayerHP -= 10;
+                StickManager.StickHP.PlayerHP -= 25;
                 StartCoroutine(StickManager.PlayerKnockbackBouncy(200, 10, 2f, 4, 1.5f));
-
+                StartCoroutine(BookAI.WaitForPlayerToGetUp("Physics"));
 //                StartCoroutine(BlowPlayerAway());
             }
 
@@ -65,5 +65,18 @@ public class NewTon_Smash_Wind : MonoBehaviour
         //StickManager.Falling_KnockBack = false;
 
         yield return null;
+    }
+
+    public IEnumerator WaitForPLayerToGetUp()
+    {
+        while (!StickManager.inPlayerKnockbackAlt)
+        {
+            yield return null;
+        }
+        while (StickManager.inPlayerKnockbackAlt)
+        {
+            yield return null;
+        }
+        BookAI.MegaRangedAttackFunction("Physics");
     }
 }

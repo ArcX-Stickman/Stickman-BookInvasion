@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.Rendering;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 [System.Serializable]
 
 
@@ -123,12 +125,16 @@ public class BookAI : MonoBehaviour
     public float KnockbackOnMeleeVerticalVelocity;
     public float DurationOfKnockbackMelee;
     public int TimesHighEnergyAttack;
-
+    public bool inAir;
+    public float JumpForce;
+    public bool AlrInMobilityAttack;
+    public string LastStickAttack;
 
     [Header("Projectiles")]
 
     public GameObject NormProjectile;
     public GameObject MiniProjectile;
+    public GameObject MegaRangedAttack;
     public Transform AimPoint;
 
 
@@ -137,6 +143,8 @@ public class BookAI : MonoBehaviour
     public AudioSource AudioP;
     public AudioClip MeleeImpact;
     public AudioClip CounterMeleeSFX;
+    public AudioClip KnockbackSFX;
+    public AudioClip GroundImpact;
 
 
 
@@ -153,7 +161,8 @@ public class BookAI : MonoBehaviour
     public SpriteRenderer SelfRender;
     public GameObject ImpactCam;
     public GameObject MainCam;
-
+    public GameObject ImpactFrameHighContrast;
+    public GameObject HighContrastWhiteRadialLines;
     public GameObject ImpactFrameEffect; // This are like the comic lines
 
     public Material UnlitRender;
@@ -164,13 +173,20 @@ public class BookAI : MonoBehaviour
     [Header("Audio")]
 
     public AudioClip ThrowSFX;
+    public AudioClip PunchImpactFromPlayerFinisher;
 
     [Header("ExtraAnimattions")]
     public AnimationClip IdleNormal;
     public AnimationClip IdleTired;
     private AnimatorOverrideController overrideController;
 
-
+    [Header("Death Animation Options ")]
+    public float KnockBackValueDeathX;
+    public float KnockBackValueDeathY;
+    public float DurationOfKnockbackDeath;
+    public GameObject Corpse;
+    public LayerMask WhatsGround;
+    public GameObject EnemySpriteObject;
 
     // Start is called before the first frame update
     void Start()
@@ -188,18 +204,23 @@ public class BookAI : MonoBehaviour
             EnemyAnim.SetBool("Moving",false);
             this.enabled = false; 
 
-        }    
-        AttackManager();
-        MoveTowardsPlayer();
-        DistanceCalc();
-        PlayerStateManager(); 
-        PlayerObserver();
-        EnemyBehaviorDecider();
-        LookAtPlayer();
+        }
+        if(Health > 0)
+        {
+            AttackManager();
+            MoveTowardsPlayer();
+
+            DistanceCalc();
+            PlayerStateManager();
+            PlayerObserver();
+            EnemyBehaviorDecider();
+            LookAtPlayer();
+
+
+            /// Time and Stuff
+            CalcTimeAlive();
+        }
         
-        
-        /// Time and Stuff
-        CalcTimeAlive();
 
         if(Time.time >= ResetCD + LastReset)
         {
@@ -211,9 +232,38 @@ public class BookAI : MonoBehaviour
         {
             IdleAnimationManager();
         }
+
+        if(Health <= 0)
+        {
+            DeathManager();
+        }
+
+        if(Corpse != null)
+        {
+            CorpseMatch();
+        }
     }
 
+    public void CorpseMatch()
+    {
+        Corpse.transform.position = transform.position;
+    }
+ 
+    public void DeathManager()
+    {
+        if(LastStickAttack == "Melee")
+        {
+            EnemyAnim.CrossFade("MeleeDeath",0,0);
+            StickAnim_Impact = "StickMeleeImpact";
+            ImpactFrameBG = ImpactFrameHighContrast;
+        }
+    }
 
+    public void DeathDestory()
+    {
+        
+        //Destroy(gameObject);
+    }
 
 
     public void AttackManager()
@@ -364,6 +414,14 @@ public class BookAI : MonoBehaviour
             TimesPlayerDamagedEnemy += 1;
             Health -= 1;
         }
+        if (collion.CompareTag("StickMelee"))
+        {
+            LastStickAttack = "Melee";
+        }
+        if (collion.CompareTag("Bullet"))
+        {
+            LastStickAttack = "Bullet";
+        }
     }
 
 
@@ -489,6 +547,121 @@ public class BookAI : MonoBehaviour
         //This is a follow up to the dodge player melee attack and occurs if the player is cocky and keep punching even after enemy dodging everything
         // and then the enemy make the player not be able to move and knocks him back (if possible and player far enough the high energy ranged or mini ranged can occur)
     }
+
+
+
+    // Crazy Attacks
+
+    //public GameObject TempMegaRange;
+    public IEnumerator MegaRangedAttackFunction(string EnemyType)
+    {
+        // these attacks are forced attacks only should be called from another script no cooldowns or anything
+        // meant to be after the high energy animie type of thing
+
+        if (isAttackingHighEnergy)
+        {
+            yield return null;
+        }
+        EnemyAnim.SetTrigger("MegaRanged");
+        Debug.Log("We in Megaranged ATK");
+
+        if (EnemyType == "Physics")
+        {
+            Debug.Log("We in Physics Physics PhysicsMegaranged ATK");
+
+            // THe wind thing
+            GameObject WindSlash = ObjectPooler.SpawnObj(MegaRangedAttack,AimPoint.position,Quaternion.identity,ObjectPooler.PoolType.GamObjects);
+            Projectiles projectiles = WindSlash.GetComponent<Projectiles>();
+            Vector2 shootDirection = (transform.localScale.x > 0) ? Vector2.right : Vector2.left;
+            projectiles.SetDirection(shootDirection);
+            //projectiles.Accelerating = true;
+            while (!projectiles.Hit || projectiles != null)
+            {
+                yield return null;
+            }
+            Debug.Log("Projectile Sucesfully Hit");
+            // Do the Charge Dash attack right here
+
+        }
+
+
+
+
+        // these are like sickles in ther air like the tengen vs gyaoy fight
+    }
+
+
+    public IEnumerator WaitForPlayerToGetUp(string EnemyType)
+    {
+        while (!StickManager.inPlayerKnockbackAlt)
+            yield return null;
+
+        while (!StickManager.isPlayerKnockbackFinished)
+            yield return null;
+
+        Debug.Log("Player fully recovered — time to attack!");
+        StartCoroutine(MegaRangedAttackFunction(EnemyType));
+    }
+
+
+
+    //public IEnumerator Leap()
+    //{
+    //    Debug.Log("We in da leap funti0on");
+    //    AlrInMobilityAttack = true;
+    //    inAir = true;
+    //    Rigidbody2D rb = GetComponent<Rigidbody2D>();
+    //    float horizontalMomentum = rb.velocity.x;
+
+    //    rb.velocity = new Vector2(horizontalMomentum, JumpForce);
+
+    //   // yield return new WaitForSecondsRealtime(0.1f); // lil delay
+    //    Vector2 PlayerFakePos = new Vector2(StickPOS.position.x, transform.position.y);
+    //    float minDis = 40;
+    //    Debug.Log("We Jumped");
+    //    float DistanceFromFakePlayer = Vector2.Distance(transform.position, PlayerFakePos);
+    //    while(DistanceFromFakePlayer > minDis)
+    //    {
+    //        Debug.Log("We Checking Dis in air");
+    //        PlayerFakePos = new Vector2(StickPOS.position.x, transform.position.y);
+
+    //        DistanceFromFakePlayer = Vector2.Distance(transform.position, PlayerFakePos);
+    //        rb.gravityScale = 0;
+    //        transform.position = Vector2.MoveTowards(transform.position, PlayerFakePos, 600 * Time.deltaTime);
+
+    //    }
+
+    //    //while (DistanceFromFakePlayer > minDis)
+    //    //{
+    //    //    Debug.Log("We in da leap Distance check fort when in air");
+
+    //    //    DistanceFromFakePlayer = Vector2.Distance(transform.position, PlayerFakePos);
+    //    //    PlayerFakePos = new Vector2(StickPOS.position.x, transform.position.y);
+    //    //    transform.position = Vector2.MoveTowards(transform.position, PlayerFakePos, 90 * Time.deltaTime);
+    //    //    yield return null;
+    //    //}
+    //    float playerangle = Mathf.Atan2(StickPOS.position.y, transform.position.x);
+    //    float playerX = Mathf.Cos(playerangle) * 100;
+    //    float playerY = Mathf.Sin(playerangle) * 100;
+    //    Vector3 MovementThing = new Vector3(playerX, playerY, 0f);
+    //    Debug.Log("Trig Ratios Calulated For Leap Ready to go down");
+    //    while(DistanceFromPlayer > 20)
+    //    {
+    //        Debug.Log("We in da leap Distance check fort when in slamming");
+    //        rb.gravityScale = 1;
+    //        transform.position = Vector2.MoveTowards(transform.position,StickPOS.position, 90 * Time.deltaTime);
+    //        yield return null;
+
+    //    }
+    //    inAir = false;
+    //    AlrInMobilityAttack = false;
+    //    Debug.Log("We finsih leaping");
+
+    //    yield break;
+    //}
+
+
+
 
     // --------------------------Evading-----------------------------------------------------------
 
@@ -689,6 +862,10 @@ public class BookAI : MonoBehaviour
         {
             HandleOverConfidentClose();
         }
+        if (EnemyBehavior == EnemyBehavior.Desperate)
+        {
+            HandleDesperateFar(); // doesnt matter if far or nah its the same thing
+        }
     }
 
     void HandleNeutralClose()
@@ -819,7 +996,19 @@ public class BookAI : MonoBehaviour
         AudioP.PlayOneShot(CounterMeleeSFX);
     }
 
+    public void PlayPlayerImpactFromPunchImpactFrameFinisher()
+    {
+        AudioP.PlayOneShot(PunchImpactFromPlayerFinisher);
 
+    }
+
+    public void PlayKnockbackSFX()
+    {
+        if (KnockbackSFX != null)
+        {
+            AudioP.PlayOneShot(KnockbackSFX);
+        }
+    }
 
     // --------------------- MISC. ----------------------------------------------------------------
 
@@ -943,9 +1132,9 @@ public class BookAI : MonoBehaviour
 
 
 
-        if (!PlayerIsVulnerable()) yield break;
+        if (!PlayerIsVulnerable() && Health > 0) yield break;
         float EnemAnimOGSpeed = EnemyAnim.speed;
-        if(PlayerIsVulnerable() )
+        if(PlayerIsVulnerable() || Health <= 0)
         {
             CounterPlayerMelee();
             Animator StickAnim = StickManager.GetComponent<Animator>();
@@ -981,7 +1170,16 @@ public class BookAI : MonoBehaviour
             float timer = 0;
             ImpactFrameBG.gameObject.SetActive(true);
             ImpactFrameEffect.gameObject.SetActive(true);
-            StickManager.TimeManager.FreezeTime(0.1f);
+            if(Health <= 0)
+            {
+                StickManager.TimeManager.FreezeTime(0.01f);
+
+            }
+            else
+            {
+                StickManager.TimeManager.FreezeTime(0.1f);
+
+            }
 
             MainCam.gameObject.SetActive(false);
             ImpactCam.gameObject.SetActive(true);
@@ -1032,5 +1230,121 @@ public class BookAI : MonoBehaviour
         }
         
     }
+
+
+    //public void FlasherImpactFrame()
+    //{
+    //    SpriteRenderer Iframe = ImpactFrameBG.GetComponent<SpriteRenderer>();
+
+    //    SpriteRenderer RadialWhite = HighContrastWhiteRadialLines.GetComponent<SpriteRenderer>();
+    //    SpriteRenderer RadialBlack = ImpactFrameEffect.GetComponent<SpriteRenderer>();
+
+
+    //    if(Iframe.color == Color.white)
+    //    {
+    //        RadialWhite.enabled = true;
+    //        RadialBlack.enabled = false ;
+    //        Iframe.color = Color.black;
+    //    }
+    //    else if(Iframe.color == Color.black)
+    //    {
+    //        RadialWhite.enabled = false;
+    //        RadialBlack.enabled =  true;
+    //        Iframe.color = Color.white;
+    //    }
+    //    else
+    //    {
+    //        RadialWhite.enabled = true;
+    //        RadialBlack.enabled = false;
+    //        Iframe.color = Color.black;
+
+    //    }
+    //}
+
+
+    public void FlashWhiteImpactFrame()
+    {
+        SpriteRenderer Iframe = ImpactFrameBG.GetComponent<SpriteRenderer>();
+
+        SpriteRenderer RadialWhite = HighContrastWhiteRadialLines.GetComponent<SpriteRenderer>();
+        SpriteRenderer RadialBlack = ImpactFrameEffect.GetComponent<SpriteRenderer>();
+        RadialWhite.enabled = false;
+        RadialBlack.enabled = true;
+        Iframe.color = Color.white;
+    }
+
+    public void FlashBlackImpactFrame()
+    {
+        SpriteRenderer Iframe = ImpactFrameBG.GetComponent<SpriteRenderer>();
+
+        SpriteRenderer RadialWhite = HighContrastWhiteRadialLines.GetComponent<SpriteRenderer>();
+        SpriteRenderer RadialBlack = ImpactFrameEffect.GetComponent<SpriteRenderer>();
+        RadialWhite.enabled = true;
+        RadialBlack.enabled = false;
+        Iframe.color = Color.black;
+
+    }
+
+    private bool CheckIfGrounded()
+    {
+        float extraHeight = 1.3f;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, GetComponent<BoxCollider2D>().bounds.extents.y + extraHeight, WhatsGround);
+        Debug.DrawRay(transform.position, Vector2.down * (GetComponent<BoxCollider2D>().bounds.extents.y + extraHeight), Color.red);
+        return hit.collider != null;
+    }
+    public IEnumerator KnockBack()
+    {
+        
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        Debug.Log("PlayerKnockBack Was Called!!");
+        float timer = 0f;
+
+        float dir = transform.localScale.x > 0 ? 1f : -1f;
+
+        float timeout = 2;
+        while (timer < DurationOfKnockbackDeath && timer < timeout)
+        {
+      
+            Debug.Log("Finishing up the timer part in Knockback ");
+
+            rb.velocity = new Vector2(KnockBackValueDeathX * dir, KnockBackValueDeathY);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        if (timer >= timeout)
+        {
+            Debug.Log("unsucessfully Knockbacked Book Had to timeout ");
+
+        }
+        else
+        {
+            Debug.Log("Sucessfully Knockbacked Book ");
+
+        }
+        while (!CheckIfGrounded())
+        {
+            yield return null;
+        }
+        if (CheckIfGrounded())
+        {
+            if(Corpse != null)
+            {
+                BoxCollider2D box = GetComponent<BoxCollider2D>();
+                rb.simulated = false;
+                AudioP.PlayOneShot(GroundImpact);
+                box.enabled = false;
+                Debug.Log("Touch ground and turn on body");
+                Corpse.gameObject.SetActive(true);
+                EnemySpriteObject.SetActive(false);
+                this.enabled = false;
+
+            }
+        }
+
+
+        //rb.velocity = Vector2.zero;
+    }
+
 
 }

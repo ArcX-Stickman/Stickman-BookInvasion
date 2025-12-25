@@ -14,16 +14,21 @@ public class HitMarker : MonoBehaviour
     public Transform FXPOS;
     public GameObject FX;
     public bool isForced;
-    
+    public Movement Stickboi;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(Stickboi == null)
+        {
+            Stickboi = FindAnyObjectByType<Movement>();
+        }
         if (collision.CompareTag("Bullet") && !isForced)
         {
             HitMarkerSFX();
             GameObject effect = ObjectPooler.SpawnObj(FX, FXPOS.position, Quaternion.identity, ObjectPooler.PoolingType = ObjectPooler.PoolType.Partcles);
+            StartCoroutine(Stickboi.CameraScript.ShakeCamGroundFeeling(20, 0.2f));
 
-        } 
+        }
         if (collision.CompareTag("ArcBullet") && !isForced)
         {
             GameObject effect = ObjectPooler.SpawnObj(FX, FXPOS.position, Quaternion.identity, ObjectPooler.PoolingType = ObjectPooler.PoolType.Partcles);
@@ -33,7 +38,7 @@ public class HitMarker : MonoBehaviour
         if (collision.CompareTag("StickMelee") && !isForced)
         {
             GameObject effect = ObjectPooler.SpawnObj(FX, FXPOS.position, Quaternion.identity, ObjectPooler.PoolingType = ObjectPooler.PoolType.Partcles);
-
+            StartCoroutine(Stickboi.CameraScript.ShakeCamGroundFeeling(UnityEngine.Random.Range(30.0f,35.0f), 0.2f));
             HitMarkerSFX();
         }
 
@@ -43,6 +48,7 @@ public class HitMarker : MonoBehaviour
 
     public void HitMarkerSFX()
     {
+
         AudioClip play = SFX[UnityEngine.Random.Range(0, SFX.Length)];
         AudioP.PlayOneShot(play);
 

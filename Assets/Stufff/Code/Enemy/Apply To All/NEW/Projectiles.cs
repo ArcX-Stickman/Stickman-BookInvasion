@@ -17,19 +17,32 @@ public class Projectiles : MonoBehaviour
     public float DurationOfKnockBackForPlayer;
     public Movement StickManager;
     public Health StickHP;
-    private bool Hit;
+    public bool Hit;
     public float FreezeTimeOnHit;
 
     public AudioSource AudioP;
     public AudioClip HitSFX;
     public AudioClip Miss;
     public GameObject FX;
-  
+
+    [Header("booleans ")]
+
+    public bool isPhysicsEnemyWindBlade;
+
+
+
+
     private void Awake()
     {
         scales = new Vector2(transform.localScale.x, transform.localScale.y);
 
     }
+
+    private void OnEnable()
+    {
+        
+    }
+
     public void SetDirection(Vector2 newDirection)
     {
         direction = newDirection;
@@ -81,6 +94,7 @@ public class Projectiles : MonoBehaviour
             {
                 StickHP.PlayerHP -= Damage;
                 KnockBackPlayer();
+                StickManager.StickAnim.SetTrigger("Hurt");
                 AudioP.PlayOneShot(HitSFX);
                 //StickManager.TimeManager.FreezeTime(FreezeTimeOnHit);
                 if(FX != null)
@@ -88,7 +102,6 @@ public class Projectiles : MonoBehaviour
                     ObjectPooler.SpawnObj(FX,transform.position,Quaternion.identity,ObjectPooler.PoolType.Partcles);
                 }
                 Destroy(gameObject);
-
             }
             else
             {
@@ -123,16 +136,8 @@ public class Projectiles : MonoBehaviour
     }
     public void KnockBackPlayer()
     {
-        if(KnockBackValueForPlayerX <= 0 && KnockBackValueForPlayerY <= 0 )
-        {
-            Debug.Log("Did not Knockback Player From Projectile Script");
-            StickManager.StickAnim.SetTrigger("Hurt");
-        }
-        else
-        {
-            Debug.Log("Tried To Knockback Player From Projectile Script");
-            StartCoroutine(StickManager.PlayerKnockBack(KnockBackValueForPlayerX, KnockBackValueForPlayerY, DurationOfKnockBackForPlayer));
-            
-        }
+        //Debug.Log("Tried To Knockback Player From Projectile Script");
+        //StartCoroutine(StickManager.PlayerKnockBack(KnockBackValueForPlayerX, KnockBackValueForPlayerY, DurationOfKnockBackForPlayer));
+        //Destroy(gameObject);
     }
 }
