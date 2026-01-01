@@ -21,9 +21,11 @@ public class Projectiles : MonoBehaviour
     public float FreezeTimeOnHit;
 
     public AudioSource AudioP;
+    public AudioSource NonPitchAudioP;
     public AudioClip HitSFX;
     public AudioClip Miss;
     public GameObject FX;
+    public bool DontDestory;
 
     [Header("booleans ")]
 
@@ -66,6 +68,13 @@ public class Projectiles : MonoBehaviour
 
     private void Update()
     {
+        if(PlayerPOS == null)
+        {
+            Movement stickMove = FindAnyObjectByType<Movement>();
+            PlayerPOS = stickMove.transform;
+            StickHP = FindAnyObjectByType<Health>();
+            StickManager = stickMove;
+        }
         Vector2 movement = direction * Speed * Time.deltaTime;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, movement.magnitude);
         // i put negative cuz ts was going backwards and im too lazy to use my brain i alr used all my brain power for impact frames >:(
@@ -87,8 +96,21 @@ public class Projectiles : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
+        HandleCollision(collision.collider);
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        HandleCollision(collision);
+    }
+
+
+    public void HandleCollision(Collider2D collision)
+    {
         if (collision.gameObject.CompareTag("Player") && !Hit)
         {
+            AudioP.pitch = UnityEngine.Random.Range(0.9f, 1.3f);
             Hit = true;
             if (PlayerIsVulnerable())
             {
@@ -97,20 +119,26 @@ public class Projectiles : MonoBehaviour
                 StickManager.StickAnim.SetTrigger("Hurt");
                 AudioP.PlayOneShot(HitSFX);
                 //StickManager.TimeManager.FreezeTime(FreezeTimeOnHit);
-                if(FX != null)
+                if (FX != null)
                 {
-                    ObjectPooler.SpawnObj(FX,transform.position,Quaternion.identity,ObjectPooler.PoolType.Partcles);
+                    ObjectPooler.SpawnObj(FX, transform.position, Quaternion.identity, ObjectPooler.PoolType.Partcles);
                 }
-                Destroy(gameObject);
+                if (!DontDestory)
+                {
+                    Destroy(gameObject);
+
+                }
             }
             else
             {
                 //StickManager.TimeManager.FreezeTime(0.1f);
-                AudioP.PlayOneShot(Miss);
+                NonPitchAudioP.PlayOneShot(Miss);
             }
         }
         if (collision.gameObject.CompareTag("Ground"))
         {
+            AudioP.pitch = UnityEngine.Random.Range(0.9f, 1.3f);
+
             AudioP.PlayOneShot(HitSFX);
 
             Hit = true;
@@ -119,6 +147,8 @@ public class Projectiles : MonoBehaviour
             {
                 ObjectPooler.SpawnObj(FX, transform.position, Quaternion.identity, ObjectPooler.PoolType.Partcles);
             }
+
+
             Destroy(gameObject);
         }
     }

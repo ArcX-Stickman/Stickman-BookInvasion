@@ -21,7 +21,10 @@ public class DestroyOnCollisionWithTag : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public Sprite Sprite;
     public bool SpriteShifter;
+    public bool noFreezeTime;
 
+    public bool CanDamagePlayerIfInRange;
+    public float DMG;
     private void Update()
     {
         if(Stick == null)
@@ -36,8 +39,36 @@ public class DestroyOnCollisionWithTag : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Health HP =FindAnyObjectByType<Health>();
+
+        if(collision.gameObject.CompareTag("Player") && CanDamagePlayerIfInRange)
+        {
+            if(!Stick.BackFlip && !Stick.isSliding && !Stick.isDashing)
+            {
+                HP.PlayerHP -= DMG;
+
+                SFXPlay();
+                if (!SpriteShifter)
+                {
+                    if (!isPooledObject)
+                    {
+                        Destroy(gameObject);
+
+                    }
+                    else
+                    {
+                        ObjectPooler.ReturnObjectToPool(gameObject);
+                    }
+                }
+                else
+                {
+                    spriteRenderer.sprite = Sprite;
+                }
+            }
+        }
         if (collision.gameObject.CompareTag(Tag) && !wantDelayForFX)
         {
+
             SFXPlay();
             if (!SpriteShifter)
             {
@@ -64,6 +95,33 @@ public class DestroyOnCollisionWithTag : MonoBehaviour
         {
             SFXPlay();
         }
+        if (collision.gameObject.CompareTag("Player") && CanDamagePlayerIfInRange)
+        {
+            Health HP = FindAnyObjectByType<Health>();
+
+            if (!Stick.BackFlip && !Stick.isSliding && !Stick.isDashing)
+            {
+                HP.PlayerHP -= DMG;
+                Stick.StickAnim.SetTrigger("Hurt");
+                SFXPlay();
+                if (!SpriteShifter)
+                {
+                    if (!isPooledObject)
+                    {
+                        Destroy(gameObject);
+
+                    }
+                    else
+                    {
+                        ObjectPooler.ReturnObjectToPool(gameObject);
+                    }
+                }
+                else
+                {
+                    spriteRenderer.sprite = Sprite;
+                }
+            }
+        }
     }
 
 
@@ -81,7 +139,11 @@ public class DestroyOnCollisionWithTag : MonoBehaviour
                 {
                     if (!LittleShake)
                     {
-                        Stick.TimeManager.FreezeTime(0.05f);
+                        if(!noFreezeTime)
+                        {
+                            Stick.TimeManager.FreezeTime(0.05f);
+
+                        }
                         Stick.CameraScript.StartCoroutine(Stick.CameraScript.ShakeCamGroundFeeling(55.5f, 1f));
                     }
                     else

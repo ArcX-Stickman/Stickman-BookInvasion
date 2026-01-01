@@ -19,6 +19,11 @@ public class TurnOffRigidBodyIfPlayerFar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(StickPOS == null)
+        {
+            Movement stickMove = FindAnyObjectByType<Movement>();
+            StickPOS = stickMove.transform;
+        }
         Distance = Vector2.Distance(transform.position, StickPOS.position);
 
         if(Distance > MaxDistance)

@@ -21,7 +21,7 @@ public class ParticleDespawn : MonoBehaviour
 
     IEnumerator Despawn()
     {
-        yield return new WaitForSecondsRealtime(ParticleSystem.main.duration);
+        yield return new WaitForSecondsRealtime(ParticleSystem.main.duration + 0.4f);
         ObjectPooler.ReturnObjectToPool(gameObject);
     }
 }

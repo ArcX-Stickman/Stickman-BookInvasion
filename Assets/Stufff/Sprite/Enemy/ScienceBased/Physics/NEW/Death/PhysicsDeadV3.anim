@@ -461,13 +461,6 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.33333334
-    functionName: FlasherImpactFrame
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.33333334
     functionName: FlashWhiteImpactFrame
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -497,13 +490,6 @@ AnimationClip:
     messageOptions: 0
   - time: 0.76666665
     functionName: KnockBack
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.8333333
-    functionName: 
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
