@@ -2867,9 +2867,32 @@ public class Movement : MonoBehaviour
         }
 
 
-        PunchAudioP.PlayOneShot(play);
+        //PunchAudioP.PlayOneShot(play);
         lastPunch = Time.time;
 
+    }
+
+    public void PlayerPunchSFX()
+    {
+        AudioClip play = null;
+
+        if (CanDoublePunch)
+        {
+            PunchAudioP.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
+
+        }
+        PunchAudioP.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
+        if (!PowerfulPunch)
+        {
+            play = PunchSFX[UnityEngine.Random.Range(0, PunchSFX.Length)];
+        }
+        else
+        {
+            play = MegaPunch;
+        }
+
+
+        PunchAudioP.PlayOneShot(play);
     }
 
     public LayerMask WutsEnemy;

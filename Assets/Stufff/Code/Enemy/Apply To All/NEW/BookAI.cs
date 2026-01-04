@@ -103,6 +103,7 @@ public class BookAI : MonoBehaviour
     public GameObject MeleeAttackFX;
     public GameObject MeleeAttackImpactFX;
     public float RangedAttackFX;
+    public GameObject HighEnergyAttackFX;
 
 
     [Header("Enemy Knowledge On The Player")]
@@ -111,6 +112,7 @@ public class BookAI : MonoBehaviour
     public float PlayerAcrobaticActionCount;
     public float TimesDamagedPlayer;
     public float TimesPlayerDamagedEnemy;
+    public PlayerDebuff PlayerDebuffManager;
 
     [Header("Enemy Colliders")]
     public BoxCollider2D MeleeCollider;
@@ -129,6 +131,18 @@ public class BookAI : MonoBehaviour
     public float JumpForce;
     public bool AlrInMobilityAttack;
     public string LastStickAttack;
+    public float HighEnergyAttackDMG;
+
+
+    [Header("High Energy Attack Data")]
+
+    public GameObject HighEnergyFX;
+    public AudioClip HighEnergyAttackSFX;
+    public bool HighEnergyStaggers;
+    public float HighEnergyStaggerTime;
+    public float HighEnergyFreezeTime;
+    public float KnockbackOnMeleeHorizontalVelocityHighEnergy;
+    public float KnockbackOnMeleeVerticalVelocityHighEnergy;
 
     [Header("Projectiles")]
 
@@ -148,6 +162,8 @@ public class BookAI : MonoBehaviour
     public AudioClip GroundImpact;
     public AudioClip EnemyDodge;
     public AudioClip PlayerStagger;
+    public AudioClip PunchWhoosh;
+    public AudioClip HighEnergyAttackImpact;
 
 
     [Header("Camera Angle")]
@@ -193,12 +209,15 @@ public class BookAI : MonoBehaviour
 
     [Header("Specific Attack References")]
 
+    [Header("Geology")]
     public GameObject Geology_Hyper_Crack;
     public GameObject Geology_Hyper_RockAvalauche;
     public AudioSource AttackAudioCue;
     public GameObject MegaAttackEffect;
     public GameObject Geology_GroundCrack_Decal;
     public GameObject MegaQuakeAfterMath;
+    [Header("NeuroScience")]
+    public GameObject NeuroElectricEffect;
 
 
     [Header("Enemy Behavior Options")]
@@ -417,7 +436,13 @@ public class BookAI : MonoBehaviour
 
     }
 
-
+    public void StaggerAttack(float time)
+    {
+        if (PlayerIsVulnerable())
+        {
+            StartCoroutine(StaggerPlayer(time));
+        }
+    }
 
 
     // --------------------------- Collisions --------------------------------------
@@ -448,19 +473,27 @@ public class BookAI : MonoBehaviour
 
     private bool MeleeContact;
 
+
+    private float CollisionTick = 0.1f;
+    private float LastCollisionTick = 0;
     public void HandleCollision(Collider2D collion)
     {
         if (!isDodging)
         {
-            if (collion.CompareTag("StickMelee") && Time.time >= lastTick + Tick)
+            if (collion.CompareTag("StickMelee") && Time.time >= LastCollisionTick + CollisionTick)
             {
+                StickManager.PlayerPunchSFX();
+                HitMarker.HitMarkerSFX();
+                LastCollisionTick = Time.time;
                 Health -= 0.7f;
                 TimesPlayerDamagedEnemy += 1;
                 MeleeContact = true;
                 LastStickAttack = "Melee";
             }
-            if (collion.CompareTag("Bullet") && Time.time >= lastTick + Tick)
+            if (collion.CompareTag("Bullet") && Time.time >= LastCollisionTick + CollisionTick)
             {
+                HitMarker.HitMarkerSFX();
+                LastCollisionTick = Time.time;
                 Health -= 1.3f;
                 TimesPlayerDamagedEnemy += 1;
                 LastStickAttack = "Bullet";
@@ -562,38 +595,66 @@ public class BookAI : MonoBehaviour
 
 
 
-
-        if (StickHP.Testing)
-        {
-            Debug.Log("High Energy Ranged Called");
-
-        }
-        // this unfortanelty even though is the hardest to prgram has to be a rare occurance and if so one of the enemies in a wave should eb doing this
-        LastHighEnergyAttack = Time.time;
-        isAttackingHighEnergy = true;
-        TimesHighEnergyAttack += 1;
-        if(HighEnergyAttackCollider_IfNeeded != null && Time.time >= Tick + lastTick)
+        if(!HighEnergyisMeleeType || HighEnergyisMeleeType && MeleeRange.StickmanIsHERE)
         {
             if (StickHP.Testing)
             {
-                Debug.Log("HighEnergyCollider Is Not Null Yessirrrr");
+                Debug.Log("High Energy Ranged Called");
 
             }
-            lastTick = Time.time;
-            if (HighEnergyAttackCollider_IfNeeded.IsTouching(StickManager.gameObject.GetComponent<BoxCollider2D>()) && !StickManager.BackFlip)
+            // this unfortanelty even though is the hardest to prgram has to be a rare occurance and if so one of the enemies in a wave should eb doing this
+            LastHighEnergyAttack = Time.time;
+            isAttackingHighEnergy = true;
+            TimesHighEnergyAttack += 1;
+            if (HighEnergyAttackCollider_IfNeeded != null && Time.time >= Tick + lastTick)
             {
-                HighEnergyAttackCD -= 6.7f; // HAHAHAHAHAH 67!!!!!!!!! HAHAHAHAHAHAHA
+                if (StickHP.Testing)
+                {
+                    Debug.Log("HighEnergyCollider Is Not Null Yessirrrr");
+
+                }
+                lastTick = Time.time;
+                if (HighEnergyAttackCollider_IfNeeded.IsTouching(StickManager.gameObject.GetComponent<BoxCollider2D>()) && !StickManager.BackFlip)
+                {
+                    HighEnergyAttackCD -= 6.7f; // HAHAHAHAHAH 67!!!!!!!!! HAHAHAHAHAHAHA
 
 
+                }
+                else if (HighEnergyAttackCollider_IfNeeded.IsTouching(StickManager.gameObject.GetComponent<BoxCollider2D>()) && StickManager.BackFlip)
+                {
+                    HighEnergyAttackCD += 5.5f;
+
+                }
             }
-            else if(HighEnergyAttackCollider_IfNeeded.IsTouching(StickManager.gameObject.GetComponent<BoxCollider2D>()) && StickManager.BackFlip)
-            {
-                HighEnergyAttackCD += 5.5f;
 
-            }
+            EnemyAnim.SetTrigger("HighEnergy");
         }
+      
 
-        EnemyAnim.SetTrigger("HighEnergy");
+    }
+
+    public bool HighEnergyisMeleeType;
+    public void HighEnergy_Damage()
+    {
+       
+        if(HighEnergyisMeleeType && PlayerIsVulnerable())
+        {
+            HighEnergy_DamageToPLayer();
+            if (HighEnergyFX != null)
+            {
+                GameObject FX = ObjectPooler.SpawnObj(HighEnergyFX, StickPOS.position, Quaternion.identity, ObjectPooler.PoolType.Partcles);
+            }
+            if (HighEnergyStaggers)
+            {
+                StartCoroutine(StaggerPlayer(HighEnergyStaggerTime));
+            }
+            StickManager.TimeManager.FreezeTime(HighEnergyFreezeTime);
+        }
+    }
+
+    private void HighEnergy_DamageToPLayer()
+    {
+        StickHP.PlayerHP -= HighEnergyAttackDMG;
 
     }
 
@@ -625,7 +686,7 @@ public class BookAI : MonoBehaviour
 
     }
 
-
+  
 
     public void ZoomOut_Camera()
     {
@@ -902,6 +963,7 @@ public class BookAI : MonoBehaviour
     public IEnumerator StaggerPlayer(float time)
     {
         StickManager.StickAnim.CrossFade("StickStaggered", 0, 0);
+        StickManager.StickAnim.SetBool("Stagger", true);
         StartCoroutine(StickManager.CameraScript.ShakeCamGroundFeeling(40, 0.35f));
         StickManager.enabled = false;
         yield return new WaitForSecondsRealtime(0.10f); // ts is the time where the sprite of stickman switches to the knock back pose if ya change animation change this or it sint gonna look good
@@ -912,6 +974,7 @@ public class BookAI : MonoBehaviour
         AudioP_PitchShifter.PlayOneShot(PlayerStagger);
         yield return new WaitForSecondsRealtime(time);
         StickManager.enabled = true;
+        StickManager.StickAnim.SetBool("Stagger", false);
 
         yield break;
     }
@@ -1006,7 +1069,7 @@ public class BookAI : MonoBehaviour
         //    // Charge Up Knockback Melee Attack
         //}
         else if(StickmanState == StickmanState.Pushing && EnemyBehavior == EnemyBehavior.OverConfident 
-        && Time.time >= LastHighEnergyAttack + HighEnergyAttackCD )// like when the player is tryna aggresive head towards the enemy
+        && Time.time >= LastHighEnergyAttack + HighEnergyAttackCD || EnemyBehavior == EnemyBehavior.OverConfident && Time.time >= LastHighEnergyAttack + HighEnergyAttackCD)// like when the player is tryna aggresive head towards the enemy
         {      
             HighEnergyRangedAttack();
         }
@@ -1030,8 +1093,13 @@ public class BookAI : MonoBehaviour
         {
             NormalMeleeAttack();
         }
-     
-       
+        else if (StickmanState == StickmanState.Pushing && EnemyBehavior == EnemyBehavior.OverConfident
+        && Time.time >= LastHighEnergyAttack + HighEnergyAttackCD || EnemyBehavior == EnemyBehavior.OverConfident && Time.time >= LastHighEnergyAttack + HighEnergyAttackCD)// like when the player is tryna aggresive head towards the enemy
+        {
+            HighEnergyRangedAttack();
+        }
+
+
     }
 
 
@@ -1146,12 +1214,54 @@ public class BookAI : MonoBehaviour
             StickManager.StickAnim.SetTrigger("Hurt");
             StickHP.PlayerHP -= DMG;
             AudioP.PlayOneShot(MeleeImpact); // TODO: Change this so you can use a audioclip in the input
-            StickManager.StartCoroutine(StickManager.PlayerKnockBack(KnockbackOnMeleeHorizontalVelocity,KnockbackOnMeleeVerticalVelocity ,DurationOfKnockbackMelee));
+            if (!isAttackingHighEnergy)
+            {
+                StickManager.StartCoroutine(StickManager.PlayerKnockBack(KnockbackOnMeleeHorizontalVelocity, KnockbackOnMeleeVerticalVelocity, DurationOfKnockbackMelee));
+
+            }
+            else
+            {
+                // this means that the high ebergy attack was just a normal melee attack but boosted up
+                StickManager.StartCoroutine(StickManager.PlayerKnockBack(KnockbackOnMeleeHorizontalVelocityHighEnergy, KnockbackOnMeleeVerticalVelocityHighEnergy, DurationOfKnockbackMelee));
+
+
+            }
             TimesDamagedPlayer += 1;
 
             if (isAttackingHighEnergy)
             {
                 isAttackingHighEnergy = false;
+            }
+        }
+
+    }
+
+
+    public void DamagePlayerVariation_Staggered(float DMG)
+    {
+        if (PlayerIsVulnerable())
+        {
+
+            EnemyState = EnemyState.Idle;
+            StickHP.PlayerHP -= DMG;
+            
+            StartCoroutine(StaggerPlayer(HighEnergyStaggerTime));
+            StickManager.TimeManager.FreezeTime(HighEnergyFreezeTime);  
+            TimesDamagedPlayer += 1;
+            if (isAttackingHighEnergy)
+            {
+                isAttackingHighEnergy = false;
+            }
+
+
+
+
+            /// Extra things needed for specific enemies
+            
+            //NeuroScience
+            if(NeuroElectricEffect != null)
+            {
+                NeuroElectricEffect.transform.position = StickPOS.position;
             }
         }
 
@@ -1165,6 +1275,7 @@ public class BookAI : MonoBehaviour
 
     public bool PlayerIsVulnerable()
     {
+        // Only use for melee based attack conditions this wont work on ranged stuff
         if(!StickManager.BackFlip && !StickManager.isSliding && !StickManager.isDashing && MeleeRange.StickmanIsHERE && DistanceFromPlayer <= MinMeleeDistance)
         {
             return true;
@@ -1192,6 +1303,12 @@ public class BookAI : MonoBehaviour
 
     }
 
+    public void PlayAirVelocityOfPunchSFX()
+    {
+        AudioP_PitchShifter.pitch = UnityEngine.Random.Range(0.8f, 1.7f);
+        AudioP_PitchShifter.PlayOneShot(PunchWhoosh);
+    }
+
     public void PlayKnockbackSFX()
     {
         if (KnockbackSFX != null)
@@ -1199,6 +1316,16 @@ public class BookAI : MonoBehaviour
             AudioP.PlayOneShot(KnockbackSFX);
         }
     }
+
+    public void PlayHighEnergyImpact()
+    {
+        if(PlayerIsVulnerable())
+        {
+            AudioP_PitchShifter.pitch = UnityEngine.Random.Range(0.8f, 1.4f);
+            AudioP_PitchShifter.PlayOneShot(HighEnergyAttackImpact);
+        }
+    }
+
 
     // --------------------- MISC. ----------------------------------------------------------------
 
@@ -1208,7 +1335,7 @@ public class BookAI : MonoBehaviour
     }
 
 
-
+ 
 
 
     private float ObserverCD = 0.2f;
@@ -1655,6 +1782,22 @@ public class BookAI : MonoBehaviour
 
     }
 
+
+
+
+    public void ApplyParalysisToPlayerOnAttack()
+    {
+        if (PlayerIsVulnerable())
+        {
+            PlayerDebuffManager.StartCoroutine(PlayerDebuffManager.ParalyzedManager());
+
+        }
+    }
+
+
+    // Glitches or Graphical Stuff 
+
+
     private StickMoveGlitch StickMoveEnable;
     public void MakeSurePlayerEnablesOrDisables()
     {
@@ -1662,7 +1805,40 @@ public class BookAI : MonoBehaviour
         {
             StickMoveEnable = FindAnyObjectByType<StickMoveGlitch>();
         }
-        StickMoveEnable.enabled = StickManager.enabled;
+       // StickMoveEnable.enabled = StickManager.enabled;
+    }
+
+
+    public void GraphicEffectsOnImpact()
+    {
+        if (PlayerIsVulnerable())
+        {
+            if (NeuroElectricEffect != null)
+            {
+                NeuroElectricEffect.gameObject.SetActive(true);
+
+            }
+            else
+            {
+                HighEnergyAttackFX.gameObject.SetActive(true);
+
+            }
+        }
+    }
+
+    public void TurnOffGraphicEffect()
+    {
+
+        if (NeuroElectricEffect != null)
+        {
+            NeuroElectricEffect.gameObject.SetActive(false);
+
+        }
+        else
+        {
+            HighEnergyAttackFX.gameObject.SetActive(true);
+
+        }
     }
 
 
