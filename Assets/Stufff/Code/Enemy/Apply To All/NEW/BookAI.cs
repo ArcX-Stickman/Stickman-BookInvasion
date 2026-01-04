@@ -935,8 +935,10 @@ public class BookAI : MonoBehaviour
             }
             Debug.Log("Enemy is Protected");
             EnemyAnim.SetBool("Protected", true);
-            while (EnemyAnim.GetBool("Protected"))
+            float timer = 0;
+            while (EnemyAnim.GetBool("Protected") && timer < 0.9f)
             {
+                timer += Time.deltaTime;
                 if (MeleeContact)
                 {
 
@@ -951,6 +953,7 @@ public class BookAI : MonoBehaviour
                 }
                 yield return null;
             }
+            EnemyAnim.SetBool("Protected", false);
             isDodging = false;
             Running_DeFensiveEvasion_IEnumTHing = false;
             yield break;
@@ -1466,7 +1469,7 @@ public class BookAI : MonoBehaviour
                 if (timeoutTimer > 1.3f)
                 {
                     EnemyAnim.speed = EnemAnimOGSpeed;
-                    StartCoroutine(StickManager.CameraScript.ZoomOutCam(59.9f, 1f));
+                    StartCoroutine(StickManager.CameraScript.ZoomOutCam(43.9f, 1f));
 
                     yield break;
 
@@ -1523,7 +1526,7 @@ public class BookAI : MonoBehaviour
                     ImpactCam.gameObject.SetActive(false);
                     ImpactFrameBG.gameObject.SetActive(false);
                     ImpactFrameEffect.gameObject.SetActive(false);
-                    StartCoroutine(StickManager.CameraScript.ZoomOutCam(59.9f, 1f));
+                    StartCoroutine(StickManager.CameraScript.ZoomOutCam(43.9f, 1f));
                     Graphix.gameObject.SetActive(true);
                     SelfRender.material = LitRender;
                     StickSprite.material = LitRender;
@@ -1538,7 +1541,7 @@ public class BookAI : MonoBehaviour
             ImpactCam.gameObject.SetActive(false);
             ImpactFrameBG.gameObject.SetActive(false);
             ImpactFrameEffect.gameObject.SetActive(false);
-            StartCoroutine(StickManager.CameraScript.ZoomOutCam(59.9f, 1f));
+            StartCoroutine(StickManager.CameraScript.ZoomOutCam(43.9f, 1f));
             Graphix.gameObject.SetActive(true);
             SelfRender.material = LitRender;
             StickSprite.material = LitRender;
@@ -1612,7 +1615,7 @@ public class BookAI : MonoBehaviour
 
     public void FreezeTime(float Time)
     {
-        if(isDodging && DistanceFromPlayer > MinMeleeDistance + 0.3f)
+        if(isDodging && DistanceFromPlayer > MinMeleeDistance + 2f)
         {
             return; // cuz itll look weird if the enemy dodges and makes the screen freeze when the player alr long gone by then
         }

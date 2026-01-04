@@ -333,6 +333,7 @@ public class Movement : MonoBehaviour
     public PhysicsMaterial2D BouncyMat;
     public PhysicsMaterial2D StickmanMat;
     public GameObject TutTXT;
+    public BoxCollider2D AlternateColliderDuringKnockback;
     
     public Vector3 SafePosition;
 
@@ -343,6 +344,7 @@ public class Movement : MonoBehaviour
 
     void Start()
     {
+        AlternateColliderDuringKnockback.enabled = false;
 
         Grounded = true;
         Jump();
@@ -4235,8 +4237,9 @@ public class Movement : MonoBehaviour
 
         while (timer < duration)
         {
-
-            if(StickHP.PlayerHP <= 0)
+            StickCollider.enabled = false;
+            AlternateColliderDuringKnockback.enabled = true;
+            if (StickHP.PlayerHP <= 0)
             {
                 yield break;
             }
@@ -4267,6 +4270,8 @@ public class Movement : MonoBehaviour
             isPlayerKnockbackFinished = true;  
 
         }
+        AlternateColliderDuringKnockback.enabled = false;
+        StickCollider.enabled = true;
         isinFriction = true;
 
         yield return new WaitForSecondsRealtime(0.2f);
@@ -4460,21 +4465,45 @@ public class Movement : MonoBehaviour
     private Vector3 LastGroundPos;
     public float GetDistanceToGround()
     {
-        Vector2 origin = (Vector2)transform.position + Vector2.down * (GetComponent<BoxCollider2D>().bounds.extents.y);
-        float maxDistance = 100f; 
-        RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, maxDistance, WhatsGround);
-
-        Debug.DrawRay(origin, Vector2.down * maxDistance, Color.red);
-
-        if (hit.collider != null)
+        float output = 0;
+        if (StickCollider.enabled)
         {
-            LastGroundPos = new Vector3(hit.point.x, hit.point.y,0);
-            return hit.distance; 
+            Vector2 origin = (Vector2)transform.position + Vector2.down * (GetComponent<BoxCollider2D>().bounds.extents.y);
+            float maxDistance = 100f;
+            RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, maxDistance, WhatsGround);
+
+            Debug.DrawRay(origin, Vector2.down * maxDistance, Color.red);
+
+            if (hit.collider != null)
+            {
+                LastGroundPos = new Vector3(hit.point.x, hit.point.y, 0);
+                output = hit.distance;
+            }
+            else
+            {
+                output = maxDistance;
+            }
         }
-        else
+        else if(AlternateColliderDuringKnockback.enabled)
         {
-            return maxDistance; 
+            Vector2 origin = (Vector2)transform.position + Vector2.down * (AlternateColliderDuringKnockback.bounds.extents.y);
+            float maxDistance = 100f;
+            RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, maxDistance, WhatsGround);
+
+            Debug.DrawRay(origin, Vector2.down * maxDistance, Color.red);
+
+            if (hit.collider != null)
+            {
+                LastGroundPos = new Vector3(hit.point.x, hit.point.y, 0);
+                output = hit.distance;
+            }
+            else
+            {
+                output = maxDistance;
+            }
         }
+        return output;
+      
     }
 
 
