@@ -218,6 +218,9 @@ public class BookAI : MonoBehaviour
     public GameObject MegaQuakeAfterMath;
     [Header("NeuroScience")]
     public GameObject NeuroElectricEffect;
+    [Header("Astronomy")]
+    public GameObject WarpSpace;
+    public GameObject[] WarpSpaceObjectPool;
 
 
     [Header("Enemy Behavior Options")]
@@ -1784,6 +1787,39 @@ public class BookAI : MonoBehaviour
         yield break;
 
     }
+
+
+    // Astrology
+   
+
+    public IEnumerator A_WarpedSpace()
+    {
+        Vector3 PositionOfWarp = new Vector3(StickPOS.position.x, transform.position.y + 30f, 0);
+        GameObject WarpSpaceObj = ObjectPooler.SpawnObj(WarpSpace, PositionOfWarp,Quaternion.identity,ObjectPooler.PoolType.GamObjects);
+        AudioSource AudioSourceOfWarpSpace = WarpSpaceObj.GetComponent<AudioSource>();
+        while(AudioSourceOfWarpSpace.enabled == false)
+        {
+            yield return null;
+        }
+        yield return new WaitForSecondsRealtime(1f);
+        Debug.Log("Spawning Object from objectpool Warp Space Astrology");
+        // pick a random enviomrent thing to kill stickboi
+        GameObject RandomizedObj = WarpSpaceObjectPool[UnityEngine.Random.Range(0, WarpSpaceObjectPool.Length)];
+        Transform SpawnPOS = WarpSpaceObj.GetComponentInChildren<Transform>();
+        GameObject EnviormentObj = ObjectPooler.SpawnObj(RandomizedObj, SpawnPOS.position, Quaternion.identity, ObjectPooler.PoolType.GamObjects);
+        float timer4timeOut = 0;
+        while(EnviormentObj != null && timer4timeOut < 3.9f)
+        {
+            timer4timeOut += Time.deltaTime;
+            yield return null;
+        }
+        Animator WarpAnim = WarpSpaceObj.GetComponent<Animator>();
+        yield return new WaitForSecondsRealtime(0.5f);
+        WarpAnim.CrossFade("ASTRO_Warp_In_Space_Portal_Leave", 0, 0); // if ya change the name in files ya change it here too
+        yield break;
+
+    }
+
 
 
 

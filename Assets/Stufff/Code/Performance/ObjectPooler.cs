@@ -14,7 +14,7 @@ public class ObjectPooler : MonoBehaviour
     public enum PoolType
     {
         Partcles,
-        GamObjects,
+        GamObjects, /// how am i this stupid at spelling?!?! now if i change this ima get 67000 errors >:(
         Misc
     }
 
