@@ -16,6 +16,7 @@ public class HitMarker : MonoBehaviour
     public bool isForced;
     public Movement Stickboi;
 
+    public bool DirectionMustMatchTarget;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(Stickboi == null)
@@ -54,8 +55,19 @@ public class HitMarker : MonoBehaviour
 
         if (isForced)
         {
+           
             GameObject effect = ObjectPooler.SpawnObj(FX, FXPOS.position, Quaternion.identity,ObjectPooler.PoolingType = ObjectPooler.PoolType.Partcles);
+            if (DirectionMustMatchTarget)
+            {
+                // Vector3 scale = new Vector3(transform.localScale.x, effect.transform.localScale.y, effect.transform.localScale.z);
+                // effect.transform.localScale = scale;
+                // foreach(Transform child in effect.transform)
+                // {
+                //     child.transform.localScale = scale;
+                // }
+                    effect.transform.SetParent(transform);
 
+            }
         }
     }
 

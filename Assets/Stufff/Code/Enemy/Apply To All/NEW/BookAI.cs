@@ -5,6 +5,7 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 [System.Serializable]
 
@@ -220,6 +221,7 @@ public class BookAI : MonoBehaviour
     public GameObject NeuroElectricEffect;
     [Header("Astronomy")]
     public GameObject WarpSpace;
+    public AudioClip Astro_WARP_Spawn_OBJ;
     public GameObject[] WarpSpaceObjectPool;
 
 
@@ -483,8 +485,10 @@ public class BookAI : MonoBehaviour
     {
         if (!isDodging)
         {
+            
             if (collion.CompareTag("StickMelee") && Time.time >= LastCollisionTick + CollisionTick)
             {
+                StartCoroutine(StickManager.CameraScript.ShakeCamGroundFeeling(UnityEngine.Random.Range(65.6f, 70.0f),UnityEngine.Random.Range(0.2f,0.5f)));
                 StickManager.PlayerPunchSFX();
                 HitMarker.HitMarkerSFX();
                 LastCollisionTick = Time.time;
@@ -504,6 +508,11 @@ public class BookAI : MonoBehaviour
         }
         
     }
+
+    // private IEnumerator EnemyFlash()
+    // {
+        
+    // }
 
     public void HandleThemExitCollisions(Collider2D collision)
     {
@@ -759,7 +768,7 @@ public class BookAI : MonoBehaviour
         while (!StickManager.isPlayerKnockbackFinished)
             yield return null;
 
-        Debug.Log("Player fully recovered — time to attack!");
+        Debug.Log("Player fully recovered ï¿½ time to attack!");
         StartCoroutine(MegaRangedAttackFunction(EnemyType));
     }
 
@@ -1095,7 +1104,7 @@ public class BookAI : MonoBehaviour
         }
 
 
-        if (Time.time >= MeleeCD + LastMelee)
+        if (Time.time >= MeleeCD + LastMelee ||Time.time >= MeleeCD + LastMelee && StickManager.isInPunchAttach )
         {
             NormalMeleeAttack();
         }
@@ -1148,7 +1157,7 @@ public class BookAI : MonoBehaviour
         {
             // either do first melee attack or second one
         }
-        else if(StickmanState == StickmanState.Pushing && EnemyBehavior != EnemyBehavior.OverConfident)// like when the player is tryna aggresive head towards the enemy
+        else if(StickmanState == StickmanState.Pushing && EnemyBehavior != EnemyBehavior.OverConfident ||Time.time >= MeleeCD + LastMelee && StickManager.isInPunchAttach)// like when the player is tryna aggresive head towards the enemy
         {      
             NormalMeleeAttack();
         }
@@ -1794,14 +1803,27 @@ public class BookAI : MonoBehaviour
 
     public IEnumerator A_WarpedSpace()
     {
-        Vector3 PositionOfWarp = new Vector3(StickPOS.position.x, transform.position.y + 30f, 0);
+        Vector3 PositionOfWarp;
+        if(StickManager.StickDirection >= 0 )
+        {
+            PositionOfWarp = new Vector3(StickPOS.position.x + 15, transform.position.y + 30f, 0);
+
+        }
+        else
+        {
+             PositionOfWarp = new Vector3(StickPOS.position.x - 15, transform.position.y + 30f, 0);
+
+        }
         GameObject WarpSpaceObj = ObjectPooler.SpawnObj(WarpSpace, PositionOfWarp,Quaternion.identity,ObjectPooler.PoolType.GamObjects);
-        AudioSource AudioSourceOfWarpSpace = WarpSpaceObj.GetComponent<AudioSource>();
-        while(AudioSourceOfWarpSpace.enabled == false)
+        Light2D Light = WarpSpaceObj.GetComponent<Light2D>();
+        while(Light.enabled == false)
         {
             yield return null;
         }
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(0.6f);
+        StartCoroutine(StickManager.CameraScript.ShakeCamGroundFeeling(25,0.3f));
+        AudioP_PitchShifter.pitch = UnityEngine.Random.Range(0.9f,1.5f);
+        AudioP_PitchShifter.PlayOneShot(Astro_WARP_Spawn_OBJ);
         Debug.Log("Spawning Object from objectpool Warp Space Astrology");
         // pick a random enviomrent thing to kill stickboi
         GameObject RandomizedObj = WarpSpaceObjectPool[UnityEngine.Random.Range(0, WarpSpaceObjectPool.Length)];

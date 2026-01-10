@@ -160,7 +160,7 @@ public class Movement : MonoBehaviour
     public GameObject RaycastableObj;
     public float RayDistance;
     public LayerMask WhatsTheBookLayer;
-    private bool isInPunchAttach;
+    public bool isInPunchAttach;
     private float LastAttachFreeFlow;
     public float FreeFlowAttachCD;
     public float AttachSpeed;
@@ -323,6 +323,14 @@ public class Movement : MonoBehaviour
     public GameObject GroundImpactFXSmoke;
     public ParticleSystem DashSmoke;
 
+    [Header(" Gravity Stuff With RigidBody and stuff ")]
+
+    public float FallingGravityMAX;
+
+    public float FallGravity;
+    private float OG_FallGravity;
+    private float OG_NormGravity;
+
     [Header(" Misc ")]
     //Performance level destoryer
     public GameObject Level1;
@@ -344,6 +352,9 @@ public class Movement : MonoBehaviour
 
     void Start()
     {
+
+        OG_NormGravity = rb.gravityScale;
+
         AlternateColliderDuringKnockback.enabled = false;
 
         Grounded = true;
@@ -355,23 +366,9 @@ public class Movement : MonoBehaviour
             Level2.gameObject.SetActive(true);
         }
 
-        //MuzzleFire.gameObject.SetActive(false);
         StickCollider = GetComponent<BoxCollider2D>();
 
         LastULT = -UltCD;
-
-        //if (Checkpoint > 3)
-        //{
-        //    Level1.gameObject.SetActive(true);
-
-        //    Level2.gameObject.SetActive(true);
-        //}
-        //if(Checkpoint <= 3)
-        //{
-        //    Level2.gameObject.SetActive(false);
-        //    ;
-        //    Level1.gameObject.SetActive(true);
-        //}
 
 
         OG_MeleeCD = MeleeCD;
@@ -489,6 +486,10 @@ public class Movement : MonoBehaviour
 
     void FixedUpdate()
     {
+
+        // Manage The Jump Gravity
+        ManageJumpGravity();
+
         if (Input.GetKey(KeyCode.F4) && Input.GetKeyDown(KeyCode.S))
         {
             Debug.Log("Debugging Save");
@@ -1488,6 +1489,11 @@ public class Movement : MonoBehaviour
     public void Jump()
     {
 
+        
+        // Gravity Manager
+        //StartCoroutine(Jump_Gravity_Manager());
+
+
         // Shaking stuff
         if (shake_AnimationKey == null)
         {
@@ -1580,6 +1586,78 @@ public class Movement : MonoBehaviour
             }
         }
     }
+
+    private void ManageJumpGravity()
+    {
+        if(isDashing) return;
+        if (rb.velocity.y < 0 && !Grounded && !isDashing)
+        {
+            rb.gravityScale = FallGravity;
+            StartCoroutine(ManageFallGravity());
+        }
+        else
+        {
+            rb.gravityScale = OG_NormGravity;
+            FallGravity = OG_FallGravity;
+        }
+    }
+
+    private bool isRunningMangeFallGravityInstance;
+
+    private IEnumerator ManageFallGravity()
+    {
+
+        if(FallGravity >= FallingGravityMAX || isRunningMangeFallGravityInstance) yield break;
+        FallGravity = 0;
+        while(!Grounded && !isDashing && FallGravity < FallingGravityMAX)
+        {
+            isRunningMangeFallGravityInstance = true;
+            FallGravity += 1.2f * Time.deltaTime;
+            if(isDashing)
+            {
+                rb.gravityScale = 0;
+                yield break;
+            }
+        }
+        isRunningMangeFallGravityInstance = false;
+        yield break;
+    }
+
+
+
+    // private IEnumerator Jump_Gravity_Manager_UnUSed()
+    // {
+    //     float timer = 0;
+    //     float GravityScaler = 10000; // this thing will be hard coded cuz ion feel like making it public
+    //     //  so if ts crap ya gotta change it here
+    //     float Timeout = 10; // this gonna be the max time and after that gravity will be locked 
+    //     float OriginalGravityOfRB = rb.gravityScale;
+
+    //     Debug.Log("Entered Jump Gravity Manager");
+
+
+    //     while(rb.velocity.y > 0)
+    //     {
+    //         yield return null; //Player is still in the jump impulse thing like he still gaining height
+    //     }
+    //     Debug.Log("Jump Velocity is 0");
+    //     while(!Grounded && !isDashing && timer < 10)
+    //     {
+    //         // no player is losing gravity and too lose the floaty feeling we just reduce gravity
+    //         timer += Time.deltaTime;
+    //         float NewVelocity = rb.velocity.y + (timer * GravityScaler);
+    //         rb.velocity = new Vector2(rb.velocity.x, NewVelocity);  
+
+    //         yield return null;
+    //     }
+    //     while(!Grounded)
+    //     {
+    //         yield return null; // This runs only if the timeout has happened so we just play the waiting game
+
+    //     }
+    //     //rb.gravityScale = OriginalGravityOfRB;
+    //     yield break;
+    // }
 
     public void AnimationKey_UppercutBool()
     {
@@ -3043,6 +3121,8 @@ public class Movement : MonoBehaviour
                             StickAnim.SetBool("Attach", false);
                             StickAnim.CrossFade("Punch", 0, 0);
                             HeCanMove = true;
+                            TimeManager.FreezeTime(0.1f);
+
                             break;
                         }
                         if (BookPos.x < transform.position.x)
@@ -3064,6 +3144,8 @@ public class Movement : MonoBehaviour
                             HeCanMove = true;
                             AlrAttaching = false;
                             LastAttachFreeFlow = Time.time;
+                            TimeManager.FreezeTime(0.1f);
+
                             break;
                         }
 
@@ -3076,6 +3158,8 @@ public class Movement : MonoBehaviour
                         HeCanMove = true;
                         AlrAttaching = false;
                         LastAttachFreeFlow = Time.time;
+                        TimeManager.FreezeTime(0.1f);
+
                         break;
                     }
                     else
@@ -3083,6 +3167,8 @@ public class Movement : MonoBehaviour
                         LastAttachFreeFlow = Time.time;
                         StickAnim.SetBool("Attach", false);
                         StickAnim.CrossFade("Punch", 0, 0);
+                        TimeManager.FreezeTime(0.1f);
+
                         AlrAttaching = false;
                         break;
                     }
@@ -3389,7 +3475,7 @@ public class Movement : MonoBehaviour
 
     public void GravityNormal()
     {
-        if (!SlideJump || !isJumping)
+        if (!SlideJump && !isJumping && !JumpDodge)
         {
             rb.gravityScale = 10.55f;
             rb.mass = 76.55f;
