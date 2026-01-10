@@ -19,6 +19,19 @@ public class Bullet : MonoBehaviour
         direction = newDirection;
     }
 
+
+    private void OnEnable()
+    {
+        TrailRenderer TR = GetComponent<TrailRenderer>();
+        if(TR != null )
+        {
+            TR.Clear();
+
+            TR.enabled = true;
+        }
+    }
+
+
     private void Start()
     {
         IsGone = false;
@@ -59,7 +72,7 @@ public class Bullet : MonoBehaviour
             }
             IsGone = true;
             //Destroy(gameObject);
-            ObjectPooler.ReturnObjectToPool(gameObject);
+            ReturnBulletToPool();
             isEnemyCounter = false;
 
 
@@ -75,7 +88,7 @@ public class Bullet : MonoBehaviour
         {
             IsGone = true;
             //Destroy(gameObject);
-            ObjectPooler.ReturnObjectToPool(gameObject);
+            ReturnBulletToPool();
             isEnemyCounter = false;
 
         }
@@ -84,9 +97,22 @@ public class Bullet : MonoBehaviour
         {
             IsGone = true;
             //Destroy(gameObject);
-            ObjectPooler.ReturnObjectToPool(gameObject);
+            ReturnBulletToPool();
             isEnemyCounter = false;
 
         }
+    }
+
+    public void ReturnBulletToPool()
+    {
+        TrailRenderer TR = GetComponent<TrailRenderer>();
+        if (TR != null)
+        {
+            TR.enabled = false;
+            TR.Clear();
+
+        }
+        ObjectPooler.ReturnObjectToPool(gameObject);
+
     }
 }

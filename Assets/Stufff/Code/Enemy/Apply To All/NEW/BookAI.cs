@@ -501,9 +501,10 @@ public class BookAI : MonoBehaviour
             {
                 HitMarker.HitMarkerSFX();
                 LastCollisionTick = Time.time;
-                Health -= 1.3f;
+                Health -= 0.9f;
                 TimesPlayerDamagedEnemy += 1;
                 LastStickAttack = "Bullet";
+                Destroy(collion.gameObject);
             }
         }
         
@@ -1806,12 +1807,12 @@ public class BookAI : MonoBehaviour
         Vector3 PositionOfWarp;
         if(StickManager.StickDirection >= 0 )
         {
-            PositionOfWarp = new Vector3(StickPOS.position.x + 15, transform.position.y + 30f, 0);
+            PositionOfWarp = new Vector3(StickPOS.position.x , transform.position.y + 30f, 0);
 
         }
         else
         {
-             PositionOfWarp = new Vector3(StickPOS.position.x - 15, transform.position.y + 30f, 0);
+             PositionOfWarp = new Vector3(StickPOS.position.x , transform.position.y + 30f, 0);
 
         }
         GameObject WarpSpaceObj = ObjectPooler.SpawnObj(WarpSpace, PositionOfWarp,Quaternion.identity,ObjectPooler.PoolType.GamObjects);

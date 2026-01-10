@@ -2722,9 +2722,9 @@ public class Movement : MonoBehaviour
             LastDelay = Time.time;
             StartCoroutine(StickHP.DelayinMegaCharge());
             StartCoroutine(MuzzleFireAnim());
-
+            GameObject bullet = Instantiate(GunBullet, AimPoint.position, Quaternion.identity);
             //GameObject bullet = Instantiate(GunBullet, AimPoint.position, Quaternion.identity);
-            GameObject bullet = ObjectPooler.SpawnObj(GunBullet, AimPoint.position, Quaternion.identity, ObjectPooler.PoolType.GamObjects);
+
             Vector2 shootDirection = (transform.localScale.x > 0) ? Vector2.right : Vector2.left;
             bullet.GetComponent<Bullet>().SetDirection(shootDirection);
 
