@@ -210,7 +210,12 @@ public class DynamicBattleMusic : MonoBehaviour
         {
             if (bookAIai.EnemVision.PlayerSpotted)
             {
-                if (DefaultBG_Music.gameObject.activeSelf)
+                foreach (BookAI enemy in Enemies)
+                {
+                    enemy.EnemVision.PlayerSpotted = true;
+                }
+
+                    if (DefaultBG_Music.gameObject.activeSelf)
                 {
                     DefaultBG_Music.gameObject.SetActive(false);
                     BattleAudioP.gameObject.SetActive(true);

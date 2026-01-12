@@ -265,7 +265,7 @@ public class BookAI : MonoBehaviour
             EvasionManager();
 
         }
-        else
+        else if(HasParameter(EnemyAnim, "Dodge1",AnimatorControllerParameterType.Bool) && HasParameter(EnemyAnim, "Dodge2", AnimatorControllerParameterType.Bool))
         {
             EnemyAnim.ResetTrigger("Dodge1");
             EnemyAnim.ResetTrigger("Dodge2");
@@ -410,14 +410,14 @@ public class BookAI : MonoBehaviour
         //FollowUpPunchFinish = false;
 
         // Follow Up
-        if(FollowUpPunchFinish)
+        if(FollowUpPunchFinish && HasParameter(EnemyAnim, "NormMelee", AnimatorControllerParameterType.Trigger) || !HasParameter(EnemyAnim, "MeleeFollow", AnimatorControllerParameterType.Trigger))
         {
             EnemyAnim.SetTrigger("NormMelee");
             FollowUpPunchFinish = false; 
 
 
         }
-        else
+        else if(HasParameter(EnemyAnim, "MeleeFollow",AnimatorControllerParameterType.Trigger))
         {
             EnemyAnim.SetTrigger("MeleeFollow");
 
@@ -507,6 +507,11 @@ public class BookAI : MonoBehaviour
                 Destroy(collion.gameObject);
             }
         }
+
+        if(collion.CompareTag("Player") && StickManager.isSliding || collion.CompareTag("Player") && StickManager.isDashing)
+        {
+
+        }
         
     }
 
@@ -593,7 +598,7 @@ public class BookAI : MonoBehaviour
     public void HighEnergyRangedAttack()
     {
 
-
+        if(!HasParameter(EnemyAnim, "HighEnergy",AnimatorControllerParameterType.Trigger)) return;
 
         // Specific Enemy Settings
 
@@ -1058,7 +1063,8 @@ public class BookAI : MonoBehaviour
         {   
             // Start Spaming random stuff 
             // Or Litteraly just dip and run
-            if(Time.time >= LastHighEnergyAttack + HighEnergyAttackCD - 5)
+            if(Time.time >= LastHighEnergyAttack + HighEnergyAttackCD - 5 && HasParameter(EnemyAnim, "HighEnergy", AnimatorControllerParameterType.Trigger)
+)
             {
                 HighEnergyRangedAttack();
             }
@@ -1085,7 +1091,7 @@ public class BookAI : MonoBehaviour
         //    // Charge Up Knockback Melee Attack
         //}
         else if(StickmanState == StickmanState.Pushing && EnemyBehavior == EnemyBehavior.OverConfident 
-        && Time.time >= LastHighEnergyAttack + HighEnergyAttackCD || EnemyBehavior == EnemyBehavior.OverConfident && Time.time >= LastHighEnergyAttack + HighEnergyAttackCD)// like when the player is tryna aggresive head towards the enemy
+        && Time.time >= LastHighEnergyAttack + HighEnergyAttackCD || EnemyBehavior == EnemyBehavior.OverConfident && Time.time >= LastHighEnergyAttack + HighEnergyAttackCD && HasParameter(EnemyAnim, "HighEnergy", AnimatorControllerParameterType.Trigger))// like when the player is tryna aggresive head towards the enemy
         {      
             HighEnergyRangedAttack();
         }
@@ -1110,9 +1116,14 @@ public class BookAI : MonoBehaviour
             NormalMeleeAttack();
         }
         else if (StickmanState == StickmanState.Pushing && EnemyBehavior == EnemyBehavior.OverConfident
-        && Time.time >= LastHighEnergyAttack + HighEnergyAttackCD || EnemyBehavior == EnemyBehavior.OverConfident && Time.time >= LastHighEnergyAttack + HighEnergyAttackCD)// like when the player is tryna aggresive head towards the enemy
+        && Time.time >= LastHighEnergyAttack + HighEnergyAttackCD || EnemyBehavior == EnemyBehavior.OverConfident && Time.time >= LastHighEnergyAttack + HighEnergyAttackCD && HasParameter(EnemyAnim, "HighEnergy", AnimatorControllerParameterType.Trigger))// like when the player is tryna aggresive head towards the enemy
         {
             HighEnergyRangedAttack();
+        }
+
+        if (Time.time >= LastMiniRangedAttack + MiniRangedAttackCD && Time.time < LastHighEnergyAttack + HighEnergyAttackCD)
+        {
+            MiniRangedAttack();
         }
 
 
@@ -1229,7 +1240,8 @@ public class BookAI : MonoBehaviour
             EnemyState = EnemyState.Idle;
             StickManager.StickAnim.SetTrigger("Hurt");
             StickHP.PlayerHP -= DMG;
-            AudioP.PlayOneShot(MeleeImpact); // TODO: Change this so you can use a audioclip in the input
+            AudioP_PitchShifter.pitch = UnityEngine.Random.Range(0.9f, 1.6f);
+            AudioP_PitchShifter.PlayOneShot(MeleeImpact); // TODO: Change this so you can use a audioclip in the input
             if (!isAttackingHighEnergy)
             {
                 StickManager.StartCoroutine(StickManager.PlayerKnockBack(KnockbackOnMeleeHorizontalVelocity, KnockbackOnMeleeVerticalVelocity, DurationOfKnockbackMelee));
@@ -1902,6 +1914,17 @@ public class BookAI : MonoBehaviour
 
         }
     }
+
+    bool HasParameter(Animator animator, string paramName, AnimatorControllerParameterType type)
+    {
+        foreach (var param in animator.parameters)
+        {
+            if (param.name == paramName && param.type == type)
+                return true;
+        }
+        return false;
+    }
+
 
 
 }
