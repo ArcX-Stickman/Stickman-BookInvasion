@@ -27,10 +27,20 @@ public class Projectiles : MonoBehaviour
     public GameObject FX;
     public bool DontDestory;
 
+
+    public float ShakeAmount;
+    public float ShakeDuration;
+
     [Header("booleans ")]
 
     public bool isPhysicsEnemyWindBlade;
+    public bool WantCameraShake;
 
+    public bool isOG;
+
+    public bool DestroysAfterCertainTime;
+
+    public float DestoyAfterDuration;
 
 
 
@@ -42,7 +52,22 @@ public class Projectiles : MonoBehaviour
 
     private void OnEnable()
     {
-        
+        if(!isOG)
+        {
+            StartCoroutine(DestoryAfterThisManySeconds());
+        }
+    }
+
+    public IEnumerator DestoryAfterThisManySeconds()
+    {
+        float timer = 0;
+        while(timer < DestoyAfterDuration)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        Destroy(gameObject);
+
     }
 
     public void SetDirection(Vector2 newDirection)
@@ -127,6 +152,10 @@ public class Projectiles : MonoBehaviour
                 {
                     Destroy(gameObject);
 
+                }
+                if(WantCameraShake)
+                {
+                    StartCoroutine(StickManager.CameraScript.ShakeCamGroundFeeling(ShakeAmount,ShakeDuration));
                 }
             }
             else

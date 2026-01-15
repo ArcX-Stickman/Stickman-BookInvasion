@@ -236,9 +236,13 @@ public class BookAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StartHP = Health;
+        if(EnemyAnim == null)
+        {
+            EnemyAnim = GetComponent<Animator>();
+        }
         overrideController = new AnimatorOverrideController(EnemyAnim.runtimeAnimatorController);
         EnemyAnim.runtimeAnimatorController = overrideController;
-        StartHP = Health;
     }
 
     // Update is called once per frame
@@ -1352,6 +1356,12 @@ public class BookAI : MonoBehaviour
             AudioP_PitchShifter.pitch = UnityEngine.Random.Range(0.8f, 1.4f);
             AudioP_PitchShifter.PlayOneShot(HighEnergyAttackImpact);
         }
+    }
+
+    public void HighEnergySFX_NOT_BASED_ON_IMPACT()
+    {
+        AudioP_PitchShifter.pitch = UnityEngine.Random.Range(0.8f, 1.4f);
+        AudioP_PitchShifter.PlayOneShot(HighEnergyAttackImpact);
     }
 
 
