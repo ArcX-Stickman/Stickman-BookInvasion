@@ -8,6 +8,11 @@ public class ParticleDespawn : MonoBehaviour
     public ParticleSystem ParticleSystem;
 
     // Update is called once per frame
+
+    private void Start()
+    {
+        ParticleSystem = GetComponent<ParticleSystem>();
+    }
     void Update()
     {
         ParticleSystem = GetComponent<ParticleSystem>();

@@ -50,22 +50,21 @@ public class Projectiles : MonoBehaviour
 
     }
 
-    private void OnEnable()
-    {
-        if(!isOG)
-        {
-            StartCoroutine(DestoryAfterThisManySeconds());
-        }
-    }
+   
+    
+    private bool DestroyCoro;
 
     public IEnumerator DestoryAfterThisManySeconds()
     {
+        Debug.Log(gameObject.name + "is Going To Destory after this many secodns");
         float timer = 0;
         while(timer < DestoyAfterDuration)
         {
             timer += Time.deltaTime;
             yield return null;
         }
+        ObjectPooler.SpawnObj(FX, transform.position, Quaternion.identity, ObjectPooler.PoolType.Partcles);
+
         Destroy(gameObject);
 
     }
@@ -77,6 +76,13 @@ public class Projectiles : MonoBehaviour
 
     private void Start()
     {
+        if (!isOG && !DestroyCoro)
+        {
+            DestroyCoro = true;
+            StartCoroutine(DestoryAfterThisManySeconds());
+        }
+
+
         //IsGone = false;
         if (transform.localScale.x >= 0)
         {

@@ -40,13 +40,13 @@ public class BookAI : MonoBehaviour
 
     [Header("Enemy State Manager")]
     private float HeyImJustHereForFormattingIMeanNothing;
-    
+
     public EnemyState EnemyState;
 
     public EnemyBehavior EnemyBehavior;
-    
+
     public StickmanBehavior StickmanBehavior;
-    
+
     public StickmanState StickmanState;
 
 
@@ -54,7 +54,7 @@ public class BookAI : MonoBehaviour
     [Header("Enemy Booleans")]
     //public bool HighEnergyHappened;
     private bool isAttackingHighEnergy;
-   
+
 
     [Header("Enemy Basic Data")]
     public float Health;
@@ -66,20 +66,21 @@ public class BookAI : MonoBehaviour
 
     private float TimeSincePlayerSpotted;
 
-    
+
     [Header("Enemy Distance Data")]
 
     public float DistanceFromPlayer;
     public float MinMeleeDistance;
     public float MinDIS_Movement; // This is the min dis for book appraching the player
 
-    
+
 
     [Header("Enemy Movement ")]
     public float Speed;
     public float MaxSpeed;
-    
-    
+    [SerializeField] private float OG_SPEED;
+
+
     [Header("Enemy Cooldowns")]
     public float MeleeCD;
     public float HighEnergyAttackCD;
@@ -133,6 +134,7 @@ public class BookAI : MonoBehaviour
     public bool AlrInMobilityAttack;
     public string LastStickAttack;
     public float HighEnergyAttackDMG;
+    public bool isAttacking;
 
 
     [Header("High Energy Attack Data")]
@@ -171,7 +173,7 @@ public class BookAI : MonoBehaviour
     public bool WantZoomOnCounter;
     public float ZoomInValue_On_Counter;
     public float DurationZoomInValue_On_Counter;
-   
+
 
     [Header("Impact Frame")]
     public GameObject ImpactFrameBG;
@@ -236,22 +238,33 @@ public class BookAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StartUPAI();
+    }
+
+
+    private void StartUPAI()
+    {
         StartHP = Health;
-        if(EnemyAnim == null)
+        if (EnemyAnim == null)
         {
             EnemyAnim = GetComponent<Animator>();
         }
         overrideController = new AnimatorOverrideController(EnemyAnim.runtimeAnimatorController);
         EnemyAnim.runtimeAnimatorController = overrideController;
+
+
+        // Speed Set up
+        OG_SPEED = Speed;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Health > 0)
+        if (Health > 0)
         {
             AttackManager();
-            if(Speed > 0)
+            if (Speed > 0 && !isAttacking)
             {
                 MoveTowardsPlayer();
             }
@@ -264,23 +277,23 @@ public class BookAI : MonoBehaviour
             CalcTimeAlive();
         }
         //Proper Evasion
-        if(Time.time >= ResetCD + LastReset)
+        if (Time.time >= ResetCD + LastReset)
         {
             EvasionManager();
 
         }
-        else if(HasParameter(EnemyAnim, "Dodge1",AnimatorControllerParameterType.Bool) && HasParameter(EnemyAnim, "Dodge2", AnimatorControllerParameterType.Bool))
+        else if (HasParameter(EnemyAnim, "Dodge1", AnimatorControllerParameterType.Bool) && HasParameter(EnemyAnim, "Dodge2", AnimatorControllerParameterType.Bool))
         {
             EnemyAnim.ResetTrigger("Dodge1");
             EnemyAnim.ResetTrigger("Dodge2");
 
         }
         // Death
-        if(Health <= 0)
+        if (Health <= 0)
         {
             DeathManager();
         }
-        if(Corpse != null)
+        if (Corpse != null)
         {
             CorpseMatch();
         }
@@ -302,38 +315,48 @@ public class BookAI : MonoBehaviour
     {
         Corpse.transform.position = transform.position;
     }
- 
+
+    private bool DeathAnimPlayed;
     public void DeathManager()
     {
-        if(LastStickAttack == "Melee")
+        if (!DeathAnimPlayed)
         {
-            EnemyAnim.CrossFade("MeleeDeath",0,0);
-            StickAnim_Impact = "StickMeleeImpact";
-            ImpactFrameBG = ImpactFrameHighContrast;
+            DeathAnimPlayed = true;
+            if (LastStickAttack == "Melee")
+            {
+                EnemyAnim.CrossFade("MeleeDeath", 0, 0);
+                StickAnim_Impact = "StickMeleeImpact";
+                ImpactFrameBG = ImpactFrameHighContrast;
+            }
         }
+        else
+        {
+            return;
+        }
+        
     }
 
     public void DeathDestory()
     {
-        
+
         //Destroy(gameObject);
     }
 
 
     public void AttackManager()
     {
-        if(!EnemVision.PlayerSpotted) return;
+        if (!EnemVision.PlayerSpotted) return;
         // This is solely animaiton based attacks all the attacks are done by using animation key frames
         // This function/void is pretty much just to tell the enemy to do which attack based on what behavior
         //  or state the enemy brain is thinking
 
-        if(EnemyState == EnemyState.GoingToPlayer)
+        if (EnemyState == EnemyState.GoingToPlayer)
         {
             HandleGoingToPlayer();
             return;
         }
 
-        if(EnemyState == EnemyState.Idle)
+        if (EnemyState == EnemyState.Idle)
         {
             HandleIdle();
             return;
@@ -347,31 +370,31 @@ public class BookAI : MonoBehaviour
         {
             EnemyState = EnemyState.GoingToPlayer;
 
-            if(EnemyBehavior == EnemyBehavior.Neutral)
+            if (EnemyBehavior == EnemyBehavior.Neutral)
             {
-                Vector2 FakeStickMan = new Vector2(StickPOS.position.x,transform.position.y);
+                Vector2 FakeStickMan = new Vector2(StickPOS.position.x, transform.position.y);
                 // This is normal walk up to player and meant for direct Melee combat
-                if(DistanceFromPlayer >= MinDIS_Movement)
+                if (DistanceFromPlayer >= MinDIS_Movement)
                 {
                     transform.position = Vector2.MoveTowards(transform.position, FakeStickMan, Speed * Time.deltaTime);
                     EnemyAnim.SetBool("Moving", true);
 
                 }
             }
-            if(EnemyBehavior == EnemyBehavior.OverConfident )
+            if (EnemyBehavior == EnemyBehavior.OverConfident)
             {
-                Vector2 FakeStickMan = new Vector2(StickPOS.position.x,transform.position.y);
+                Vector2 FakeStickMan = new Vector2(StickPOS.position.x, transform.position.y);
                 // This is normal walk up to player and meant for direct Melee combat
-                if(DistanceFromPlayer >= MinDIS_Movement)
+                if (DistanceFromPlayer >= MinDIS_Movement)
                 {
                     transform.position = Vector2.MoveTowards(transform.position, FakeStickMan, MaxSpeed * Time.deltaTime);
                     EnemyAnim.SetBool("Moving", true);
 
                 }
             }
-        
-        
-            if(EnemyBehavior == EnemyBehavior.Surrender)
+
+
+            if (EnemyBehavior == EnemyBehavior.Surrender)
             {
                 // he gonna dip or he gonna like beg for mercy
             }
@@ -414,14 +437,14 @@ public class BookAI : MonoBehaviour
         //FollowUpPunchFinish = false;
 
         // Follow Up
-        if(FollowUpPunchFinish && HasParameter(EnemyAnim, "NormMelee", AnimatorControllerParameterType.Trigger) || !HasParameter(EnemyAnim, "MeleeFollow", AnimatorControllerParameterType.Trigger))
+        if (FollowUpPunchFinish && HasParameter(EnemyAnim, "NormMelee", AnimatorControllerParameterType.Trigger) || !HasParameter(EnemyAnim, "MeleeFollow", AnimatorControllerParameterType.Trigger))
         {
             EnemyAnim.SetTrigger("NormMelee");
-            FollowUpPunchFinish = false; 
+            FollowUpPunchFinish = false;
 
 
         }
-        else if(HasParameter(EnemyAnim, "MeleeFollow",AnimatorControllerParameterType.Trigger))
+        else if (HasParameter(EnemyAnim, "MeleeFollow", AnimatorControllerParameterType.Trigger))
         {
             EnemyAnim.SetTrigger("MeleeFollow");
 
@@ -489,10 +512,10 @@ public class BookAI : MonoBehaviour
     {
         if (!isDodging)
         {
-            
+
             if (collion.CompareTag("StickMelee") && Time.time >= LastCollisionTick + CollisionTick)
             {
-                StartCoroutine(StickManager.CameraScript.ShakeCamGroundFeeling(UnityEngine.Random.Range(65.6f, 70.0f),UnityEngine.Random.Range(0.2f,0.5f)));
+                StartCoroutine(StickManager.CameraScript.ShakeCamGroundFeeling(UnityEngine.Random.Range(65.6f, 70.0f), UnityEngine.Random.Range(0.2f, 0.5f)));
                 StickManager.PlayerPunchSFX();
                 HitMarker.HitMarkerSFX();
                 LastCollisionTick = Time.time;
@@ -512,16 +535,16 @@ public class BookAI : MonoBehaviour
             }
         }
 
-        if(collion.CompareTag("Player") && StickManager.isSliding || collion.CompareTag("Player") && StickManager.isDashing)
+        if (collion.CompareTag("Player") && StickManager.isSliding || collion.CompareTag("Player") && StickManager.isDashing)
         {
 
         }
-        
+
     }
 
     // private IEnumerator EnemyFlash()
     // {
-        
+
     // }
 
     public void HandleThemExitCollisions(Collider2D collision)
@@ -560,7 +583,7 @@ public class BookAI : MonoBehaviour
 
     public void AnimationKeyRangedProjectile()
     {
-
+        AnimationKeyMiniRangedProjectile(); // idk why ts fucntion exists
     }
 
     private Projectiles lastthrownProjectile;
@@ -572,6 +595,8 @@ public class BookAI : MonoBehaviour
         Projectile.GetComponent<Projectiles>().SetDirection(shootDirection);
         Projectile.GetComponent<Projectiles>().Accelerating = true;
         lastthrownProjectile = Projectile.GetComponent<Projectiles>();
+        Projectile.GetComponent<Projectiles>().isOG = false;
+
         Projectile.transform.localScale = new Vector2(Projectile.transform.localScale.x * shootDirection.x, Projectile.transform.localScale.y);
 
     }
@@ -584,7 +609,7 @@ public class BookAI : MonoBehaviour
 
     public void ChangeAccelerationValue_Projectile(int Use1ForTrue2ForFalse)
     {
-        if(Use1ForTrue2ForFalse == 1)
+        if (Use1ForTrue2ForFalse == 1)
         {
             lastthrownProjectile.Accelerating = true;
 
@@ -602,11 +627,11 @@ public class BookAI : MonoBehaviour
     public void HighEnergyRangedAttack()
     {
 
-        if(!HasParameter(EnemyAnim, "HighEnergy",AnimatorControllerParameterType.Trigger)) return;
+        if (!HasParameter(EnemyAnim, "HighEnergy", AnimatorControllerParameterType.Trigger)) return;
 
         // Specific Enemy Settings
 
-        if(Geology_Hyper_Crack != null)
+        if (Geology_Hyper_Crack != null)
         {
 
             // this tells us that this boi is geology
@@ -617,7 +642,7 @@ public class BookAI : MonoBehaviour
 
 
 
-        if(!HighEnergyisMeleeType || HighEnergyisMeleeType && MeleeRange.StickmanIsHERE)
+        if (!HighEnergyisMeleeType || HighEnergyisMeleeType && MeleeRange.StickmanIsHERE)
         {
             if (StickHP.Testing)
             {
@@ -651,15 +676,15 @@ public class BookAI : MonoBehaviour
 
             EnemyAnim.SetTrigger("HighEnergy");
         }
-      
+
 
     }
 
     public bool HighEnergyisMeleeType;
     public void HighEnergy_Damage()
     {
-       
-        if(HighEnergyisMeleeType && PlayerIsVulnerable())
+
+        if (HighEnergyisMeleeType && PlayerIsVulnerable())
         {
             HighEnergy_DamageToPLayer();
             if (HighEnergyFX != null)
@@ -684,7 +709,7 @@ public class BookAI : MonoBehaviour
     {
         // This is going to be a pain in the butt to code but these attacks shouldnt "actually hit" the player mostly meant to miss on purpose
         LastRanged = Time.time;
-    
+
     }
 
     // --------------------------RANGED---------------------------------------------
@@ -708,7 +733,7 @@ public class BookAI : MonoBehaviour
 
     }
 
-  
+
 
     public void ZoomOut_Camera()
     {
@@ -749,7 +774,7 @@ public class BookAI : MonoBehaviour
             Debug.Log("We in Physics Physics PhysicsMegaranged ATK");
 
             // THe wind thing
-            GameObject WindSlash = ObjectPooler.SpawnObj(MegaRangedAttack,AimPoint.position,Quaternion.identity,ObjectPooler.PoolType.GamObjects);
+            GameObject WindSlash = ObjectPooler.SpawnObj(MegaRangedAttack, AimPoint.position, Quaternion.identity, ObjectPooler.PoolType.GamObjects);
             Projectiles projectiles = WindSlash.GetComponent<Projectiles>();
             Vector2 shootDirection = (transform.localScale.x > 0) ? Vector2.right : Vector2.left;
             projectiles.SetDirection(shootDirection);
@@ -851,7 +876,7 @@ public class BookAI : MonoBehaviour
     private bool RunningEvasionManagerTimer;
     public void EvasionManager()
     {
-        if (Time.time >= LastReset + ResetCD && MeleeContact )
+        if (Time.time >= LastReset + ResetCD && MeleeContact)
         {
             DodgeMelee();
         }
@@ -859,14 +884,14 @@ public class BookAI : MonoBehaviour
         {
             RunningEvasionManagerTimer = true;
             StartCoroutine(RunEvasionTimer());
-            
+
         }
     }
 
     public IEnumerator RunEvasionTimer()
     {
         float Timer = 0;
-        while(Timer < 10)
+        while (Timer < 10)
         {
             //Debug.Log("RunEvasionTimer: " + Timer);
             Timer += Time.deltaTime;
@@ -899,7 +924,7 @@ public class BookAI : MonoBehaviour
 
             }
         }
-        else if(!isAttackingHighEnergy && !DefensiveDodger)
+        else if (!isAttackingHighEnergy && !DefensiveDodger)
         {
             EnemyAnim.SetTrigger("Dodge3");
             DodgeCount = 0;
@@ -942,8 +967,8 @@ public class BookAI : MonoBehaviour
             }
             while (Defensive_Dodger_Opening)
             {
-               
-                if(MeleeContact && !PlayerSpam)
+
+                if (MeleeContact && !PlayerSpam)
                 {
                     EnemyAnim.SetBool("Protected", false);
                     Debug.Log("Enemy Got Staggred");
@@ -984,7 +1009,7 @@ public class BookAI : MonoBehaviour
         }
     }
 
-  
+
     public IEnumerator StaggerPlayer(float time)
     {
         StickManager.StickAnim.CrossFade("StickStaggered", 0, 0);
@@ -1018,13 +1043,13 @@ public class BookAI : MonoBehaviour
 
 
     /// ---------------------- AI Attack Decisions------------------------------------
-    
+
     void HandleGoingToPlayer()
     {
         // This is when The Enemy is Going Towards the player while on the move and has a distance
         // from the player
 
-        if(DistanceFromPlayer > MinDIS_Movement)
+        if (DistanceFromPlayer > MinDIS_Movement)
         {
             HandleFarFromPlayer();
         }
@@ -1034,20 +1059,20 @@ public class BookAI : MonoBehaviour
         }
     }
 
-        
+
     void HandleFarFromPlayer()
     {
-        if(EnemyBehavior == EnemyBehavior.Neutral)
+        if (EnemyBehavior == EnemyBehavior.Neutral)
         {
             HandleNeutralFar();
         }
 
-        if(EnemyBehavior == EnemyBehavior.Desperate)
+        if (EnemyBehavior == EnemyBehavior.Desperate)
         {
             HandleDesperateFar();
         }
 
-        if(EnemyBehavior == EnemyBehavior.OverConfident)
+        if (EnemyBehavior == EnemyBehavior.OverConfident)
         {
             HandleOverConfidentFar();
         }
@@ -1055,7 +1080,7 @@ public class BookAI : MonoBehaviour
 
     void HandleNeutralFar()
     {
-        if(StickmanState == StickmanState.Pushing)
+        if (StickmanState == StickmanState.Pushing)
         {
             // Do a charge up melee attack or a high power ranged
         }
@@ -1063,11 +1088,11 @@ public class BookAI : MonoBehaviour
 
     void HandleDesperateFar()
     {
-        if(StickmanState == StickmanState.Pushing)
-        {   
+        if (StickmanState == StickmanState.Pushing)
+        {
             // Start Spaming random stuff 
             // Or Litteraly just dip and run
-            if(Time.time >= LastHighEnergyAttack + HighEnergyAttackCD - 5 && HasParameter(EnemyAnim, "HighEnergy", AnimatorControllerParameterType.Trigger)
+            if (Time.time >= LastHighEnergyAttack + HighEnergyAttackCD - 5 && HasParameter(EnemyAnim, "HighEnergy", AnimatorControllerParameterType.Trigger)
 )
             {
                 HighEnergyRangedAttack();
@@ -1094,13 +1119,13 @@ public class BookAI : MonoBehaviour
         //{
         //    // Charge Up Knockback Melee Attack
         //}
-        else if(StickmanState == StickmanState.Pushing && EnemyBehavior == EnemyBehavior.OverConfident 
+        else if (StickmanState == StickmanState.Pushing && EnemyBehavior == EnemyBehavior.OverConfident
         && Time.time >= LastHighEnergyAttack + HighEnergyAttackCD || EnemyBehavior == EnemyBehavior.OverConfident && Time.time >= LastHighEnergyAttack + HighEnergyAttackCD && HasParameter(EnemyAnim, "HighEnergy", AnimatorControllerParameterType.Trigger))// like when the player is tryna aggresive head towards the enemy
-        {      
+        {
             HighEnergyRangedAttack();
         }
 
-        if(Time.time >= LastMiniRangedAttack + MiniRangedAttackCD && Time.time < LastHighEnergyAttack + HighEnergyAttackCD)
+        if (Time.time >= LastMiniRangedAttack + MiniRangedAttackCD && Time.time < LastHighEnergyAttack + HighEnergyAttackCD)
         {
             MiniRangedAttack();
         }
@@ -1115,7 +1140,7 @@ public class BookAI : MonoBehaviour
         }
 
 
-        if (Time.time >= MeleeCD + LastMelee ||Time.time >= MeleeCD + LastMelee && StickManager.isInPunchAttach )
+        if (Time.time >= MeleeCD + LastMelee || Time.time >= MeleeCD + LastMelee && StickManager.isInPunchAttach)
         {
             NormalMeleeAttack();
         }
@@ -1138,11 +1163,11 @@ public class BookAI : MonoBehaviour
     {
         // This is when enemy is close enough for player to do melee attacks
 
-        if(EnemyBehavior == EnemyBehavior.Neutral)
+        if (EnemyBehavior == EnemyBehavior.Neutral)
         {
             HandleNeutralClose();
         }
-        if(EnemyBehavior == EnemyBehavior.OverConfident)
+        if (EnemyBehavior == EnemyBehavior.OverConfident)
         {
             HandleOverConfidentClose();
         }
@@ -1164,25 +1189,25 @@ public class BookAI : MonoBehaviour
             // Do an Air block attack that knockbacks player
         }
 
-        if(StickManager.isSliding && StickmanBehavior == StickmanBehavior.NoSkill_Spammer 
+        if (StickManager.isSliding && StickmanBehavior == StickmanBehavior.NoSkill_Spammer
         && StickmanBehavior == StickmanBehavior.Evasive)
         {
             // Punish for player for being too evasive and only relying on evasion
         }
-        else if(StickmanState == StickmanState.Neutral)
+        else if (StickmanState == StickmanState.Neutral)
         {
             // either do first melee attack or second one
         }
-        else if(StickmanState == StickmanState.Pushing && EnemyBehavior != EnemyBehavior.OverConfident ||Time.time >= MeleeCD + LastMelee && StickManager.isInPunchAttach)// like when the player is tryna aggresive head towards the enemy
-        {      
+        else if (StickmanState == StickmanState.Pushing && EnemyBehavior != EnemyBehavior.OverConfident || Time.time >= MeleeCD + LastMelee && StickManager.isInPunchAttach)// like when the player is tryna aggresive head towards the enemy
+        {
             NormalMeleeAttack();
         }
-        
+
     }
 
     void HandleIdle()
     {
-    
+
     }
 
 
@@ -1195,7 +1220,7 @@ public class BookAI : MonoBehaviour
 
     public void IdleAnimationManager()
     {
-        if(Health / StartHP <= 0.50)
+        if (Health / StartHP <= 0.50)
         {
             overrideController["Idle"] = IdleTired;
         }
@@ -1217,14 +1242,14 @@ public class BookAI : MonoBehaviour
 
 
 
-        if(TimeSincePlayerSpotted >= 6 && Health >= StartHP - 4 && LastHighEnergyAttack == 0)
+        if (TimeSincePlayerSpotted >= 6 && Health >= StartHP - 4 && LastHighEnergyAttack == 0)
         {
             EnemyBehavior = EnemyBehavior.OverConfident;
         }
-        else if(TimeSincePlayerSpotted >= 14 && Health / StartHP <= 0.2f)
+        else if (TimeSincePlayerSpotted >= 14 && Health / StartHP <= 0.2f)
         {
             int randomDecision = UnityEngine.Random.Range(0, 10);
-            if(randomDecision == 2)
+            if (randomDecision == 2)
             {
                 EnemyBehavior = EnemyBehavior.Surrender;
 
@@ -1239,7 +1264,7 @@ public class BookAI : MonoBehaviour
 
     public void DamagePlayer(float DMG)
     {
-        if(PlayerIsVulnerable())
+        if (PlayerIsVulnerable())
         {
             EnemyState = EnemyState.Idle;
             StickManager.StickAnim.SetTrigger("Hurt");
@@ -1276,9 +1301,9 @@ public class BookAI : MonoBehaviour
 
             EnemyState = EnemyState.Idle;
             StickHP.PlayerHP -= DMG;
-            
+
             StartCoroutine(StaggerPlayer(HighEnergyStaggerTime));
-            StickManager.TimeManager.FreezeTime(HighEnergyFreezeTime);  
+            StickManager.TimeManager.FreezeTime(HighEnergyFreezeTime);
             TimesDamagedPlayer += 1;
             if (isAttackingHighEnergy)
             {
@@ -1289,9 +1314,9 @@ public class BookAI : MonoBehaviour
 
 
             /// Extra things needed for specific enemies
-            
+
             //NeuroScience
-            if(NeuroElectricEffect != null)
+            if (NeuroElectricEffect != null)
             {
                 NeuroElectricEffect.transform.position = StickPOS.position;
             }
@@ -1308,7 +1333,7 @@ public class BookAI : MonoBehaviour
     public bool PlayerIsVulnerable()
     {
         // Only use for melee based attack conditions this wont work on ranged stuff
-        if(!StickManager.BackFlip && !StickManager.isSliding && !StickManager.isDashing && MeleeRange.StickmanIsHERE && DistanceFromPlayer <= MinMeleeDistance)
+        if (!StickManager.BackFlip && !StickManager.isSliding && !StickManager.isDashing && MeleeRange.StickmanIsHERE && DistanceFromPlayer <= MinMeleeDistance)
         {
             return true;
         }
@@ -1351,7 +1376,7 @@ public class BookAI : MonoBehaviour
 
     public void PlayHighEnergyImpact()
     {
-        if(PlayerIsVulnerable())
+        if (PlayerIsVulnerable())
         {
             AudioP_PitchShifter.pitch = UnityEngine.Random.Range(0.8f, 1.4f);
             AudioP_PitchShifter.PlayOneShot(HighEnergyAttackImpact);
@@ -1369,11 +1394,11 @@ public class BookAI : MonoBehaviour
 
     public void DistanceCalc()
     {
-        DistanceFromPlayer =  Vector2.Distance(transform.position, StickPOS.position);
+        DistanceFromPlayer = Vector2.Distance(transform.position, StickPOS.position);
     }
 
 
- 
+
 
 
     private float ObserverCD = 0.2f;
@@ -1381,46 +1406,46 @@ public class BookAI : MonoBehaviour
     public void PlayerObserver()
     {
         // This is what the enemy sees the player doing
-        if(Time.time >= ObserverCD + LastObserve)
+        if (Time.time >= ObserverCD + LastObserve)
         {
             // Stickman Action Observer
-            if(MeleeContact)
+            if (MeleeContact)
             {
-                PlayerPunchCount +=1;
+                PlayerPunchCount += 1;
                 LastObserve = Time.time;
             }
-            if(StickManager.isSliding || StickManager.isDashing)
+            if (StickManager.isSliding || StickManager.isDashing)
             {
                 PlayerEvasiveActionCount += 1;
             }
-            if(StickManager.BackFlip || StickManager.isDashing)
+            if (StickManager.BackFlip || StickManager.isDashing)
             {
                 PlayerAcrobaticActionCount += 1;
             }
-            
+
 
         }
         RegisterPlayerActionsInBrain();
 
-        
+
 
     }
 
     public void RegisterPlayerActionsInBrain()
     {
-        if(PlayerPunchCount >= 5)
+        if (PlayerPunchCount >= 5)
         {
             StickmanBehavior = StickmanBehavior.NoSkill_Spammer;
         }
-        if(PlayerEvasiveActionCount >= 4)
+        if (PlayerEvasiveActionCount >= 4)
         {
             StickmanBehavior = StickmanBehavior.Evasive;
         }
-        if(PlayerAcrobaticActionCount >= 8)
+        if (PlayerAcrobaticActionCount >= 8)
         {
             StickmanBehavior = StickmanBehavior.Acrobatic;
         }
-        if(StickmanCharging())
+        if (StickmanCharging())
         {
             StickmanBehavior = StickmanBehavior.onAdrenaline;
             StickmanState = StickmanState.Pushing;
@@ -1431,7 +1456,7 @@ public class BookAI : MonoBehaviour
     public bool StickmanCharging()
     {
         bool StickRunAnim = StickManager.StickAnim.GetBool("Walking");
-        if(Math.Abs(StickManager.rb.velocity.x) == StickManager.MaxSpeed && StickAnimsChargeChecker() && StickManager.rb.velocity.y <= 0)
+        if (Math.Abs(StickManager.rb.velocity.x) == StickManager.MaxSpeed && StickAnimsChargeChecker() && StickManager.rb.velocity.y <= 0)
         {
             return true;
         }
@@ -1448,7 +1473,7 @@ public class BookAI : MonoBehaviour
         bool JumpStickAnim = StickManager.StickAnim.GetBool("Jump");
         bool BackflipStick = StickManager.StickAnim.GetBool("Backflip");
         bool Airbone = StickManager.StickAnim.GetBool("Airbone");
-        if(StickRun || JumpStickAnim || BackflipStick || Airbone)
+        if (StickRun || JumpStickAnim || BackflipStick || Airbone)
         {
             return true;
         }
@@ -1458,12 +1483,12 @@ public class BookAI : MonoBehaviour
         }
 
 
-        
+
     }
     public void LookAtPlayer()
     {
         Vector2 targetPosition = new Vector2(StickPOS.position.x, transform.position.y);
-        if (targetPosition.x < transform.position.x )
+        if (targetPosition.x < transform.position.x)
         {
             transform.localScale = new Vector3(1, 1, 1);
 
@@ -1477,7 +1502,7 @@ public class BookAI : MonoBehaviour
     }
     public void CalcTimeAlive()
     {
-        if(!EnemVision.PlayerSpotted) return;
+        if (!EnemVision.PlayerSpotted) return;
         TimeSincePlayerSpotted += Time.deltaTime;
     }
 
@@ -1489,7 +1514,7 @@ public class BookAI : MonoBehaviour
 
         if (!PlayerIsVulnerable() && Health > 0) yield break;
         float EnemAnimOGSpeed = EnemyAnim.speed;
-        if(PlayerIsVulnerable() || Health <= 0)
+        if (PlayerIsVulnerable() || Health <= 0)
         {
             CounterPlayerMelee();
             Animator StickAnim = StickManager.GetComponent<Animator>();
@@ -1525,7 +1550,7 @@ public class BookAI : MonoBehaviour
             float timer = 0;
             ImpactFrameBG.gameObject.SetActive(true);
             ImpactFrameEffect.gameObject.SetActive(true);
-            if(Health <= 0)
+            if (Health <= 0)
             {
                 StickManager.TimeManager.FreezeTime(0.01f);
 
@@ -1556,7 +1581,7 @@ public class BookAI : MonoBehaviour
                 // ts helps with timeouts like if player somehow miracoulddsy ( <--- how the hell u spell this) switched animation it wouldnt be nice >:(
                 if (timer2 > 1.3f)
                 {
-                    
+
                     MainCam.gameObject.SetActive(true);
                     ImpactCam.gameObject.SetActive(false);
                     ImpactFrameBG.gameObject.SetActive(false);
@@ -1583,7 +1608,7 @@ public class BookAI : MonoBehaviour
             StickManager.enabled = true;
             yield return null;
         }
-        
+
     }
 
 
@@ -1640,6 +1665,96 @@ public class BookAI : MonoBehaviour
 
     }
 
+    public bool inPlainWhiteImpact;
+    public IEnumerator PlainWhiteImpactFrame(float time)
+    {
+        // this is mostly for explosions and stuff
+        while (inPlainBlackImpact)
+        {
+            yield return null;
+        }
+
+
+        SpriteRenderer StickSR = StickManager.GetComponent<SpriteRenderer>();
+        SpriteRenderer ThisBook = EnemySpriteObject.GetComponent<SpriteRenderer>();
+        Color col = StickSR.color;
+        StickSR.color = Color.black;
+        ThisBook.color = Color.black;
+        inPlainWhiteImpact = true;
+
+
+        MainCam.gameObject.SetActive(false);
+        ImpactCam.gameObject.SetActive(true);
+        SpriteRenderer Iframe = ImpactFrameBG.GetComponent<SpriteRenderer>();
+        Iframe.color = Color.white;
+        Iframe.gameObject.SetActive(true);
+        float currenttime = 0;
+        StickManager.TimeManager.FreezeTime(0.1f); // hardcoded cuz ion rrly want anything higher than that num
+        while(currenttime < time)
+        {
+            currenttime += Time.deltaTime;
+            yield return null;
+        }
+        Iframe.gameObject.SetActive(false);
+        MainCam.gameObject.SetActive(true);
+        ImpactCam.gameObject.SetActive(false);
+
+        if(col == Color.black)
+        {
+            col = Color.white;
+
+        }
+        StickSR.color = col;
+        ThisBook.color = Color.white;
+        inPlainWhiteImpact = false;
+        yield break;
+    }
+
+
+    public Material StickMaterial;
+    public Material BookMaterial;
+    public bool inPlainBlackImpact;
+
+    public Material BlackIF_Material;
+
+    public IEnumerator PlainBlackImpactFrame(float time)
+    {
+        while (inPlainWhiteImpact)
+        {
+            yield return null;
+        }
+        HighContrastWhiteRadialLines.gameObject.SetActive(false);
+        ImpactFrameEffect.gameObject.SetActive(false);
+        // this is mostly for explosions and stuff
+        SpriteRenderer StickSR = StickManager.GetComponent<SpriteRenderer>();
+        SpriteRenderer ThisBook = EnemySpriteObject.GetComponent<SpriteRenderer>();
+        StickSR.material = BlackIF_Material;
+        ThisBook.material = BlackIF_Material;
+        inPlainBlackImpact = true;
+
+
+        MainCam.gameObject.SetActive(false);
+        ImpactCam.gameObject.SetActive(true);
+        SpriteRenderer Iframe = ImpactFrameBG.GetComponent<SpriteRenderer>();
+        Iframe.color = Color.black;
+        Iframe.gameObject.SetActive(true);
+        float currenttime = 0;
+        StickManager.TimeManager.FreezeTime(0.1f); // hardcoded cuz ion rrly want anything higher than that num
+        while (currenttime < time)
+        {
+            currenttime += Time.deltaTime;
+            yield return null;
+        }
+        Iframe.gameObject.SetActive(false);
+        MainCam.gameObject.SetActive(true);
+        ImpactCam.gameObject.SetActive(false);
+
+        StickSR.material = StickMaterial;
+        ThisBook.material = BookMaterial;
+        inPlainBlackImpact = false;
+        yield break;
+    }
+
     private bool CheckIfGrounded()
     {
         float extraHeight = 1.3f;
@@ -1650,7 +1765,7 @@ public class BookAI : MonoBehaviour
 
     public void FreezeTime(float Time)
     {
-        if(isDodging && DistanceFromPlayer > MinMeleeDistance + 2f)
+        if (isDodging && DistanceFromPlayer > MinMeleeDistance + 2f)
         {
             return; // cuz itll look weird if the enemy dodges and makes the screen freeze when the player alr long gone by then
         }
@@ -1659,7 +1774,7 @@ public class BookAI : MonoBehaviour
 
     public IEnumerator KnockBack()
     {
-        
+
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.bodyType = RigidbodyType2D.Dynamic;
         Debug.Log("PlayerKnockBack Was Called!!");
@@ -1670,10 +1785,10 @@ public class BookAI : MonoBehaviour
         float timeout = 2;
         while (timer < DurationOfKnockbackDeath && timer < timeout)
         {
-      
+
             Debug.Log("Finishing up the timer part in Knockback ");
 
-            rb.velocity = new Vector2(KnockBackValueDeathX * dir, KnockBackValueDeathY) ;
+            rb.velocity = new Vector2(KnockBackValueDeathX * dir, KnockBackValueDeathY);
             timer += Time.deltaTime;
             yield return null;
         }
@@ -1693,7 +1808,7 @@ public class BookAI : MonoBehaviour
         }
         if (CheckIfGrounded())
         {
-            if(Corpse != null)
+            if (Corpse != null)
             {
                 BoxCollider2D box = GetComponent<BoxCollider2D>();
                 rb.simulated = false;
@@ -1758,11 +1873,11 @@ public class BookAI : MonoBehaviour
         Geology_Hyper_Crack.transform.position = new Vector2(transform.position.x, Geology_Hyper_Crack.transform.position.y);
         AttackAudioCue.gameObject.SetActive(true);
         float SpeedOfCrack = 80;
-        Vector2 PlayerPos = new Vector2(StickPOS.transform.position.x,Geology_Hyper_Crack.transform.position.y);
+        Vector2 PlayerPos = new Vector2(StickPOS.transform.position.x, Geology_Hyper_Crack.transform.position.y);
         float Dis = Vector2.Distance(Geology_Hyper_Crack.transform.position, PlayerPos);
         float mindis = 2; // if needed change this cuz ts is hard coded
         float timeoutTracking = 0;
-        while(Dis > mindis)
+        while (Dis > mindis)
         {
             if (timeoutTracking > 1.6f)
             {
@@ -1771,7 +1886,7 @@ public class BookAI : MonoBehaviour
             PlayerPos = new Vector2(StickPOS.transform.position.x, Geology_Hyper_Crack.transform.position.y);
             StartCoroutine(StickManager.CameraScript.ShakeCamGroundFeeling(20, 0.2f));
             timeoutTracking += Time.deltaTime;
-            
+
             Dis = Vector2.Distance(Geology_Hyper_Crack.transform.position, PlayerPos);
             Geology_Hyper_Crack.transform.position = Vector2.MoveTowards(Geology_Hyper_Crack.transform.position, PlayerPos, SpeedOfCrack * Time.deltaTime);
             yield return null;
@@ -1783,7 +1898,7 @@ public class BookAI : MonoBehaviour
         EnemyAnim.SetBool("GeoHyper", false);
         Debug.Log("Rock Launch now!!!");
         StartCoroutine(StickManager.CameraScript.ShakeCamGroundFeeling(190, 0.4f));
-        if(Geology_GroundCrack_Decal != null)
+        if (Geology_GroundCrack_Decal != null)
         {
             GameObject Decal = Instantiate(Geology_GroundCrack_Decal, Geology_Hyper_Crack.transform.position, Quaternion.identity);
         }
@@ -1796,7 +1911,7 @@ public class BookAI : MonoBehaviour
         float IntensityCamShake = 120;
         AttackAudioCue.gameObject.SetActive(false);
         PlayASoundAnimation PASA = GetComponent<PlayASoundAnimation>();
-        if( PASA != null)
+        if (PASA != null)
         {
             PASA.SFX();
         }
@@ -1822,30 +1937,30 @@ public class BookAI : MonoBehaviour
 
 
     // Astrology
-   
+
 
     public IEnumerator A_WarpedSpace()
     {
         Vector3 PositionOfWarp;
-        if(StickManager.StickDirection >= 0 )
+        if (StickManager.StickDirection >= 0)
         {
-            PositionOfWarp = new Vector3(StickPOS.position.x , transform.position.y + 30f, 0);
+            PositionOfWarp = new Vector3(StickPOS.position.x, transform.position.y + 30f, 0);
 
         }
         else
         {
-             PositionOfWarp = new Vector3(StickPOS.position.x , transform.position.y + 30f, 0);
+            PositionOfWarp = new Vector3(StickPOS.position.x, transform.position.y + 30f, 0);
 
         }
-        GameObject WarpSpaceObj = ObjectPooler.SpawnObj(WarpSpace, PositionOfWarp,Quaternion.identity,ObjectPooler.PoolType.GamObjects);
+        GameObject WarpSpaceObj = ObjectPooler.SpawnObj(WarpSpace, PositionOfWarp, Quaternion.identity, ObjectPooler.PoolType.GamObjects);
         Light2D Light = WarpSpaceObj.GetComponent<Light2D>();
-        while(Light.enabled == false)
+        while (Light.enabled == false)
         {
             yield return null;
         }
         yield return new WaitForSecondsRealtime(0.6f);
-        StartCoroutine(StickManager.CameraScript.ShakeCamGroundFeeling(25,0.3f));
-        AudioP_PitchShifter.pitch = UnityEngine.Random.Range(0.9f,1.5f);
+        StartCoroutine(StickManager.CameraScript.ShakeCamGroundFeeling(25, 0.3f));
+        AudioP_PitchShifter.pitch = UnityEngine.Random.Range(0.9f, 1.5f);
         AudioP_PitchShifter.PlayOneShot(Astro_WARP_Spawn_OBJ);
         Debug.Log("Spawning Object from objectpool Warp Space Astrology");
         // pick a random enviomrent thing to kill stickboi
@@ -1853,7 +1968,7 @@ public class BookAI : MonoBehaviour
         Transform SpawnPOS = WarpSpaceObj.GetComponentInChildren<Transform>();
         GameObject EnviormentObj = ObjectPooler.SpawnObj(RandomizedObj, SpawnPOS.position, Quaternion.identity, ObjectPooler.PoolType.GamObjects);
         float timer4timeOut = 0;
-        while(EnviormentObj != null && timer4timeOut < 3.9f)
+        while (EnviormentObj != null && timer4timeOut < 3.9f)
         {
             timer4timeOut += Time.deltaTime;
             yield return null;
@@ -1885,11 +2000,11 @@ public class BookAI : MonoBehaviour
     private StickMoveGlitch StickMoveEnable;
     public void MakeSurePlayerEnablesOrDisables()
     {
-        if(StickMoveEnable == null)
+        if (StickMoveEnable == null)
         {
             StickMoveEnable = FindAnyObjectByType<StickMoveGlitch>();
         }
-       // StickMoveEnable.enabled = StickManager.enabled;
+        // StickMoveEnable.enabled = StickManager.enabled;
     }
 
 
@@ -1935,6 +2050,13 @@ public class BookAI : MonoBehaviour
         return false;
     }
 
-
+    public void AttackTrue()
+    {
+        isAttacking  = true;
+    }
+    public void AttackFalse()
+    {
+        isAttacking = false;
+    }
 
 }

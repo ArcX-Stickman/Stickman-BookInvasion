@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyAITicker : MonoBehaviour
 {
-    private EnemyAI ai;
+    private BookAI ai;
     private Animator anim;
     private Rigidbody2D rb;
     private Collider2D col;
@@ -18,11 +18,10 @@ public class EnemyAITicker : MonoBehaviour
 
     void Awake()
     {
-        ai = GetComponent<EnemyAI>();
+        ai = GetComponent<BookAI>();
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
-        SlideUI = ai.HPSlide.gameObject;
 
         GameObject p = GameObject.FindGameObjectWithTag("Player");
         if (p != null)
