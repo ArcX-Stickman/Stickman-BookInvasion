@@ -489,6 +489,7 @@ public class Movement : MonoBehaviour
 
         // Manage The Jump Gravity
         ManageJumpGravity();
+        PhysicsManagerManual();
 
         if (Input.GetKey(KeyCode.F4) && Input.GetKeyDown(KeyCode.S))
         {
@@ -1246,11 +1247,12 @@ public class Movement : MonoBehaviour
             }
 
 
-
+            // inpuit uffer thing
+            
 
 
         }
-
+        InputDelay_ion_rlly_know_what_toCall_THIS();
 
         //if (Input.GetButton("Fire2"))
         //{
@@ -1326,6 +1328,13 @@ public class Movement : MonoBehaviour
     private bool CheckIfGrounded()
     {
         float extraHeight = 1.3f;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, GetComponent<BoxCollider2D>().bounds.extents.y + extraHeight, WhatsGround);
+        Debug.DrawRay(transform.position, Vector2.down * (GetComponent<BoxCollider2D>().bounds.extents.y + extraHeight), Color.red);
+        return hit.collider != null;
+    }
+
+    private bool CheckIfGroundedStrict(float extraHeight)
+    {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, GetComponent<BoxCollider2D>().bounds.extents.y + extraHeight, WhatsGround);
         Debug.DrawRay(transform.position, Vector2.down * (GetComponent<BoxCollider2D>().bounds.extents.y + extraHeight), Color.red);
         return hit.collider != null;
@@ -1525,6 +1534,7 @@ public class Movement : MonoBehaviour
         BackFlipAS.PlayOneShot(BackFlipSFX);
         rb.gravityScale = 20;
         isJumping = true;
+        JumpDodge = true;
 
         if (rb.velocity.magnitude > 5.1f && MaxSpeed >= 40 && StickHP.MegaCharge > 1)
         {
@@ -4590,6 +4600,121 @@ public class Movement : MonoBehaviour
         }
         return output;
       
+    }
+
+
+
+    // Manage Physics Glitches 
+    // i hate this
+
+    public void PhysicsManagerManual()
+    {
+        // ts manages phsyics because unity kinda doo doo with its physics calcs in 2D
+        if (Grounded)
+        {
+            ManageVelocityOnGround();
+        }
+        
+        
+    }
+
+
+    private bool JumpBoolAnim()
+    {
+        bool jump = StickAnim.GetBool("Jump");
+        return jump;
+    }
+
+    private bool AirAnim()
+    {
+       
+        bool air = StickAnim.GetBool("Airborne");
+        return air;
+
+    }
+
+    private bool BackflipAnimBool()
+    {
+        bool Bf = StickAnim.GetBool("Backflip");
+        return Bf;
+    }
+
+    public float LastJumpInput;
+    private float LastBackflipInput;
+
+    public float JumpInCD = 0.4f;
+    public float BackFlipIn = 0.35f;
+    private void InputDelay_ion_rlly_know_what_toCall_THIS()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            LastJumpInput = Time.time;
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            LastBackflipInput = Time.time;
+
+        }
+    }
+
+    private bool AirborneInputDelay()
+    {
+        bool ReturnVal = false;
+        if (Time.time >= LastJumpInput + JumpInCD &&
+    Time.time >= LastBackflipInput + BackFlipIn)
+
+        {
+            ReturnVal = true;
+        }
+        else
+        {
+            ReturnVal = false;
+        }
+        return ReturnVal;
+        
+    }
+
+    public void ManageVelocityOnGround()
+    {
+
+      
+        if (CheckIfGrounded() && !JumpBoolAnim() && !AirAnim()  && !BackflipAnimBool() && AirborneInputDelay() && !isDashing && !isJumping)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Min(rb.velocity.y, 0));
+
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1.5f, WhatsGround);
+            if (hit.collider != null)
+            {
+                float snapY = hit.point.y + 1.4f;
+                if (transform.position.y > snapY)
+                    transform.position = new Vector2(transform.position.x, snapY);
+            }
+        }
+
+
+
+        // Debug statement
+        if (AirAnim())
+        {
+            Debug.Log("AirAnim = true");
+
+        }
+        else
+        {
+            Debug.Log("AirAnim = false");
+        }
+
+        if (JumpBoolAnim())
+        {
+            Debug.Log("JumpBoolAnim = true");
+
+        }
+        else
+        {
+            Debug.Log("JumpBoolAnim = false");
+        }
+        return;
+
     }
 
 
