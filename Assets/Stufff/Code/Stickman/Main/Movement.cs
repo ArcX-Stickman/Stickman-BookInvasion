@@ -348,6 +348,7 @@ public class Movement : MonoBehaviour
 
     [Header("Misc SFX")]
     public AudioClip GroundImpact;
+    public AudioClip LandSFX;
 
 
     void Start()
@@ -1285,8 +1286,62 @@ public class Movement : MonoBehaviour
 
         AssignPossibleNulls();
         ShootNPunch();
+
+
+
+        if (!Grounded &&!PlayingTheLandSFX_AFTER_BEING_IN_AIR)
+        {
+            PlayingTheLandSFX_AFTER_BEING_IN_AIR = true;
+            StartCoroutine(GetReadyForLandSFX());
+        }
     }
 
+    private bool PlayingTheLandSFX_AFTER_BEING_IN_AIR;
+    public IEnumerator GetReadyForLandSFX()
+    {
+        float timer = 0;
+        if (isBouncyKnockbackActive || Falling_KnockBack)
+        {
+            PlayingTheLandSFX_AFTER_BEING_IN_AIR = false;
+            yield break;
+        }
+        while (!Grounded)
+        {
+            if(isBouncyKnockbackActive || Falling_KnockBack)
+            {
+                PlayingTheLandSFX_AFTER_BEING_IN_AIR = false;
+                yield break;
+            }
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        if(timer > 2f)
+        {
+            BackFlipAS.pitch = Random.Range(0.7f, 1.5f);
+            BackFlipAS.PlayOneShot(GroundImpact);
+            if (JumpSmoke != null)
+            {
+                ObjectPooler.SpawnObj(JumpSmoke.gameObject, JumpSmoke.gameObject.transform.position, Quaternion.identity, ObjectPooler.PoolType.Partcles);
+
+            }
+            CameraScript.StartCoroutine(CameraScript.ShakeCamGroundFeeling(17, 0.2f));
+
+        }
+        if(timer > 0.2f)
+        {
+            BackFlipAS.pitch = Random.Range(0.7f, 1.5f);
+            BackFlipAS.PlayOneShot(LandSFX);
+            if (JumpSmoke != null)
+            {
+                ObjectPooler.SpawnObj(JumpSmoke.gameObject, JumpSmoke.gameObject.transform.position, Quaternion.identity, ObjectPooler.PoolType.Partcles);
+
+            }
+            CameraScript.StartCoroutine(CameraScript.ShakeCamGroundFeeling(10, 0.2f));
+        }   
+        PlayingTheLandSFX_AFTER_BEING_IN_AIR = false;
+        yield break;
+    }
+    
     //private bool FoundLedge;
     //private Vector2 LedgePosition;
     // there was gonna be a section where you climb a Hill but ngl it made me mad and now no more climb
@@ -4694,25 +4749,29 @@ public class Movement : MonoBehaviour
 
 
         // Debug statement
-        if (AirAnim())
+        if (StickHP.Testing)
         {
-            Debug.Log("AirAnim = true");
+            if (AirAnim())
+            {
+                Debug.Log("AirAnim = true");
 
-        }
-        else
-        {
-            Debug.Log("AirAnim = false");
-        }
+            }
+            else
+            {
+                Debug.Log("AirAnim = false");
+            }
 
-        if (JumpBoolAnim())
-        {
-            Debug.Log("JumpBoolAnim = true");
+            if (JumpBoolAnim())
+            {
+                Debug.Log("JumpBoolAnim = true");
 
+            }
+            else
+            {
+                Debug.Log("JumpBoolAnim = false");
+            }
         }
-        else
-        {
-            Debug.Log("JumpBoolAnim = false");
-        }
+        
         return;
 
     }

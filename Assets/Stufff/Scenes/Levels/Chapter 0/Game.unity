@@ -3612493,6 +3612493,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 14403581}
     - target: {fileID: 7102139758763711920, guid: a881a36805962bc4fa0fc6699f831541, type: 3}
+      propertyPath: LandSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 6e310db5445170f4a86113db3802e278, type: 3}
+    - target: {fileID: 7102139758763711920, guid: a881a36805962bc4fa0fc6699f831541, type: 3}
       propertyPath: MeleeCD
       value: 0.003
       objectReference: {fileID: 0}
