@@ -349,6 +349,7 @@ public class Movement : MonoBehaviour
     [Header("Misc SFX")]
     public AudioClip GroundImpact;
     public AudioClip LandSFX;
+    public AudioClip FootstepsStart;
 
 
     void Start()
@@ -1315,7 +1316,7 @@ public class Movement : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
-        if(timer > 2f)
+        if(timer >= 2f && timer < 2.01f)
         {
             BackFlipAS.pitch = Random.Range(0.7f, 1.5f);
             BackFlipAS.PlayOneShot(GroundImpact);
@@ -1327,7 +1328,19 @@ public class Movement : MonoBehaviour
             CameraScript.StartCoroutine(CameraScript.ShakeCamGroundFeeling(17, 0.2f));
 
         }
-        if(timer > 0.2f)
+        else if(timer > 10)
+        {
+            StickHP.PlayerHP = 0;
+            BackFlipAS.pitch = Random.Range(0.7f, 1.5f);
+            BackFlipAS.PlayOneShot(GroundImpact);
+            if (JumpSmoke != null)
+            {
+                ObjectPooler.SpawnObj(JumpSmoke.gameObject, JumpSmoke.gameObject.transform.position, Quaternion.identity, ObjectPooler.PoolType.Partcles);
+
+            }
+            CameraScript.StartCoroutine(CameraScript.ShakeCamGroundFeeling(100, 0.4f));
+        }
+        else if(timer > 0.2f)
         {
             BackFlipAS.pitch = Random.Range(0.7f, 1.5f);
             BackFlipAS.PlayOneShot(LandSFX);
@@ -1382,6 +1395,8 @@ public class Movement : MonoBehaviour
     }
     private bool CheckIfGrounded()
     {
+
+
         float extraHeight = 1.3f;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, GetComponent<BoxCollider2D>().bounds.extents.y + extraHeight, WhatsGround);
         Debug.DrawRay(transform.position, Vector2.down * (GetComponent<BoxCollider2D>().bounds.extents.y + extraHeight), Color.red);
@@ -2095,10 +2110,26 @@ public class Movement : MonoBehaviour
 
     //private Vector2 moveinput;
 
+
+    // these are just for the footstep build up sfx nothin else
+    bool wasMoving;
+    bool isMoving;
+
     public void Move()
     {
         if (HeCanMove == true && StickmanGetsKnocked == false)
         {
+            isMoving = Mathf.Abs(rb.velocity.x) > 0.1f && CheckIfGrounded();
+
+            if (!wasMoving && isMoving)
+            {
+                BackFlipAS.pitch = UnityEngine.Random.Range(0.8f, 1.7f);
+                BackFlipAS.PlayOneShot(FootstepsStart);
+            }
+
+            wasMoving = isMoving;
+
+
 
             //BuildUp = true;
             float horizontalInput = Input.GetAxis("Horizontal");
