@@ -54,6 +54,7 @@ public class DynamicBattleMusic : MonoBehaviour
 
     void Update()
     {
+        CheckForImpactFrame();
         bool spotted = PlayerSpotted();
 
         if (!spotted)
@@ -345,5 +346,45 @@ public class DynamicBattleMusic : MonoBehaviour
         {
             currentState = StateOfFight.Finale;
         }
+    }
+
+
+
+    public void CheckForImpactFrame() 
+    {
+        foreach (BookAI ai in Enemies)
+        {
+            if (ai.isInIFrame) 
+            {
+                StartCoroutine(SomeoneIsInIF(ai));
+            }
+        }
+    }
+    private bool isRunningIF_Manager;
+    public IEnumerator SomeoneIsInIF(BookAI AI)
+    {
+        if (isRunningIF_Manager) yield break;
+        while(AI.isInIFrame)
+        {
+            foreach (BookAI aiC in Enemies)
+            {
+                if (!aiC.isInIFrame)
+                {
+                   aiC.gameObject.SetActive(false);
+                }
+            }
+            yield return null;
+        }
+        foreach (BookAI aiC in Enemies)
+        {
+            if (!aiC.gameObject.activeSelf)
+            {
+                aiC.gameObject.SetActive(true);
+            }
+        }
+
+        yield break;
+
+
     }
 }

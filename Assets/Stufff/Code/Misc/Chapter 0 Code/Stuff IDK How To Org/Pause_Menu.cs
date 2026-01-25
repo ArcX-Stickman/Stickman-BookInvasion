@@ -137,12 +137,19 @@ public class PauseManager : MonoBehaviour
         }
     }
 
-    public void SixtyFPS()
+    public void ThirtyFPS()
     {
         if (PlayerManager.StickHP.PlayerHP > 0)
             AudioP.PlayOneShot(ButtonClick);
 
         fpsManager.fps = 30;
+    }
+    public void SixtyFPS()
+    {
+        if (PlayerManager.StickHP.PlayerHP > 0)
+            AudioP.PlayOneShot(ButtonClick);
+
+        fpsManager.fps = 60;
     }
 
     public void OneTwentyFPS()
@@ -150,7 +157,7 @@ public class PauseManager : MonoBehaviour
         if (PlayerManager.StickHP.PlayerHP > 0)
             AudioP.PlayOneShot(ButtonClick);
 
-        fpsManager.fps = 60;
+        fpsManager.fps = 120;
     }
 
     public void AudioOFF()

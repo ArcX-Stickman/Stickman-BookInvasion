@@ -147,6 +147,7 @@ public class Movement : MonoBehaviour
     public float resetPunchSpeedTime = 2f;
     public float MaxPunchSpeed;
     public bool PunchBool;
+    public bool isInPunchAnim;
     public float PunchAnimationSpeed;
     public bool CanCombo;
     public float MeleeCD;
@@ -822,7 +823,7 @@ public class Movement : MonoBehaviour
                     }
                     else
                     {
-                        StickAnim.SetTrigger("Punch");
+                        PunchAnimManager();
 
                     }
 
@@ -3054,10 +3055,10 @@ public class Movement : MonoBehaviour
 
         if (CanDoublePunch)
         {
-            PunchAudioP.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
+            PunchAudioP.pitch = UnityEngine.Random.Range(1f, 1.2f);
 
         }
-        PunchAudioP.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
+        PunchAudioP.pitch = UnityEngine.Random.Range(1f, 1.2f);
         if (!PowerfulPunch)
         {
             play = PunchSFX[UnityEngine.Random.Range(0, PunchSFX.Length)];
@@ -3180,8 +3181,8 @@ public class Movement : MonoBehaviour
                     if (BookBxcd != null && bxcd.IsTouching(BookBxcd))
                     {
                         StickAnim.SetBool("Attach", false);
-                        StickAnim.CrossFade("Punch", 0, 0);
-                        HeCanMove = true;
+                        PunchAnimManager();
+                         HeCanMove = true;
                         AlrAttaching = false;
                         LastAttachFreeFlow = Time.time;
                         break;
@@ -3215,7 +3216,8 @@ public class Movement : MonoBehaviour
                         if (StickCollider.IsTouching(BookCollider))
                         {
                             StickAnim.SetBool("Attach", false);
-                            StickAnim.CrossFade("Punch", 0, 0);
+                            PunchAnimManager();
+
                             HeCanMove = true;
                             TimeManager.FreezeTime(0.1f);
 
@@ -3236,7 +3238,8 @@ public class Movement : MonoBehaviour
                         if (distance < 12)
                         {
                             StickAnim.SetBool("Attach", false);
-                            StickAnim.CrossFade("Punch", 0, 0);
+                            PunchAnimManager();
+
                             HeCanMove = true;
                             AlrAttaching = false;
                             LastAttachFreeFlow = Time.time;
@@ -3250,7 +3253,8 @@ public class Movement : MonoBehaviour
                     else if (distance <= 11)
                     {
                         StickAnim.SetBool("Attach", false);
-                        StickAnim.CrossFade("Punch", 0, 0);
+                        PunchAnimManager();
+
                         HeCanMove = true;
                         AlrAttaching = false;
                         LastAttachFreeFlow = Time.time;
@@ -3262,7 +3266,8 @@ public class Movement : MonoBehaviour
                     {
                         LastAttachFreeFlow = Time.time;
                         StickAnim.SetBool("Attach", false);
-                        StickAnim.CrossFade("Punch", 0, 0);
+                        PunchAnimManager();
+
                         TimeManager.FreezeTime(0.1f);
 
                         AlrAttaching = false;
@@ -3285,7 +3290,8 @@ public class Movement : MonoBehaviour
         {
             LastAttachFreeFlow = Time.time;
             StickAnim.SetBool("Attach", false);
-            StickAnim.SetTrigger("Punch");
+            PunchAnimManager();
+
             HeCanMove = true;
             yield break;
 
@@ -3297,6 +3303,65 @@ public class Movement : MonoBehaviour
 
 
     }
+
+
+    private int punchIndex = -1;
+
+
+    public void PunchAnimManager()
+    {
+        if (isInPunchAnim) return;
+
+        if (Grounded)
+        {
+            switch (punchIndex)
+            {
+                case 0:
+                    StickAnim.CrossFade("Punch", 0, 0);
+                    break;
+
+                case 1:
+                    StickAnim.CrossFade("StickJab2", 0, 0);
+                    break;
+
+                case 2:
+                    StickAnim.CrossFade("StickKick", 0, 0);
+                    break;
+                default:
+                    StickAnim.CrossFade("Punch", 0, 0);
+                    break;
+            }
+        }
+        else
+        {
+            if (!BackFlip)
+            {
+                StickAnim.CrossFade("StickPunchInAir", 0, 0);
+
+                
+            }
+        }
+        
+
+        punchIndex++;
+
+        if (punchIndex > 2)
+            punchIndex = -1;
+    }
+
+
+    public void PunchAnim_Bool_isInPunch()
+    {
+        isInPunchAnim = true;
+    }
+
+    public void PunchAnim_Bool_is_NOT_InPunch()
+    {
+        isInPunchAnim = false;
+    }
+
+   
+
     public IEnumerator PunchDecay()
     {
         Debug.Log("DecayPunch");

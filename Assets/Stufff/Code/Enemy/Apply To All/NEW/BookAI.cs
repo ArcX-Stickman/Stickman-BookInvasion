@@ -185,6 +185,7 @@ public class BookAI : MonoBehaviour
     public GameObject ImpactFrameHighContrast;
     public GameObject HighContrastWhiteRadialLines;
     public GameObject ImpactFrameEffect; // This are like the comic lines
+    public bool isInIFrame;
 
     public Material UnlitRender;
 
@@ -199,6 +200,7 @@ public class BookAI : MonoBehaviour
     [Header("ExtraAnimattions")]
     public AnimationClip IdleNormal;
     public AnimationClip IdleTired;
+    public AnimationClip IdleAnim_BeforeSpotted;
     private AnimatorOverrideController overrideController;
 
     [Header("Death Animation Options ")]
@@ -234,6 +236,15 @@ public class BookAI : MonoBehaviour
     [Header("Defensive Dodger Behavior ")]
     public bool Defensive_Dodger_Opening;
     public bool ShieldDefense;
+
+    [Header("Enemy Stagger Stuff")]
+    public bool CanBeHurt;
+    public float VulnerableWindow = 12f;
+
+    private float vulnerableEndTime;
+
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -275,13 +286,17 @@ public class BookAI : MonoBehaviour
             LookAtPlayer();
             /// Time and Stuff
             CalcTimeAlive();
+
+            //Anims
+            VunerabiltyManager();
         }
         //Proper Evasion
-        if (Time.time >= ResetCD + LastReset)
-        {
-            EvasionManager();
+        //if (Time.time >= ResetCD + LastReset)
+        //{
+        //   //EvasionManager();
+           
 
-        }
+        //}
         else if (HasParameter(EnemyAnim, "Dodge1", AnimatorControllerParameterType.Bool) && HasParameter(EnemyAnim, "Dodge2", AnimatorControllerParameterType.Bool))
         {
             EnemyAnim.ResetTrigger("Dodge1");
@@ -310,6 +325,54 @@ public class BookAI : MonoBehaviour
             IdleAnimationManager();
         }
     }
+
+
+
+    // Vunerabilty
+
+    public void OpenVulnerableWindow() // use this as aniamtion key after the enemy does a attack
+    {
+        Debug.Log("Vunlerability Opened");
+        CanBeHurt = true;
+        vulnerableEndTime = Time.time + VulnerableWindow;
+    }
+
+    public void VunerabiltyManager()
+    {
+        if (CanBeHurt && Time.time > vulnerableEndTime)
+        {
+            Debug.Log("Vunlerability Ended");
+            CanBeHurt = false;
+        }
+    }
+
+    private int hurtAnimIndex = 0; 
+    private int totalHurtAnims = 2;
+
+
+    public void HurtAnim()
+    {
+        if (CanBeHurt)
+        {
+            switch (hurtAnimIndex)
+            {
+                case 0:
+                    EnemyAnim.SetTrigger("Hurt1");
+                    break;
+                case 1:
+                    EnemyAnim.SetTrigger("Hurt2");
+                    break;
+            }
+
+            hurtAnimIndex++;
+            if (hurtAnimIndex > 1)
+            {
+                hurtAnimIndex = 0;
+            }
+        }
+    }
+
+
 
     public void CorpseMatch()
     {
@@ -523,6 +586,7 @@ public class BookAI : MonoBehaviour
                 TimesPlayerDamagedEnemy += 1;
                 MeleeContact = true;
                 LastStickAttack = "Melee";
+                HurtAnim();
             }
             if (collion.CompareTag("Bullet") && Time.time >= LastCollisionTick + CollisionTick)
             {
@@ -876,16 +940,16 @@ public class BookAI : MonoBehaviour
     private bool RunningEvasionManagerTimer;
     public void EvasionManager()
     {
-        if (Time.time >= LastReset + ResetCD && MeleeContact)
-        {
-            DodgeMelee();
-        }
-        if (!RunningEvasionManagerTimer)
-        {
-            RunningEvasionManagerTimer = true;
-            StartCoroutine(RunEvasionTimer());
+        //if (Time.time >= LastReset + ResetCD && MeleeContact)
+        //{
+        //    DodgeMelee();
+        //}
+        //if (!RunningEvasionManagerTimer)
+        //{
+        //    RunningEvasionManagerTimer = true;
+        //    StartCoroutine(RunEvasionTimer());
 
-        }
+        //}
     }
 
     public IEnumerator RunEvasionTimer()
@@ -1220,15 +1284,33 @@ public class BookAI : MonoBehaviour
 
     public void IdleAnimationManager()
     {
-        if (Health / StartHP <= 0.50)
+
+        if(IdleAnim_BeforeSpotted != null && !EnemVision.PlayerSpotted && Health / StartHP > 0.50)
         {
-            overrideController["Idle"] = IdleTired;
+            overrideController["Idle"] = IdleAnim_BeforeSpotted;
+
         }
-        else
+        else if(IdleAnim_BeforeSpotted != null && EnemVision.PlayerSpotted && Health / StartHP > 0.50)
         {
             overrideController["Idle"] = IdleNormal;
 
         }
+
+
+        if (IdleAnim_BeforeSpotted == null || IdleAnim_BeforeSpotted != null && EnemVision.PlayerSpotted)
+        {
+            if (Health / StartHP <= 0.50)
+            {
+                overrideController["Idle"] = IdleTired;
+            }
+            else
+            {
+                overrideController["Idle"] = IdleNormal;
+
+            }
+        }
+       
+       
     }
 
 
@@ -1283,6 +1365,26 @@ public class BookAI : MonoBehaviour
 
 
             }
+            TimesDamagedPlayer += 1;
+
+            if (isAttackingHighEnergy)
+            {
+                isAttackingHighEnergy = false;
+            }
+        }
+
+    }
+
+    public void DamagePlayer_NoKnockBack(float DMG)
+    {
+        if (PlayerIsVulnerable())
+        {
+            EnemyState = EnemyState.Idle;
+            StickManager.StickAnim.SetTrigger("Hurt");
+            StickHP.PlayerHP -= DMG;
+            AudioP_PitchShifter.pitch = UnityEngine.Random.Range(0.9f, 1.6f);
+            AudioP_PitchShifter.PlayOneShot(MeleeImpact); // TODO: Change this so you can use a audioclip in the input
+           
             TimesDamagedPlayer += 1;
 
             if (isAttackingHighEnergy)
@@ -1487,6 +1589,7 @@ public class BookAI : MonoBehaviour
     }
     public void LookAtPlayer()
     {
+        if (!EnemVision.PlayerSpotted) return;
         Vector2 targetPosition = new Vector2(StickPOS.position.x, transform.position.y);
         if (targetPosition.x < transform.position.x)
         {
@@ -1514,6 +1617,7 @@ public class BookAI : MonoBehaviour
 
         if (!PlayerIsVulnerable() && Health > 0) yield break;
         float EnemAnimOGSpeed = EnemyAnim.speed;
+        isInIFrame = true;
         if (PlayerIsVulnerable() || Health <= 0)
         {
             CounterPlayerMelee();
@@ -1597,6 +1701,7 @@ public class BookAI : MonoBehaviour
 
 
             }
+            isInIFrame = false;
             MainCam.gameObject.SetActive(true);
             ImpactCam.gameObject.SetActive(false);
             ImpactFrameBG.gameObject.SetActive(false);
@@ -1634,7 +1739,7 @@ public class BookAI : MonoBehaviour
     //    }
     //    else
     //    {
-    //        RadialWhite.enabled = true;
+    //        RadialWhite.enabled = true;   
     //        RadialBlack.enabled = false;
     //        Iframe.color = Color.black;
 
@@ -1862,18 +1967,18 @@ public class BookAI : MonoBehaviour
 
     // High Energy
 
-
+    public Transform GeologyEQ_AimPosition;
     public IEnumerator MegaQuake_Geology()
     {
         AudioP.PlayOneShot(GroundImpact);
         float CarryOldSpeed = Speed;
         Speed = 0;
-        Geology_Hyper_Crack.transform.position = new Vector2(transform.position.x, Geology_Hyper_Crack.transform.position.y);
+        Geology_Hyper_Crack.transform.position = new Vector2(transform.position.x, GeologyEQ_AimPosition.transform.position.y);
         Geology_Hyper_Crack.gameObject.SetActive(true);
-        Geology_Hyper_Crack.transform.position = new Vector2(transform.position.x, Geology_Hyper_Crack.transform.position.y);
+        Geology_Hyper_Crack.transform.position = new Vector2(transform.position.x, GeologyEQ_AimPosition.transform.position.y);
         AttackAudioCue.gameObject.SetActive(true);
         float SpeedOfCrack = 80;
-        Vector2 PlayerPos = new Vector2(StickPOS.transform.position.x, Geology_Hyper_Crack.transform.position.y);
+        Vector2 PlayerPos = new Vector2(StickPOS.transform.position.x, GeologyEQ_AimPosition.transform.position.y);
         float Dis = Vector2.Distance(Geology_Hyper_Crack.transform.position, PlayerPos);
         float mindis = 2; // if needed change this cuz ts is hard coded
         float timeoutTracking = 0;
@@ -1897,7 +2002,7 @@ public class BookAI : MonoBehaviour
         Geology_Hyper_Crack.gameObject.SetActive(false);
         EnemyAnim.SetBool("GeoHyper", false);
         Debug.Log("Rock Launch now!!!");
-        StartCoroutine(StickManager.CameraScript.ShakeCamGroundFeeling(190, 0.4f));
+        StartCoroutine(StickManager.CameraScript.ShakeCamGroundFeeling(50, 0.4f));
         if (Geology_GroundCrack_Decal != null)
         {
             GameObject Decal = Instantiate(Geology_GroundCrack_Decal, Geology_Hyper_Crack.transform.position, Quaternion.identity);
@@ -1908,7 +2013,7 @@ public class BookAI : MonoBehaviour
         GameObject FX = Instantiate(MegaAttackEffect.gameObject, FXPos, Quaternion.identity);
         Rigidbody2D rb = Boulders.GetComponent<Rigidbody2D>();
         float timer = 0;
-        float IntensityCamShake = 120;
+        float IntensityCamShake = 50;
         AttackAudioCue.gameObject.SetActive(false);
         PlayASoundAnimation PASA = GetComponent<PlayASoundAnimation>();
         if (PASA != null)
@@ -1921,7 +2026,7 @@ public class BookAI : MonoBehaviour
             float horizontalMomentum = rb.velocity.x;
             rb.velocity = new Vector2(horizontalMomentum, 130);
             StartCoroutine(StickManager.CameraScript.ShakeCamGroundFeeling(IntensityCamShake, 0.2f));
-            IntensityCamShake -= 10 * Time.deltaTime;
+            IntensityCamShake -= 18 * Time.deltaTime;
 
             timer += Time.deltaTime;
             yield return null;

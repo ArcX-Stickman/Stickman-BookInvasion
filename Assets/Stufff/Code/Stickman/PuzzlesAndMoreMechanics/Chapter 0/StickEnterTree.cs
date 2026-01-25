@@ -18,7 +18,14 @@ public class StickEnterTree : MonoBehaviour
     public string Txt;
     public KeyCode Kc;
 
+    public bool HasAlrPlayedEnterSFX;
+
     public bool NeedForCheckPoint_Water;
+
+
+
+    public AudioSource AudioPitch;
+    public AudioClip FoliageEnter;
 
 // sigma 
     private int umIDKMan = 0;
@@ -54,8 +61,15 @@ public class StickEnterTree : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            if (!StickInTree) 
+            {
+                AudioPitch.pitch = UnityEngine.Random.Range(0.8f, 1.8f);
+                AudioPitch.PlayOneShot(FoliageEnter);
+                HasAlrPlayedEnterSFX = true;
 
-            if(PlayerManager.Grounded && NeedForCheckPoint_Water)
+            }
+
+            if (PlayerManager.Grounded && NeedForCheckPoint_Water)
             {
                 PlayerManager.SafePosition = new Vector3(PlayerManager.transform.position.x,PlayerManager.transform.position.y,0);
             }
@@ -101,7 +115,7 @@ public class StickEnterTree : MonoBehaviour
 
             c.a = OG_Opacity;
             Tree.color = c;
-
+            HasAlrPlayedEnterSFX = false;
         }
     }
 
@@ -111,8 +125,14 @@ public class StickEnterTree : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            if (!StickInTree)
+            {
+                AudioPitch.pitch = UnityEngine.Random.Range(0.8f, 1.8f);
+                AudioPitch.PlayOneShot(FoliageEnter);
+                HasAlrPlayedEnterSFX = true;
 
-            if(PlayerManager.Grounded && NeedForCheckPoint_Water)
+            }
+            if (PlayerManager.Grounded && NeedForCheckPoint_Water)
             {
                 PlayerManager.SafePosition = new Vector3(PlayerManager.transform.position.x,PlayerManager.transform.position.y,0);
             }

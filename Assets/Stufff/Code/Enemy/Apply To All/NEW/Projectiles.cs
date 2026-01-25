@@ -65,7 +65,7 @@ public class Projectiles : MonoBehaviour
         }
         ObjectPooler.SpawnObj(FX, transform.position, Quaternion.identity, ObjectPooler.PoolType.Partcles);
 
-        Destroy(gameObject);
+        DestoryObject();
 
     }
 
@@ -76,7 +76,7 @@ public class Projectiles : MonoBehaviour
 
     private void Start()
     {
-        if (!isOG && !DestroyCoro)
+        if (!isOG && !DestroyCoro && DestoyAfterDuration > 0)
         {
             DestroyCoro = true;
             StartCoroutine(DestoryAfterThisManySeconds());
@@ -156,7 +156,7 @@ public class Projectiles : MonoBehaviour
                 }
                 if (!DontDestory)
                 {
-                    Destroy(gameObject);
+                    DestoryObject();
 
                 }
                 if(WantCameraShake)
@@ -184,7 +184,7 @@ public class Projectiles : MonoBehaviour
             }
 
 
-            Destroy(gameObject);
+            DestoryObject();
         }
     }
 
@@ -197,6 +197,15 @@ public class Projectiles : MonoBehaviour
         else
         {
             return false;
+        }
+    }
+
+
+    public void DestoryObject()
+    {
+        if (!isOG)
+        {
+            Destroy(gameObject);
         }
     }
     public void KnockBackPlayer()

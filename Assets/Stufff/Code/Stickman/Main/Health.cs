@@ -288,7 +288,7 @@ public class Health : MonoBehaviour
             yield break;
 
         IsDelayingMegaCharge = true;
-        Debug.Log("Stamina DelayCalled");
+        //Debug.Log("Stamina DelayCalled");
 
         CanChargeMegaCharge = false;
         if(MegaCharge >= 1.9f)

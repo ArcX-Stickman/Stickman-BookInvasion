@@ -474,6 +474,13 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0
+    functionName: PunchAnim_Bool_is_NOT_InPunch
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0
     functionName: Animation_KeysIsinPunchAtttachFalse
     data: 
     objectReferenceParameter: {fileID: 0}
