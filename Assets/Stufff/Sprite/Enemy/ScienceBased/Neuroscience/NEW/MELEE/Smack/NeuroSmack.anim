@@ -180,6 +180,13 @@ AnimationClip:
     floatParameter: 8.9
     intParameter: 0
     messageOptions: 0
+  - time: 0.53333336
+    functionName: OpenVulnerableWindow
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.5833333
     functionName: AnimationKey_FollowUp_Finished
     data: 

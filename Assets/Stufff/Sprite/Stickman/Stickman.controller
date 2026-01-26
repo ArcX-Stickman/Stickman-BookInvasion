@@ -1602,7 +1602,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Punch
-  m_Speed: 1
+  m_Speed: 1.4
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1070777955619529260}
@@ -2196,7 +2196,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: StickJab2
-  m_Speed: 1
+  m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -3105197283615009815}
@@ -3825,7 +3825,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: StickPunch(Jab)
-  m_Speed: 1
+  m_Speed: 1.4
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -6846,7 +6846,7 @@ AnimatorStateMachine:
     m_Position: {x: -10780, y: 4280, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5968261475676915474}
-    m_Position: {x: -9260, y: 4230, z: 0}
+    m_Position: {x: -8810, y: 4040, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3145100527142889080}
     m_Position: {x: -3520, y: 2390, z: 0}
@@ -6885,7 +6885,7 @@ AnimatorStateMachine:
     m_Position: {x: -5190, y: 1960, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7894688368752138991}
-    m_Position: {x: -9460, y: 4020, z: 0}
+    m_Position: {x: -9350, y: 4090, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2735552389322007314}
     m_Position: {x: -11300, y: 3780, z: 0}
@@ -6960,7 +6960,7 @@ AnimatorStateMachine:
     m_Position: {x: -9260, y: 3020, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2312430120541566289}
-    m_Position: {x: -9225, y: 3085, z: 0}
+    m_Position: {x: -9570, y: 2900, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5322531699368822348}
     m_Position: {x: -9190, y: 2800, z: 0}
@@ -9353,7 +9353,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: StickKick
-  m_Speed: 1
+  m_Speed: 1.3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 6388066097385817919}

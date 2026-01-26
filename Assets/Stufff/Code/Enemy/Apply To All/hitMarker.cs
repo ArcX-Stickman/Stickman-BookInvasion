@@ -49,7 +49,9 @@ public class HitMarker : MonoBehaviour
 
     public void HitMarkerSFX()
     {
+        
 
+        Debug.Log("HItmarker SFX Played");
         AudioClip play = SFX[UnityEngine.Random.Range(0, SFX.Length)];
         AudioP.PlayOneShot(play);
 

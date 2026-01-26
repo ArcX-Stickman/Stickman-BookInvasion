@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public enum StateOfFight
 {
@@ -40,6 +41,10 @@ public class DynamicBattleMusic : MonoBehaviour
 
     public int HighEnergyAttackTimesForTrueHype;
 
+
+    public float DistanceFromPlayerToBattleManager;
+    public Volume BattleBefore;
+
     void Start()
     {
         float healthAccum = 0;
@@ -52,25 +57,91 @@ public class DynamicBattleMusic : MonoBehaviour
 
     private bool battleStarted;
 
+    private bool ChangingGraphixOFBattlePrep;
+    private IEnumerator BattlePrepGraphix_TurnUpDown(bool turnOn)
+    {
+        if (ChangingGraphixOFBattlePrep) yield break;
+        ChangingGraphixOFBattlePrep = true;
+
+        float target = turnOn ? 1f : 0f;
+
+        while (!Mathf.Approximately(BattleBefore.weight, target))
+        {
+            BattleBefore.weight = Mathf.MoveTowards(
+                BattleBefore.weight,
+                target,
+                Time.deltaTime * 1.5f 
+            );
+
+            yield return null;
+        }
+
+        BattleBefore.weight = target;
+        ChangingGraphixOFBattlePrep = false;
+    }
+
+
     void Update()
     {
         CheckForImpactFrame();
         bool spotted = PlayerSpotted();
 
-        if (!spotted)
+        //if(Enemies.Count <= 0)
+        //{
+        //    this.enabled = false;
+        //}
+
+        if (!spotted && Enemies.Count > 0 && !battleStarted)
         {
+            DistanceFromPlayerToBattleManager = Vector2.Distance(transform.position,Stickman.transform.position);
+            if(DistanceFromPlayerToBattleManager <= 100)
+            {
+                if (BattleBefore.weight == 0 && !ChangingGraphixOFBattlePrep)
+                {
+                    StartCoroutine(BattlePrepGraphix_TurnUpDown(true));
+
+                }
+
+                DefaultBG_Music.gameObject.SetActive(false);
+                BattleAudioP.clip = Riser;
+                BattleAudioP.gameObject.SetActive(true);
+                if (!BattleAudioP.isPlaying)
+                {
+                    BattleAudioP.time = 0f;
+                    BattleAudioP.Play();
+
+                }
+            }
+            else if(DistanceFromPlayerToBattleManager > 100)
+            {
+                if (BattleBefore.weight == 1 && !ChangingGraphixOFBattlePrep)
+                {
+                    StartCoroutine(BattlePrepGraphix_TurnUpDown(false));
+
+                }
+
+                DefaultBG_Music.gameObject.SetActive(true);
+                BattleAudioP.gameObject.SetActive(false);
+
+                BattleAudioP.Pause();
+            }
             battleStarted = false;
             return;
         }
 
         if (!battleStarted)
         {
+
             battleStarted = true;
             currentState = StateOfFight.EnemyDominance;
             lastState = currentState;
 
             RunningSwitchMusicInstance = false;
             StopAllCoroutines();
+            StartCoroutine(BattlePrepGraphix_TurnUpDown(false));
+
+            Stickman.CameraScript.StartCoroutine((Stickman.CameraScript.SmoothZoomIn(Stickman.CameraScript.BattleCamSize, 1)));
+
 
             BattleAudioP.clip = BattleStart;
             BattleAudioP.time = 0f;
@@ -95,6 +166,8 @@ public class DynamicBattleMusic : MonoBehaviour
             AlrJingle = true;
             BattleAudioP.enabled = false;
             StartCoroutine(WaitForAudioPStopPlay());
+            Stickman.CameraScript.StartCoroutine((Stickman.CameraScript.SmoothZoomIn(Stickman.CameraScript.OG_CAM_SIZE, 1)));
+
         }
     }
 

@@ -343,6 +343,7 @@ public class Movement : MonoBehaviour
     public PhysicsMaterial2D StickmanMat;
     public GameObject TutTXT;
     public BoxCollider2D AlternateColliderDuringKnockback;
+    public bool isSitting;
     
     public Vector3 SafePosition;
 

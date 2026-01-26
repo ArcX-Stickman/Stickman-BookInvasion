@@ -119,50 +119,63 @@ public class StickEnterTree : MonoBehaviour
         }
     }
 
+    bool ThisGuyCanEntrer(Collider2D col)
+    {
+        return col.CompareTag("Player") || col.CompareTag("Book");
+    }
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            if (!StickInTree)
-            {
-                AudioPitch.pitch = UnityEngine.Random.Range(0.8f, 1.8f);
-                AudioPitch.PlayOneShot(FoliageEnter);
-                HasAlrPlayedEnterSFX = true;
+        if (!ThisGuyCanEntrer(collision)) return;
 
-            }
+        if (!StickInTree)
+        {
+            AudioPitch.pitch = UnityEngine.Random.Range(0.8f, 1.8f);
+            AudioPitch.PlayOneShot(FoliageEnter);
+            HasAlrPlayedEnterSFX = true;
+        }
+
+        StickInTree = true;
+
+        Color c = Tree.color;
+        c.a = OpacityThing;
+        Tree.color = c;
+
+        if (collision.CompareTag("Player"))
+        {
+            PlayerManager.InStealth = true;
+
             if (PlayerManager.Grounded && NeedForCheckPoint_Water)
             {
-                PlayerManager.SafePosition = new Vector3(PlayerManager.transform.position.x,PlayerManager.transform.position.y,0);
+                PlayerManager.SafePosition = new Vector3(
+                    PlayerManager.transform.position.x,
+                    PlayerManager.transform.position.y,
+                    0
+                );
             }
-            StickInTree = true;
-
-            PlayerManager.InStealth = true;
-            Color c = Tree.color;
-
-            c.a = OpacityThing;
-            Tree.color = c;
-
         }
     }
+
 
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (!ThisGuyCanEntrer(collision)) return;
+
+        StickInTree = false;
+
+        Color c = Tree.color;
+        c.a = OG_Opacity;
+        Tree.color = c;
+
+        HasAlrPlayedEnterSFX = false;
+
+        if (collision.CompareTag("Player"))
         {
-            StickInTree = false;
-
             PlayerManager.InStealth = false;
-
-
-            Color c = Tree.color;
-
-            c.a = OG_Opacity;
-            Tree.color = c;
-
         }
     }
+
 
 }

@@ -163,9 +163,9 @@ public class BookAI : MonoBehaviour
     public AudioClip CounterMeleeSFX;
     public AudioClip KnockbackSFX;
     public AudioClip GroundImpact;
-    public AudioClip EnemyDodge;
+    public AudioClip[] EnemyDodge;
     public AudioClip PlayerStagger;
-    public AudioClip PunchWhoosh;
+    public AudioClip[] PunchWhoosh;
     public AudioClip HighEnergyAttackImpact;
 
 
@@ -232,6 +232,12 @@ public class BookAI : MonoBehaviour
     [Header("Enemy Behavior Options")]
     public bool DefensiveDodger;
 
+    [Header("Enemy Evasive Stuff")]
+
+    public bool PlayerIsActuallySpammingWHAAAAAAA;
+
+    private float CheckPlayerSpammingIntervals = 3;
+    public float LastCheckPlayerSpammingIntervals;
 
     [Header("Defensive Dodger Behavior ")]
     public bool Defensive_Dodger_Opening;
@@ -239,7 +245,7 @@ public class BookAI : MonoBehaviour
 
     [Header("Enemy Stagger Stuff")]
     public bool CanBeHurt;
-    public float VulnerableWindow = 12f;
+    public float VulnerableWindow ;
 
     private float vulnerableEndTime;
 
@@ -290,19 +296,34 @@ public class BookAI : MonoBehaviour
             //Anims
             VunerabiltyManager();
         }
+
+
+
+        //---------------------------------------------------------------------------------------------------------------------- big ol lines to organize ts
+
         //Proper Evasion
-        //if (Time.time >= ResetCD + LastReset)
-        //{
-        //   //EvasionManager();
+        if (Time.time >= ResetCD + LastReset && PlayerIsActuallySpammingWHAAAAAAA)
+        {
+           EvasionManager();
            
 
-        //}
+        }
+        if(Time.time >= LastCheckPlayerSpammingIntervals + CheckPlayerSpammingIntervals)
+        {
+            LastCheckPlayerSpammingIntervals = Time.time;
+            StartCoroutine(CheckIfPlayerSpamsTooMuch());
+        }
         else if (HasParameter(EnemyAnim, "Dodge1", AnimatorControllerParameterType.Bool) && HasParameter(EnemyAnim, "Dodge2", AnimatorControllerParameterType.Bool))
         {
             EnemyAnim.ResetTrigger("Dodge1");
             EnemyAnim.ResetTrigger("Dodge2");
 
         }
+
+        // ----------------------------------------------------------------------------------------------------------------------
+
+
+
         // Death
         if (Health <= 0)
         {
@@ -318,6 +339,9 @@ public class BookAI : MonoBehaviour
             this.enabled = false;
 
         }
+
+        //----------------------------------------------------------------------------------------------------------------------
+
         /// misc
         MakeSurePlayerEnablesOrDisables();
         if (IdleNormal != null && IdleTired != null)
@@ -354,6 +378,16 @@ public class BookAI : MonoBehaviour
     {
         if (CanBeHurt)
         {
+         
+            isDodging = true;
+            Invoke("DodgeFalse", 0.3f); // Unlock dodging after 0.3 seconds
+
+            switch (hurtAnimIndex)
+            {
+                case 0: EnemyAnim.SetTrigger("Hurt1"); break;
+                case 1: EnemyAnim.SetTrigger("Hurt2"); break;
+            }
+
             switch (hurtAnimIndex)
             {
                 case 0:
@@ -370,9 +404,10 @@ public class BookAI : MonoBehaviour
                 hurtAnimIndex = 0;
             }
         }
+      
     }
 
-
+   
 
     public void CorpseMatch()
     {
@@ -429,7 +464,7 @@ public class BookAI : MonoBehaviour
 
     public void MoveTowardsPlayer()
     {
-        if (EnemVision.PlayerSpotted && EnemyState != EnemyState.Attacking)
+        if (EnemVision.PlayerSpotted && EnemyState != EnemyState.Attacking && !isDodging)
         {
             EnemyState = EnemyState.GoingToPlayer;
 
@@ -573,37 +608,34 @@ public class BookAI : MonoBehaviour
     private float LastCollisionTick = 0;
     public void HandleCollision(Collider2D collion)
     {
-        if (!isDodging)
-        {
+        // 1. Check if we are dodging FIRST
+        if (isDodging) return;
 
-            if (collion.CompareTag("StickMelee") && Time.time >= LastCollisionTick + CollisionTick)
-            {
-                StartCoroutine(StickManager.CameraScript.ShakeCamGroundFeeling(UnityEngine.Random.Range(65.6f, 70.0f), UnityEngine.Random.Range(0.2f, 0.5f)));
-                StickManager.PlayerPunchSFX();
-                HitMarker.HitMarkerSFX();
-                LastCollisionTick = Time.time;
-                Health -= 0.7f;
-                TimesPlayerDamagedEnemy += 1;
-                MeleeContact = true;
-                LastStickAttack = "Melee";
-                HurtAnim();
-            }
-            if (collion.CompareTag("Bullet") && Time.time >= LastCollisionTick + CollisionTick)
-            {
-                HitMarker.HitMarkerSFX();
-                LastCollisionTick = Time.time;
-                Health -= 0.9f;
-                TimesPlayerDamagedEnemy += 1;
-                LastStickAttack = "Bullet";
-                Destroy(collion.gameObject);
-            }
+        // 2. Melee Logic
+        if (collion.CompareTag("StickMelee") && Time.time >= LastCollisionTick + CollisionTick)
+        {
+            if (isDodging) return;
+            StartCoroutine(StickManager.CameraScript.ShakeCamGroundFeeling(UnityEngine.Random.Range(65.6f, 70.0f), UnityEngine.Random.Range(0.2f, 0.5f)));
+            StickManager.PlayerPunchSFX();
+            HitMarker.HitMarkerSFX();
+            LastCollisionTick = Time.time;
+            Health -= 0.7f;
+            TimesPlayerDamagedEnemy += 1;
+            MeleeContact = true;
+            LastStickAttack = "Melee";
+            HurtAnim();
         }
 
-        if (collion.CompareTag("Player") && StickManager.isSliding || collion.CompareTag("Player") && StickManager.isDashing)
+        // 3. Bullet Logic (Now protected by the 'if (isDodging) return' above)
+        if (collion.CompareTag("Bullet") && Time.time >= LastCollisionTick + CollisionTick)
         {
-
+            HitMarker.HitMarkerSFX();
+            LastCollisionTick = Time.time;
+            Health -= 0.9f;
+            TimesPlayerDamagedEnemy += 1;
+            LastStickAttack = "Bullet";
+            Destroy(collion.gameObject);
         }
-
     }
 
     // private IEnumerator EnemyFlash()
@@ -856,6 +888,7 @@ public class BookAI : MonoBehaviour
 
 
         // these are like sickles in ther air like the tengen vs gyaoy fight
+        // mb if i butchered my fellow demon gyay's speeling ion remeber the spelling :/
     }
 
 
@@ -940,16 +973,22 @@ public class BookAI : MonoBehaviour
     private bool RunningEvasionManagerTimer;
     public void EvasionManager()
     {
-        //if (Time.time >= LastReset + ResetCD && MeleeContact)
-        //{
-        //    DodgeMelee();
-        //}
-        //if (!RunningEvasionManagerTimer)
-        //{
-        //    RunningEvasionManagerTimer = true;
-        //    StartCoroutine(RunEvasionTimer());
 
-        //}
+        // Check if player is punching in range AND we aren't already stunned/hurt
+        if (StickManager.PunchBool && DistanceFromPlayer < MinMeleeDistance && !isDodging && CanBeHurt || StickManager.isInPunchAnim && DistanceFromPlayer < MinMeleeDistance && !isDodging && CanBeHurt)
+        {
+   
+            if (UnityEngine.Random.value > 0.5f) // just rng making it so thery can dodge every thing if they dodge evrything ts becomes a souls like
+            {
+                DodgeMelee();
+            }
+        }
+
+        if (!RunningEvasionManagerTimer)
+        {
+            RunningEvasionManagerTimer = true;
+            StartCoroutine(RunEvasionTimer());
+        }
     }
 
     public IEnumerator RunEvasionTimer()
@@ -966,7 +1005,12 @@ public class BookAI : MonoBehaviour
 
     }
 
-    private bool isDodging;
+    public bool isDodging;
+    private float LastMeleeHitTime;
+    private int SpamHitCount;
+    public float SpamResetTime = 0.25f;
+    public int SpamThreshold = 3;
+
     public void DodgeMelee()
     {
         // mostly to punish spam
@@ -1016,63 +1060,103 @@ public class BookAI : MonoBehaviour
     private bool PlayerSpam;
     public IEnumerator DefensiveEvasion()
     {
-
         Running_DeFensiveEvasion_IEnumTHing = true;
+        PlayerSpam = false;
+        SpamHitCount = 0;
+
         if (ShieldDefense)
         {
-            yield return new WaitForSecondsRealtime(0.2f); // ts is just for buffereing this so its not unfair and the player can parry the attaack
+            yield return new WaitForSecondsRealtime(0.2f);
+
             while (!Defensive_Dodger_Opening)
             {
-                if (MeleeContact)
+                if (MeleeContact || StickManager.PunchBool && DistanceFromPlayer < MinMeleeDistance + 4)
                 {
-                    PlayerSpam = true;
-                }
-                yield return null;
-            }
-            while (Defensive_Dodger_Opening)
-            {
+                    if (Time.time - LastMeleeHitTime <= SpamResetTime)
+                    {
+                        SpamHitCount++;
+                    }
+                    else
+                    {
+                        SpamHitCount = 1;
+                    }
 
-                if (MeleeContact && !PlayerSpam)
-                {
-                    EnemyAnim.SetBool("Protected", false);
-                    Debug.Log("Enemy Got Staggred");
-                    yield break;
+                    LastMeleeHitTime = Time.time;
+
+                    if (SpamHitCount >= SpamThreshold)
+                    {
+                        PlayerSpam = true;
+                    }
                 }
-                if (PlayerSpam)
-                {
-                    break;
-                }
+
                 yield return null;
             }
-            Debug.Log("Enemy is Protected");
+
             EnemyAnim.SetBool("Protected", true);
+
             float timer = 0;
-            while (EnemyAnim.GetBool("Protected") && timer < 0.9f)
+            while (timer < 0.9f)
             {
                 timer += Time.deltaTime;
+
                 if (MeleeContact)
                 {
-
-                    StartCoroutine(StaggerPlayer(0.4f));
-                    // He cooked fr player gets staggerd and gets hit with a melee attack
-                    NormalMeleeAttack();
-                    Debug.Log("Player Got Staggred");
-                    Running_DeFensiveEvasion_IEnumTHing = false;
-                    isDodging = false;
-
-                    yield break;
+                    if (PlayerSpam)
+                    {
+                        StartCoroutine(StaggerPlayer(0.4f));
+                        NormalMeleeAttack();
+                        EnemyAnim.SetBool("Protected", false);
+                        isDodging = false;
+                        Running_DeFensiveEvasion_IEnumTHing = false;
+                        yield break;
+                    }
+                    else
+                    {
+                        EnemyAnim.SetBool("Protected", false);
+                        Debug.Log("Enemy Got Staggered");
+                        isDodging = false;
+                        Running_DeFensiveEvasion_IEnumTHing = false;
+                        yield break;
+                    }
                 }
+
                 yield return null;
             }
+
             EnemyAnim.SetBool("Protected", false);
             isDodging = false;
             Running_DeFensiveEvasion_IEnumTHing = false;
             yield break;
-
-
         }
     }
 
+    /// <summary>
+    /// private bool MovingBackDodge;
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator MoveBackALil()
+    {
+
+        // this is for when the enemy dodges
+
+        Vector2 newPos = new Vector2((transform.position.x + (10 * transform.localScale.x)), transform.position.y);
+        float DisToNewPos = Vector2.Distance(transform.position, newPos);
+        float timer = 0;
+        while(DisToNewPos > 0.5f)
+        {
+            timer += Time.deltaTime;
+            if(timer >= 3)
+            {
+                yield break;
+            }
+            DisToNewPos = Vector2.Distance(transform.position, newPos);
+            transform.position = Vector2.MoveTowards(transform.position,newPos, Time.deltaTime * OG_SPEED);
+            yield return null;
+        }
+        yield break;
+
+
+    }
 
     public IEnumerator StaggerPlayer(float time)
     {
@@ -1453,8 +1537,9 @@ public class BookAI : MonoBehaviour
 
     public void PlayDodgeSFX()
     {
-        AudioP_PitchShifter.pitch = UnityEngine.Random.Range(0.8f, 1.4f);
-        AudioP_PitchShifter.PlayOneShot(EnemyDodge);
+        AudioP_PitchShifter.pitch = UnityEngine.Random.Range(0.8f, 1f);
+        AudioClip sfx = EnemyDodge[UnityEngine.Random.Range(0, EnemyDodge.Length)];
+        AudioP_PitchShifter.PlayOneShot(sfx);
     }
     public void PlayPlayerImpactFromPunchImpactFrameFinisher()
     {
@@ -1464,8 +1549,10 @@ public class BookAI : MonoBehaviour
 
     public void PlayAirVelocityOfPunchSFX()
     {
-        AudioP_PitchShifter.pitch = UnityEngine.Random.Range(0.8f, 1.7f);
-        AudioP_PitchShifter.PlayOneShot(PunchWhoosh);
+        AudioP_PitchShifter.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
+        AudioClip sfx = PunchWhoosh[UnityEngine.Random.Range(0, PunchWhoosh.Length)];
+
+        AudioP_PitchShifter.PlayOneShot(sfx);
     }
 
     public void PlayKnockbackSFX()
@@ -1554,6 +1641,61 @@ public class BookAI : MonoBehaviour
         }
 
     }
+
+
+
+
+    public IEnumerator CheckIfPlayerSpamsTooMuch()
+    {
+        List<float> PlayerLastPunches = new List<float>();
+        List<float> PlayerLastPunchesSubtracted = new List<float>();
+
+        int timesOfPunches = 0;
+        bool lastMeleeContact = false;
+
+        while (timesOfPunches < 4)
+        {
+            if (MeleeContact && !lastMeleeContact)
+            {
+                PlayerLastPunches.Add(Time.time);
+                timesOfPunches++;
+
+                int count = PlayerLastPunches.Count;
+                if (count >= 2)
+                {
+                    float gap = Mathf.Abs(
+                        PlayerLastPunches[count - 1] - PlayerLastPunches[count - 2]
+                    );
+                    PlayerLastPunchesSubtracted.Add(gap);
+                }
+            }
+
+            lastMeleeContact = MeleeContact;
+            yield return null;
+        }
+
+        float cummulaionOfTimings = 0f;
+
+        for (int i = 0; i < PlayerLastPunchesSubtracted.Count; i++)
+        {
+            cummulaionOfTimings += PlayerLastPunchesSubtracted[i];
+        }
+
+        if (PlayerLastPunchesSubtracted.Count > 0)
+        {
+            float avg = Mathf.Abs(
+                cummulaionOfTimings / PlayerLastPunchesSubtracted.Count
+            );
+
+            if (avg <= 1.6f)
+            {
+                PlayerIsActuallySpammingWHAAAAAAA = true;
+            }
+        }
+
+        yield break;
+    }
+
 
     public bool StickmanCharging()
     {
@@ -2002,6 +2144,7 @@ public class BookAI : MonoBehaviour
         Geology_Hyper_Crack.gameObject.SetActive(false);
         EnemyAnim.SetBool("GeoHyper", false);
         Debug.Log("Rock Launch now!!!");
+        Speed = CarryOldSpeed;
         StartCoroutine(StickManager.CameraScript.ShakeCamGroundFeeling(50, 0.4f));
         if (Geology_GroundCrack_Decal != null)
         {
@@ -2009,7 +2152,13 @@ public class BookAI : MonoBehaviour
         }
         Vector2 FXPos = new Vector2(Geology_Hyper_Crack.transform.position.x, Geology_Hyper_Crack.transform.position.y + 29);
         Vector2 PositionWhereRocks = new Vector2(FXPos.x, Geology_Hyper_Crack.transform.position.y - 30);
+
         GameObject Boulders = ObjectPooler.SpawnObj(Geology_Hyper_RockAvalauche, PositionWhereRocks, Quaternion.identity);
+
+        Projectiles BoulderProjectile = Boulders.GetComponent<Projectiles>();
+        BoulderProjectile.Hit = false;
+        BoulderProjectile.isOG = false;
+
         GameObject FX = Instantiate(MegaAttackEffect.gameObject, FXPos, Quaternion.identity);
         Rigidbody2D rb = Boulders.GetComponent<Rigidbody2D>();
         float timer = 0;
@@ -2034,7 +2183,7 @@ public class BookAI : MonoBehaviour
         yield return new WaitForSecondsRealtime(2);
         GameObject AfterMath = Instantiate(MegaQuakeAfterMath, Boulders.transform.position, Quaternion.identity);
         ObjectPooler.ReturnObjectToPool(Boulders);
-        Speed = CarryOldSpeed;
+        
 
         yield break;
 

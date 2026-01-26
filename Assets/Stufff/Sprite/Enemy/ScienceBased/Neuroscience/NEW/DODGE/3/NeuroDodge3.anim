@@ -852,11 +852,11 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.6166667
-    functionName: DamagePlayer
+  - time: 0.016666668
+    functionName: MoveBackALil
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 6.7
+    floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.6166667
@@ -864,6 +864,13 @@ AnimationClip:
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0.4
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.6166667
+    functionName: DamagePlayer
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 6.7
     intParameter: 0
     messageOptions: 0
   - time: 0.73333335

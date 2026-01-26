@@ -23,6 +23,10 @@ public class CameraScript : MonoBehaviour
     public bool notlocked;
 
     public Transform Stick;
+
+
+    public bool inBattle;
+    public float BattleCamSize;
     // Start is called before the first frame update
 
     // Helicopter Chapter 0 - Notes
@@ -84,11 +88,35 @@ public class CameraScript : MonoBehaviour
                 StickCam.Follow = Stick.transform;
 
             }
+
+
+            //BattleCam_Manager();
         }
         
 
 
     }
+
+    public void BattleCam_Manager()
+    {
+        if(StickManager.StickHP.PlayerHP > 0 && inBattle)
+        {
+            if(CamSize != BattleCamSize)
+            {
+                StartCoroutine(ZoomIn(BattleCamSize,1.5f));
+            }
+        }
+        else if(StickManager.StickHP.PlayerHP > 0 && !inBattle)
+        {
+            StartCoroutine(ZoomIn(OG_CAM_SIZE, 1.5f));
+
+        }
+    }
+
+    
+
+
+
     public bool FullyZoomed;
     public IEnumerator DeathCam()
     {
