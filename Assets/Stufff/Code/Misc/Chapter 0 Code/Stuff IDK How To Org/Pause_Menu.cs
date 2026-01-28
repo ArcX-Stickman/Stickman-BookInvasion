@@ -274,12 +274,16 @@ public class PauseManager : MonoBehaviour
             }
 
 
-        Time.fixedDeltaTime = 0f;
         PauseMenuAnim.SetTrigger("In");
 
-        Timemanager.SetActive(false);
+        if (!PlayerManager.isSitting)
+        {
+            Timemanager.SetActive(false);
+            Time.fixedDeltaTime = 0f;
 
-        Time.timeScale = 0f;
+            Time.timeScale = 0f;
+        }
+       
         isPaused = true;
     }
 

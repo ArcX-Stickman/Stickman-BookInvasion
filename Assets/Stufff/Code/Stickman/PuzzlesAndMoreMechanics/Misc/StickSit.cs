@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class StickSit : MonoBehaviour
 {
@@ -9,107 +7,162 @@ public class StickSit : MonoBehaviour
     public Movement StickBoi;
     public GameObject StickBoiObj;
 
-    public float DistanceFromPlayer;
     public float MinDis;
 
     private bool CanSit;
+    private bool PlayerSat;
 
     public AudioSource AudioP;
     public AudioClip SitSFX;
 
     public GameObject SitText;
+    public Transform SitPos;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private Coroutine healRoutine;
 
-    // Update is called once per frame
+
+    public GameObject StickCamOG;
+    public GameObject StickCamCamp;
+
+    public AudioSource CampMusic;
+    public AudioSource BGMusic;
+
+    public GameObject UI;
+    public GameObject SavingObj;
+    public AudioSource PauseMenu;
+    public PauseManager PM;
+
+
+    public AudioClip UIPopup;
+
+
+    private float BufferInput = 1;
+    private float LastBuffer;
     void Update()
     {
-        if(DBM !=null && DBM.Enemies.Count > 0)
-        {
+        float distance = Vector2.Distance(transform.position, StickBoi.transform.position);
 
+        // Enemies nearby ? no sitting
+        if (DBM != null && DBM.Enemies.Count > 0)
+        {
             CanSit = false;
-           // so player cant sit ans chill while enemies are fighting and beating his butt
+            SitText.SetActive(false);
+            return;
+        }
+
+        CanSit = distance <= MinDis;
+
+        SitText.SetActive(CanSit && !StickBoi.isSitting);
+        if(PM == null)
+        {
+            PM = FindAnyObjectByType < PauseManager>();
+        }
+        if (CanSit && Input.GetKeyDown(KeyCode.S) && !PauseManager.isPaused && Time.time >= LastBuffer + BufferInput)
+        {
+            LastBuffer = Time.time;
+            if (!StickBoi.isSitting)
+                Sit();
+            else
+                Leave();
+        }
+
+
+        
+
+    }
+
+    public void Sit()
+    {
+        if (!CanSit || StickBoi.isSitting) return;
+        StickBoi.SaveProgress();
+        PauseMenu.mute = true;
+        SavingObj.gameObject.SetActive(true);
+        // StopCoroutine(MusicSwitchSmooth(false));
+        BGMusic.gameObject.SetActive(false);
+        CampMusic.gameObject.SetActive(true);
+
+        UI.gameObject.SetActive(false);
+        StickCamOG.gameObject.SetActive(false);
+        StickCamCamp.gameObject.SetActive(true);
+        StickBoi.StickAnim.CrossFade("StickSit",0,0);
+        AudioP.PlayOneShot(SitSFX);
+
+        StickBoi.isSitting = true;
+        StickBoi.rb.velocity = Vector2.zero;
+        StickBoi.rb.simulated = false;
+        StickBoi.enabled = false;
+
+        PlayerSat = true;
+        StartCoroutine(MovePlayerToSeat());
+    }
+
+
+    private IEnumerator MusicSwitchSmooth(bool v)
+    {
+        if (v)
+        {
+            BGMusic.gameObject.SetActive(false);
+            yield return new WaitForSecondsRealtime(1.3f);
+            CampMusic.gameObject.SetActive(true);
 
         }
         else
         {
-            if(DistanceFromPlayer <= MinDis)
-            {
-                CanSit=true;
-            }
-            else
-            {
-                CanSit = false;
-            }
-
-
-            if(CanSit && !StickBoi.isSitting)
-            {
-                SitText.gameObject.SetActive(true);
-            }
-            else
-            {
-                SitText.gameObject.SetActive(false);
-
-            }
-        }
-
-
-    }
-
-
-    public void Sit()
-    {
-        if(CanSit && !StickBoi.isSitting)
-        {
-            AudioP.PlayOneShot(SitSFX);
-            StickBoi.rb.simulated = false;
-            StickBoi.isSitting = true;
-            StickBoi.enabled = false;
-            if (!PlayerSat)
-            {
-                PlayerSat = true;
-                StartCoroutine(MovePlayerToSeat());
-            }
+            BGMusic.gameObject.SetActive(true);
+            yield return new WaitForSecondsRealtime(1.3f);
+            CampMusic.gameObject.SetActive(false);
         }
     }
 
     public void Leave()
     {
-        StickBoi.rb.simulated = true;
-        StickBoi.isSitting =  false;
-        StickBoi.enabled = true;
+        UI.gameObject.SetActive(true);
+        PauseMenu.mute = false;
+
+        BGMusic.gameObject.SetActive(true);
+        CampMusic.gameObject.SetActive(false);
         
+        PlayerSat = false;
+       // StopCoroutine(MusicSwitchSmooth(true));
+       // StartCoroutine(MusicSwitchSmooth(false));
+        if (healRoutine != null)
+            StopCoroutine(healRoutine);
+        StickCamOG.gameObject.SetActive(true);
+        StickCamCamp.gameObject.SetActive(false);
+        StickBoi.rb.simulated = true;
+        StickBoi.isSitting = false;
+        StickBoi.enabled = true;
+        StickBoi.StickAnim.CrossFade("Idle", 0, 0);
+        StickBoi.AudioPlayer.PlayOneShot(StickBoi.LandSFX);
+
     }
 
-    private bool PlayerSat;
-    public IEnumerator MovePlayerToSeat()
+    private IEnumerator MovePlayerToSeat()
     {
-        PlayerSat = true;
-        float Dis = Vector2.Distance(StickBoiObj.transform.position, transform.position);
-        while(Dis > 0.1f)
+        while (Vector2.Distance(StickBoiObj.transform.position, SitPos.position) > 0.05f)
         {
-            StickBoiObj.transform.position = Vector2.MoveTowards(StickBoiObj.transform.position,transform.position,Time.timeScale * 6);
+            StickBoiObj.transform.position =
+                Vector2.MoveTowards(
+                    StickBoiObj.transform.position,
+                    SitPos.position,
+                    6f * Time.deltaTime
+                );
+
             yield return null;
         }
-        StartCoroutine(HealPlayer());
-        yield break;
+
+        healRoutine = StartCoroutine(HealPlayer());
     }
 
-
-    public IEnumerator HealPlayer()
+    private IEnumerator HealPlayer()
     {
         StickBoi.StickHP.AudioP.PlayOneShot(StickBoi.StickHP.HealSFX);
-        while(StickBoi.StickHP.PlayerHP <= 100)
-        {
-            StickBoi.StickHP.PlayerHP += 20 * Time.deltaTime;
-        }
-        yield break;
-    }
 
-    
+        while (StickBoi.isSitting && StickBoi.StickHP.PlayerHP < 100f)
+        {
+            StickBoi.StickHP.PlayerHP += 20f * Time.deltaTime;
+            StickBoi.StickHP.PlayerHP = Mathf.Min(StickBoi.StickHP.PlayerHP, 100f);
+            yield return null;
+        }
+    }
 }

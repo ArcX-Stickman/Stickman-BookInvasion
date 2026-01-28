@@ -287,4 +287,41 @@ public class CameraScript : MonoBehaviour
     //IntensityStart = intensity;
     //ShakeTimerTotal = time;
     //shakeTime = time;
+
+    // new verion of zooming cuz the other 3 are ste
+
+    private Coroutine activeZoom; 
+    public void ZoomTo(float targetSize, float duration)
+    {
+        // Stop any zoom
+        if (activeZoom != null)
+        {
+            StopCoroutine(activeZoom);
+        }
+
+        activeZoom = StartCoroutine(ZoomCoroutine(targetSize, duration));
+    }
+
+    private IEnumerator ZoomCoroutine(float targetSize, float duration)
+    {
+        MainCam.orthographic = true;
+
+        float startSize = StickCam.m_Lens.OrthographicSize;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            CamSize = Mathf.Lerp(startSize, targetSize, elapsed / duration);
+            StickCam.m_Lens.OrthographicSize = CamSize;
+            yield return null;
+        }
+
+        CamSize = targetSize;
+        StickCam.m_Lens.OrthographicSize = CamSize;
+
+        activeZoom = null; 
+    }
+
+
 }

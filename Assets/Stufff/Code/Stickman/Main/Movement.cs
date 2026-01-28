@@ -183,7 +183,14 @@ public class Movement : MonoBehaviour
     public bool FinshedEncounterAfterLab;
     public bool HasBrokeOutOfRope;
     public LoadingSystem LoadingSystem;
-    
+
+    [Header("Progression Values Encounter / enimies ")]
+
+    [Header("Chap 0")]
+
+    public bool Camp1ClearedCH0;
+
+
     [Header("Progression For Abilites ")]
     public bool UnlockedBackflip;
     public bool UnlockedDash;
@@ -1397,8 +1404,6 @@ public class Movement : MonoBehaviour
     }
     private bool CheckIfGrounded()
     {
-
-
         float extraHeight = 1.3f;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, GetComponent<BoxCollider2D>().bounds.extents.y + extraHeight, WhatsGround);
         Debug.DrawRay(transform.position, Vector2.down * (GetComponent<BoxCollider2D>().bounds.extents.y + extraHeight), Color.red);
@@ -4308,6 +4313,7 @@ public class Movement : MonoBehaviour
         SaveProgress();
     }
 
+
     public void LoadProgress()
     {
         PlayerData data = SaveSystem.LoadSave();
@@ -4344,6 +4350,10 @@ public class Movement : MonoBehaviour
         UnlockedDash = data.UnlockedDash;
         UnlockedSlide = data.UnlockedSlide;
 
+
+
+        // Camp Encounters
+        Camp1ClearedCH0 = data.Camp1ClearedCH0;
     }
 
     public void OverrideSave_Position(float x, float y, float z)
@@ -4534,7 +4544,7 @@ public class Movement : MonoBehaviour
         while (Momentum > 0)
         {
             StickAnim.SetBool("Friction", true);
-            reducer += 5 * Time.deltaTime;
+            reducer += 8 * Time.deltaTime;
             Momentum -= reducer * Time.deltaTime;
             rb.velocity = new Vector2(Momentum * Mathf.Sign(-transform.localScale.x), rb.velocity.y);
             if(!BackFlip && !JumpDodge && StickHP.PlayerHP > 0)

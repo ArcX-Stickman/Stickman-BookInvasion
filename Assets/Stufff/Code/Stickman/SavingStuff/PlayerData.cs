@@ -37,6 +37,20 @@ public class PlayerData
 
     //Stuff For PerkTree
     public int XP_Orbs;
+
+
+
+
+
+    //Chapter 0 data
+
+    ///camps 
+    public bool Camp1ClearedCH0;
+
+
+
+
+
     public PlayerData (Movement PlayerManager)
     {
         // Player Data and Sum Progression
@@ -72,6 +86,10 @@ public class PlayerData
 
         //PerkTree
         XP_Orbs = PlayerManager.XP_Orbs;
+
+
+        // Camp Encounters 
+        Camp1ClearedCH0 = PlayerManager.Camp1ClearedCH0; 
 
     }
 

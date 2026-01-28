@@ -35,7 +35,7 @@ public class PlayerDebuff : MonoBehaviour
     public GameObject ParalyzeFX;
     [SerializeField] private AnimationClip StickParalizeClip;
 
-
+    public bool Paralyzed;
     void Update()
     {
         StateManager();
@@ -55,20 +55,20 @@ public class PlayerDebuff : MonoBehaviour
 
     public void StateManager()
     {
-        switch (State)
-        {
-            case PlayerState.Poisoned:
-                Poison();
-                break;
-            case PlayerState.Burned:
-                Burned();
-                break ;
-            case PlayerState.Paralyzed:
-                Paralyzed();
-                break ;
-            default:
-                break;
-        }
+        //switch (State)
+        //{
+        //    case PlayerState.Poisoned:
+        //        Poison();
+        //        break;
+        //    case PlayerState.Burned:
+        //        Burned();
+        //        break ;
+        //    case PlayerState.Paralyzed:
+        //        Paralyzed();
+        //        break ;
+        //    default:
+        //        break;
+        //}
     }
 
 
@@ -108,15 +108,12 @@ public class PlayerDebuff : MonoBehaviour
 
 
 
-    public void Paralyzed()
-    {
-
-    }
     private bool RunningParalyzedManager;
     
     public IEnumerator ParalyzedManager()
     {
         yield return new WaitForSecondsRealtime(0.5f);
+        Paralyzed = true;
         Debug.Log("Entered Paralysis State  ");
         State = PlayerState.Paralyzed;
         float timer = 0;
@@ -154,6 +151,7 @@ public class PlayerDebuff : MonoBehaviour
             }
             Stickman.enabled = true;
             ParalyzeFX.gameObject.SetActive(false);
+            Paralyzed = false;
         }
         Debug.Log("Finish Paralysis");
         ParalyzeFX.gameObject.SetActive(false);

@@ -45,6 +45,9 @@ public class DynamicBattleMusic : MonoBehaviour
     public float DistanceFromPlayerToBattleManager;
     public Volume BattleBefore;
 
+
+    public string CampName;
+
     void Start()
     {
         float healthAccum = 0;
@@ -140,7 +143,7 @@ public class DynamicBattleMusic : MonoBehaviour
             StopAllCoroutines();
             StartCoroutine(BattlePrepGraphix_TurnUpDown(false));
 
-            Stickman.CameraScript.StartCoroutine((Stickman.CameraScript.SmoothZoomIn(Stickman.CameraScript.BattleCamSize, 1)));
+            Stickman.CameraScript.ZoomTo(Stickman.CameraScript.BattleCamSize, 1);
 
 
             BattleAudioP.clip = BattleStart;
@@ -166,9 +169,19 @@ public class DynamicBattleMusic : MonoBehaviour
             AlrJingle = true;
             BattleAudioP.enabled = false;
             StartCoroutine(WaitForAudioPStopPlay());
-            Stickman.CameraScript.StartCoroutine((Stickman.CameraScript.SmoothZoomIn(Stickman.CameraScript.OG_CAM_SIZE, 1)));
+            Stickman.CameraScript.ZoomTo(Stickman.CameraScript.OG_CAM_SIZE, 1);
 
         }
+
+
+
+
+
+
+
+
+
+        PlayerSaveDataManager(); //checks if player cleared the batle area
     }
 
     private bool AlrJingle;
@@ -460,4 +473,38 @@ public class DynamicBattleMusic : MonoBehaviour
 
 
     }
+
+
+    public void PlayerSaveDataManager()
+    {
+        /// yo this code is extremly strict so careful with naming yo strings
+        if (CampName == "CH0_Camp1")
+        {
+            if (Enemies.Count <= 0)
+            {
+                Stickman.Camp1ClearedCH0 = true;
+            }
+
+            if (Stickman.Camp1ClearedCH0 && Enemies.Count > 0)
+            {
+                Debug.Log("Camp Has Been Cleared");
+                DefaultBG_Music.gameObject.SetActive(true);
+                BattleAudioP.enabled = false;
+
+                for (int i = Enemies.Count - 1; i >= 0; i--)
+                {
+                    if (Enemies[i] != null)
+                    {
+                        Destroy(Enemies[i].gameObject);
+                        Enemies.RemoveAt(i);
+                    }
+                }
+
+                Enemies.Clear();
+                this.enabled = false;
+            }
+        }
+    }
+
+
 }
