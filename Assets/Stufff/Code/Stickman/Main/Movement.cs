@@ -1204,7 +1204,7 @@ public class Movement : MonoBehaviour
         }
 
 
-        if (Input.GetKey(KeyCode.Space) && !isSliding && !SlideJump && !InSlideAnimation && !Dead && Time.time >= LastJump + JumpCD && Grounded)
+        if (Input.GetKeyDown(KeyCode.Space) && !isSliding && !SlideJump && !InSlideAnimation && !Dead && Time.time >= LastJump + JumpCD && Grounded)
         {
             LastJump = Time.time;
 //            Debug.Log("Jump Has Been Requested");

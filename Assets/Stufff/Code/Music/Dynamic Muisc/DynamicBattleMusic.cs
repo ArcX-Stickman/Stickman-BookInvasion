@@ -89,6 +89,8 @@ public class DynamicBattleMusic : MonoBehaviour
 
     void Update()
     {
+        PlayerSaveDataManager(); //checks if player cleared the batle area
+
         CheckForImpactFrame();
         bool spotted = PlayerSpotted();
 
@@ -184,7 +186,6 @@ public class DynamicBattleMusic : MonoBehaviour
 
 
 
-        PlayerSaveDataManager(); //checks if player cleared the batle area
         if (TutorialChecker())
         {
             TutorialManager();

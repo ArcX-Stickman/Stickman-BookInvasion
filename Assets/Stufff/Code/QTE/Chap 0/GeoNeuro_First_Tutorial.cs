@@ -24,6 +24,8 @@ public class GeoNeuro_First_Tutorial : MonoBehaviour
     public BookAI BookAI;
     public BookAI BookAI2;
 
+    private bool Randelay;
+
     void Update()
     {
         if(StickManager.Camp1ClearedCH0 && TKI.gameObject.activeSelf  && ObjThatTriggers.gameObject.activeSelf)
@@ -36,6 +38,19 @@ public class GeoNeuro_First_Tutorial : MonoBehaviour
 
             }
              this.enabled = false;
+        }
+        if (StickManager.Camp1ClearedCH0)
+        {
+            if (!Randelay)
+            {
+                Randelay = true;
+                StartCoroutine(DelayToDeactivate());
+            }
+             if (ObjThatTriggers != null)
+            {
+                ObjThatTriggers.SetActive(false);
+                
+            }
         }
         if (ObjThatTriggers == null && !QTEStarted)
         {
@@ -60,6 +75,11 @@ public class GeoNeuro_First_Tutorial : MonoBehaviour
         }
     }
 
+    public IEnumerator DelayToDeactivate()
+    {
+        yield return new WaitForSeconds(0.1f);
+        this.enabled = false;
+    }
 
     public IEnumerator QTE()
     {
