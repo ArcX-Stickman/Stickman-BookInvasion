@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.Rendering;
@@ -167,6 +168,7 @@ public class BookAI : MonoBehaviour
     public AudioClip PlayerStagger;
     public AudioClip[] PunchWhoosh;
     public AudioClip HighEnergyAttackImpact;
+    public AudioClip[] PlayerDodge;
 
 
     [Header("Camera Angle")]
@@ -255,6 +257,13 @@ public class BookAI : MonoBehaviour
     public GeoNeuro_First_Tutorial GN_F_T;
 
 
+    [Header("Tutorial Stuff")]
+
+    public TutorialKeyInput TutorialKeyInput;
+    public TextMeshProUGUI TutTXT;
+    public bool isTutorial;
+    public int TimesHitPlayer;
+
 
     // Start is called before the first frame update
     void Start()
@@ -303,6 +312,10 @@ public class BookAI : MonoBehaviour
 
             //Anims
             VunerabiltyManager();
+
+            // Tutorial Stuff
+            if (!isTutorial) return;
+            TutorialManager();
         }
 
 
@@ -1052,6 +1065,21 @@ public class BookAI : MonoBehaviour
 
     }
 
+
+    public void PerfectDodgeWindow_ForPlayer()
+    {
+        if(StickManager.BackFlip && DistanceFromPlayer <= MinMeleeDistance + 5)
+        {
+            AudioClip rnd = EnemyDodge[UnityEngine.Random.Range(0, EnemyDodge.Length)];
+            AudioP_PitchShifter.pitch = UnityEngine.Random.Range(1f, 1.2f);
+            AudioP_PitchShifter.PlayOneShot(rnd);
+            StickHP.PlayerHP += 5;
+            StickManager.TimeManager.FreezeTime(0.3f);
+        }
+    }
+
+
+
     public bool isDodging;
     private float LastMeleeHitTime;
     private int SpamHitCount;
@@ -1499,9 +1527,22 @@ public class BookAI : MonoBehaviour
 
     public void DamagePlayer(float DMG)
     {
+
+        // Extra stuff
+
+        if(GN_F_T != null && GN_F_T.Failed &&  !StickManager.inPlayerKnockbackAlt) // do 3 even though its a low number its for a teaching guide
+        {
+            StartCoroutine(TutorialFreeze(KeyCode.Q, "Backflip [Q]"));
+            return;
+        }
+
+
+
+
         ForgivenessSystem(PlayerIsVulnerable());
         if (PlayerIsVulnerable())
         {
+            TimesHitPlayer += 1;
             EnemyState = EnemyState.Idle;
             StickManager.StickAnim.SetTrigger("Hurt");
             StickHP.PlayerHP -= DMG;
@@ -1536,6 +1577,16 @@ public class BookAI : MonoBehaviour
                 isAttackingHighEnergy = false;
             }
         }
+        else
+        {
+
+            if(GN_F_T != null)
+            {
+                GN_F_T.TimesPlayedDodged += 1;
+            }
+
+
+        }
 
     }
 
@@ -1545,6 +1596,7 @@ public class BookAI : MonoBehaviour
 
         if (PlayerIsVulnerable())
         {
+            TimesHitPlayer += 1;
 
             if (TimesPlayerHitUpClose > 3)
             {
@@ -1565,6 +1617,16 @@ public class BookAI : MonoBehaviour
                 isAttackingHighEnergy = false;
             }
         }
+        else
+        {
+
+            if (GN_F_T != null)
+            {
+                GN_F_T.TimesPlayedDodged += 1;
+            }
+
+
+        }
 
     }
 
@@ -1575,6 +1637,7 @@ public class BookAI : MonoBehaviour
 
         if (PlayerIsVulnerable())
         {
+            TimesHitPlayer += 1;
 
             EnemyState = EnemyState.Idle;
             StickHP.PlayerHP -= DMG;
@@ -1597,6 +1660,16 @@ public class BookAI : MonoBehaviour
             {
                 NeuroElectricEffect.transform.position = StickPOS.position;
             }
+        }
+        else
+        {
+
+            if (GN_F_T != null)
+            {
+                GN_F_T.TimesPlayedDodged += 1;
+            }
+
+
         }
 
     }
@@ -2449,4 +2522,73 @@ public class BookAI : MonoBehaviour
         isAttacking = false;
     }
 
+
+    //////////////////////////////////////////// QTE Stuff//////////////////////////////////////////////////////////
+    ///\
+    ///
+
+    public AudioClip KeyClick;
+    private bool TFReeeze;
+    public IEnumerator TutorialFreeze(KeyCode key, string txt)
+    {
+        if (!PlayerDebuffManager.Paralyzed && !StickManager.inPlayerKnockbackAlt && !TFReeeze)
+        {
+            bool inputRecived = false;
+            TFReeeze = true;
+            TutorialKeyInput.gameObject.SetActive(true);
+            TutorialKeyInput.InputS = key;
+            TutTXT.text = txt;
+
+
+            while (!inputRecived)
+            {
+
+
+                StickManager.TimeManager.enabled = false;
+                Time.timeScale = 0;
+                Time.fixedDeltaTime = Time.timeScale * 0.02f;
+
+
+                if (Input.GetKeyDown(key))
+                {
+                    inputRecived = true;
+                }
+                yield return null;
+            }
+            AudioP_PitchShifter.pitch = UnityEngine.Random.Range(1, 1.2f);
+            AudioP_PitchShifter.PlayOneShot(KeyClick);
+            TutorialKeyInput.gameObject.SetActive(false);
+
+            StickManager.TimeManager.enabled = true;
+            Time.timeScale = 1;
+            Time.fixedDeltaTime = Time.timeScale * 0.02f;
+
+
+
+
+            // Set that if theres a tutorial manager thing make that statement true
+            if (GN_F_T != null)
+            {
+                GN_F_T.Failed = false;
+                TimesHitPlayer = 0;
+            }
+
+            TFReeeze = false;
+
+        }
+
+
+
+
+        yield break;
+    }
+
+
+    public void TutorialManager()
+    {
+        if(GN_F_T != null)
+        {
+
+        }
+    }
 }

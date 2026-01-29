@@ -8,7 +8,7 @@ public enum StateOfFight
 {
     EnemyDominance, Instability, EnemyDominace2, PlayerTurningPoint, Finale
 }
-
+// this is technically a battle manager not just for music
 public class DynamicBattleMusic : MonoBehaviour
 {
     public List<BookAI> Enemies;
@@ -56,6 +56,9 @@ public class DynamicBattleMusic : MonoBehaviour
             healthAccum += bookAIai.Health;
         }
         StartAveragesOfEnemiesHealth = healthAccum / Enemies.Count;
+
+
+        
     }
 
     private bool battleStarted;
@@ -182,9 +185,30 @@ public class DynamicBattleMusic : MonoBehaviour
 
 
         PlayerSaveDataManager(); //checks if player cleared the batle area
+        if (TutorialChecker())
+        {
+            TutorialManager();
+        }
+
+
+
     }
 
     private bool AlrJingle;
+
+
+
+    public bool TutorialChecker()
+    {
+        foreach(BookAI ai in Enemies)
+        {
+            if (ai.isTutorial)
+            {
+                return true;
+            }
+        }
+        return false; // if nothing aint  a tut
+    }
 
     public IEnumerator WaitForAudioPStopPlay()
     {
@@ -373,6 +397,8 @@ public class DynamicBattleMusic : MonoBehaviour
 
     public void SwitchState()
     {
+        if (Enemies.Count <= 0) return;
+
         if (AveragesOfEnemyHealth() / StartAveragesOfEnemiesHealth < 0.90f && currentState == StateOfFight.EnemyDominance)
         {
             currentState = StateOfFight.Instability;
@@ -504,6 +530,49 @@ public class DynamicBattleMusic : MonoBehaviour
                 this.enabled = false;
             }
         }
+    }
+
+
+    public void TutorialManager()
+    {
+        //foreach (BookAI aiC in Enemies)
+        //{
+        //    if(aiC.GN_F_T != null)
+        //    {
+        //        if(aiC.TimesHitPlayer > 3)
+        //        {
+        //            foreach(BookAI ai in Enemies)
+        //            {
+        //                ai.TimesHitPlayer = 0;
+        //            }
+        //        }
+        //    }
+        //}
+        //int sumOfAllAttack = 0;
+
+        ////foreach (BookAI aiC in Enemies)
+        ////{
+        ////    sumOfAllAttack += aiC.TimesHitPlayer;
+        ////}
+
+        //for(int i = 0; i < Enemies.Count; i++)
+        //{
+        //    sumOfAllAttack += Enemies[i].TimesHitPlayer;
+        //}
+        
+
+        //if(sumOfAllAttack > 2)
+        //{
+        //    // check the enemies for a tutorial script
+
+        //    foreach(BookAI ai in Enemies)
+        //    {
+        //        if(ai.GN_F_T != null)
+        //        {
+        //            ai.GN_F_T.Failed = true;
+        //        }
+        //    }
+        //}
     }
 
 

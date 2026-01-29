@@ -1133678,7 +1133678,7 @@ MonoBehaviour:
   AudioP: {fileID: 1734015287}
   NonPitchAudioP: {fileID: 590502044}
   HitSFX: {fileID: 8300000, guid: 45955b610e6d33a48b1310c8ea3a64a4, type: 3}
-  Miss: {fileID: 8300000, guid: 9d578207f21d0b84caa984e3fa21b45d, type: 3}
+  Miss: {fileID: 8300000, guid: 9bfc5b4bf8fb4a949b10d75f4139eeae, type: 3}
   FX: {fileID: 3469864527608169300, guid: 71ce11364a0486044836375e2ceba7e7, type: 3}
   DontDestory: 0
   ShakeAmount: 0
@@ -1536780,7 +1536780,7 @@ MonoBehaviour:
   AudioP: {fileID: 1734015287}
   NonPitchAudioP: {fileID: 590502044}
   HitSFX: {fileID: 8300000, guid: b6ef28eca8b9340dcb2316a3e969b7bd, type: 3}
-  Miss: {fileID: 8300000, guid: 9d578207f21d0b84caa984e3fa21b45d, type: 3}
+  Miss: {fileID: 8300000, guid: 9bfc5b4bf8fb4a949b10d75f4139eeae, type: 3}
   FX: {fileID: 205089135944073526, guid: 4db9436e80ede6b418d0c44cfebc09fc, type: 3}
   DontDestory: 0
   ShakeAmount: 0
@@ -1537569,6 +1537569,10 @@ MonoBehaviour:
   - {fileID: 836904199}
   TutTXT: {fileID: 1714098885}
   TKI: {fileID: 1714098886}
+  finished: 0
+  TimesPlayedDodged: 0
+  BookAI: {fileID: 1112251017}
+  BookAI2: {fileID: 1546336995}
 --- !u!4 &598291235 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 65234447004238102, guid: f06a338a00d528148ad1b90135aa7498, type: 3}
@@ -1729721,6 +1729725,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1576443286926742069, guid: f5b473f2ce4ac92418f8c09729924e2b, type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1966325353979337025, guid: f5b473f2ce4ac92418f8c09729924e2b, type: 3}
       propertyPath: AudioP
       value: 
@@ -1729742,6 +1729750,10 @@ PrefabInstance:
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2348329329922297347, guid: f5b473f2ce4ac92418f8c09729924e2b, type: 3}
+      propertyPath: TutTXT
+      value: 
+      objectReference: {fileID: 1714098885}
+    - target: {fileID: 2348329329922297347, guid: f5b473f2ce4ac92418f8c09729924e2b, type: 3}
       propertyPath: Graphix
       value: 
       objectReference: {fileID: 130332099}
@@ -1729754,6 +1729766,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 228098108}
     - target: {fileID: 2348329329922297347, guid: f5b473f2ce4ac92418f8c09729924e2b, type: 3}
+      propertyPath: KeyClick
+      value: 
+      objectReference: {fileID: 8300000, guid: 6e61efa72de3c1945870798869b36c85, type: 3}
+    - target: {fileID: 2348329329922297347, guid: f5b473f2ce4ac92418f8c09729924e2b, type: 3}
       propertyPath: MaxSpeed
       value: 35
       objectReference: {fileID: 0}
@@ -1729765,6 +1729781,10 @@ PrefabInstance:
       propertyPath: ImpactCam
       value: 
       objectReference: {fileID: 1779423002}
+    - target: {fileID: 2348329329922297347, guid: f5b473f2ce4ac92418f8c09729924e2b, type: 3}
+      propertyPath: isTutorial
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2348329329922297347, guid: f5b473f2ce4ac92418f8c09729924e2b, type: 3}
       propertyPath: StickManager
       value: 
@@ -1729781,6 +1729801,10 @@ PrefabInstance:
       propertyPath: NormProjectile
       value: 
       objectReference: {fileID: 594757166}
+    - target: {fileID: 2348329329922297347, guid: f5b473f2ce4ac92418f8c09729924e2b, type: 3}
+      propertyPath: TutorialKeyInput
+      value: 
+      objectReference: {fileID: 1714098886}
     - target: {fileID: 2348329329922297347, guid: f5b473f2ce4ac92418f8c09729924e2b, type: 3}
       propertyPath: ImpactFrameEffect
       value: 
@@ -1734027,7 +1734051,7 @@ MonoBehaviour:
   AudioP: {fileID: 1734015287}
   NonPitchAudioP: {fileID: 590502044}
   HitSFX: {fileID: 8300000, guid: c144299d91b4dcf40b702fb7b0fa1ea8, type: 3}
-  Miss: {fileID: 8300000, guid: 9d578207f21d0b84caa984e3fa21b45d, type: 3}
+  Miss: {fileID: 8300000, guid: 9bfc5b4bf8fb4a949b10d75f4139eeae, type: 3}
   FX: {fileID: 1262510506}
   DontDestory: 0
   ShakeAmount: 0
@@ -1927059,6 +1927083,10 @@ PrefabInstance:
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2877878739023018332, guid: b449042058694a3408f73bc0f3ad8c17, type: 3}
+      propertyPath: TutTXT
+      value: 
+      objectReference: {fileID: 1714098885}
+    - target: {fileID: 2877878739023018332, guid: b449042058694a3408f73bc0f3ad8c17, type: 3}
       propertyPath: Graphix
       value: 
       objectReference: {fileID: 130332099}
@@ -1927071,6 +1927099,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 228098108}
     - target: {fileID: 2877878739023018332, guid: b449042058694a3408f73bc0f3ad8c17, type: 3}
+      propertyPath: KeyClick
+      value: 
+      objectReference: {fileID: 8300000, guid: 6e61efa72de3c1945870798869b36c85, type: 3}
+    - target: {fileID: 2877878739023018332, guid: b449042058694a3408f73bc0f3ad8c17, type: 3}
       propertyPath: StickPOS
       value: 
       objectReference: {fileID: 228098103}
@@ -1927082,6 +1927114,10 @@ PrefabInstance:
       propertyPath: ImpactCam
       value: 
       objectReference: {fileID: 1779423002}
+    - target: {fileID: 2877878739023018332, guid: b449042058694a3408f73bc0f3ad8c17, type: 3}
+      propertyPath: isTutorial
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2877878739023018332, guid: b449042058694a3408f73bc0f3ad8c17, type: 3}
       propertyPath: StickManager
       value: 
@@ -1927102,6 +1927138,10 @@ PrefabInstance:
       propertyPath: MegaRangedAttack
       value: 
       objectReference: {fileID: 2055706460}
+    - target: {fileID: 2877878739023018332, guid: b449042058694a3408f73bc0f3ad8c17, type: 3}
+      propertyPath: TutorialKeyInput
+      value: 
+      objectReference: {fileID: 1714098886}
     - target: {fileID: 2877878739023018332, guid: b449042058694a3408f73bc0f3ad8c17, type: 3}
       propertyPath: VulnerableWindow
       value: 0.5
@@ -1927236,6 +1927276,10 @@ PrefabInstance:
       objectReference: {fileID: 590502044}
     - target: {fileID: 7156019632767636212, guid: b449042058694a3408f73bc0f3ad8c17, type: 3}
       propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8231688547460942267, guid: b449042058694a3408f73bc0f3ad8c17, type: 3}
+      propertyPath: m_Layer
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2758558,7 +2758602,7 @@ MonoBehaviour:
   AudioP: {fileID: 1734015287}
   NonPitchAudioP: {fileID: 590502044}
   HitSFX: {fileID: 8300000, guid: 89249b3e8ac1b894c8e81627e7e3b3d8, type: 3}
-  Miss: {fileID: 8300000, guid: 9d578207f21d0b84caa984e3fa21b45d, type: 3}
+  Miss: {fileID: 8300000, guid: 9bfc5b4bf8fb4a949b10d75f4139eeae, type: 3}
   FX: {fileID: 205089135944073526, guid: 4db9436e80ede6b418d0c44cfebc09fc, type: 3}
   DontDestory: 0
   ShakeAmount: 0
@@ -3619018,7 +3619062,7 @@ MonoBehaviour:
   AudioP: {fileID: 590502044}
   NonPitchAudioP: {fileID: 0}
   HitSFX: {fileID: 8300000, guid: 2e6ddd299c5f5c144b5cb72d21deb2de, type: 3}
-  Miss: {fileID: 8300000, guid: 9d578207f21d0b84caa984e3fa21b45d, type: 3}
+  Miss: {fileID: 8300000, guid: 9bfc5b4bf8fb4a949b10d75f4139eeae, type: 3}
   FX: {fileID: 6126206662861723998, guid: 244fd29425436334d8cdf679cba5aa86, type: 3}
   DontDestory: 0
   ShakeAmount: 0
@@ -3651007,6 +3651051,10 @@ PrefabInstance:
       propertyPath: AudioP
       value: 
       objectReference: {fileID: 590502044}
+    - target: {fileID: 8231688547460942267, guid: b449042058694a3408f73bc0f3ad8c17, type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3652697,6 +3652745,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1584933742}
     m_Modifications:
+    - target: {fileID: 1576443286926742069, guid: f5b473f2ce4ac92418f8c09729924e2b, type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1966325353979337025, guid: f5b473f2ce4ac92418f8c09729924e2b, type: 3}
       propertyPath: AudioP
       value: 
@@ -3653517,7 +3653569,7 @@ MonoBehaviour:
   DurationPara: 0
   BurnDuration: 0
   PoisonDuration: 0
-  ParalyzeDuration: 1.4
+  ParalyzeDuration: 0.5
   CurrentTimer: 0
   ParalyzeFX: {fileID: 1210322607}
   StickParalizeClip: {fileID: 7400000, guid: a24f93d10279f4e41bd51aca617a2256, type: 2}
@@ -3658320,6 +3658372,10 @@ PrefabInstance:
       propertyPath: AudioP
       value: 
       objectReference: {fileID: 590502044}
+    - target: {fileID: 7164032710800938308, guid: 5802987c90cb4504e980507463aed67c, type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7276806560425926916, guid: 5802987c90cb4504e980507463aed67c, type: 3}
       propertyPath: AudioP
       value: 
@@ -3663273,6 +3663329,10 @@ PrefabInstance:
       propertyPath: AudioP
       value: 
       objectReference: {fileID: 590502044}
+    - target: {fileID: 7289463889431835917, guid: 48c562af7961dbb4ca860b5da8cfc075, type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

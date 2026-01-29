@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GeoNeuro_First_Tutorial : MonoBehaviour
@@ -15,15 +16,26 @@ public class GeoNeuro_First_Tutorial : MonoBehaviour
     public AudioSource SloMoAudio;
     public AudioSource BattleTheme;
     public StickEnterTree[] stickEnterTrees;
-
     public TextMeshProUGUI TutTXT;
     public TutorialKeyInput TKI;
+    public bool finished;
+    public int TimesPlayedDodged;
+
+    public BookAI BookAI;
+    public BookAI BookAI2;
+
     void Update()
     {
-        if(StickManager.Camp1ClearedCH0)
+        if(StickManager.Camp1ClearedCH0 && TKI.gameObject.activeSelf  && ObjThatTriggers.gameObject.activeSelf)
         {
-            ObjThatTriggers.SetActive(false);
-            this.enabled = false;
+            TKI.gameObject.SetActive(false);
+
+            if (ObjThatTriggers != null)
+            {
+                ObjThatTriggers.SetActive(false);
+
+            }
+             this.enabled = false;
         }
         if (ObjThatTriggers == null && !QTEStarted)
         {
@@ -38,16 +50,25 @@ public class GeoNeuro_First_Tutorial : MonoBehaviour
                 SR.color = color;
             }
         }
+
+      //
+      
+         if(StickManager.Camp1ClearedCH0 || finished && !Failed  &&  TimesPlayedDodged > 5  )
+        {
+            TKI.gameObject.SetActive(false);
+
+        }
     }
+
 
     public IEnumerator QTE()
     {
-        bool finished = false;
+        finished = false;
 
         StickManager.enabled = false;
 
         float originalFixedDelta = Time.fixedDeltaTime;
-
+        StickManager.FootP.enabled = false;
         while (!finished)
         {
             StickManager.rb.velocity = Vector2.zero;
@@ -77,6 +98,8 @@ public class GeoNeuro_First_Tutorial : MonoBehaviour
                 {
                     Failed = true;
                     finished = true;
+                    StickManager.FootP.enabled = true;
+
                     break;
                 }
                 yield return null; // wait for all of geology's projectiles to add to the list
@@ -202,11 +225,25 @@ public class GeoNeuro_First_Tutorial : MonoBehaviour
             finished = true;
             yield return null;
         }
+        StickManager.FootP.enabled = false;
 
         StickManager.rb.simulated = true;
         StickManager.enabled = true;
         Time.timeScale = 1;
         Time.fixedDeltaTime = originalFixedDelta;
+
+        if (finished && !Failed && TimesPlayedDodged < 5)
+        {
+
+            /// step one of the fight teach defensive to player
+            TKI.gameObject.SetActive(true);
+            TKI.InputS = KeyCode.None;
+            TutTXT.text = "Backflip[Q] To Evade Melee and Ranged Attacks";
+
+
+        }
+
+
 
         yield break;
     }
