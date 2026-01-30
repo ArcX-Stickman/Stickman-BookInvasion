@@ -52,6 +52,7 @@ TagManager:
   - ObjectOfDestruction
   - Ladder
   - Tree
+  - Woodsteps
   layers:
   - Default
   - TransparentFX

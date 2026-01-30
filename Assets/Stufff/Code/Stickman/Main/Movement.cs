@@ -2414,6 +2414,7 @@ public class Movement : MonoBehaviour
                 }
             }
         }
+
     }
 
 
@@ -2468,21 +2469,27 @@ public class Movement : MonoBehaviour
         }
 
 
-        if (collision.gameObject.CompareTag("Book"))
-        {
-            BoxCollider2D MyCollider = GetComponent<BoxCollider2D>();
-            BoxCollider2D bxcd = collision.gameObject.gameObject.GetComponent<BoxCollider2D>();
-            if (isDashing)
-            {
-                Physics2D.IgnoreCollision(bxcd, MyCollider, true);
+        //if (collision.gameObject.CompareTag("Book"))
+        //{
+        //    BoxCollider2D MyCollider = GetComponent<BoxCollider2D>();
+        //    BoxCollider2D bxcd = collision.gameObject.gameObject.GetComponent<BoxCollider2D>();
+        //    if (isDashing)
+        //    {
+        //        Physics2D.IgnoreCollision(bxcd, MyCollider, true);
 
-            }
-            else
-            {
-                Physics2D.IgnoreCollision(bxcd, MyCollider, false);
+        //    }
+        //    else
+        //    {
+        //        Physics2D.IgnoreCollision(bxcd, MyCollider, false);
 
-            }
-        }
+        //    }
+        //}
+
+        //if (collision.gameObject.CompareTag("Woodsteps"))
+        //{
+        //    WalkOnWood = true;
+        //}
+
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -2491,6 +2498,11 @@ public class Movement : MonoBehaviour
         {
             Grounded = false;
         }
+
+        //if (collision.gameObject.CompareTag("Woodsteps"))
+        //{
+        //    WalkOnWood = false;
+        //}
     }
 
 
