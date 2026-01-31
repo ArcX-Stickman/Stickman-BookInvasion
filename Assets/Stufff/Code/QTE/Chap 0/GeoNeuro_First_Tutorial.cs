@@ -245,7 +245,7 @@ public class GeoNeuro_First_Tutorial : MonoBehaviour
             finished = true;
             yield return null;
         }
-        StickManager.FootP.enabled = false;
+        StickManager.FootP.enabled = true;
 
         StickManager.rb.simulated = true;
         StickManager.enabled = true;
