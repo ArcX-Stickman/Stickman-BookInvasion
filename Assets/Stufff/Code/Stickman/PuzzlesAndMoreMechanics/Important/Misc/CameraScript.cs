@@ -34,7 +34,11 @@ public class CameraScript : MonoBehaviour
     void Start()
     {
         StickCam = GetComponent<CinemachineVirtualCamera>();
-        OG_CAM_SIZE = CamSize;
+        if(OG_CAM_SIZE == 0)
+        {
+            OG_CAM_SIZE = CamSize;
+
+        }
         transposer = StickCam.GetCinemachineComponent<CinemachineFramingTransposer>();
     }
 

@@ -2128,11 +2128,7 @@ public class Movement : MonoBehaviour
         {
             isMoving = Mathf.Abs(rb.velocity.x) > 0.1f && CheckIfGrounded();
 
-            if (!wasMoving && isMoving)
-            {
-                BackFlipAS.pitch = UnityEngine.Random.Range(0.8f, 1.7f);
-                BackFlipAS.PlayOneShot(FootstepsStart);
-            }
+           
 
             wasMoving = isMoving;
 
@@ -2149,6 +2145,16 @@ public class Movement : MonoBehaviour
             //{
             //    horizontalInput = 1;
             //}
+            bool hasInput = Mathf.Abs(horizontalInput) <= 0.01f;
+
+            if (hasInput && !wasMoving && isMoving)
+            {
+                BackFlipAS.pitch = UnityEngine.Random.Range(0.8f, 1.7f);
+                BackFlipAS.PlayOneShot(FootstepsStart);
+            }
+
+
+
             rb.velocity = new Vector2(horizontalInput * Speed, rb.velocity.y);
             FacingRight = transform.localScale.x >= 1 ? true : false;
             float targetspeed = horizontalInput * Speed;

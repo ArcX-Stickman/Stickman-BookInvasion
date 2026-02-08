@@ -51,39 +51,39 @@ public class SpriteCulling : MonoBehaviour
     void Update()
     {
 
-        if (useManager) return;
+    //    if (useManager) return;
 
-        if (player == null)
-            return;
+    //    if (player == null)
+    //        return;
 
-        if (Time.time < nextCheckTime)
-            return;
+    //    if (Time.time < nextCheckTime)
+    //        return;
 
-        nextCheckTime = Time.time + checkInterval;
+    //    nextCheckTime = Time.time + checkInterval;
 
-        float distSqr = (transform.position - player.position).sqrMagnitude;
-        float maxDistSqr = maxDistance * maxDistance;
+    //    float distSqr = (transform.position - player.position).sqrMagnitude;
+    //    float maxDistSqr = maxDistance * maxDistance;
 
-        currentDistance = Mathf.Sqrt(distSqr);
-        if (distSqr > maxDistSqr)
-        {
-            if (!isCulled)
-            {
-                spriteRenderer.sprite = LowResSprite;
-                spriteRenderer.enabled = false;
-                isCulled = true;
-            }
-        }
-        else
-        {
-            if (isCulled)
-            {
-                if (HighQualitySprite != null)
-                    spriteRenderer.sprite = HighQualitySprite;
+    //    currentDistance = Mathf.Sqrt(distSqr);
+    //    if (distSqr > maxDistSqr)
+    //    {
+    //        if (!isCulled)
+    //        {
+    //            spriteRenderer.sprite = LowResSprite;
+    //            spriteRenderer.enabled = false;
+    //            isCulled = true;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        if (isCulled)
+    //        {
+    //            if (HighQualitySprite != null)
+    //                spriteRenderer.sprite = HighQualitySprite;
 
-                spriteRenderer.enabled = true;
-                isCulled = false;
-            }
-        }
+    //            spriteRenderer.enabled = true;
+    //            isCulled = false;
+    //        }
+    //    }
     }
 }
