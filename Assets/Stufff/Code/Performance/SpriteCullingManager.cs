@@ -18,44 +18,44 @@ public class SpriteCullingManager : MonoBehaviour
 
     private SpriteCulling[] spriteCullings;
 
-    private void Update()
-    {
-        if (!initialized)
-        {
-            Initialize();
-        }
+    //private void Update()
+    //{
+    //    if (!initialized)
+    //    {
+    //        Initialize();
+    //    }
 
-        // Detect mode switches safely
-        if (Low && currentMode != "Low")
-        {
-            ApplyDrawDistance(drawDistanceLow);
-            currentMode = "Low";
-        }
-        else if (Medium && currentMode != "Medium")
-        {
-            ApplyDrawDistance(drawDistanceMedium);
-            currentMode = "Medium";
-        }
-        else if (High && currentMode != "High")
-        {
-            ApplyDrawDistance(drawDistanceHigh);
-            currentMode = "High";
-        }
-    }
+    //    // Detect mode switches safely
+    //    if (Low && currentMode != "Low")
+    //    {
+    //        ApplyDrawDistance(drawDistanceLow);
+    //        currentMode = "Low";
+    //    }
+    //    else if (Medium && currentMode != "Medium")
+    //    {
+    //        ApplyDrawDistance(drawDistanceMedium);
+    //        currentMode = "Medium";
+    //    }
+    //    else if (High && currentMode != "High")
+    //    {
+    //        ApplyDrawDistance(drawDistanceHigh);
+    //        currentMode = "High";
+    //    }
+    //}
 
-    private void Initialize()
-    {
-        spriteCullings = FindObjectsOfType<SpriteCulling>(true);
-        initialized = true;
-    }
+    //private void Initialize()
+    //{
+    //    spriteCullings = FindObjectsOfType<SpriteCulling>(true);
+    //    initialized = true;
+    //}
 
-    private void ApplyDrawDistance(float value)
-    {
-        if (spriteCullings == null) return;
+    //private void ApplyDrawDistance(float value)
+    //{
+    //    if (spriteCullings == null) return;
 
-        foreach (var s in spriteCullings)
-        {
-            s.maxDistance = value;
-        }
-    }
+    //    foreach (var s in spriteCullings)
+    //    {
+    //        s.maxDistance = value;
+    //    }
+    //}
 }

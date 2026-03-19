@@ -29,18 +29,16 @@ public class PassablePlatforms : MonoBehaviour
     {
         if(StickManager.rb.velocity.y > 0)
         {
-            BoxCollider2D.enabled = false;
-            PlatformEffector2D.enabled = false ;
+            StartCoroutine(PreventStickVisualGlitch_StickJump2(false)); 
         }
         else
         {
-            BoxCollider2D.enabled = true;
-            PlatformEffector2D.enabled = true;
+            StartCoroutine(PreventStickVisualGlitch_StickJump2(true));
 
         }
 
 
-        if(SR != null)
+        if (SR != null)
         {
             if (BoxCollider2D.IsTouching(StickCap) && StickManager.Grounded)
             {
@@ -51,5 +49,30 @@ public class PassablePlatforms : MonoBehaviour
                 SR.sortingOrder = -10;
             }
         }
+    }
+
+
+    /// theres like this rlly weird gltich where if mark jumps on these platforms it causes his jump animation to happen twice.
+    /// this happens because the miisceond he jumps the platform is turned off which causes the jump animation function to hallucinate thinking hes falling
+    /// and this causes the jump animtion to be fired twice causing weird stuff.
+    public IEnumerator PreventStickVisualGlitch_StickJump2(bool k)
+    {
+
+        yield return new WaitForSecondsRealtime(0.01f);
+
+        switch (k)
+        {
+            case true:
+                BoxCollider2D.enabled = true;
+                PlatformEffector2D.enabled = true;
+                break;
+            case false:
+                BoxCollider2D.enabled = false;
+                PlatformEffector2D.enabled = false;
+                break;
+        }
+            
+
+        yield break;
     }
 }

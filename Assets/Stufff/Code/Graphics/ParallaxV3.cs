@@ -35,4 +35,8 @@ public class ParallaxV3 : MonoBehaviour
 
         transform.position = newPos;
     }
+
+
+
+
 }
