@@ -46,6 +46,7 @@ public class PlayerData
 
     ///camps 
     public bool Camp1ClearedCH0;
+    public bool CreekClearedCH0;
 
 
 
@@ -89,7 +90,8 @@ public class PlayerData
 
 
         // Camp Encounters 
-        Camp1ClearedCH0 = PlayerManager.Camp1ClearedCH0; 
+        Camp1ClearedCH0 = PlayerManager.Camp1ClearedCH0;
+        CreekClearedCH0 = PlayerManager.CreekClearedCH0;
 
     }
 

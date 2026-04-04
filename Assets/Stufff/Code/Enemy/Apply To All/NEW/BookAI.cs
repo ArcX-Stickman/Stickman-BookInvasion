@@ -726,10 +726,11 @@ public class BookAI : MonoBehaviour
     {
         AudioP.PlayOneShot(ThrowSFX);
         GameObject Projectile = ObjectPooler.SpawnObj(MiniProjectile, AimPoint.position, Quaternion.identity, ObjectPooler.PoolType.GamObjects);
+        lastthrownProjectile = Projectile.GetComponent<Projectiles>();
+
         Vector2 shootDirection = (transform.localScale.x > 0) ? Vector2.right : Vector2.left;
         Projectile.GetComponent<Projectiles>().SetDirection(shootDirection);
         Projectile.GetComponent<Projectiles>().Accelerating = true;
-        lastthrownProjectile = Projectile.GetComponent<Projectiles>();
         Projectile.GetComponent<Projectiles>().isOG = false;
 
         Projectile.transform.localScale = new Vector2(Projectile.transform.localScale.x * shootDirection.x, Projectile.transform.localScale.y);
@@ -1321,7 +1322,7 @@ public class BookAI : MonoBehaviour
         {
             // Start Spaming random stuff 
             // Or Litteraly just dip and run
-            if (Time.time >= LastHighEnergyAttack + HighEnergyAttackCD - 5 && HasParameter(EnemyAnim, "HighEnergy", AnimatorControllerParameterType.Trigger)
+            if (Time.time >= LastHighEnergyAttack + HighEnergyAttackCD - 0.3f && HasParameter(EnemyAnim, "HighEnergy", AnimatorControllerParameterType.Trigger)
 )
             {
                 HighEnergyRangedAttack();

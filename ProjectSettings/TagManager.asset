@@ -102,6 +102,9 @@ TagManager:
   - name: NotLitByBGObjects
     uniqueID: 2343039389
     locked: 0
+  - name: Default(Custom Terrain)
+    uniqueID: 4293859131
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

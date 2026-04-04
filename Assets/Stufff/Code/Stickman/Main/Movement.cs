@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Xml;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Rendering;
@@ -189,12 +186,14 @@ public class Movement : MonoBehaviour
     [Header("Chap 0")]
 
     public bool Camp1ClearedCH0;
+    public bool CreekClearedCH0;
 
 
     [Header("Progression For Abilites ")]
     public bool UnlockedBackflip;
     public bool UnlockedDash;
     public bool UnlockedSlide;
+    public bool UnlockedCounter;
 
 
     [Header("PerkTree Values ")]
@@ -361,8 +360,17 @@ public class Movement : MonoBehaviour
     public AudioClip FootstepsStart;
 
 
+    [Header("ExtraAnimattions")]
+    public AnimationClip RunNormal;
+    public AnimationClip RunHighOctane;
+    private AnimatorOverrideController overrideController;
+    public bool HighOctane_Needed;
+
+
     void Start()
     {
+        overrideController = new AnimatorOverrideController(StickAnim.runtimeAnimatorController);
+        StickAnim.runtimeAnimatorController = overrideController;
 
         OG_NormGravity = rb.gravityScale;
 
@@ -451,8 +459,35 @@ public class Movement : MonoBehaviour
         }
     }
 
+    private bool lastHighOctaneState;
+
+    public void ExtraAnimationManager()
+    {
+        if (overrideController == null)
+        {
+            overrideController = new AnimatorOverrideController(StickAnim.runtimeAnimatorController);
+            StickAnim.runtimeAnimatorController = overrideController;
+        }
+
+        if (lastHighOctaneState == HighOctane_Needed) return;
+
+        lastHighOctaneState = HighOctane_Needed;
+
+        overrideController["Running"] = HighOctane_Needed ? RunHighOctane : RunNormal;
 
 
+        foreach (var clip in overrideController.animationClips)
+        {
+            
+            Debug.Log("Possible animation"+clip.name);
+        }
+
+        if(overrideController["Running"] = RunHighOctane)
+        {
+            MaxSpeed = 150;
+            Speed = MaxSpeed;
+        }
+    }
 
     private bool AlrDid4DeathCor;
 
@@ -1298,7 +1333,7 @@ public class Movement : MonoBehaviour
         ShootNPunch();
 
 
-
+        ExtraAnimationManager();
         if (!Grounded &&!PlayingTheLandSFX_AFTER_BEING_IN_AIR)
         {
             PlayingTheLandSFX_AFTER_BEING_IN_AIR = true;
@@ -1334,7 +1369,7 @@ public class Movement : MonoBehaviour
                 ObjectPooler.SpawnObj(JumpSmoke.gameObject, JumpSmoke.gameObject.transform.position, Quaternion.identity, ObjectPooler.PoolType.Partcles);
 
             }
-            CameraScript.StartCoroutine(CameraScript.ShakeCamGroundFeeling(17, 0.2f));
+           // CameraScript.StartCoroutine(CameraScript.ShakeCamGroundFeeling(17, 0.2f));
 
         }
         else if(timer > 10)
@@ -1358,7 +1393,7 @@ public class Movement : MonoBehaviour
                 ObjectPooler.SpawnObj(JumpSmoke.gameObject, JumpSmoke.gameObject.transform.position, Quaternion.identity, ObjectPooler.PoolType.Partcles);
 
             }
-            CameraScript.StartCoroutine(CameraScript.ShakeCamGroundFeeling(10, 0.2f));
+            //CameraScript.StartCoroutine(CameraScript.ShakeCamGroundFeeling(10, 0.2f));
         }   
         PlayingTheLandSFX_AFTER_BEING_IN_AIR = false;
         yield break;
@@ -1586,19 +1621,19 @@ public class Movement : MonoBehaviour
             shake_AnimationKey = GetComponent<Shake_AnimationKey>();
 
         }
-        if (shake_AnimationKey != null)
-        {
-            if(MaxSpeed >= 100)
-            {
-                shake_AnimationKey.ShakeWithSpecificGivenAmount(15.5f, 0.3f);
+        //if (shake_AnimationKey != null)
+        //{
+        //    if(MaxSpeed >= 100)
+        //    {
+        //        shake_AnimationKey.ShakeWithSpecificGivenAmount(15.5f, 0.3f);
 
-            }
-            else
-            {
-                shake_AnimationKey.ShakeWithSpecificGivenAmount(10.5f, 0.34f);
+        //    }
+        //    else
+        //    {
+        //        shake_AnimationKey.ShakeWithSpecificGivenAmount(10.5f, 0.34f);
 
-            }
-        }
+        //    }
+        //}
 
         if (JumpSmoke != null)
         {
@@ -3043,6 +3078,12 @@ public class Movement : MonoBehaviour
     private bool isPunching;
     public void Punch()
     {
+        if (StickAnim.GetCurrentAnimatorStateInfo(0).IsName("StickKick") &&
+        StickAnim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+        {
+            return; // Exit the method so no other punches are thrown
+        }
+
         AuraSigmaRizzyDodge = false;
         AudioClip play = null;
         isPunching = true;
@@ -3197,6 +3238,7 @@ public class Movement : MonoBehaviour
                 float varfordirec = (book.transform.position.x - transform.position.x);
                 while (distance >= 11 && StickHP.PlayerHP > 0)
                 {
+                    PowerfulPunch = true;
                     Grounded = false;
 
                     BoxCollider2D bxcd = GetComponent<BoxCollider2D>();
@@ -3240,7 +3282,8 @@ public class Movement : MonoBehaviour
                         if (StickCollider.IsTouching(BookCollider))
                         {
                             StickAnim.SetBool("Attach", false);
-                            PunchAnimManager();
+                            StickAnim.CrossFade("StickAttachPunch", 0, 0);
+
 
                             HeCanMove = true;
                             TimeManager.FreezeTime(0.1f);
@@ -3262,7 +3305,8 @@ public class Movement : MonoBehaviour
                         if (distance < 12)
                         {
                             StickAnim.SetBool("Attach", false);
-                            PunchAnimManager();
+                            StickAnim.CrossFade("StickAttachPunch", 0, 0);
+
 
                             HeCanMove = true;
                             AlrAttaching = false;
@@ -3277,7 +3321,8 @@ public class Movement : MonoBehaviour
                     else if (distance <= 11)
                     {
                         StickAnim.SetBool("Attach", false);
-                        PunchAnimManager();
+                        StickAnim.CrossFade("StickAttachPunch", 0, 0);
+
 
                         HeCanMove = true;
                         AlrAttaching = false;
@@ -3290,7 +3335,8 @@ public class Movement : MonoBehaviour
                     {
                         LastAttachFreeFlow = Time.time;
                         StickAnim.SetBool("Attach", false);
-                        PunchAnimManager();
+                        StickAnim.CrossFade("StickAttachPunch", 0, 0);
+
 
                         TimeManager.FreezeTime(0.1f);
 
@@ -3314,7 +3360,7 @@ public class Movement : MonoBehaviour
         {
             LastAttachFreeFlow = Time.time;
             StickAnim.SetBool("Attach", false);
-            PunchAnimManager();
+            StickAnim.CrossFade("StickAttachPunch", 0, 0);
 
             HeCanMove = true;
             yield break;
@@ -3324,6 +3370,7 @@ public class Movement : MonoBehaviour
         EnemyRecivedHit = false;
         StickAnim.SetBool("Attach", false);
 
+        PowerfulPunch = false;
 
 
     }
@@ -3336,7 +3383,10 @@ public class Movement : MonoBehaviour
     {
         if (isInPunchAnim) return;
 
-        if (Grounded)
+        bool KickAnim = (StickAnim.GetCurrentAnimatorStateInfo(0).IsName("StickKick"));
+
+
+            if (Grounded && !KickAnim && !AlrAttaching)
         {
             switch (punchIndex)
             {
@@ -3349,7 +3399,7 @@ public class Movement : MonoBehaviour
                     break;
 
                 case 2:
-                    StickAnim.CrossFade("StickKick", 0, 0);
+                    StickAnim.CrossFade("StickKick", 0.2f, 0);
                     break;
                 default:
                     StickAnim.CrossFade("Punch", 0, 0);
@@ -3574,7 +3624,13 @@ public class Movement : MonoBehaviour
 
     public void Footsteps()
     {
-        if (WalkOnGrass && Grounded && !isSliding && !isDashing && !BackFlip && !Dead)
+       
+        AnimatorStateInfo stateInfo = StickAnim.GetCurrentAnimatorStateInfo(0);
+
+  
+        if (WalkOnGrass && Grounded && !isSliding && !isDashing && !BackFlip && !Dead ||
+            WalkOnGrass && !isSliding && !isDashing && !BackFlip && !Dead && stateInfo.IsName("Running") ||
+            !isSliding && !isDashing && !BackFlip && !Dead && StickAnim.GetBool("OnGround") &&!WalkOnWood)
         {
             if (BreakIn)
             {
@@ -3707,25 +3763,25 @@ public class Movement : MonoBehaviour
                 shake_AnimationKey = GetComponent<Shake_AnimationKey>();
 
             }
-            if (shake_AnimationKey != null)
-            {
-                if (!Grounded)
-                {
-                    shake_AnimationKey.ShakeWithSpecificGivenAmount(13.5f, 0.2f);
+            //if (shake_AnimationKey != null)
+            //{
+            //    if (!Grounded)
+            //    {
+            //        shake_AnimationKey.ShakeWithSpecificGivenAmount(13.5f, 0.2f);
 
-                }
-                else if (MaxSpeed >= 100)
-                {
-                    shake_AnimationKey.ShakeWithSpecificGivenAmount(25, 0.2f);
+            //    }
+            //    else if (MaxSpeed >= 100)
+            //    {
+            //        shake_AnimationKey.ShakeWithSpecificGivenAmount(25, 0.2f);
 
-                }
+            //    }
                 
-                else
-                {
-                    shake_AnimationKey.ShakeWithSpecificGivenAmount(18.5f, 0.2f);
+            //    else
+            //    {
+            //        shake_AnimationKey.ShakeWithSpecificGivenAmount(18.5f, 0.2f);
 
-                }
-            }
+            //    }
+            //}
 
             if (JumpSmoke != null)
         {
@@ -4372,6 +4428,7 @@ public class Movement : MonoBehaviour
 
         // Camp Encounters
         Camp1ClearedCH0 = data.Camp1ClearedCH0;
+        CreekClearedCH0 = data.CreekClearedCH0;
     }
 
     public void OverrideSave_Position(float x, float y, float z)

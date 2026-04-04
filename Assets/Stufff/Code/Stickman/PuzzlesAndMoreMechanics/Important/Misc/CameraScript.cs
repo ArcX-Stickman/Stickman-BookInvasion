@@ -33,6 +33,8 @@ public class CameraScript : MonoBehaviour
     // Glass QTE Casm size: 35.3
     void Start()
     {
+        CinemachineBrain brain = Camera.main.GetComponent<CinemachineBrain>();
+        brain.m_DefaultBlend.m_Time = 0f;
         StickCam = GetComponent<CinemachineVirtualCamera>();
         if(OG_CAM_SIZE == 0)
         {
@@ -95,6 +97,13 @@ public class CameraScript : MonoBehaviour
 
 
             //BattleCam_Manager();
+        }
+
+
+
+        if(StickCam.m_Follow == null)
+        {
+            StickCam.m_Follow = StickManager.gameObject.GetComponent<Transform>();
         }
         
 

@@ -18,6 +18,7 @@ public class ActivateAnObjectWithCollider : MonoBehaviour
     public bool Alrdid;
     public bool StartActive;
     public bool WantMuteAudio;
+    public bool TurnOnAudio;
 
     [Header("Optional Object")]
     public GameObject OptionalExtraObject;
@@ -30,6 +31,12 @@ public class ActivateAnObjectWithCollider : MonoBehaviour
     public float Delay;
 
     private bool TimerStart;
+
+
+    [Header("Extra Settings")]
+
+    public bool StickDisabledWhenObjActivate;
+
 
 
     void Start()
@@ -74,11 +81,27 @@ public class ActivateAnObjectWithCollider : MonoBehaviour
         if (Wantonce)
             Alrdid = true;
 
+
+        if (StickDisabledWhenObjActivate)
+        {
+            StartCoroutine(Stick_Requested_Disable());
+        }
+
         if (WantMuteAudio && TheObject != null)
         {
             AudioSource audioSource = TheObject.GetComponent<AudioSource>();
             if (audioSource != null)
                 audioSource.mute = true;
+
+            audioSource.enabled = false;
+        }
+        if (TurnOnAudio && TheObject != null)
+        {
+            AudioSource audioSource = TheObject.GetComponent<AudioSource>();
+            if (audioSource != null)
+                audioSource.mute = false;
+            audioSource.enabled = true;
+          
         }
 
         if (OptionalExtraObject != null)
@@ -134,5 +157,26 @@ public class ActivateAnObjectWithCollider : MonoBehaviour
             TheObject.SetActive(true);
 
         TimerStart = false;
+    }
+
+
+    public IEnumerator Stick_Requested_Disable()
+    {
+        Movement Stick = FindAnyObjectByType<Movement>();
+
+        while (TheObject != null)
+        {
+            Stick.StopFootsteps();
+            Stick.ResetAllAnimationStates();
+            Stick.rb.velocity = Vector2.zero;
+            Stick.enabled = false;
+            yield return null;
+        }
+
+        Stick.enabled = true;
+        Stick.rb.simulated = true;
+
+
+        yield break;
     }
 }
