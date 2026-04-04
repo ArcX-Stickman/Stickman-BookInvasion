@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
 
 public class Embry_Attach : MonoBehaviour
 {
@@ -74,12 +75,21 @@ public class Embry_Attach : MonoBehaviour
         Embry.CrossFade("Sliding",0,0);
         transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
         float t = 0;
-        while(t < 6)
+        float maxtime = 0;
+        if (movement.StickHP.Testing)
+        {
+            maxtime = 2;
+        }
+        else
+        {
+            maxtime = 3.5f;
+        }
+        while(t < maxtime)
         {
             transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
             t += Time.deltaTime;
 
-            if(t >= 4.5)
+            if(t >= maxtime - 1.4f)
             {
                 SpecialEventOver_1st = true;
                 EnemyAI.enabled = true;
@@ -141,9 +151,15 @@ public class Embry_Attach : MonoBehaviour
 
         for (int i = 0; i < QTEs.Length && i < qteSequence.Length; i++)
         {
+            yield return new WaitForSecondsRealtime(0.01f);
+            AudioP.PlayOneShot(QTEButtonPOP);
             QTEs[i].gameObject.SetActive(true);
+            Animator anim = QTEs[i].GetComponent<Animator>();
+
+            anim.CrossFade("Keynorm", 0, 0);
 
             TextMeshProUGUI text = QTEs[i].GetComponentInChildren<TextMeshProUGUI>();
+            text.gameObject.SetActive(true);
             text.text = qteSequence[i].ToString();
         }
 
@@ -159,14 +175,19 @@ public class Embry_Attach : MonoBehaviour
         {
 
 
-           slider.value -= (1 * Time.unscaledDeltaTime) * 100;
+          
 
             if (index < qteSequence.Length)
             {
                 if (Input.GetKeyDown(qteSequence[index]))
                 {
                     playerInput.Add(qteSequence[index]);
-                    QTEs[index].SetActive(false);
+                    Animator anim = QTEs[index].GetComponent<Animator>();
+                    TextMeshProUGUI text = QTEs[index].GetComponentInChildren<TextMeshProUGUI>();
+                    text.gameObject.SetActive(false);
+                    anim.CrossFade("KeyCrackFX",0,0);
+
+
                     AudioP.PlayOneShot(ButtonClick);
 
                     index++;
@@ -187,16 +208,26 @@ public class Embry_Attach : MonoBehaviour
                     }
                 }
             }
-
+            slider.value -= (1 * Time.unscaledDeltaTime) * 100;
             timer += Time.unscaledDeltaTime;
             yield return null;
         }
 
-
+        yield return new WaitForSecondsRealtime(0.2f); // buffer
         // finished QTE
         slider.gameObject.SetActive(false);
         bool success = index == qteSequence.Length;
-        Embry_QTE_1_AVOID_ZY.SetBool("Pass", success);
+
+        if (success)
+        {
+            Embry_QTE_1_AVOID_ZY.CrossFade("EMBRY_PASS_CH0_P1_DOGING", 0.2f, 0);
+        }
+        else
+        {
+            Embry_QTE_1_AVOID_ZY.CrossFade("EMBRY_FAIL_CH0_P1_DOGING", 0.4f, 0);
+
+        }
+
         foreach (GameObject G in QTEs)
         {
             G.SetActive(false);

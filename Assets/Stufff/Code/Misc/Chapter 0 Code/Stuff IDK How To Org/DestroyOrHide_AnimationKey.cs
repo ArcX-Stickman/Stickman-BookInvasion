@@ -6,6 +6,14 @@ public class DestroyOrHide_AnimationKey : MonoBehaviour
 {
     public GameObject Object;
 
+
+    private void Start()
+    {
+        if(Object == null)
+        {
+            Object = gameObject;
+        }
+    }
     public void HideIt()
     {
         Object.gameObject.SetActive(false);
