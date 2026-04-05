@@ -19,6 +19,11 @@ public class Embry_Attach : MonoBehaviour
     public AudioClip QTEButtonPOP;
     public AudioClip ButtonClick;
     public AudioClip Fail;
+    public AudioClip AlertLaunchKick;
+    public AudioClip JetWhoosh;
+    public AudioClip Impact;
+    public GameObject FX_Dirt;
+ 
 
     public AudioSource AudioP;
 
@@ -35,6 +40,14 @@ public class Embry_Attach : MonoBehaviour
 
     public Movement movement;
 
+
+
+
+    public float LastLaunchKick;
+    public float LauchCD;
+    public float Y_Axis_Launch;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,11 +63,112 @@ public class Embry_Attach : MonoBehaviour
         {
             EnemyAI.enabled = false;
         }
+        else
+        {
+            movement.MaxSpeed = 100;
+            movement.Speed = 100;
+        }
+
+        if(movement.isInPunchAttach || movement.PunchBool && EnemyAI.DistanceFromPlayer <= EnemyAI.MinMeleeDistance + 5)
+        {
+            if(LastLaunchKick <= 0 && SpecialEventOver_1st)
+            {
+                LastLaunchKick = Time.time;
+                StartCoroutine(LaunchKick());
+            }
+        }
+        else if(SpecialEventOver_1st && LastLaunchKick > 0 && Time.time >= LastLaunchKick + LauchCD)
+        {
+            LastLaunchKick = Time.time;
+            StartCoroutine(LaunchKick());
+        }
 
 
     }
     private bool Start1stEvent;
 
+
+    public bool AnimatiorBoolLaunchKickReady;
+    public IEnumerator LaunchKick()
+    {
+        yield return new WaitForSecondsRealtime(0.4f);
+        transform.Translate(Vector3.right * 40 * Time.deltaTime);
+
+        yield return new WaitForSecondsRealtime(0.2f);
+        EnemyAI.EnemyAnim.CrossFade("EmbrySpinJumpKick", 0.2f, 0);
+        Vector2 FakeStickPos = new Vector2(transform.position.x, movement.transform.position.y);
+
+        EnemyAI.enabled = false;
+        Rigidbody2D rb = EnemyAI.gameObject.GetComponent<Rigidbody2D>();
+        rb.simulated = false;
+        // turn off any crap that messes the launch up
+
+        Vector2 FakePos = new Vector2(FakeStickPos.x, Y_Axis_Launch);
+        
+        //float FakeDIS = Mathf.Abs(transform.position.y - FakePos.y);
+
+
+        float speed = 23;
+        while (Vector2.Distance(transform.position, FakePos) > 0.1f)
+        {
+            //FakeDIS = Mathf.Abs(transform.position.y - FakePos.y);
+            transform.position = Vector2.MoveTowards(transform.position, FakePos, speed * Time.deltaTime);
+            yield return null;
+        }
+
+        while (!AnimatiorBoolLaunchKickReady)
+        {
+            yield return null;
+        }
+
+        Vector2 PlayerLastLocation = movement.gameObject.transform.position;
+        AudioP.PlayOneShot(AlertLaunchKick);
+       // yield return new WaitForSecondsRealtime(0.f); // bufffer time for the player to gettt outta there
+
+        float FakePlayerDIS = Mathf.Abs(transform.position.y - movement.transform.position.y);
+
+
+        float fallSpeed = 50;
+        float gravity = 200f;
+        AudioP.PlayOneShot(JetWhoosh);
+        while (Vector2.Distance(transform.position, FakeStickPos) > 0.5f)
+        {
+            if(transform.position.y <= FakeStickPos.y)
+            {
+                 break;
+            }
+            fallSpeed += gravity * Time.deltaTime;
+            transform.position += Vector3.down * fallSpeed * Time.deltaTime;
+            yield return null;
+        }
+        AudioP.PlayOneShot(Impact);
+       
+
+        rb.simulated = true;
+
+        rb.velocity = Vector2.zero;
+        EnemyAI.enabled = true;
+
+        if (TouchingPlayer)
+        {
+            StartCoroutine(movement.PlayerKnockBack(5, 0, 0.5f));
+            
+        }
+        EnemyAI.EnemyAnim.CrossFade("EmbryIDLE", 0,0);
+        movement.CameraScript.StartCoroutine(movement.CameraScript.ShakeCamGroundFeeling(80, 0.4f));
+        while (!EnemyAI.CheckIfGrounded())
+        {
+            yield return null;
+        }
+        EnemyAI.SpawnGroundDecal(new Vector2(FakeStickPos.x,transform.position.y - 5));
+        GameObject FX = Instantiate(FX_Dirt.gameObject, new Vector2(FakeStickPos.x, transform.position.y - 5), Quaternion.identity);
+        yield break;
+
+    }
+
+
+
+    private bool TouchingPlayer;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("StickMelee"))
@@ -66,12 +180,29 @@ public class Embry_Attach : MonoBehaviour
                 BossTheme.gameObject.SetActive(true);
             }
         }
+
+        if (collision.CompareTag("Player"))
+        {
+            if (!movement.BackFlip)
+            {
+                TouchingPlayer = true;
+
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            TouchingPlayer = false;
+        }
     }
 
     public IEnumerator Special1stEvent()
     {
 
-
+        float ShakeCam = 60;
         Embry.CrossFade("Sliding",0,0);
         transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
         float t = 0;
@@ -86,6 +217,8 @@ public class Embry_Attach : MonoBehaviour
         }
         while(t < maxtime)
         {
+            ShakeCam -= 2 * Time.unscaledDeltaTime;
+            movement.CameraScript.StartCoroutine(movement.CameraScript.ShakeCamGroundFeeling(ShakeCam, 0.1f));
             transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
             t += Time.deltaTime;
 
@@ -104,6 +237,13 @@ public class Embry_Attach : MonoBehaviour
 
 
         EnemyAI.enabled = true;
+        float MaxSpeed_Enem = EnemyAI.MaxSpeed;
+        while (!QTE_AV_ZY)
+        {
+            EnemyAI.MaxSpeed = 0;
+            yield return null;
+        }
+        EnemyAI.MaxSpeed = MaxSpeed_Enem;
 
         yield break;
     }
@@ -139,6 +279,7 @@ public class Embry_Attach : MonoBehaviour
 
     }
 
+    private bool QTE_AV_ZY = false ;
     public IEnumerator QTE_1_AVOID_ZY()
     {
         slider.gameObject.SetActive(true);
@@ -247,6 +388,7 @@ public class Embry_Attach : MonoBehaviour
         }
         yield return new WaitForSecondsRealtime(0.6f);
         SwitchOG_Cam();
+        QTE_AV_ZY = true;
         yield break;
     }
     private bool QTE_Right(KeyCode[] OG, List<KeyCode> Player)

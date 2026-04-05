@@ -1601,9 +1601,9 @@ public class BookAI : MonoBehaviour
 
             if (TimesPlayerHitUpClose > 3)
             {
+                TimesPlayerHitUpClose = 0;
                 StickManager.TimeManager.FreezeTime(0.4f);
                 StickManager.StartCoroutine(StickManager.PlayerKnockBackAltered(KnockbackOnMeleeHorizontalVelocity * 1.3f, KnockbackOnMeleeVerticalVelocity, 1));
-
             }
             EnemyState = EnemyState.Idle;
             StickManager.StickAnim.SetTrigger("Hurt");
@@ -2167,7 +2167,7 @@ public class BookAI : MonoBehaviour
         yield break;
     }
 
-    private bool CheckIfGrounded()
+    public bool CheckIfGrounded()
     {
         float extraHeight = 1.3f;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, GetComponent<BoxCollider2D>().bounds.extents.y + extraHeight, WhatsGround);
@@ -2399,6 +2399,13 @@ public class BookAI : MonoBehaviour
 
     }
 
+    //seperate funtion
+    public void SpawnGroundDecal(Vector2 position)
+    {
+        if (Geology_GroundCrack_Decal == null) return;
+
+        Instantiate(Geology_GroundCrack_Decal, position, Quaternion.identity);
+    }
 
     // Astrology
 
@@ -2591,5 +2598,23 @@ public class BookAI : MonoBehaviour
         {
 
         }
+    }
+
+    public AnimationClip[] StickHurts;
+
+    public void PlayerHurtAnimation(int index)
+    {
+        if (PlayerIsVulnerable())
+        {
+            var currentOverride = StickManager.StickAnim.runtimeAnimatorController as AnimatorOverrideController;
+
+            if (currentOverride != null)
+            {
+                currentOverride["Stick_Hurt"] = StickHurts[index];
+                StickManager.StickAnim.CrossFade("Stick_Hurt", 0f, 0);
+                StickManager.TimeManager.FreezeTime(0.1f);
+            }
+        }
+        
     }
 }

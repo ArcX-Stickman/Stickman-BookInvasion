@@ -1331,7 +1331,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Hurt
+  m_Name: Stick_Hurt
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -4922,6 +4922,28 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1101 &-318062807600746309
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 8872209004433967590}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 1
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &-256390791110724199
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -6910,13 +6932,13 @@ AnimatorStateMachine:
     m_Position: {x: -11140, y: 4570, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6723995932402487281}
-    m_Position: {x: -3580, y: 1790, z: 0}
+    m_Position: {x: -3530, y: 1800, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7562363440531954751}
     m_Position: {x: -8860, y: 3540, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8634863281036121442}
-    m_Position: {x: -1870, y: 1510, z: 0}
+    m_Position: {x: -1870, y: 1520, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1552305775113406566}
     m_Position: {x: -3530, y: 2950, z: 0}
@@ -7100,6 +7122,9 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 4551908290961413490}
     m_Position: {x: -4195, y: 4425, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 4644611450011382856}
+    m_Position: {x: -8200, y: 3240, z: 0}
   m_ChildStateMachines:
   - serializedVersion: 1
     m_StateMachine: {fileID: 4873966147200419928}
@@ -7862,6 +7887,33 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &4644611450011382856
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: StickHurt(Bend)
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: -318062807600746309}
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 9b50a7ee8082e7340bc50f39ce480a28, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1101 &4737117972947269300
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -8048,7 +8100,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
-  m_ExitTime: 0.82
+  m_ExitTime: 1
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -9002,7 +9054,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
-  m_ExitTime: 1
+  m_ExitTime: 1.15
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
