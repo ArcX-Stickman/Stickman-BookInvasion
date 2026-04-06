@@ -48,6 +48,17 @@ public class Embry_Attach : MonoBehaviour
     public float Y_Axis_Launch;
 
 
+
+    public GameObject Tendril;
+    public AudioClip SpawnTen;
+    public AudioClip TenRip;
+    public AudioClip ThrowSFX;
+
+    public float LastTen;
+    public float TenCD;
+    public Transform AimPoint;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,10 +66,18 @@ public class Embry_Attach : MonoBehaviour
 
         EnemyAI = GetComponent<BookAI>();
     }
-
+    private bool OP34243242467676;
     // Update is called once per frame
     void Update()
     {
+
+        if (movement.StickHP.Testing && !OP34243242467676)
+        {
+            OP34243242467676 = true;
+            LauchCD /= 2;
+        }
+
+
         if(!SpecialEventOver_1st)
         {
             EnemyAI.enabled = false;
@@ -83,12 +102,50 @@ public class Embry_Attach : MonoBehaviour
             StartCoroutine(LaunchKick());
         }
 
+        if(Time.time >= LastTen + TenCD && SpecialEventOver_1st && LastLaunchKick > 0)
+        {
+            LastTen = Time.time;
+            AudioP.PlayOneShot(SpawnTen);
+            EnemyAI.EnemyAnim.CrossFade("EmbryTendril_Ranged", 0.3f, 0);
+        }
+
 
     }
+
+
+
+    private Projectiles lastthrownProjectile;
+    public void MiniRangedProjectile()
+    {
+        AudioP.PlayOneShot(ThrowSFX);
+        GameObject Projectile = Instantiate(Tendril, AimPoint.position, Quaternion.identity);
+        lastthrownProjectile = Projectile.GetComponent<Projectiles>();
+
+        Rigidbody2D rb = Projectile.GetComponent<Rigidbody2D>();
+       // rb.AddTorque(200);
+
+
+
+        Vector2 shootDirection = (transform.localScale.x > 0) ? Vector2.right : Vector2.left;
+        Projectile.GetComponent<Projectiles>().SetDirection(shootDirection);
+        Projectile.GetComponent<Projectiles>().Accelerating = true;
+        Projectile.GetComponent<Projectiles>().isOG = false;
+
+        Projectile.transform.localScale = new Vector2(Projectile.transform.localScale.x * shootDirection.x, Projectile.transform.localScale.y);
+
+
+    }
+    //
+
+
+
+
+
     private bool Start1stEvent;
 
 
     public bool AnimatiorBoolLaunchKickReady;
+    public bool AnimatiorBoolJumpReady;
     public IEnumerator LaunchKick()
     {
         yield return new WaitForSecondsRealtime(0.4f);
@@ -104,19 +161,27 @@ public class Embry_Attach : MonoBehaviour
         // turn off any crap that messes the launch up
 
         Vector2 FakePos = new Vector2(FakeStickPos.x, Y_Axis_Launch);
-        
+
         //float FakeDIS = Mathf.Abs(transform.position.y - FakePos.y);
 
+        while (!AnimatiorBoolJumpReady)
+        {
+            yield return null;  
+        }
+        float speed = 150;
 
-        float speed = 23;
+       
         while (Vector2.Distance(transform.position, FakePos) > 0.1f)
         {
             //FakeDIS = Mathf.Abs(transform.position.y - FakePos.y);
             transform.position = Vector2.MoveTowards(transform.position, FakePos, speed * Time.deltaTime);
+
+           
+
             yield return null;
         }
 
-        while (!AnimatiorBoolLaunchKickReady)
+        while (!AnimatiorBoolLaunchKickReady )
         {
             yield return null;
         }
@@ -128,17 +193,31 @@ public class Embry_Attach : MonoBehaviour
         float FakePlayerDIS = Mathf.Abs(transform.position.y - movement.transform.position.y);
 
 
-        float fallSpeed = 50;
+        float fallSpeed = 500;
         float gravity = 200f;
         AudioP.PlayOneShot(JetWhoosh);
+        float maxtimer = 1.3f;
+        float timerSlamdown = 0;
+        bool broken = false;
+
         while (Vector2.Distance(transform.position, FakeStickPos) > 0.5f)
         {
+            timerSlamdown += Time.deltaTime;
+
+            EnemyAI.EnemyAnim.SetTrigger("LOOP_SJK");
             if(transform.position.y <= FakeStickPos.y)
             {
                  break;
             }
             fallSpeed += gravity * Time.deltaTime;
             transform.position += Vector3.down * fallSpeed * Time.deltaTime;
+
+
+            if (timerSlamdown >= maxtimer)
+            {
+                broken = true;
+                break;
+            }
             yield return null;
         }
         AudioP.PlayOneShot(Impact);
@@ -148,10 +227,20 @@ public class Embry_Attach : MonoBehaviour
 
         rb.velocity = Vector2.zero;
         EnemyAI.enabled = true;
+        EnemyAI.EnemyAnim.ResetTrigger("LOOP_SJK");
+
+
+
+        //prevent ground clipping
+
+       
+
+
 
         if (TouchingPlayer)
         {
             StartCoroutine(movement.PlayerKnockBack(5, 0, 0.5f));
+            EnemyAI.DamagePlayer(25);
             
         }
         EnemyAI.EnemyAnim.CrossFade("EmbryIDLE", 0,0);
@@ -162,6 +251,22 @@ public class Embry_Attach : MonoBehaviour
         }
         EnemyAI.SpawnGroundDecal(new Vector2(FakeStickPos.x,transform.position.y - 5));
         GameObject FX = Instantiate(FX_Dirt.gameObject, new Vector2(FakeStickPos.x, transform.position.y - 5), Quaternion.identity);
+
+        float checker = 0;
+        float maxcheck = 1.6f;
+
+        while(checker < maxcheck)
+        {
+            if (transform.position.y < movement.transform.position.y - 8  && movement.Grounded|| transform.position.y > movement.transform.position.y + 2 && movement.Grounded)
+            {
+                // this is the worst case scenario if this ahappens a lot make it better
+                transform.position = new Vector2(transform.position.x, movement.transform.position.y);
+            }
+            checker += Time.deltaTime;
+            yield return null;
+        }
+
+
         yield break;
 
     }
@@ -408,4 +513,20 @@ public class Embry_Attach : MonoBehaviour
 
 
 
+    public void AnimationKeys_Enable_EnemyAI()
+    {
+        EnemyAI.enabled = true;
+    }
+
+
+    public void AnimationKeys_Disable_EnemyAI()
+    {
+        EnemyAI.enabled = false;
+    }
+    
+
+    public void PlayRip()
+    {
+        AudioP.PlayOneShot(TenRip);
+    }
 }
