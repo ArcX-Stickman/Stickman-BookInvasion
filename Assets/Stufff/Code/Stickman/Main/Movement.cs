@@ -15,7 +15,7 @@ public class Movement : MonoBehaviour
     public float JumpForce;
     public Rigidbody2D rb;
     public Animator StickAnim;
-
+    private bool HeldPunch;
     public bool Grounded;
     public bool CallJumpDEBUG;
 
@@ -840,8 +840,8 @@ public class Movement : MonoBehaviour
             ComboCount = 0;
         }
 
-
-        if (Input.GetButton("Fire2"))
+        HeldPunch = Input.GetButton("Fire2") & Input.GetKeyDown(KeyCode.LeftShift);
+        if (Input.GetButton("Fire2") && !HeldPunch)
         {
 
             if (Time.time >= lastPunchTime + MeleeCD && !BackFlip || isInPerfectDodge)
@@ -873,7 +873,7 @@ public class Movement : MonoBehaviour
                 }
                 if (Time.time >= lastPunchTime + MeleeCD + 0.4f)
                 {
-                    StartCoroutine(PunchFreeFlow());
+                    PunchAnimManager();
 
                 }
 
@@ -886,6 +886,11 @@ public class Movement : MonoBehaviour
 
             }
         }
+        else if (HeldPunch && Time.time >= lastPunchTime + MeleeCD + 0.4f)
+        {
+            StartCoroutine(PunchFreeFlow());
+        }
+        
 
 
 
@@ -3147,6 +3152,10 @@ public class Movement : MonoBehaviour
     public IEnumerator PunchFreeFlow()
     {
 
+        // i used to use this for everything but it felt horrifyign to play so i kept it in the game if you want to use just 
+        // press punch and shift
+
+        
         // Add things for collision
         //tempListEnems.Append() / <--- NOO dont do this crap Actually <--- Actually YESSSS DO SUM LIKE THISSS!!!!
         // Create a fake origin point from where the player jumps
@@ -4447,10 +4456,14 @@ public class Movement : MonoBehaviour
 
     public void AbilityInputHandler()
     {
-          if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && !Dead && !BackFlip && !isInPerfectDodge && !OnLadder && UnlockedDash|| Input.GetKeyDown(KeyCode.LeftShift) && canDash && HeliFinale && !OnLadder)
+        if (!HeldPunch)
         {
-            StartCoroutine(Dash());
+            if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && !Dead && !BackFlip && !isInPerfectDodge && !OnLadder && UnlockedDash || Input.GetKeyDown(KeyCode.LeftShift) && canDash && HeliFinale && !OnLadder)
+            {
+                StartCoroutine(Dash());
+            }
         }
+         
 
         if (Input.GetKeyDown(KeyCode.C) && UnlockedSlide)
         {

@@ -355,6 +355,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0
+    functionName: AttackTrue
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.35
     functionName: PlayRip
     data: 
@@ -364,6 +371,13 @@ AnimationClip:
     messageOptions: 0
   - time: 0.73333335
     functionName: MiniRangedProjectile
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1
+    functionName: AttackFalse
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

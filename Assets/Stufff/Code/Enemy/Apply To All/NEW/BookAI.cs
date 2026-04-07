@@ -640,11 +640,11 @@ public class BookAI : MonoBehaviour
 
     // Extra collision bools i guess
 
-    private bool MeleeContact;
+    public bool  MeleeContact;
 
 
-    private float CollisionTick = 0.1f;
-    private float LastCollisionTick = 0;
+    public float CollisionTick = 0.1f;
+    public float LastCollisionTick = 0;
     public void HandleCollision(Collider2D collion)
     {
         // 1. Check if we are dodging FIRST
@@ -1684,7 +1684,7 @@ public class BookAI : MonoBehaviour
     public bool PlayerIsVulnerable()
     {
         // Only use for melee based attack conditions this wont work on ranged stuff
-        if (!StickManager.BackFlip && !StickManager.isSliding && !StickManager.isDashing && MeleeRange.StickmanIsHERE && DistanceFromPlayer <= MinMeleeDistance)
+        if ( !StickManager.isSliding && !StickManager.isDashing && MeleeRange.StickmanIsHERE && DistanceFromPlayer <= MinMeleeDistance)
         {
             return true;
         }
