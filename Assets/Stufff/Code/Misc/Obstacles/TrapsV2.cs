@@ -21,7 +21,14 @@ public class TrapsV2 : MonoBehaviour
     public Animator RespawnUI_BlackFade;
 
 
+
     private bool triggered = false;
+    public bool PlsDontGoAwayPapi;
+    private void OnEnable()
+    {
+        triggered = false;
+    }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -40,9 +47,12 @@ public class TrapsV2 : MonoBehaviour
         {
             StartCoroutine(TeleportPlayerToSafety());
         }
-       
 
-        this.enabled = false;
+        if (!PlsDontGoAwayPapi)
+        {
+            this.enabled = false;
+
+        }
     }
 
     private IEnumerator TeleportPlayerToSafety()
@@ -67,5 +77,11 @@ public class TrapsV2 : MonoBehaviour
             PlayerManager.transform.position = PlayerManager.SafePosition;
         }
         yield break;
+    }
+
+    public GameObject GroundLimbs;
+    public void SummonTendril_GroundAttack()
+    {
+        GroundLimbs.gameObject.SetActive (true);
     }
 }

@@ -1,6 +1,9 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
+using System.Threading;
+using System.Xml;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -54,6 +57,7 @@ public class Embry_Attach : MonoBehaviour
     public AudioClip SpawnTen;
     public AudioClip TenRip;
     public AudioClip ThrowSFX;
+    public AudioClip DodgeSFX;
 
     public float LastTen;
     public float TenCD;
@@ -78,6 +82,21 @@ public class Embry_Attach : MonoBehaviour
 
 
 
+    // Ground Attack
+    public GameObject Ten_Ground_ATK;
+    public float Ground_Ten_CD;
+    public float Last_Ground_TenATK;
+
+
+    // Defensive stuff
+    public bool Vunerable;
+
+
+
+    // Stick- Stick Gatling Scripted Event
+    [SerializeField] private int TimesDodged_PunchDefPhase;
+    public int MaxDodgesForStickGatle;
+    //public StickStickGatling StickGat; //this is kinda a OP referenmce you see i said OP cuz ion wanna get copyrighted :0
 
     // Start is called before the first frame update
     void Start()
@@ -108,74 +127,291 @@ public class Embry_Attach : MonoBehaviour
     }
 
     private bool OP34243242467676;
+
+
+    [SerializeField] private int TimesStick_Stick = 0;
+    [SerializeField] private int StickStick_TimesNeeded = 25;
+    private int queuedStickStickPunches;
     // Update is called once per frame
     void Update()
     {
-        if (EnemyAI == null || movement == null)
+
+        if (ExtremlyBusy_StopUpdate) return;
+
+        if (Input.GetButtonDown("Fire2"))
+        {
+            SSG_LastClickLeftClick = Time.time;
+
+            if (PlayerReadyToGattle)
+            {
+                queuedStickStickPunches++;
+            }
+        }
+
+        if (TimesDodged_PunchDefPhase >= MaxDodgesForStickGatle && QTE_AV_ZY)
+        {
+            Stick_Stick();
+        }
+
+
+        if (!StickStickOccuring)
+        {
+            if (physicsControlLocked)
+            {
+                return;
+            }
+
+            LastMelee = EnemyAI.LastMelee;
+
+
+
+            if (movement.StickHP.Testing && !OP34243242467676)
+            {
+                OP34243242467676 = true;
+                LauchCD /= 2;
+            }
+
+
+            if (!SpecialEventOver_1st)
+            {
+                EnemyAI.enabled = false;
+            }
+            else
+            {
+                movement.MaxSpeed = 100;
+                movement.Speed = 100;
+            }
+
+
+            if (!IsBossBusy() && (movement.isInPunchAttach || movement.PunchBool && EnemyAI.DistanceFromPlayer <= EnemyAI.MinMeleeDistance + 5))
+            {
+                if (LastLaunchKick <= 0 && SpecialEventOver_1st && launchKickRoutine == null)
+                {
+                    LastLaunchKick = Time.time;
+                    launchKickRoutine = StartCoroutine(LaunchKick());
+                }
+            }
+            else if (SpecialEventOver_1st && LastLaunchKick > 0 && Time.time >= LastLaunchKick + LauchCD && launchKickRoutine == null)
+            {
+                LastLaunchKick = Time.time;
+                isAttachedVer_Attack = true;
+
+                launchKickRoutine = StartCoroutine(LaunchKick());
+            }
+
+            if (Time.time >= LastTen + TenCD && SpecialEventOver_1st && HasDone1stLandKick && !IsBossBusy() && tendrilRoutine == null)
+            {
+                LastTen = Time.time;
+                tendrilRoutine = StartCoroutine(TendrilAttackRoutine());
+            }
+
+            bool CanTele = SpecialEventOver_1st && Time.time >= LastTelePort + TeleCD && Time.time - LastTelePort > 6
+                && !IsBossBusy() && LastTen + TenCD > Time.time && HasDone1stLandKick && teleportRoutine == null || SpecialEventOver_1st && Time.time >= LastTelePort + TeleCD && Time.time - LastTelePort > 6
+                && !IsBossBusy() && LastTen + TenCD - 3 > Time.time && HasDone1stLandKick && teleportRoutine == null && movement.PunchBool;
+
+
+            if (CanTele)
+            {
+                LastTelePort = Time.time;
+                teleportRoutine = StartCoroutine(TelePort());
+
+
+            }
+
+
+
+            ExtraVoids();
+        }
+            if (EnemyAI == null || movement == null)
         {
             return;
         }
 
+
+       
+
+    }
+
+    public void ExtraVoids()
+    {
         RecoverEnemyAIIfNeeded();
+        HealthBased_Actions();
 
-        if (physicsControlLocked)
+    }
+
+    public float LastKick;
+    public float KickCD;
+
+    public void HealthBased_Actions()
+    {
+        if (EnemyAI.Health <= 96) // its kinda hard to hit him
         {
-            return;
+            DodgePhase_Started = true;
+            DodgePhase();
         }
 
-        LastMelee = EnemyAI.LastMelee;
+     
+
+    }
 
 
+    private bool DodgePhase_Started;
 
-        if (movement.StickHP.Testing && !OP34243242467676)
+    public float DodgeCD_Move;
+    public float LastDodgePhase_Move;
+    private float TeleportCD_DefPhase = 7;
+
+    public void DodgePhase()
+    {
+        if (StickStickOccuring) return;
+        TeleCD = TeleportCD_DefPhase;
+
+       // EnemyAnim.SetBool("Def", true);
+
+
+        //EnemyAI.Move_Towards_Player_OP_Breaker = true;
+
+        bool punchStarted = movement.PunchBool && !lastPunchState;
+
+        if (punchStarted && EnemyAI.DistanceFromPlayer <= EnemyAI.MinMeleeDistance + 5 || movement.StickAnim.GetCurrentAnimatorStateInfo(0).IsName("Punch")
+            && EnemyAI.DistanceFromPlayer <= EnemyAI.MinMeleeDistance + 5
+            || movement.StickAnim.GetCurrentAnimatorStateInfo(0).IsName("StickKick") && EnemyAI.DistanceFromPlayer <= EnemyAI.MinMeleeDistance + 5)
         {
-            OP34243242467676 = true;
-            LauchCD /= 2;
+            if (Time.time >= LastDodgePhase_Move + DodgeCD_Move && !isDodging && !IsBossBusy())
+            {
+                IgnoreStickMelee(true);
+
+                LastDodgePhase_Move = Time.time;
+                StartCoroutine(DodgeMove());
+            }
         }
 
+        lastPunchState = movement.PunchBool;
 
-        if (!SpecialEventOver_1st)
+
+        //bool CanTele = SpecialEventOver_1st && Time.time >= LastTelePort + TeleCD
+        //        && !IsBossBusy();
+
+
+        //if (CanTele)
+        //{
+        //    LastTelePort = Time.time;
+        //    teleportRoutine = StartCoroutine(TelePort());
+
+
+        //}
+
+
+        //if (Time.time >= LastTen + TenCD && SpecialEventOver_1st && HasDone1stLandKick && !IsBossBusy() && tendrilRoutine == null)
+        //{
+        //    LastTen = Time.time;
+        //    tendrilRoutine = StartCoroutine(TendrilAttackRoutine());
+        //}
+
+        //if (!Operation_StopThatMovement_DEFENSIVE_EDITION_67)
+        //{
+        //    // walking / movement
+        //    if (!isDodging && EnemyAI.DistanceFromPlayer <= 60 && !istele)
+        //    {
+        //        EnemyAnim.SetBool("Moving", true);
+        //        if (EnemyAnim.GetCurrentAnimatorStateInfo(0).IsName("EmbryDefenWalk"))  
+        //        {
+        //            // there was a dumb glitch where the movement playeed every second screwing up the teleportaion
+        //            float direction = (transform.position.x < movement.transform.position.x) ? -1 : 1;
+        //            Vector2 startPos = transform.position;
+        //            Vector2 targtPos = new Vector2(startPos.x + (direction), startPos.y);
+
+        //            transform.position = Vector2.MoveTowards(transform.position, targtPos, EnemyAI.Speed / 1.2f * Time.deltaTime);
+        //        }
+
+
+        //    }
+        //    else
+        //    {
+        //        EnemyAnim.SetBool("Moving", false);
+
+        //    }
+        //}
+
+
+
+    }
+
+    private bool Operation_StopThatMovement_DEFENSIVE_EDITION_67;
+    private bool isDodging;
+    private bool lastPunchState;
+
+    public IEnumerator DodgeMove()
+    {
+        if (isDodging) yield break;
+        TimesDodged_PunchDefPhase += 1;
+
+
+        isDodging = true;
+
+        float direction = (transform.position.x < movement.transform.position.x) ? -1 : 1;
+
+        float dodgeDistance = 10f;
+        float duration = 0.25f;
+
+        Vector2 startPos = transform.position;
+        Vector2 targtPos = new Vector2(startPos.x + (direction * dodgeDistance), startPos.y);
+
+        EnemyAnim.CrossFade("EmbryDodgeMoving", 0, 0);
+        SetEnemyAIEnabled(false);
+        SetScriptedPhysicsLock(true);
+        AudioP.PlayOneShot(DodgeSFX);
+
+        float elapsed = 0f;
+
+        while (elapsed < duration)
         {
-            EnemyAI.enabled = false;
+            float t = elapsed / duration;
+
+            float ease = 1f - Mathf.Pow(1f - t, 2f); // ts makes it feel kool and smoother
+
+            Vector2 newPos = Vector2.Lerp(startPos, targtPos, ease);
+            rb.MovePosition(newPos);
+
+            elapsed += Time.unscaledDeltaTime;
+            yield return new WaitForFixedUpdate();
+        }
+
+        rb.MovePosition(targtPos);
+
+        yield return new WaitForSecondsRealtime(0.05f);
+
+        SetScriptedPhysicsLock(false);
+        SetEnemyAIEnabled(true);
+        IgnoreStickMelee(false);
+        rb.velocity = Vector3.zero;
+        isDodging = false;
+    }
+
+
+    public BoxCollider2D PunchCollider;
+    public void IgnoreStickMelee(bool t)
+    {
+        BoxCollider2D box = gameObject.GetComponent<BoxCollider2D>();
+        HitMarker h = GetComponent<HitMarker>();
+
+        if (t)
+        {
+            Physics2D.IgnoreCollision(box, PunchCollider, true);
+
+            h.enabled = false;
         }
         else
         {
-            movement.MaxSpeed = 100;
-            movement.Speed = 100;
-        }
-
-        if (!IsBossBusy() && (movement.isInPunchAttach || movement.PunchBool && EnemyAI.DistanceFromPlayer <= EnemyAI.MinMeleeDistance + 5))
-        {
-            if (LastLaunchKick <= 0 && SpecialEventOver_1st && launchKickRoutine == null)
-            {
-                LastLaunchKick = Time.time;
-                launchKickRoutine = StartCoroutine(LaunchKick());
-            }
-        }
-        else if (SpecialEventOver_1st && LastLaunchKick > 0 && Time.time >= LastLaunchKick + LauchCD && launchKickRoutine == null)
-        {
-            LastLaunchKick = Time.time;
-            isAttachedVer_Attack = true;
-
-            launchKickRoutine = StartCoroutine(LaunchKick());
-        }
-
-        if (Time.time >= LastTen + TenCD && SpecialEventOver_1st && HasDone1stLandKick && !IsBossBusy() && tendrilRoutine == null)
-        {
-            LastTen = Time.time;
-            tendrilRoutine = StartCoroutine(TendrilAttackRoutine());
-        }
-
-        if (SpecialEventOver_1st && Time.time >= LastTelePort + TeleCD && Time.time - LastTelePort > 6
-            && !IsBossBusy() && LastTen + TenCD > Time.time && HasDone1stLandKick && teleportRoutine == null)
-        {
-            LastTelePort = Time.time;
-            teleportRoutine = StartCoroutine(TelePort());
-
+            Physics2D.IgnoreCollision(box, PunchCollider, false);
+            h.enabled = true;
 
         }
-
     }
+
+
+
+
 
     private void SetEnemyAIEnabled(bool enabled)
     {
@@ -238,7 +474,7 @@ public class Embry_Attach : MonoBehaviour
 
     private bool IsBossBusy()
     {
-        return EnemyAI.isAttacking || IsScriptedSequenceRunning() || AnimatorShowsAttack();
+        return EnemyAI.isAttacking || IsScriptedSequenceRunning() || AnimatorShowsAttack() || isDodging;
     }
 
     private void RecoverEnemyAIIfNeeded()
@@ -278,8 +514,8 @@ public class Embry_Attach : MonoBehaviour
         }
     }
 
-    private IEnumerator MoveToPosition(Vector2 targetPosition, float speed, float stopDistance = 0.1f, bool useUnscaledTime = false) 
-        // unscale is just for when i need to do sum if slomo or pause time
+    private IEnumerator MoveToPosition(Vector2 targetPosition, float speed, float stopDistance = 0.1f, bool useUnscaledTime = false)
+    // unscale is just for when i need to do sum if slomo or pause time
     {
         while (Vector2.Distance(rb.position, targetPosition) > stopDistance)
         {
@@ -321,19 +557,21 @@ public class Embry_Attach : MonoBehaviour
 
     public IEnumerator TelePort()
     {
+        Operation_StopThatMovement_DEFENSIVE_EDITION_67 = true;
         SetEnemyAIEnabled(false);
-
+        istele = true;
         float StickScale = movement.StickDirection;
         Vector2 StickPOS = movement.transform.position;
-        float DashSpeed = 670;
+        float DashSpeed = 700;
         float behindOffset = 30f;
+
 
         while (!movement.Grounded)
         {
             yield return null; // wait for stick boi to get on the ground
         }
         EnemyAnim.CrossFade("Embry_Telewhoosh", 0, 0);
-        EnemyAnim.SetBool("Dash",true);
+        EnemyAnim.SetBool("Dash", true);
         SetScriptedPhysicsLock(true);
         SetIgnorePlayerCollision(true);
         AudioP.PlayOneShot(Dash);
@@ -372,11 +610,15 @@ public class Embry_Attach : MonoBehaviour
         EnemyAI.LookAtPlayer();
 
 
+
         AnimationClip rnd = BackStab_Anim[UnityEngine.Random.Range(0, BackStab_Anim.Length)];
 
-        EnemyAI.EnemyAnim.CrossFade(rnd.name,0,0);
+        EnemyAI.EnemyAnim.CrossFade(rnd.name, 0, 0);
+        istele = false;
 
-
+        yield return new WaitForSecondsRealtime(0.3f);
+        Operation_StopThatMovement_DEFENSIVE_EDITION_67 = false;
+        yield break;
     }
 
     public AnimationClip[] BackStab_Anim;
@@ -514,7 +756,7 @@ public class Embry_Attach : MonoBehaviour
 
 
         SetEnemyAIEnabled(true);
-        EnemyAnim.SetBool("LOOP_SJK",false);
+        EnemyAnim.SetBool("LOOP_SJK", false);
         SetScriptedPhysicsLock(false);
 
 
@@ -571,26 +813,33 @@ public class Embry_Attach : MonoBehaviour
     {
         if (collision.CompareTag("StickMelee"))
         {
-            if (!SpecialEventOver_1st && !Start1stEvent)
+
+            if (!isDodging)
             {
-                Start1stEvent = true;
-                StartCoroutine(Special1stEvent());
-                BossTheme.gameObject.SetActive(true);
+                if (!SpecialEventOver_1st && !Start1stEvent)
+                {
+                    Start1stEvent = true;
+                    StartCoroutine(Special1stEvent());
+                    BossTheme.gameObject.SetActive(true);
+                }
+
+                if (collision.CompareTag("StickMelee") && Time.time >= EnemyAI.LastCollisionTick + EnemyAI.CollisionTick && EnemyAI.enabled == false)
+                {
+                    if (EnemyAI.isDodging) return;
+                    StartCoroutine(EnemyAI.StickManager.CameraScript.ShakeCamGroundFeeling(UnityEngine.Random.Range(65.6f, 70.0f), UnityEngine.Random.Range(0.2f, 0.5f)));
+                    EnemyAI.StickManager.PlayerPunchSFX();
+                    EnemyAI.HitMarker.HitMarkerSFX();
+                    EnemyAI.LastCollisionTick = Time.time;
+                    EnemyAI.Health -= 0.7f;
+                    EnemyAI.TimesPlayerDamagedEnemy += 1;
+                    EnemyAI.MeleeContact = true;
+                    EnemyAI.LastStickAttack = "Melee";
+                    EnemyAI.HurtAnim();
+                }
             }
 
-            if (collision.CompareTag("StickMelee") && Time.time >= EnemyAI.LastCollisionTick + EnemyAI.CollisionTick && EnemyAI.enabled == false)
-            {
-                if (EnemyAI.isDodging) return;
-                StartCoroutine(EnemyAI.StickManager.CameraScript.ShakeCamGroundFeeling(UnityEngine.Random.Range(65.6f, 70.0f), UnityEngine.Random.Range(0.2f, 0.5f)));
-                EnemyAI.StickManager.PlayerPunchSFX();
-                EnemyAI.HitMarker.HitMarkerSFX();
-                EnemyAI.LastCollisionTick = Time.time;
-                EnemyAI.Health -= 0.7f;
-                EnemyAI.TimesPlayerDamagedEnemy += 1;
-                EnemyAI.MeleeContact = true;
-                EnemyAI.LastStickAttack = "Melee";
-                EnemyAI.HurtAnim();
-            }
+            Embry_RecivedPunch = true;
+
 
 
         }
@@ -610,6 +859,11 @@ public class Embry_Attach : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             TouchingPlayer = false;
+        }
+        if (collision.CompareTag("StickMelee"))
+        {
+            Embry_RecivedPunch = false;
+
         }
     }
 
@@ -820,7 +1074,232 @@ public class Embry_Attach : MonoBehaviour
         return true;
     }
 
+    // Stick-Stick Gatling
 
+    private bool SSG_Start;
+    private float SSG_LastClickLeftClick;
+    public bool StickStickOccuring;
+
+    public void Stick_Stick()
+    {
+        SetEnemyAIEnabled(false);
+        if (!SSG_Start )
+        {
+            SSG_Start = true;
+            TimesStick_Stick = 0;
+            queuedStickStickPunches = 0;
+            AlreadyStarted_EmbryKnockFast_StickStick = false;
+            Embry_RecivedPunch = false;
+            PlayerReadyToGattle = false;
+
+            StartCoroutine(Stick_Stick_ScriptedEvent());
+
+        }
+
+
+      
+
+    }
+
+    private bool Embry_RecivedPunch;
+    private bool HasGattledYet;
+    private bool PlayerReadyToGattle;
+    public float StickStickPunchGap = 12f;
+    public float StickStickAlignSpeed = 180f;
+    public float EmbryKnockbackSpeed_StickStick = 90f;
+    public float EmbryKnockbackDuration_StickStick = 10f;
+
+    private IEnumerator AlignStickStickPositions()
+    {
+        float timeout = 0.35f;
+        float timer = 0f;
+
+        while (timer < timeout)
+        {
+            float directionToPlayer = movement.transform.position.x >= transform.position.x ? 1f : -1f;
+            Vector2 midpoint = new Vector2((movement.transform.position.x + transform.position.x) * 0.5f, movement.transform.position.y);
+            Vector2 enemyTarget = new Vector2(midpoint.x - (directionToPlayer * StickStickPunchGap * 0.5f), transform.position.y);
+            Vector2 playerTarget = new Vector2(midpoint.x + (directionToPlayer * StickStickPunchGap * 0.5f), movement.transform.position.y);
+
+            transform.position = Vector2.MoveTowards(transform.position, enemyTarget, StickStickAlignSpeed * Time.deltaTime);
+            movement.transform.position = Vector2.MoveTowards(movement.transform.position, playerTarget, StickStickAlignSpeed * Time.deltaTime);
+
+            bool enemyAligned = Vector2.Distance(transform.position, enemyTarget) <= 0.05f;
+            bool playerAligned = Vector2.Distance(movement.transform.position, playerTarget) <= 0.05f;
+            if (enemyAligned && playerAligned)
+            {
+                break;
+            }
+
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        float finalDirectionToPlayer = movement.transform.position.x >= transform.position.x ? 1f : -1f;
+        Vector2 finalMidpoint = new Vector2((movement.transform.position.x + transform.position.x) * 0.5f, movement.transform.position.y);
+        transform.position = new Vector2(finalMidpoint.x - (finalDirectionToPlayer * StickStickPunchGap * 0.5f), transform.position.y);
+        movement.transform.position = new Vector2(finalMidpoint.x + (finalDirectionToPlayer * StickStickPunchGap * 0.5f), movement.transform.position.y);
+    }
+
+
+    public GameObject EmbryCamera;
+    private bool AlreadyStarted_EmbryKnockFast_StickStick;
+    private float originalStickStickAnimSpeed = 1f;
+
+
+    private float LastPunch_SSG_SuperVersion;
+    public IEnumerator Stick_Stick_ScriptedEvent()
+    {
+        StickStickOccuring = true;
+        originalStickStickAnimSpeed = movement.StickAnim.speed;
+
+        while (!Embry_RecivedPunch)
+        {
+            yield return null;
+        }
+
+        while (!movement.StickAnim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        {
+            movement.StickAnim.CrossFade("Idle", 0.01f, 0);
+            yield return new WaitForSecondsRealtime(0.01f);
+            yield return null;
+        }
+
+        yield return AlignStickStickPositions();
+        movement.ResetAllAnimationStates();
+        EnemyAnim.CrossFade("Embry_Heavy_Blam", 0, 0);
+        movement.StickAnim.CrossFade("Punch (Hold)", 0f, 0);
+        AudioP.PlayOneShot(EnemyAI.PlayerStagger);
+        movement.StickAnim.enabled = false;
+        movement.enabled = false;
+        yield return new WaitForSecondsRealtime(0.3f);
+        movement.StickAnim.enabled = true;
+
+        PlayerReadyToGattle = true;
+        EnemyAnim.SetBool("Hold", true);
+
+        while (PlayerReadyToGattle)
+        {
+            float directionToPlayer = movement.transform.position.x >= transform.position.x ? 1f : -1f;
+            Vector2 midpoint = new Vector2((movement.transform.position.x + transform.position.x) * 0.5f, movement.transform.position.y);
+            transform.position = new Vector2(midpoint.x - (directionToPlayer * StickStickPunchGap * 0.5f), transform.position.y);
+            movement.transform.position = new Vector2(midpoint.x + (directionToPlayer * StickStickPunchGap * 0.5f), movement.transform.position.y);
+
+            if (queuedStickStickPunches > 0)
+            {
+                movement.StickAnim.SetBool("Stick-Stick-G", true);
+                EnemyAnim.SetBool("Hold", true);
+                movement.StickAnim.speed += 0.2f;
+                LastPunch_SSG_SuperVersion = Time.time;
+                queuedStickStickPunches--;
+                TimesStick_Stick += 1;
+            }
+
+            if (Time.time >= 0.2f + LastPunch_SSG_SuperVersion)
+            {
+                movement.StickAnim.SetBool("Stick-Stick-G", false);
+            }
+
+            if (TimesStick_Stick >= StickStick_TimesNeeded && !AlreadyStarted_EmbryKnockFast_StickStick)
+            {
+                Debug.Log("Finished Stick Stick Gatling");
+                AlreadyStarted_EmbryKnockFast_StickStick = true;
+                PlayerReadyToGattle = false;
+                movement.StickAnim.speed = originalStickStickAnimSpeed;
+                movement.StickAnim.SetBool("Stick-Stick-G", false);
+                yield return StartCoroutine(EmbryKnockFast_StickStick());
+                yield break;
+            }
+
+            yield return null;
+        }
+    }
+
+    private bool ExtremlyBusy_StopUpdate;
+    public ChangeCamSize CCS;
+    private void ResetStickStickState()
+    {
+        queuedStickStickPunches = 0;
+        TimesStick_Stick = 0;
+        PlayerReadyToGattle = false;
+        StickStickOccuring = false;
+        SSG_Start = false;
+        AlreadyStarted_EmbryKnockFast_StickStick = false;
+        Embry_RecivedPunch = false;
+        ExtremlyBusy_StopUpdate = false;
+       // movement.StickAnim.enabled = true;
+        movement.StickAnim.speed = originalStickStickAnimSpeed;
+        EnemyAnim.SetBool("Hold", false);
+        EmbryCamera.gameObject.SetActive(false);
+        SetEnemyAIEnabled(true);
+    }
+
+    public IEnumerator EmbryKnockFast_StickStick()
+    {
+        Debug.Log("REached EmbryKnockFast");
+        float timer = 0;
+        float OG_CAMCCG_ZOOM_TIME = CCS.CamSizeZoomDuration;
+        float OG_CAMCCG_ZOOMED_IN = CCS.CamSizeZoomedin;
+        movement.StickAnim.CrossFade("StickDragBackAfterGattle", 0, 0);
+        Debug.Log("REached StickDragBackAfterGattle");
+
+        AudioP.PlayOneShot(EnemyAI.PlayerStagger);
+        EnemyAnim.SetBool("Hold", false);
+        Embry_RecivedPunch = false;
+        movement.StickAnim.CrossFade("Stick_Punch(Slowed)", 0.1f, 0);
+        movement.StickAnim.SetBool("Stick-Stick-G", false);
+
+        Debug.Log("REached Slowed");
+
+
+        while (!Embry_RecivedPunch)
+        {
+            yield return null;
+        }
+        CCS.CamSizeZoomDuration = 0.1f;
+        CCS.CamSizeZoomedin = 7.83f;
+
+        yield return new WaitForSecondsRealtime(0.6f);
+        EnemyAnim.SetTrigger("Block_Con");
+        //yield return new WaitForSecondsRealtime(0.6f);
+
+
+        // embry crloss fade into shocked animtion or recovery
+
+        // while loop here waiting for the punch event (animation keys)
+
+        // EmbryCrossFade knockback animation ( do a bool type insiead of crossfade)
+
+
+        BoxCollider2D Bxcd = EnemyAI.gameObject.GetComponent<BoxCollider2D>();
+        BoxCollider2D Sbxcd = movement.gameObject.GetComponent<BoxCollider2D>();
+        ExtremlyBusy_StopUpdate = true;
+        CCS.CamSizeZoomedin = 25;
+        SetEnemyAIEnabled(false);
+        SetScriptedPhysicsLock(true);
+        EmbryCamera.gameObject.SetActive(true);
+        Physics2D.IgnoreCollision(Bxcd, Sbxcd, true);
+        float knockDirection = transform.position.x >= movement.transform.position.x ? 1f : -1f;
+        float z = 0;
+        while (timer < EmbryKnockbackDuration_StickStick)
+        {
+           // z += 20 * knockDirection;
+            //transform.rotation = Quaternion.Euler(0,0,z);
+            Vector2 nextPosition = rb.position + Vector2.right * knockDirection * EmbryKnockbackSpeed_StickStick * Time.deltaTime;
+            rb.MovePosition(nextPosition);
+            timer += Time.deltaTime;
+            yield return null ;
+
+        }
+
+
+        CCS.CamSizeZoomDuration = OG_CAMCCG_ZOOM_TIME;
+        CCS.CamSizeZoomedin = OG_CAMCCG_ZOOMED_IN;
+
+        Physics2D.IgnoreCollision(Bxcd, Sbxcd, false);
+        SetScriptedPhysicsLock(false);
+        ResetStickStickState();
+    }
 
 
     public void AnimationKeys_Enable_EnemyAI()
@@ -839,4 +1318,12 @@ public class Embry_Attach : MonoBehaviour
     {
         AudioP.PlayOneShot(TenRip);
     }
+
+    public void GroundAttack_Enabled()
+    {
+        Ten_Ground_ATK.gameObject.SetActive(true);
+    }
+
+
+
 }

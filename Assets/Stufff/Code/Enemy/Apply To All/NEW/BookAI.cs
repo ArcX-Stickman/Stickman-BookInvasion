@@ -485,9 +485,12 @@ public class BookAI : MonoBehaviour
         }
     }
 
-
+    public bool Move_Towards_Player_OP_Breaker;
     public void MoveTowardsPlayer()
     {
+        if (Move_Towards_Player_OP_Breaker) return; // this is like set by scripts oputside this scope
+
+
         if (EnemVision.PlayerSpotted && EnemyState != EnemyState.Attacking && !isDodging)
         {
             EnemyState = EnemyState.GoingToPlayer;

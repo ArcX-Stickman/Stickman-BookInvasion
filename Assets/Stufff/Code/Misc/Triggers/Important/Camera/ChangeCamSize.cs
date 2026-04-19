@@ -22,6 +22,36 @@ public class ChangeCamSize : MonoBehaviour
 
     public float CamSizeZoomedin;
     public float CamSizeZoomDuration;
+    [SerializeField] private Embry_Attach EmbryCh0AttachScr;
+    public float CamSize_Embry;
+    private float OGCam;
+
+    private void Start()
+    {
+        OGCam = CamSizeZoomedin;
+    }
+
+    public void Update()
+    {
+        if (EmbryCh0AttachScr != null)
+        {
+            if (EmbryCh0AttachScr.StickStickOccuring && CamSizeZoomDuration != CamSize_Embry)
+            {
+                CamSizeZoomedin = CamSize_Embry;
+                CamScript.ZoomTo(CamSizeZoomedin, CamSizeZoomDuration);
+
+            }
+            else
+            {
+                if(CamSizeZoomedin != OGCam)
+                {
+                    CamSizeZoomedin = OGCam;
+                    CamScript.ZoomTo(CamSizeZoomedin, CamSizeZoomDuration);
+                }
+               
+            }
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

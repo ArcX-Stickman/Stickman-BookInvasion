@@ -255,6 +255,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.56666666
+    functionName: PunchAnim_Bool_isInPunch
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.5833333
     functionName: KickWhooshSFX_Play
     data: 
@@ -269,6 +276,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.6666667
+    functionName: PunchAnim_Bool_is_NOT_InPunch
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 1.0666667
     functionName: KickWhooshSFX_Play
     data: 
@@ -278,6 +292,20 @@ AnimationClip:
     messageOptions: 0
   - time: 1.0833334
     functionName: Punch
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.0833334
+    functionName: PunchAnim_Bool_isInPunch
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.1166667
+    functionName: PunchAnim_Bool_is_NOT_InPunch
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
