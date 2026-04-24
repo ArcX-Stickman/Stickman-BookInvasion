@@ -2,6 +2,7 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Net;
 using System.Threading;
 using System.Xml;
 using TMPro;
@@ -852,6 +853,11 @@ public class Embry_Attach : MonoBehaviour
 
             }
         }
+
+        if (collision.CompareTag("Blocker"))
+        {
+            ICallItOperationRock_67 = true;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -1106,11 +1112,13 @@ public class Embry_Attach : MonoBehaviour
     private bool PlayerReadyToGattle;
     public float StickStickPunchGap = 12f;
     public float StickStickAlignSpeed = 180f;
-    public float EmbryKnockbackSpeed_StickStick = 90f;
+    public float EmbryKnockbackSpeed_StickStick = 800;
     public float EmbryKnockbackDuration_StickStick = 10f;
 
     private IEnumerator AlignStickStickPositions()
     {
+        if (AlreadyStarted_EmbryKnockFast_StickStick) yield break;
+
         float timeout = 0.35f;
         float timer = 0f;
 
@@ -1150,10 +1158,11 @@ public class Embry_Attach : MonoBehaviour
     private float LastPunch_SSG_SuperVersion;
     public IEnumerator Stick_Stick_ScriptedEvent()
     {
+        movement.rb.simulated = false;
         StickStickOccuring = true;
         originalStickStickAnimSpeed = movement.StickAnim.speed;
 
-        while (!Embry_RecivedPunch)
+        while (!Embry_RecivedPunch && transform.localScale.x != 1)
         {
             yield return null;
         }
@@ -1176,7 +1185,6 @@ public class Embry_Attach : MonoBehaviour
         movement.StickAnim.enabled = true;
 
         PlayerReadyToGattle = true;
-        EnemyAnim.SetBool("Hold", true);
 
         while (PlayerReadyToGattle)
         {
@@ -1234,8 +1242,15 @@ public class Embry_Attach : MonoBehaviour
         SetEnemyAIEnabled(true);
     }
 
+    public Transform StickHandFor_CamMove_StickStick;
+    public Transform Rock;
+    public Animator RockAnim;
+    private bool ICallItOperationRock_67;
     public IEnumerator EmbryKnockFast_StickStick()
     {
+
+        movement.CameraScript.Stick = StickHandFor_CamMove_StickStick;
+
         Debug.Log("REached EmbryKnockFast");
         float timer = 0;
         float OG_CAMCCG_ZOOM_TIME = CCS.CamSizeZoomDuration;
@@ -1246,21 +1261,23 @@ public class Embry_Attach : MonoBehaviour
         AudioP.PlayOneShot(EnemyAI.PlayerStagger);
         EnemyAnim.SetBool("Hold", false);
         Embry_RecivedPunch = false;
+        yield return new WaitForSecondsRealtime(0.2f);
         movement.StickAnim.CrossFade("Stick_Punch(Slowed)", 0.1f, 0);
         movement.StickAnim.SetBool("Stick-Stick-G", false);
-
+        EnemyAnim.SetTrigger("Block_Con");
         Debug.Log("REached Slowed");
 
 
         while (!Embry_RecivedPunch)
         {
+            Debug.Log("Waiting for  punch");
+
             yield return null;
         }
         CCS.CamSizeZoomDuration = 0.1f;
         CCS.CamSizeZoomedin = 7.83f;
 
         yield return new WaitForSecondsRealtime(0.6f);
-        EnemyAnim.SetTrigger("Block_Con");
         //yield return new WaitForSecondsRealtime(0.6f);
 
 
@@ -1269,23 +1286,64 @@ public class Embry_Attach : MonoBehaviour
         // while loop here waiting for the punch event (animation keys)
 
         // EmbryCrossFade knockback animation ( do a bool type insiead of crossfade)
-
-
+        Debug.Log("Finishing Event");
+       // movement.CameraScript.Stick = movement.transform;
         BoxCollider2D Bxcd = EnemyAI.gameObject.GetComponent<BoxCollider2D>();
         BoxCollider2D Sbxcd = movement.gameObject.GetComponent<BoxCollider2D>();
         ExtremlyBusy_StopUpdate = true;
         CCS.CamSizeZoomedin = 25;
         SetEnemyAIEnabled(false);
         SetScriptedPhysicsLock(true);
-        EmbryCamera.gameObject.SetActive(true);
+        //EmbryCamera.gameObject.SetActive(true);
+
         Physics2D.IgnoreCollision(Bxcd, Sbxcd, true);
         float knockDirection = transform.position.x >= movement.transform.position.x ? 1f : -1f;
         float z = 0;
+        float t_while = 0;
+        float disFromRock = Vector2.Distance(transform.position, Rock.transform.position);
+        EnemyAnim.ResetTrigger("Block_Con");
+        EnemyAnim.SetBool("fi", true);
+        while (t_while < 0.5f)
+        {
+            t_while += Time.deltaTime;
+            if(disFromRock > 20)
+            {
+                transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
+                transform.position = Vector2.MoveTowards(transform.position, Rock.transform.position, EmbryKnockbackSpeed_StickStick * Time.deltaTime);
+                disFromRock = Vector2.Distance(transform.position, Rock.transform.position);
+            }
+          
+            yield return null;
+        }
+        // just to make the trans smoother
+        movement.CameraScript.Stick = Rock.transform;
+        Debug.Log("Switched to RockFocus");
+       
+        float minDis = 1f;
+        while(disFromRock > minDis)
+        {
+            transform.localScale = new Vector3(1,transform.localScale.y,transform.localScale.z);
+            transform.position = Vector2.MoveTowards(transform.position, Rock.transform.position, EmbryKnockbackSpeed_StickStick * Time.deltaTime);
+            disFromRock = Vector2.Distance(transform.position, Rock.transform.position);
+            yield return null;
+        }
+
+        AnimationTriggerOn_Distance ATD_Rock = Rock.gameObject.GetComponent<AnimationTriggerOn_Distance>();
+
+
+        while (ATD_Rock.Distance > 70.60243f)
+        {
+            yield return null;
+
+        }
+
+        AudioP.PlayOneShot(JetWhoosh);
+        
         while (timer < EmbryKnockbackDuration_StickStick)
         {
            // z += 20 * knockDirection;
             //transform.rotation = Quaternion.Euler(0,0,z);
-            Vector2 nextPosition = rb.position + Vector2.right * knockDirection * EmbryKnockbackSpeed_StickStick * Time.deltaTime;
+            Vector2 nextPosition = rb.position + Vector2.right  * EmbryKnockbackSpeed_StickStick * Time.deltaTime;
             rb.MovePosition(nextPosition);
             timer += Time.deltaTime;
             yield return null ;
@@ -1299,6 +1357,18 @@ public class Embry_Attach : MonoBehaviour
         Physics2D.IgnoreCollision(Bxcd, Sbxcd, false);
         SetScriptedPhysicsLock(false);
         ResetStickStickState();
+        movement.rb.simulated = true;
+        movement.enabled = true;
+        movement.ResetAllAnimationStates();
+
+    }
+
+    public Transform Hand;
+
+    public void DirectionalCam()
+    {
+        CameraScript CS = movement.CameraScript;
+        StartCoroutine(CS.ShakeCamDirection(10,0.2f,transform));
     }
 
 

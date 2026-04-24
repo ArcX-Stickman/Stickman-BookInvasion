@@ -36,7 +36,7 @@ public class CameraScript : MonoBehaviour
         CinemachineBrain brain = Camera.main.GetComponent<CinemachineBrain>();
         brain.m_DefaultBlend.m_Time = 0f;
         StickCam = GetComponent<CinemachineVirtualCamera>();
-        if(OG_CAM_SIZE == 0)
+        if (OG_CAM_SIZE == 0)
         {
             OG_CAM_SIZE = CamSize;
 
@@ -53,7 +53,7 @@ public class CameraScript : MonoBehaviour
 
     private void OnEnable()
     {
-        if(StickManager.StickHP.PlayerHP > 0)
+        if (StickManager.StickHP.PlayerHP > 0)
         {
             StopAllCoroutines();
 
@@ -61,14 +61,14 @@ public class CameraScript : MonoBehaviour
     }
     void Update()
     {
-       
-        if(StickManager.StickHP.PlayerHP > 0)
+
+        if (StickManager.StickHP.PlayerHP > 0)
         {
             StickCam.m_Lens.OrthographicSize = CamSize;
             StickCam.m_Lens.FieldOfView = CamSize + AdditivePerspec;
 
         }
-        else if(StickManager.StickHP.PlayerHP <= 0 &&!ALr_StartedDeath)
+        else if (StickManager.StickHP.PlayerHP <= 0 && !ALr_StartedDeath)
         {
             StickCam.m_Lens.OrthographicSize = CamSize;
             StickCam.m_Lens.FieldOfView = CamSize;
@@ -76,7 +76,7 @@ public class CameraScript : MonoBehaviour
             StartCoroutine(DeathCam());
 
         }
-        if(Psych_Cutscene != null)
+        if (Psych_Cutscene != null)
         {
             if (Psych_Cutscene.gameObject.activeSelf)
             {
@@ -101,32 +101,32 @@ public class CameraScript : MonoBehaviour
 
 
 
-        if(StickCam.m_Follow == null)
+        if (StickCam.m_Follow == null)
         {
             StickCam.m_Follow = StickManager.gameObject.GetComponent<Transform>();
         }
-        
+
 
 
     }
 
     public void BattleCam_Manager()
     {
-        if(StickManager.StickHP.PlayerHP > 0 && inBattle)
+        if (StickManager.StickHP.PlayerHP > 0 && inBattle)
         {
-            if(CamSize != BattleCamSize)
+            if (CamSize != BattleCamSize)
             {
-                StartCoroutine(ZoomIn(BattleCamSize,1.5f));
+                StartCoroutine(ZoomIn(BattleCamSize, 1.5f));
             }
         }
-        else if(StickManager.StickHP.PlayerHP > 0 && !inBattle)
+        else if (StickManager.StickHP.PlayerHP > 0 && !inBattle)
         {
             StartCoroutine(ZoomIn(OG_CAM_SIZE, 1.5f));
 
         }
     }
 
-    
+
 
 
 
@@ -147,7 +147,7 @@ public class CameraScript : MonoBehaviour
     }
 
 
-    public IEnumerator ZoomCam(float Size,float Duration)
+    public IEnumerator ZoomCam(float Size, float Duration)
     {
         MainCam.orthographic = true;
         while (CamSize >= Size && elapsedTime <= Duration)
@@ -190,7 +190,7 @@ public class CameraScript : MonoBehaviour
     public IEnumerator StickBrainWakeUp_Event()
     {
         //extend to 3492.2
-        while(CamSize < 3492)
+        while (CamSize < 3492)
         {
             CamSize += 700 * Time.deltaTime;
             yield return null;
@@ -202,12 +202,12 @@ public class CameraScript : MonoBehaviour
     private bool inZoomOutCour;
     public IEnumerator ZoomIn(float Size, float time)
     {
-        if(inZoomCour) yield break;
+        if (inZoomCour) yield break;
         PriorCamSizeToZoom = CamSize;
         inZoomCour = true;
-        while(CamSize != Size)
+        while (CamSize != Size)
         {
-            CamSize = Mathf.Lerp (CamSize, Size, time);
+            CamSize = Mathf.Lerp(CamSize, Size, time);
             yield return null;
         }
         inZoomCour = false;
@@ -231,11 +231,11 @@ public class CameraScript : MonoBehaviour
     }
 
 
-    public IEnumerator ZoomOut( float time) 
+    public IEnumerator ZoomOut(float time)
     {
         if (inZoomOutCour) yield break;
         inZoomOutCour = true;
-        while(CamSize != PriorCamSizeToZoom) 
+        while (CamSize != PriorCamSizeToZoom)
         {
             CamSize = Mathf.Lerp(CamSize, PriorCamSizeToZoom, time);
             yield return null;
@@ -248,7 +248,7 @@ public class CameraScript : MonoBehaviour
 
     public IEnumerator ShakeCam(float intensity, float time)
     {
-        if(notlocked) yield break; 
+        if (notlocked) yield break;
         if (inShake) yield break;
         if (!inShake)
         {
@@ -257,13 +257,13 @@ public class CameraScript : MonoBehaviour
             float tempCalc = CamSize - intensity;
             while (CamSize != tempCalc)
             {
-                CamSize = Mathf.Lerp(CamSize,tempCalc,intensity);
+                CamSize = Mathf.Lerp(CamSize, tempCalc, intensity);
                 yield return null;
             }
             yield return new WaitForSeconds(time);
             while (CamSize != tempCamSize)
             {
-               CamSize = Mathf.Lerp(CamSize, tempCamSize, intensity);
+                CamSize = Mathf.Lerp(CamSize, tempCamSize, intensity);
                 yield return null;
             }
             CamSize = tempCamSize;
@@ -282,7 +282,7 @@ public class CameraScript : MonoBehaviour
 
         float elapsed = 0f;
         perlin.m_AmplitudeGain = intensity;
-        perlin.m_FrequencyGain = 2f; 
+        perlin.m_FrequencyGain = 2f;
         while (elapsed < time)
         {
             elapsed += Time.unscaledDeltaTime;
@@ -294,6 +294,63 @@ public class CameraScript : MonoBehaviour
 
         inShake = false;
     }
+    bool SpeicalShake;
+    public IEnumerator ShakeCamDirection(float intensity, float time, Transform reference)
+    {
+        if (SpeicalShake) yield break;
+        SpeicalShake = true;
+
+        var vcam = StickCam;
+        var transposer = vcam.GetCinemachineComponent<CinemachineFramingTransposer>();
+
+        Vector3 originalOffset = transposer.m_TrackedObjectOffset;
+
+        // direction from reference to camera target
+        Transform target = FindObjectOfType<Movement>().transform;
+        float dirSign = reference.localScale.x >= 0 ? 1f : -1f;
+
+        Vector3 worldDir = reference.right * dirSign;
+        worldDir.y = 0f;
+        worldDir.Normalize();
+        worldDir.y = 0f;
+
+        float elapsed = 0f;
+
+        while (elapsed < time)
+        {
+            elapsed += Time.unscaledDeltaTime;
+
+            float t = elapsed / time;
+
+            // sharp anime falloff (fast hit, quick decay)
+            float strength = intensity * (1f - t * t);
+
+            transposer.m_TrackedObjectOffset = originalOffset + worldDir * (strength * 1.3f);
+
+            yield return null;
+        }
+
+        float returnTime = 0f;
+
+        while (returnTime < 0.15f)
+        {
+            returnTime += Time.unscaledDeltaTime;
+
+            transposer.m_TrackedObjectOffset = Vector3.Lerp(
+                transposer.m_TrackedObjectOffset,
+                originalOffset,
+                returnTime / 0.15f
+            );
+
+            yield return null;
+        }
+
+        transposer.m_TrackedObjectOffset = originalOffset;
+        SpeicalShake = false;
+    }
+
+
+
     //CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin =
     //    StickCam.GetCinemachineComponent < CinemachineBasicMultiChannelPerlin>();
     //cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = intensity;
@@ -303,7 +360,7 @@ public class CameraScript : MonoBehaviour
 
     // new verion of zooming cuz the other 3 are ste
 
-    private Coroutine activeZoom; 
+    private Coroutine activeZoom;
     public void ZoomTo(float targetSize, float duration)
     {
         // Stop any zoom
@@ -333,7 +390,7 @@ public class CameraScript : MonoBehaviour
         CamSize = targetSize;
         StickCam.m_Lens.OrthographicSize = CamSize;
 
-        activeZoom = null; 
+        activeZoom = null;
     }
 
 
