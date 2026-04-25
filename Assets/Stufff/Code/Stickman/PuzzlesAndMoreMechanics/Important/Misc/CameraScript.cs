@@ -21,9 +21,9 @@ public class CameraScript : MonoBehaviour
     public GameObject Psych_Cutscene;
     public Camera MainCam;
     public bool notlocked;
-
+    public PlayerStatusInGame PSIG;
     public Transform Stick;
-
+    public Transform BossTransform;
 
     public bool inBattle;
     public float BattleCamSize;
@@ -61,6 +61,7 @@ public class CameraScript : MonoBehaviour
     }
     void Update()
     {
+
 
         if (StickManager.StickHP.PlayerHP > 0)
         {
@@ -107,6 +108,25 @@ public class CameraScript : MonoBehaviour
         }
 
 
+
+
+
+    }
+
+    private Transform MidPointBasedPosition;
+    private Transform StickPOS;
+    public bool HoldNeeeded;
+    [SerializeField] private Transform InviMidPoint;
+    public void BossCamManager()
+    {
+        //if(StickPOS == null)
+        //{
+        //    StickPOS = StickManager.transform;
+        //}
+        //Vector3 midpoint = (StickPOS.position + BossTransform.position) / 2f; // ts lowkey bad code performance i think so change later haha in later update rn it jus gotta work Zehahaahha
+
+        //InviMidPoint.position = midpoint;
+        //Stick = InviMidPoint;
 
     }
 
@@ -295,7 +315,7 @@ public class CameraScript : MonoBehaviour
         inShake = false;
     }
     bool SpeicalShake;
-    public IEnumerator ShakeCamDirection(float intensity, float time, Transform reference)
+    public IEnumerator ShakeCamDirection(float intensity, float time, Transform reference, bool Flip)
     {
         if (SpeicalShake) yield break;
         SpeicalShake = true;
@@ -316,6 +336,11 @@ public class CameraScript : MonoBehaviour
 
         float elapsed = 0f;
 
+        if (Flip)
+        {
+            worldDir = reference.right * -dirSign;
+        }
+
         while (elapsed < time)
         {
             elapsed += Time.unscaledDeltaTime;
@@ -326,6 +351,37 @@ public class CameraScript : MonoBehaviour
             float strength = intensity * (1f - t * t);
 
             transposer.m_TrackedObjectOffset = originalOffset + worldDir * (strength * 1.3f);
+
+            yield return null;
+        }
+
+        elapsed = 0f;
+
+
+        float timeOut = 0.2f;
+        float timer4Out = 0;
+
+        while (HoldNeeeded && timer4Out < timeOut)
+        {
+            if (!HoldNeeeded)
+            {
+                Debug.Log("Camera hold wasnt needed");
+                break;
+            }
+            timer4Out += Time.unscaledDeltaTime;
+            elapsed += Time.unscaledDeltaTime;
+
+            float t = elapsed / time;
+            float strength = intensity * (1f - t * t);
+
+            transposer.m_TrackedObjectOffset = originalOffset + worldDir * (strength * 0.3f);
+
+            if(timer4Out >= timeOut)
+            {
+                Debug.Log("Camera hold Timed Out");
+                break;
+            }
+
 
             yield return null;
         }
@@ -349,7 +405,101 @@ public class CameraScript : MonoBehaviour
         SpeicalShake = false;
     }
 
+    public IEnumerator ShakeCamDirection_Vertical(float intensity, float time, bool Up,Transform reference)
+    {
+        if (SpeicalShake) yield break;
+        SpeicalShake = true;
 
+        var vcam = StickCam;
+        var transposer = vcam.GetCinemachineComponent<CinemachineFramingTransposer>();
+
+        Vector3 originalOffset = transposer.m_TrackedObjectOffset;
+
+        // direction from reference to camera target
+        Transform target = FindObjectOfType<Movement>().transform;
+        float dir = 0;
+
+        if (Up)
+        {
+            dir = 1;
+        }
+        else
+        {
+            dir = -1;
+        }
+
+        Vector3 worldDir = reference.up * dir;
+       
+        worldDir.Normalize();
+        
+
+        float elapsed = 0f;
+
+        
+
+        while (elapsed < time)
+        {
+            elapsed += Time.unscaledDeltaTime;
+
+            float t = elapsed / time;
+
+            // sharp anime falloff (fast hit, quick decay)
+            float strength = intensity * (1f - t * t);
+
+            transposer.m_TrackedObjectOffset = originalOffset + worldDir * (strength * 1.3f);
+
+            yield return null;
+        }
+
+        elapsed = 0f;
+
+
+        float timeOut = 0.2f;
+        float timer4Out = 0;
+
+        while (HoldNeeeded && timer4Out < timeOut)
+        {
+            if (!HoldNeeeded)
+            {
+                Debug.Log("Camera hold wasnt needed");
+                break;
+            }
+            timer4Out += Time.unscaledDeltaTime;
+            elapsed += Time.unscaledDeltaTime;
+
+            float t = elapsed / time;
+            float strength = intensity * (1f - t * t);
+
+            transposer.m_TrackedObjectOffset = originalOffset + worldDir * (strength * 0.3f);
+
+            if (timer4Out >= timeOut)
+            {
+                Debug.Log("Camera hold Timed Out");
+                break;
+            }
+
+
+            yield return null;
+        }
+
+        float returnTime = 0f;
+
+        while (returnTime < 0.15f)
+        {
+            returnTime += Time.unscaledDeltaTime;
+
+            transposer.m_TrackedObjectOffset = Vector3.Lerp(
+                transposer.m_TrackedObjectOffset,
+                originalOffset,
+                returnTime / 0.15f
+            );
+
+            yield return null;
+        }
+
+        transposer.m_TrackedObjectOffset = originalOffset;
+        SpeicalShake = false;
+    }
 
     //CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin =
     //    StickCam.GetCinemachineComponent < CinemachineBasicMultiChannelPerlin>();

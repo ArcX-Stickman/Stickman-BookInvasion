@@ -38,6 +38,7 @@ public class ChangeCamSize : MonoBehaviour
             if (EmbryCh0AttachScr.StickStickOccuring && CamSizeZoomDuration != CamSize_Embry)
             {
                 CamSizeZoomedin = CamSize_Embry;
+                CamSizeZoomDuration = 0.1f;
                 CamScript.ZoomTo(CamSizeZoomedin, CamSizeZoomDuration);
 
             }

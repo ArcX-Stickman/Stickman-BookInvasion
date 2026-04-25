@@ -264,6 +264,9 @@ public class BookAI : MonoBehaviour
     public bool isTutorial;
     public int TimesHitPlayer;
 
+    [Header("Misc Stuff")]
+    public DirectionalCam DirecCam;
+
 
     // Start is called before the first frame update
     void Start()
@@ -666,6 +669,8 @@ public class BookAI : MonoBehaviour
             MeleeContact = true;
             LastStickAttack = "Melee";
             HurtAnim();
+            StartCoroutine(DirecCam.HoldNUnHold(0.2f));
+            
         }
 
         // 3. Bullet Logic (Now protected by the 'if (isDodging) return' above)
@@ -1529,6 +1534,8 @@ public class BookAI : MonoBehaviour
         }
     }
 
+
+
     public void DamagePlayer(float DMG)
     {
 
@@ -1565,7 +1572,7 @@ public class BookAI : MonoBehaviour
                     StickManager.StartCoroutine(StickManager.PlayerKnockBack(KnockbackOnMeleeHorizontalVelocity, KnockbackOnMeleeVerticalVelocity, DurationOfKnockbackMelee));
 
                 }
-
+                DirecCam.CamHold();
             }
             else
             {
@@ -1620,6 +1627,7 @@ public class BookAI : MonoBehaviour
             {
                 isAttackingHighEnergy = false;
             }
+            DirecCam.CamHold();
         }
         else
         {
@@ -1653,7 +1661,7 @@ public class BookAI : MonoBehaviour
             {
                 isAttackingHighEnergy = false;
             }
-
+            DirecCam.CamHold();
 
 
 

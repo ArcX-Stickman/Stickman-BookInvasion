@@ -255,6 +255,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.5
+    functionName: DiretionCamShake
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.56666666
     functionName: PunchAnim_Bool_isInPunch
     data: 
@@ -278,6 +285,13 @@ AnimationClip:
     messageOptions: 0
   - time: 0.6666667
     functionName: PunchAnim_Bool_is_NOT_InPunch
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.0166667
+    functionName: DiretionCamShake
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

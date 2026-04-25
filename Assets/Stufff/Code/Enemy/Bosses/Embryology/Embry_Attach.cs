@@ -7,6 +7,7 @@ using System.Threading;
 using System.Xml;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class Embry_Attach : MonoBehaviour
@@ -133,11 +134,20 @@ public class Embry_Attach : MonoBehaviour
     [SerializeField] private int TimesStick_Stick = 0;
     [SerializeField] private int StickStick_TimesNeeded = 25;
     private int queuedStickStickPunches;
+    public PlayerStatusInGame  PlayerStatusInGame;
     // Update is called once per frame
     void Update()
     {
 
         if (ExtremlyBusy_StopUpdate) return;
+
+        if (EnemyAI.EnemVision.PlayerSpotted)
+        {
+            PlayerStatusInGame.InBossFight = true;
+            movement.CameraScript.BossTransform = transform;
+        }
+
+
 
         if (Input.GetButtonDown("Fire2"))
         {
@@ -237,8 +247,23 @@ public class Embry_Attach : MonoBehaviour
     {
         RecoverEnemyAIIfNeeded();
         HealthBased_Actions();
-
+        Bool_Manager();
     }
+
+    [SerializeField]private bool isFacingLeft;
+    public void Bool_Manager()
+    {
+        if(transform.localScale.x > 0)
+        {
+            isFacingLeft = true;
+        }
+        else
+        {
+            isFacingLeft = false;
+
+        }
+    }
+
 
     public float LastKick;
     public float KickCD;
@@ -571,6 +596,8 @@ public class Embry_Attach : MonoBehaviour
         {
             yield return null; // wait for stick boi to get on the ground
         }
+        DirectionalCam Dc = GetComponent<DirectionalCam>();
+        Dc.DiretionCamShake();
         EnemyAnim.CrossFade("Embry_Telewhoosh", 0, 0);
         EnemyAnim.SetBool("Dash", true);
         SetScriptedPhysicsLock(true);
@@ -1088,7 +1115,6 @@ public class Embry_Attach : MonoBehaviour
 
     public void Stick_Stick()
     {
-        SetEnemyAIEnabled(false);
         if (!SSG_Start )
         {
             SSG_Start = true;
@@ -1158,34 +1184,45 @@ public class Embry_Attach : MonoBehaviour
     private float LastPunch_SSG_SuperVersion;
     public IEnumerator Stick_Stick_ScriptedEvent()
     {
-        movement.rb.simulated = false;
-        StickStickOccuring = true;
+        
         originalStickStickAnimSpeed = movement.StickAnim.speed;
-
-        while (!Embry_RecivedPunch && transform.localScale.x != 1)
+        bool Contrinue = false;
+        while (!Contrinue)
         {
+
+            if(Embry_RecivedPunch && isFacingLeft)
+            {
+                Contrinue = true;
+            }
+           
+
             yield return null;
         }
+        SetEnemyAIEnabled(false);
 
-        while (!movement.StickAnim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
-        {
-            movement.StickAnim.CrossFade("Idle", 0.01f, 0);
-            yield return new WaitForSecondsRealtime(0.01f);
-            yield return null;
-        }
 
+        //while (!movement.StickAnim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        //{
+        //    movement.StickAnim.CrossFade("Idle", 0.01f, 0);
+        //    yield return new WaitForSecondsRealtime(0.01f);
+        //    yield return null;
+        //}
+        StickStickOccuring = true;
+        PlayerStatusInGame.InBossFight = false;
         yield return AlignStickStickPositions();
         movement.ResetAllAnimationStates();
         EnemyAnim.CrossFade("Embry_Heavy_Blam", 0, 0);
         movement.StickAnim.CrossFade("Punch (Hold)", 0f, 0);
         AudioP.PlayOneShot(EnemyAI.PlayerStagger);
+        StartCoroutine(movement.CameraScript.ShakeCamGroundFeeling(100, 0.3f));
+       
         movement.StickAnim.enabled = false;
         movement.enabled = false;
         yield return new WaitForSecondsRealtime(0.3f);
         movement.StickAnim.enabled = true;
 
         PlayerReadyToGattle = true;
-
+        movement.rb.simulated = false;
         while (PlayerReadyToGattle)
         {
             float directionToPlayer = movement.transform.position.x >= transform.position.x ? 1f : -1f;
@@ -1195,6 +1232,7 @@ public class Embry_Attach : MonoBehaviour
 
             if (queuedStickStickPunches > 0)
             {
+                StartCoroutine(movement.CameraScript.ShakeCamGroundFeeling(50,0.1f));
                 movement.StickAnim.SetBool("Stick-Stick-G", true);
                 EnemyAnim.SetBool("Hold", true);
                 movement.StickAnim.speed += 0.2f;
@@ -1225,6 +1263,11 @@ public class Embry_Attach : MonoBehaviour
 
     private bool ExtremlyBusy_StopUpdate;
     public ChangeCamSize CCS;
+
+
+
+
+
     private void ResetStickStickState()
     {
         queuedStickStickPunches = 0;
@@ -1248,7 +1291,7 @@ public class Embry_Attach : MonoBehaviour
     private bool ICallItOperationRock_67;
     public IEnumerator EmbryKnockFast_StickStick()
     {
-
+        PlayerStatusInGame.InBossFight = false;
         movement.CameraScript.Stick = StickHandFor_CamMove_StickStick;
 
         Debug.Log("REached EmbryKnockFast");
@@ -1277,7 +1320,7 @@ public class Embry_Attach : MonoBehaviour
         CCS.CamSizeZoomDuration = 0.1f;
         CCS.CamSizeZoomedin = 7.83f;
 
-        yield return new WaitForSecondsRealtime(0.6f);
+        yield return new WaitForSecondsRealtime(1f);
         //yield return new WaitForSecondsRealtime(0.6f);
 
 
@@ -1309,37 +1352,62 @@ public class Embry_Attach : MonoBehaviour
             if(disFromRock > 20)
             {
                 transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
-                transform.position = Vector2.MoveTowards(transform.position, Rock.transform.position, EmbryKnockbackSpeed_StickStick * Time.deltaTime);
+                transform.position = Vector2.MoveTowards(transform.position, Rock.transform.position, 200 * Time.deltaTime);
                 disFromRock = Vector2.Distance(transform.position, Rock.transform.position);
             }
           
             yield return null;
         }
         // just to make the trans smoother
+        PlayerStatusInGame.InBossFight = false;
         movement.CameraScript.Stick = Rock.transform;
         Debug.Log("Switched to RockFocus");
        
         float minDis = 1f;
-        while(disFromRock > minDis)
+
+
+        float timertimout_67 = 0 ;
+        Debug.Log("dis rock loop start");
+
+        while (disFromRock > minDis )
         {
+            timertimout_67 += Time.deltaTime;
+            if(timertimout_67 > 4f)
+            {
+                Debug.Log("dis rock loop fail");
+
+                break;
+            }
             transform.localScale = new Vector3(1,transform.localScale.y,transform.localScale.z);
             transform.position = Vector2.MoveTowards(transform.position, Rock.transform.position, EmbryKnockbackSpeed_StickStick * Time.deltaTime);
             disFromRock = Vector2.Distance(transform.position, Rock.transform.position);
             yield return null;
         }
+        Debug.Log("dis rock loop done");
 
         AnimationTriggerOn_Distance ATD_Rock = Rock.gameObject.GetComponent<AnimationTriggerOn_Distance>();
 
+        Debug.Log("ATD rock loop start");
 
-        while (ATD_Rock.Distance > 70.60243f)
+        float timeer4timeout = 0;
+        while (ATD_Rock.Distance > 70.60243f && timeer4timeout <= 1.5f)
         {
+            if(timeer4timeout >= 1.5f)
+            {
+                Debug.Log("ATD rock loop timeout");
+
+                break;
+            }
+            timeer4timeout += Time.unscaledDeltaTime;
             yield return null;
 
         }
+        Debug.Log("ATD rock loop sucess");
 
         AudioP.PlayOneShot(JetWhoosh);
-        
-        while (timer < EmbryKnockbackDuration_StickStick)
+        Debug.Log("Reached whoosh");
+
+        while (timer < 1)
         {
            // z += 20 * knockDirection;
             //transform.rotation = Quaternion.Euler(0,0,z);
@@ -1349,6 +1417,7 @@ public class Embry_Attach : MonoBehaviour
             yield return null ;
 
         }
+        Debug.Log("loop almost Finished ");
 
 
         CCS.CamSizeZoomDuration = OG_CAMCCG_ZOOM_TIME;
@@ -1357,18 +1426,37 @@ public class Embry_Attach : MonoBehaviour
         Physics2D.IgnoreCollision(Bxcd, Sbxcd, false);
         SetScriptedPhysicsLock(false);
         ResetStickStickState();
+        movement.CameraScript.StickCam.gameObject.SetActive(true);
+        movement.CameraScript.StickCam.enabled = true;
+
         movement.rb.simulated = true;
         movement.enabled = true;
+        movement.CameraScript.Stick = movement.transform;
         movement.ResetAllAnimationStates();
+        PlayerStatusInGame.InBossFight = true;
+        while(movement.CameraScript.Stick != movement.transform)
+        {
+            ResetCamera();
+            yield return null;
+        }
+        Debug.Log("loop Finished Yay"); 
+        yield break;
 
     }
+
+
+    void ResetCamera()
+    {
+        movement.CameraScript.Stick = movement.transform;
+    }
+
 
     public Transform Hand;
 
     public void DirectionalCam()
     {
         CameraScript CS = movement.CameraScript;
-        StartCoroutine(CS.ShakeCamDirection(10,0.2f,transform));
+        StartCoroutine(CS.ShakeCamDirection(10,0.2f,transform,false));
     }
 
 

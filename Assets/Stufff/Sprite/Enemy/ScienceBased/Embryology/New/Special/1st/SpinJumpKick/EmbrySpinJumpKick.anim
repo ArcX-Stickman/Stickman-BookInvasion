@@ -374,3 +374,17 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.4
+    functionName: DiretionCamShakeVert
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: -1
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.3666667
+    functionName: DiretionCamShakeVert
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 1
+    intParameter: 0
+    messageOptions: 0
