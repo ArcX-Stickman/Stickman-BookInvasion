@@ -31,7 +31,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.5833333
+        time: 0.38333333
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -40,7 +40,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.68333334
+        time: 0.48333332
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -49,7 +49,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 1.0333333
+        time: 0.8333333
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -58,7 +58,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 1.1833333
+        time: 0.98333335
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -79,37 +79,37 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: 21300000, guid: 023429ca5abe5454195f1a7a4933be43, type: 3}
-    - time: 0.083333336
+    - time: 0.033333335
       value: {fileID: 21300000, guid: 1fb415c7431498b44ba2a61cedca34c9, type: 3}
-    - time: 0.16666667
+    - time: 0.06666667
       value: {fileID: 21300000, guid: ebebfe8764f357e4cbb026fa8a426566, type: 3}
-    - time: 0.25
+    - time: 0.1
       value: {fileID: 21300000, guid: 11bc2e641fa8be4418e999b5d6a7a987, type: 3}
-    - time: 0.33333334
+    - time: 0.16666667
       value: {fileID: 21300000, guid: 6bf77987b2e918c4fb200b873c427e6b, type: 3}
-    - time: 0.41666666
+    - time: 0.21666667
       value: {fileID: 21300000, guid: 73fe57e9e0cdd2e48902f0ee2a67b411, type: 3}
-    - time: 0.5
+    - time: 0.3
       value: {fileID: 21300000, guid: cd8236bca4f7b354ca048eb61deeee8f, type: 3}
-    - time: 0.5833333
+    - time: 0.38333333
       value: {fileID: 21300000, guid: 499ebe2e08ef2be4eb2de530a0e10c30, type: 3}
-    - time: 0.6666667
+    - time: 0.46666667
       value: {fileID: 21300000, guid: fb75ffcb5f167784c8b08c2560bba1c3, type: 3}
-    - time: 0.75
+    - time: 0.55
       value: {fileID: 21300000, guid: 5c79181381bba4947897e2cc65c85ddd, type: 3}
-    - time: 0.8333333
+    - time: 0.6333333
       value: {fileID: 21300000, guid: 9660e1a7cdd36c245b18946dc2a0f412, type: 3}
-    - time: 0.9166667
+    - time: 0.71666664
       value: {fileID: 21300000, guid: 4cd8c477903720a4d9222e81530ec986, type: 3}
-    - time: 1
+    - time: 0.8
       value: {fileID: 21300000, guid: b5b651318b048514cb5c46c77148e5d9, type: 3}
-    - time: 1.0833334
+    - time: 0.8833333
       value: {fileID: 21300000, guid: d3f28775aa2bf124a87c11a69b367e43, type: 3}
-    - time: 1.1666666
+    - time: 0.96666664
       value: {fileID: 21300000, guid: 2072644c43715714bb68412608bb3c90, type: 3}
-    - time: 1.25
+    - time: 1.05
       value: {fileID: 21300000, guid: e5ff1170c22c21342806c7f791864b30, type: 3}
-    - time: 1.3333334
+    - time: 1.1333333
       value: {fileID: 21300000, guid: 9660e1a7cdd36c245b18946dc2a0f412, type: 3}
     attribute: m_Sprite
     path: 
@@ -194,7 +194,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.5833333
+        time: 0.38333333
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -203,7 +203,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.68333334
+        time: 0.48333332
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -212,7 +212,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 1.0333333
+        time: 0.8333333
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -221,7 +221,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 1.1833333
+        time: 0.98333335
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -255,70 +255,84 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.5
+  - time: 0.21666667
     functionName: DiretionCamShake
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.56666666
+  - time: 0.28333333
     functionName: PunchAnim_Bool_isInPunch
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.5833333
+  - time: 0.3
     functionName: KickWhooshSFX_Play
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.6
+  - time: 0.31666666
     functionName: Punch
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.6666667
+  - time: 0.31666666
+    functionName: ShakeWithSpecificGivenAmount_AnimKey
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 10
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.38333333
     functionName: PunchAnim_Bool_is_NOT_InPunch
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.0166667
+  - time: 0.73333335
     functionName: DiretionCamShake
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.0666667
+  - time: 0.78333336
     functionName: KickWhooshSFX_Play
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.0833334
+  - time: 0.8
+    functionName: ShakeWithSpecificGivenAmount_AnimKey
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 10
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.8
     functionName: Punch
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.0833334
+  - time: 0.8
     functionName: PunchAnim_Bool_isInPunch
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.1166667
+  - time: 0.8333333
     functionName: PunchAnim_Bool_is_NOT_InPunch
     data: 
     objectReferenceParameter: {fileID: 0}

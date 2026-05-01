@@ -376,12 +376,33 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.21666667
+    functionName: ShakeWithSpecificGivenAmount_AnimKey
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 10
+    intParameter: 0
+    messageOptions: 0
   - time: 0.23333333
     functionName: DamagePlayer
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 19
     intParameter: 0
+    messageOptions: 0
+  - time: 0.23333333
+    functionName: ShakeWithSpecificGivenAmount_AnimKey
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 10
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.23333333
+    functionName: PlayerHurtAnimation
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 3
     messageOptions: 0
   - time: 0.35
     functionName: AttackFalse

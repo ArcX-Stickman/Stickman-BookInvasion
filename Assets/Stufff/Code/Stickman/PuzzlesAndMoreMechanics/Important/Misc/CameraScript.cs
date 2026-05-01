@@ -77,6 +77,10 @@ public class CameraScript : MonoBehaviour
             StartCoroutine(DeathCam());
 
         }
+         if (PSIG.InBossFight && !Interupt)
+        {
+            //BossCamManager();
+        }
         if (Psych_Cutscene != null)
         {
             if (Psych_Cutscene.gameObject.activeSelf)
@@ -117,8 +121,15 @@ public class CameraScript : MonoBehaviour
     private Transform StickPOS;
     public bool HoldNeeeded;
     [SerializeField] private Transform InviMidPoint;
+    public Transform BossRoomCam;
+    public bool Interupt;
     public void BossCamManager()
     {
+        if (!Interupt)
+        {
+            Stick = BossRoomCam;
+
+        }
         //if(StickPOS == null)
         //{
         //    StickPOS = StickManager.transform;
@@ -361,30 +372,30 @@ public class CameraScript : MonoBehaviour
         float timeOut = 0.2f;
         float timer4Out = 0;
 
-        while (HoldNeeeded && timer4Out < timeOut)
-        {
-            if (!HoldNeeeded)
-            {
-                Debug.Log("Camera hold wasnt needed");
-                break;
-            }
-            timer4Out += Time.unscaledDeltaTime;
-            elapsed += Time.unscaledDeltaTime;
+        //while (HoldNeeeded && timer4Out < timeOut)
+        //{
+        //    if (!HoldNeeeded)
+        //    {
+        //        Debug.Log("Camera hold wasnt needed");
+        //        break;
+        //    }
+        //    timer4Out += Time.unscaledDeltaTime;
+        //    elapsed += Time.unscaledDeltaTime;
 
-            float t = elapsed / time;
-            float strength = intensity * (1f - t * t);
+        //    float t = elapsed / time;
+        //    float strength = intensity * (1f - t * t);
 
-            transposer.m_TrackedObjectOffset = originalOffset + worldDir * (strength * 0.3f);
+        //    transposer.m_TrackedObjectOffset = originalOffset + worldDir * (strength * 0.3f);
 
-            if(timer4Out >= timeOut)
-            {
-                Debug.Log("Camera hold Timed Out");
-                break;
-            }
+        //    if(timer4Out >= timeOut)
+        //    {
+        //        Debug.Log("Camera hold Timed Out");
+        //        break;
+        //    }
 
 
-            yield return null;
-        }
+        //    yield return null;
+        //}
 
         float returnTime = 0f;
 

@@ -22,6 +22,7 @@ public class ChangeCamSize : MonoBehaviour
 
     public float CamSizeZoomedin;
     public float CamSizeZoomDuration;
+    public float CamSizeZoomDurationModif;
     [SerializeField] private Embry_Attach EmbryCh0AttachScr;
     public float CamSize_Embry;
     private float OGCam;
@@ -39,7 +40,7 @@ public class ChangeCamSize : MonoBehaviour
             {
                 CamSizeZoomedin = CamSize_Embry;
                 CamSizeZoomDuration = 0.1f;
-                CamScript.ZoomTo(CamSizeZoomedin, CamSizeZoomDuration);
+                CamScript.ZoomTo(CamSizeZoomedin, CamSizeZoomDurationModif);
 
             }
             else

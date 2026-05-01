@@ -247,7 +247,7 @@ public class BookAI : MonoBehaviour
 
     [Header("Enemy Stagger Stuff")]
     public bool CanBeHurt;
-    public float VulnerableWindow ;
+    public float VulnerableWindow;
 
     private float vulnerableEndTime;
 
@@ -263,6 +263,8 @@ public class BookAI : MonoBehaviour
     public TextMeshProUGUI TutTXT;
     public bool isTutorial;
     public int TimesHitPlayer;
+    [Header("Note : MaxPunchesForPlayerKnockbnack_EnemyPunches becomes 3 if theres no value")]
+    public int MaxPunchesForPlayerKnockbnack_EnemyPunches;
 
     [Header("Misc Stuff")]
     public DirectionalCam DirecCam;
@@ -271,6 +273,11 @@ public class BookAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (MaxPunchesForPlayerKnockbnack_EnemyPunches <= 0)
+        {
+            Debug.LogWarning("Yo MaxPunchesForPlayerKnockbnack_EnemyPunches is 0 so we makin it 3 alr?");
+            MaxPunchesForPlayerKnockbnack_EnemyPunches = 3;
+        }
         StartUPAI();
     }
 
@@ -292,12 +299,46 @@ public class BookAI : MonoBehaviour
     }
 
     // Update is called once per frame
+
+
+    public void AnimationExtraStuff()
+    {
+        if (EnemyAnim.GetBool("Hurt1") || EnemyAnim.GetBool("Hurt2"))
+        {
+            if (!WeHurtAnimReset)
+            {
+                StartCoroutine(HurtAnimReset());
+            }
+        }
+
+        VunerabiltyManager();
+    }
+
+
+    private bool WeHurtAnimReset;
+    private IEnumerator HurtAnimReset()
+    {
+        if (WeHurtAnimReset) yield break;
+        WeHurtAnimReset = true;
+
+        yield return new WaitForSecondsRealtime(0.3f);
+
+        EnemyAnim.ResetTrigger("Hurt1");
+        EnemyAnim.ResetTrigger("Hurt2");
+        WeHurtAnimReset = false;
+        yield break;
+
+
+    }
+
+
+
     void Update()
     {
         if (Health > 0)
         {
             AttackManager();
-            if (Speed > 0 && !isAttacking)
+            if (Speed > 0 && !isAttacking && DistanceFromPlayer > MinDIS_Movement)
             {
                 MoveTowardsPlayer();
             }
@@ -314,12 +355,13 @@ public class BookAI : MonoBehaviour
             CalcTimeAlive();
 
             //Anims
-            VunerabiltyManager();
-
+            AnimationExtraStuff();
             // Tutorial Stuff
             if (!isTutorial) return;
             TutorialManager();
+
         }
+
 
 
 
@@ -328,11 +370,11 @@ public class BookAI : MonoBehaviour
         //Proper Evasion
         if (Time.time >= ResetCD + LastReset && PlayerIsActuallySpammingWHAAAAAAA || Time.time >= ResetCD + 2.5f + LastReset) // enemy has to dodge at somepoints but if player is actually using skill and movement to gain tyhe upper hand lets have gang have some fun
         {
-           EvasionManager();
-           
+            EvasionManager();
+
 
         }
-        if(Time.time >= LastCheckPlayerSpammingIntervals + CheckPlayerSpammingIntervals)
+        if (Time.time >= LastCheckPlayerSpammingIntervals + CheckPlayerSpammingIntervals)
         {
             LastCheckPlayerSpammingIntervals = Time.time;
             StartCoroutine(CheckIfPlayerSpamsTooMuch());
@@ -394,15 +436,15 @@ public class BookAI : MonoBehaviour
         }
     }
 
-    private int hurtAnimIndex = 0; 
-    private int totalHurtAnims = 2;
+    public int hurtAnimIndex = 0;
+    public int totalHurtAnims = 2;
 
 
     public void HurtAnim()
     {
         if (CanBeHurt)
         {
-         
+
             isDodging = true;
             Invoke("DodgeFalse", 0.3f); // Unlock dodging after 0.3 seconds
 
@@ -428,10 +470,10 @@ public class BookAI : MonoBehaviour
                 hurtAnimIndex = 0;
             }
         }
-      
+
     }
 
-   
+
 
     public void CorpseMatch()
     {
@@ -455,7 +497,7 @@ public class BookAI : MonoBehaviour
         {
             return;
         }
-        
+
     }
 
     public void DeathDestory()
@@ -471,7 +513,7 @@ public class BookAI : MonoBehaviour
         // This is solely animaiton based attacks all the attacks are done by using animation key frames
         // This function/void is pretty much just to tell the enemy to do which attack based on what behavior
         //  or state the enemy brain is thinking
-        if(EnemyAnim.GetBool("IdleInterupt") == true)
+        if (EnemyAnim.GetBool("IdleInterupt") == true)
         {
             EnemyAnim.SetBool("IdleInterupt", false);
         }
@@ -535,8 +577,8 @@ public class BookAI : MonoBehaviour
             EnemyAnim.SetBool("Moving", false);
 
         }
-         float groundOffset = 4f;
-         float raycastDistance = 5f;
+        float groundOffset = 4f;
+        float raycastDistance = 5f;
         if (CheckIfGrounded() && Health > 0)
         {
             // Raycast down slightly further than the feet
@@ -646,7 +688,7 @@ public class BookAI : MonoBehaviour
 
     // Extra collision bools i guess
 
-    public bool  MeleeContact;
+    public bool MeleeContact;
 
 
     public float CollisionTick = 0.1f;
@@ -670,7 +712,7 @@ public class BookAI : MonoBehaviour
             LastStickAttack = "Melee";
             HurtAnim();
             StartCoroutine(DirecCam.HoldNUnHold(0.2f));
-            
+
         }
 
         // 3. Bullet Logic (Now protected by the 'if (isDodging) return' above)
@@ -742,11 +784,11 @@ public class BookAI : MonoBehaviour
         Projectile.GetComponent<Projectiles>().isOG = false;
 
         Projectile.transform.localScale = new Vector2(Projectile.transform.localScale.x * shootDirection.x, Projectile.transform.localScale.y);
-        
-        
-        
-        
-        
+
+
+
+
+
         // ----------------------------------------------Extra stuff------------------------------------------------------------------
 
 
@@ -758,8 +800,8 @@ public class BookAI : MonoBehaviour
 
 
         // -------------------------------------------- QTES -------------------------------------------------------------------------
-        
-        if(GN_F_T != null)  // this is for the Geology neuro QTE in the begginign of the game
+
+        if (GN_F_T != null)  // this is for the Geology neuro QTE in the begginign of the game
         {
             GN_F_T.ProjectilesList.Add(Projectile.GetComponent<Projectiles>());
         }
@@ -1046,7 +1088,7 @@ public class BookAI : MonoBehaviour
         // Check if player is punching in range AND we aren't already stunned/hurt
         if (StickManager.PunchBool && DistanceFromPlayer < MinMeleeDistance && !isDodging && CanBeHurt || StickManager.isInPunchAnim && DistanceFromPlayer < MinMeleeDistance && !isDodging && CanBeHurt)
         {
-   
+
             if (UnityEngine.Random.value > 0.5f) // just rng making it so thery can dodge every thing if they dodge evrything ts becomes a souls like
             {
                 DodgeMelee();
@@ -1077,7 +1119,7 @@ public class BookAI : MonoBehaviour
 
     public void PerfectDodgeWindow_ForPlayer()
     {
-        if(StickManager.BackFlip && DistanceFromPlayer <= MinMeleeDistance + 5)
+        if (StickManager.BackFlip && DistanceFromPlayer <= MinMeleeDistance + 5)
         {
             AudioClip rnd = EnemyDodge[UnityEngine.Random.Range(0, EnemyDodge.Length)];
             AudioP_PitchShifter.pitch = UnityEngine.Random.Range(1f, 1.2f);
@@ -1226,7 +1268,7 @@ public class BookAI : MonoBehaviour
         Vector2 newPos = startPos + Vector2.right * 10f * Mathf.Sign(transform.localScale.x);
 
         float timer = 0f;
-        float maxTime = 0.5f; 
+        float maxTime = 0.5f;
 
         while (timer < maxTime)
         {
@@ -1343,7 +1385,7 @@ public class BookAI : MonoBehaviour
         }
         if (StickManager.isInPunchAttach)
         {
-            if(Time.time >= LastMelee + MeleeCD - 0.2f) // adjusments to cd cuz it makes him seem extra desperate
+            if (Time.time >= LastMelee + MeleeCD - 0.2f) // adjusments to cd cuz it makes him seem extra desperate
             {
                 NormalMeleeAttack();
             }
@@ -1475,12 +1517,12 @@ public class BookAI : MonoBehaviour
     public void IdleAnimationManager()
     {
 
-        if(IdleAnim_BeforeSpotted != null && !EnemVision.PlayerSpotted && Health / StartHP > 0.50)
+        if (IdleAnim_BeforeSpotted != null && !EnemVision.PlayerSpotted && Health / StartHP > 0.50)
         {
             overrideController["Idle"] = IdleAnim_BeforeSpotted;
 
         }
-        else if(IdleAnim_BeforeSpotted != null && EnemVision.PlayerSpotted && Health / StartHP > 0.50)
+        else if (IdleAnim_BeforeSpotted != null && EnemVision.PlayerSpotted && Health / StartHP > 0.50)
         {
             overrideController["Idle"] = IdleNormal;
 
@@ -1499,8 +1541,8 @@ public class BookAI : MonoBehaviour
 
             }
         }
-       
-       
+
+
     }
 
 
@@ -1535,13 +1577,14 @@ public class BookAI : MonoBehaviour
     }
 
 
-
+    public float ShakeAmount;
+    public float ShakeDuration;
     public void DamagePlayer(float DMG)
     {
 
         // Extra stuff
 
-        if(GN_F_T != null && GN_F_T.Failed &&  !StickManager.inPlayerKnockbackAlt) // do 3 even though its a low number its for a teaching guide
+        if (GN_F_T != null && GN_F_T.Failed && !StickManager.inPlayerKnockbackAlt) // do 3 even though its a low number its for a teaching guide
         {
             StartCoroutine(TutorialFreeze(KeyCode.Q, "Backflip [Q]"));
             return;
@@ -1553,6 +1596,7 @@ public class BookAI : MonoBehaviour
         ForgivenessSystem(PlayerIsVulnerable());
         if (PlayerIsVulnerable())
         {
+            DirecCam.StickCam.ShakeCamGroundFeeling(ShakeAmount, ShakeDuration);
             TimesHitPlayer += 1;
             EnemyState = EnemyState.Idle;
             StickManager.StickAnim.SetTrigger("Hurt");
@@ -1561,10 +1605,10 @@ public class BookAI : MonoBehaviour
             AudioP_PitchShifter.PlayOneShot(MeleeImpact); // TODO: Change this so you can use a audioclip in the input
             if (!isAttackingHighEnergy)
             {
-                if(TimesPlayerHitUpClose > 3 || PlayerDebuffManager.Paralyzed)
+                if (TimesPlayerHitUpClose > MaxPunchesForPlayerKnockbnack_EnemyPunches || PlayerDebuffManager.Paralyzed)
                 {
                     StickManager.TimeManager.FreezeTime(0.4f);
-                    StickManager.StartCoroutine(StickManager.PlayerKnockBackAltered(KnockbackOnMeleeHorizontalVelocity * 1.3f , KnockbackOnMeleeVerticalVelocity, 1));
+                    StickManager.StartCoroutine(StickManager.PlayerKnockBackAltered(KnockbackOnMeleeHorizontalVelocity * 1.3f, KnockbackOnMeleeVerticalVelocity, 1));
 
                 }
                 else
@@ -1591,7 +1635,7 @@ public class BookAI : MonoBehaviour
         else
         {
 
-            if(GN_F_T != null)
+            if (GN_F_T != null)
             {
                 GN_F_T.TimesPlayedDodged += 1;
             }
@@ -1601,6 +1645,8 @@ public class BookAI : MonoBehaviour
 
     }
 
+
+
     public void DamagePlayer_NoKnockBack(float DMG)
     {
         ForgivenessSystem(PlayerIsVulnerable());
@@ -1609,7 +1655,7 @@ public class BookAI : MonoBehaviour
         {
             TimesHitPlayer += 1;
 
-            if (TimesPlayerHitUpClose > 3)
+            if (TimesPlayerHitUpClose > MaxPunchesForPlayerKnockbnack_EnemyPunches)
             {
                 TimesPlayerHitUpClose = 0;
                 StickManager.TimeManager.FreezeTime(0.4f);
@@ -1620,7 +1666,7 @@ public class BookAI : MonoBehaviour
             StickHP.PlayerHP -= DMG;
             AudioP_PitchShifter.pitch = UnityEngine.Random.Range(0.9f, 1.6f);
             AudioP_PitchShifter.PlayOneShot(MeleeImpact); // TODO: Change this so you can use a audioclip in the input
-           
+
             TimesDamagedPlayer += 1;
 
             if (isAttackingHighEnergy)
@@ -1695,7 +1741,7 @@ public class BookAI : MonoBehaviour
     public bool PlayerIsVulnerable()
     {
         // Only use for melee based attack conditions this wont work on ranged stuff
-        if ( !StickManager.isSliding && !StickManager.isDashing && MeleeRange.StickmanIsHERE && DistanceFromPlayer <= MinMeleeDistance)
+        if (!StickManager.isSliding && !StickManager.isDashing && MeleeRange.StickmanIsHERE && DistanceFromPlayer <= MinMeleeDistance)
         {
             return true;
         }
@@ -2113,7 +2159,7 @@ public class BookAI : MonoBehaviour
         Iframe.gameObject.SetActive(true);
         float currenttime = 0;
         StickManager.TimeManager.FreezeTime(0.1f); // hardcoded cuz ion rrly want anything higher than that num
-        while(currenttime < time)
+        while (currenttime < time)
         {
             currenttime += Time.deltaTime;
             yield return null;
@@ -2122,7 +2168,7 @@ public class BookAI : MonoBehaviour
         MainCam.gameObject.SetActive(true);
         ImpactCam.gameObject.SetActive(false);
 
-        if(col == Color.black)
+        if (col == Color.black)
         {
             col = Color.white;
 
@@ -2293,7 +2339,7 @@ public class BookAI : MonoBehaviour
         {
             // if not hit
 
-            if(DistanceFromPlayer <= MinMeleeDistance + 5)
+            if (DistanceFromPlayer <= MinMeleeDistance + 5)
             {
                 if (PlayerIsActuallySpammingWHAAAAAAA)
                 {
@@ -2404,7 +2450,7 @@ public class BookAI : MonoBehaviour
         yield return new WaitForSecondsRealtime(2);
         GameObject AfterMath = Instantiate(MegaQuakeAfterMath, Boulders.transform.position, Quaternion.identity);
         ObjectPooler.ReturnObjectToPool(Boulders);
-        
+
 
         yield break;
 
@@ -2534,7 +2580,7 @@ public class BookAI : MonoBehaviour
 
     public void AttackTrue()
     {
-        isAttacking  = true;
+        isAttacking = true;
     }
     public void AttackFalse()
     {
@@ -2605,7 +2651,7 @@ public class BookAI : MonoBehaviour
 
     public void TutorialManager()
     {
-        if(GN_F_T != null)
+        if (GN_F_T != null)
         {
 
         }
@@ -2626,6 +2672,14 @@ public class BookAI : MonoBehaviour
                 StickManager.TimeManager.FreezeTime(0.1f);
             }
         }
-        
+
+    }
+
+    public void HitAnimationKey()
+    {
+        if (PlayerIsVulnerable())
+        {
+            EnemyAnim.SetTrigger("Hit");
+        }
     }
 }

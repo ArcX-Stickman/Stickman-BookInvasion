@@ -6,6 +6,7 @@ using System.Net;
 using System.Threading;
 using System.Xml;
 using TMPro;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
@@ -93,6 +94,7 @@ public class Embry_Attach : MonoBehaviour
     // Defensive stuff
     public bool Vunerable;
 
+   private AnimatorStateInfo EmbryCurState;
 
 
     // Stick- Stick Gatling Scripted Event
@@ -101,6 +103,17 @@ public class Embry_Attach : MonoBehaviour
     //public StickStickGatling StickGat; //this is kinda a OP referenmce you see i said OP cuz ion wanna get copyrighted :0
 
     // Start is called before the first frame update
+
+
+
+
+    public GameObject Impact_Radial_In_Real;
+    public Transform StickHand_IRIR;
+
+
+
+    public AudioClip MassivePunch;
+    public AudioClip Whoosh_AfterMathWind;
     void Start()
     {
         if (BossTheme != null)
@@ -164,8 +177,8 @@ public class Embry_Attach : MonoBehaviour
             Stick_Stick();
         }
 
-
-        if (!StickStickOccuring)
+        EmbryCurState = EnemyAnim.GetCurrentAnimatorStateInfo(0); 
+        if (!StickStickOccuring && !EmbryCurState.IsName("EmbryHurt1") && !EmbryCurState.IsName("EmbryHurt2"))
         {
             if (physicsControlLocked)
             {
@@ -305,8 +318,8 @@ public class Embry_Attach : MonoBehaviour
         {
             if (Time.time >= LastDodgePhase_Move + DodgeCD_Move && !isDodging && !IsBossBusy())
             {
+               
                 IgnoreStickMelee(true);
-
                 LastDodgePhase_Move = Time.time;
                 StartCoroutine(DodgeMove());
             }
@@ -854,6 +867,9 @@ public class Embry_Attach : MonoBehaviour
                 if (collision.CompareTag("StickMelee") && Time.time >= EnemyAI.LastCollisionTick + EnemyAI.CollisionTick && EnemyAI.enabled == false)
                 {
                     if (EnemyAI.isDodging) return;
+                    StartCoroutine(EnemyAI.DirecCam.HoldNUnHold(0.2f));
+
+                    HurtAnim();
                     StartCoroutine(EnemyAI.StickManager.CameraScript.ShakeCamGroundFeeling(UnityEngine.Random.Range(65.6f, 70.0f), UnityEngine.Random.Range(0.2f, 0.5f)));
                     EnemyAI.StickManager.PlayerPunchSFX();
                     EnemyAI.HitMarker.HitMarkerSFX();
@@ -862,7 +878,17 @@ public class Embry_Attach : MonoBehaviour
                     EnemyAI.TimesPlayerDamagedEnemy += 1;
                     EnemyAI.MeleeContact = true;
                     EnemyAI.LastStickAttack = "Melee";
-                    EnemyAI.HurtAnim();
+                    //EnemyAI.HurtAnim();
+                }
+
+
+                if (collision.CompareTag("StickMelee") && EnemyAI.enabled == false)
+                {
+                    if (EnemyAI.isDodging) return;
+
+                    HurtAnim();
+                   
+                    //EnemyAI.HurtAnim();
                 }
             }
 
@@ -885,6 +911,33 @@ public class Embry_Attach : MonoBehaviour
         {
             ICallItOperationRock_67 = true;
         }
+    }
+
+    int hurtAnimIndex = 0;
+    public void HurtAnim()
+    {
+        switch (hurtAnimIndex)
+        {
+            case 0: EnemyAnim.SetTrigger("Hurt1"); break;
+            case 1: EnemyAnim.SetTrigger("Hurt2"); break;
+        }
+
+        switch (hurtAnimIndex)
+        {
+            case 0:
+                EnemyAnim.SetTrigger("Hurt1");
+                break;
+            case 1:
+                EnemyAnim.SetTrigger("Hurt2");
+                break;
+        }
+
+        hurtAnimIndex++;
+        if (hurtAnimIndex > 1)
+        {
+            hurtAnimIndex = 0;
+        }
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -1123,6 +1176,7 @@ public class Embry_Attach : MonoBehaviour
             AlreadyStarted_EmbryKnockFast_StickStick = false;
             Embry_RecivedPunch = false;
             PlayerReadyToGattle = false;
+            movement.CameraScript.Interupt = true;
 
             StartCoroutine(Stick_Stick_ScriptedEvent());
 
@@ -1184,13 +1238,13 @@ public class Embry_Attach : MonoBehaviour
     private float LastPunch_SSG_SuperVersion;
     public IEnumerator Stick_Stick_ScriptedEvent()
     {
-        
+        movement.CameraScript.Interupt = true;
         originalStickStickAnimSpeed = movement.StickAnim.speed;
         bool Contrinue = false;
         while (!Contrinue)
         {
 
-            if(Embry_RecivedPunch && isFacingLeft)
+            if(Embry_RecivedPunch && isFacingLeft && movement.Grounded)
             {
                 Contrinue = true;
             }
@@ -1198,7 +1252,11 @@ public class Embry_Attach : MonoBehaviour
 
             yield return null;
         }
+
+        movement.StopAllCoroutines();
+        movement.enabled = false;
         SetEnemyAIEnabled(false);
+        movement.CameraScript.Stick = movement.transform;
 
 
         //while (!movement.StickAnim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
@@ -1213,8 +1271,26 @@ public class Embry_Attach : MonoBehaviour
         movement.ResetAllAnimationStates();
         EnemyAnim.CrossFade("Embry_Heavy_Blam", 0, 0);
         movement.StickAnim.CrossFade("Punch (Hold)", 0f, 0);
-        AudioP.PlayOneShot(EnemyAI.PlayerStagger);
-        StartCoroutine(movement.CameraScript.ShakeCamGroundFeeling(100, 0.3f));
+
+        // impact fram
+        //Impact_Radial_In_Real.transform.position = StickHand_IRIR.position;
+
+        // wait for the camera to be fully zoomed
+        AudioP.PlayOneShot(MassivePunch);
+
+        while (movement.CameraScript.CamSize != CCS.CamSize_Embry)
+        {
+            yield return null;
+        }
+
+        yield return new WaitForSecondsRealtime(0.6f); // extra gap
+
+        Impact_Radial_In_Real.gameObject.SetActive(true);
+
+        AudioP.PlayOneShot(Whoosh_AfterMathWind);
+        SetEnemyAIEnabled(false);
+
+        StartCoroutine(movement.CameraScript.ShakeCamGroundFeeling(260, 1f));
        
         movement.StickAnim.enabled = false;
         movement.enabled = false;
@@ -1291,6 +1367,8 @@ public class Embry_Attach : MonoBehaviour
     private bool ICallItOperationRock_67;
     public IEnumerator EmbryKnockFast_StickStick()
     {
+        movement.CameraScript.Interupt = true;
+
         PlayerStatusInGame.InBossFight = false;
         movement.CameraScript.Stick = StickHandFor_CamMove_StickStick;
 
@@ -1311,7 +1389,10 @@ public class Embry_Attach : MonoBehaviour
         Debug.Log("REached Slowed");
 
 
-        while (!Embry_RecivedPunch)
+        StickCH0_Anim S0 = FindAnyObjectByType<StickCH0_Anim>();
+
+
+        while (!S0.EmbryPunchShoot)
         {
             Debug.Log("Waiting for  punch");
 
@@ -1320,7 +1401,6 @@ public class Embry_Attach : MonoBehaviour
         CCS.CamSizeZoomDuration = 0.1f;
         CCS.CamSizeZoomedin = 7.83f;
 
-        yield return new WaitForSecondsRealtime(1f);
         //yield return new WaitForSecondsRealtime(0.6f);
 
 
@@ -1434,12 +1514,16 @@ public class Embry_Attach : MonoBehaviour
         movement.CameraScript.Stick = movement.transform;
         movement.ResetAllAnimationStates();
         PlayerStatusInGame.InBossFight = true;
-        while(movement.CameraScript.Stick != movement.transform)
+        movement.StickAnim.CrossFade("Stick", 0.1f, 0);
+
+        while (movement.CameraScript.Stick != movement.transform)
         {
             ResetCamera();
             yield return null;
         }
-        Debug.Log("loop Finished Yay"); 
+        Debug.Log("loop Finished Yay");
+        movement.CameraScript.Interupt = false;
+
         yield break;
 
     }
