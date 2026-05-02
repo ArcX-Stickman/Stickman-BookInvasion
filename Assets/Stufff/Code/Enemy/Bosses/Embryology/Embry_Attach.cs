@@ -1274,6 +1274,7 @@ public class Embry_Attach : MonoBehaviour
 
         // impact fram
         //Impact_Radial_In_Real.transform.position = StickHand_IRIR.position;
+        StartCoroutine(movement.CameraScript.ShakeCamGroundFeeling(100, 0.5f));
 
         // wait for the camera to be fully zoomed
         AudioP.PlayOneShot(MassivePunch);
@@ -1290,7 +1291,6 @@ public class Embry_Attach : MonoBehaviour
         AudioP.PlayOneShot(Whoosh_AfterMathWind);
         SetEnemyAIEnabled(false);
 
-        StartCoroutine(movement.CameraScript.ShakeCamGroundFeeling(260, 1f));
        
         movement.StickAnim.enabled = false;
         movement.enabled = false;
@@ -1365,6 +1365,7 @@ public class Embry_Attach : MonoBehaviour
     public Transform Rock;
     public Animator RockAnim;
     private bool ICallItOperationRock_67;
+    public GameObject SmokeRock;
     public IEnumerator EmbryKnockFast_StickStick()
     {
         movement.CameraScript.Interupt = true;
@@ -1448,6 +1449,7 @@ public class Embry_Attach : MonoBehaviour
 
         float timertimout_67 = 0 ;
         Debug.Log("dis rock loop start");
+        AudioP.PlayOneShot(JetWhoosh);
 
         while (disFromRock > minDis )
         {
@@ -1465,40 +1467,29 @@ public class Embry_Attach : MonoBehaviour
         }
         Debug.Log("dis rock loop done");
 
-        AnimationTriggerOn_Distance ATD_Rock = Rock.gameObject.GetComponent<AnimationTriggerOn_Distance>();
+        SmokeRock.gameObject.SetActive(true);
 
-        Debug.Log("ATD rock loop start");
+        Debug.Log("Reached whoosh");
 
-        float timeer4timeout = 0;
-        while (ATD_Rock.Distance > 70.60243f && timeer4timeout <= 1.5f)
+        
+        Debug.Log("loop almost Finished ");
+
+        timer = 0;
+        while (timer < 1)
         {
-            if(timeer4timeout >= 1.5f)
-            {
-                Debug.Log("ATD rock loop timeout");
-
-                break;
-            }
-            timeer4timeout += Time.unscaledDeltaTime;
+            // z += 20 * knockDirection;
+            //transform.rotation = Quaternion.Euler(0,0,z);
+            Vector2 nextPosition = rb.position + Vector2.right * EmbryKnockbackSpeed_StickStick * Time.deltaTime;
+            rb.MovePosition(nextPosition);
+            timer += Time.deltaTime;
             yield return null;
 
         }
-        Debug.Log("ATD rock loop sucess");
 
-        AudioP.PlayOneShot(JetWhoosh);
-        Debug.Log("Reached whoosh");
 
-        while (timer < 1)
-        {
-           // z += 20 * knockDirection;
-            //transform.rotation = Quaternion.Euler(0,0,z);
-            Vector2 nextPosition = rb.position + Vector2.right  * EmbryKnockbackSpeed_StickStick * Time.deltaTime;
-            rb.MovePosition(nextPosition);
-            timer += Time.deltaTime;
-            yield return null ;
 
-        }
-        Debug.Log("loop almost Finished ");
 
+        yield return new WaitForSecondsRealtime(3);
 
         CCS.CamSizeZoomDuration = OG_CAMCCG_ZOOM_TIME;
         CCS.CamSizeZoomedin = OG_CAMCCG_ZOOMED_IN;
