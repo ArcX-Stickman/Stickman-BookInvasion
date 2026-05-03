@@ -54,7 +54,7 @@ public class BookAI : MonoBehaviour
 
     [Header("Enemy Booleans")]
     //public bool HighEnergyHappened;
-    private bool isAttackingHighEnergy;
+    public bool isAttackingHighEnergy;
 
 
     [Header("Enemy Basic Data")]
@@ -107,6 +107,7 @@ public class BookAI : MonoBehaviour
     public GameObject MeleeAttackImpactFX;
     public float RangedAttackFX;
     public GameObject HighEnergyAttackFX;
+    public GameObject DamageFX_book;
 
 
     [Header("Enemy Knowledge On The Player")]
@@ -702,6 +703,9 @@ public class BookAI : MonoBehaviour
         if (collion.CompareTag("StickMelee") && Time.time >= LastCollisionTick + CollisionTick)
         {
             if (isDodging) return;
+
+            StartCoroutine(BookFX_DMG());
+
             StartCoroutine(StickManager.CameraScript.ShakeCamGroundFeeling(UnityEngine.Random.Range(65.6f, 70.0f), UnityEngine.Random.Range(0.2f, 0.5f)));
             StickManager.PlayerPunchSFX();
             HitMarker.HitMarkerSFX();
@@ -726,6 +730,20 @@ public class BookAI : MonoBehaviour
             Destroy(collion.gameObject);
         }
     }
+
+    public IEnumerator BookFX_DMG()
+    {
+        if (DamageFX_book == null) yield break;
+        DamageFX_book.gameObject.SetActive(false);
+
+        yield return new WaitForSecondsRealtime(0.001f);
+
+
+        DamageFX_book.gameObject.SetActive(true);
+
+
+    }
+
 
     // private IEnumerator EnemyFlash()
     // {
@@ -1407,7 +1425,7 @@ public class BookAI : MonoBehaviour
         //{
         //    // Charge Up Knockback Melee Attack
         //}
-        else if (StickmanState == StickmanState.Pushing && EnemyBehavior == EnemyBehavior.OverConfident
+        if (StickmanState == StickmanState.Pushing && EnemyBehavior == EnemyBehavior.OverConfident
         && Time.time >= LastHighEnergyAttack + HighEnergyAttackCD || EnemyBehavior == EnemyBehavior.OverConfident && Time.time >= LastHighEnergyAttack + HighEnergyAttackCD && HasParameter(EnemyAnim, "HighEnergy", AnimatorControllerParameterType.Trigger))// like when the player is tryna aggresive head towards the enemy
         {
             HighEnergyRangedAttack();
@@ -1418,12 +1436,9 @@ public class BookAI : MonoBehaviour
             MiniRangedAttack();
         }
 
-        if (StickManager.isInPunchAttach)
+        if (Time.time >= LastMelee + MeleeCD + 0.9f) // dont do it too often cuz it can get annoying as hell
         {
-            if (Time.time >= LastMelee + MeleeCD + 0.9f) // dont do it too often cuz it can get annoying as hell
-            {
-                NormalMeleeAttack();
-            }
+            NormalMeleeAttack();
         }
     }
 
@@ -1480,21 +1495,8 @@ public class BookAI : MonoBehaviour
             Debug.Log("Hangling Enemy's Neutral Close");
 
         }
-        if (StickmanState == StickmanState.InAir && StickmanBehavior == StickmanBehavior.Acrobatic)
-        {
-            // Do an Air block attack that knockbacks player
-        }
-
-        if (StickManager.isSliding && StickmanBehavior == StickmanBehavior.NoSkill_Spammer
-        && StickmanBehavior == StickmanBehavior.Evasive)
-        {
-            // Punish for player for being too evasive and only relying on evasion
-        }
-        else if (StickmanState == StickmanState.Neutral)
-        {
-            // either do first melee attack or second one
-        }
-        else if (StickmanState == StickmanState.Pushing && EnemyBehavior != EnemyBehavior.OverConfident || Time.time >= MeleeCD + LastMelee && StickManager.isInPunchAttach)// like when the player is tryna aggresive head towards the enemy
+      
+         if (StickmanState == StickmanState.Pushing && EnemyBehavior != EnemyBehavior.OverConfident || Time.time >= MeleeCD + LastMelee )// like when the player is tryna aggresive head towards the enemy
         {
             NormalMeleeAttack();
         }
@@ -1596,6 +1598,9 @@ public class BookAI : MonoBehaviour
         ForgivenessSystem(PlayerIsVulnerable());
         if (PlayerIsVulnerable())
         {
+            StartCoroutine(DamageAnimationFlash());
+
+
             DirecCam.StickCam.ShakeCamGroundFeeling(ShakeAmount, ShakeDuration);
             TimesHitPlayer += 1;
             EnemyState = EnemyState.Idle;
@@ -1644,8 +1649,16 @@ public class BookAI : MonoBehaviour
         }
 
     }
+    public IEnumerator DamageAnimationFlash()
+    {
+        StickManager.DamageMotionLines.gameObject.SetActive(false);
 
+        yield return new WaitForSecondsRealtime(0.01f);
 
+        StickManager.DamageMotionLines.gameObject.SetActive(true);
+
+        yield break;
+    }
 
     public void DamagePlayer_NoKnockBack(float DMG)
     {
@@ -1653,6 +1666,8 @@ public class BookAI : MonoBehaviour
 
         if (PlayerIsVulnerable())
         {
+            StartCoroutine(DamageAnimationFlash());
+
             TimesHitPlayer += 1;
 
             if (TimesPlayerHitUpClose > MaxPunchesForPlayerKnockbnack_EnemyPunches)
@@ -1695,6 +1710,9 @@ public class BookAI : MonoBehaviour
 
         if (PlayerIsVulnerable())
         {
+            StartCoroutine(DamageAnimationFlash());
+
+
             TimesHitPlayer += 1;
 
             EnemyState = EnemyState.Idle;

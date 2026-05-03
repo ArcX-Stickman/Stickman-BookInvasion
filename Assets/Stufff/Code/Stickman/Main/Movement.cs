@@ -164,6 +164,8 @@ public class Movement : MonoBehaviour
     public float AttachSpeed;
     public AudioClip MegaPunch;
     public AudioClip RopeShift;
+    public int punchIndex = -1;
+
 
     [Header("Progression Values ")]
     // Progression Values
@@ -329,6 +331,7 @@ public class Movement : MonoBehaviour
     public GameObject GroundImpactFX;
     public GameObject GroundImpactFXSmoke;
     public ParticleSystem DashSmoke;
+    public GameObject DamageMotionLines;
 
     [Header(" Gravity Stuff With RigidBody and stuff ")]
 
@@ -365,6 +368,7 @@ public class Movement : MonoBehaviour
     public AnimationClip RunHighOctane;
     private AnimatorOverrideController overrideController;
     public bool HighOctane_Needed;
+    public bool inKick;
 
 
     void Start()
@@ -840,8 +844,8 @@ public class Movement : MonoBehaviour
             ComboCount = 0;
         }
 
-        HeldPunch = Input.GetButton("Fire2") & Input.GetKeyDown(KeyCode.LeftShift);
-        if (Input.GetButton("Fire2") && !HeldPunch)
+        HeldPunch = Input.GetButton("Fire2") & Input.GetKey(KeyCode.LeftShift);
+        if (Input.GetButtonDown("Fire2") && !HeldPunch)
         {
 
             if (Time.time >= lastPunchTime + MeleeCD && !BackFlip || isInPerfectDodge)
@@ -3385,18 +3389,22 @@ public class Movement : MonoBehaviour
     }
 
 
-    private int punchIndex = -1;
 
-
+    private bool inPunchVoidAnim;
     public void PunchAnimManager()
     {
-        if (isInPunchAnim) return;
+
+        if (inPunchVoidAnim) return;
+        if (isInPunchAnim || inKick || PunchBool) return;
 
         bool KickAnim = (StickAnim.GetCurrentAnimatorStateInfo(0).IsName("StickKick"));
+        bool DontMakeMoreIndexxGrr = false;
+
+        inPunchVoidAnim = true;
 
 
-            if (Grounded && !KickAnim && !AlrAttaching)
-        {
+            if (Grounded && !KickAnim && !AlrAttaching && !inKick)
+            {
             switch (punchIndex)
             {
                 case 0:
@@ -3424,12 +3432,19 @@ public class Movement : MonoBehaviour
                 
             }
         }
-        
 
-        punchIndex++;
+        if (!DontMakeMoreIndexxGrr)
+        {
+            DontMakeMoreIndexxGrr = true;
+
+            punchIndex += 1 ;
+
+        }
 
         if (punchIndex > 2)
             punchIndex = -1;
+        inPunchVoidAnim = false;
+        return;
     }
 
 

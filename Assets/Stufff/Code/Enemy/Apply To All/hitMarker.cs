@@ -57,9 +57,14 @@ public class HitMarker : MonoBehaviour
 
         if (isForced)
         {
-           
-            GameObject effect = ObjectPooler.SpawnObj(FX, FXPOS.position, Quaternion.identity,ObjectPooler.PoolingType = ObjectPooler.PoolType.Partcles);
-            if (DirectionMustMatchTarget)
+            GameObject effect = null;
+
+            if (FX != null)
+            {
+                effect = ObjectPooler.SpawnObj(FX, FXPOS.position, Quaternion.identity, ObjectPooler.PoolingType = ObjectPooler.PoolType.Partcles);
+
+            }
+            if (DirectionMustMatchTarget && FX != null)
             {
                 Vector3 scale = new Vector3(transform.localScale.x, effect.transform.localScale.y, effect.transform.localScale.z);
                 effect.transform.localScale = scale;

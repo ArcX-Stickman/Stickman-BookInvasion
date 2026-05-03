@@ -1,12 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Net;
-using System.Threading;
-using System.Xml;
 using TMPro;
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
@@ -114,8 +109,13 @@ public class Embry_Attach : MonoBehaviour
 
     public AudioClip MassivePunch;
     public AudioClip Whoosh_AfterMathWind;
+    public GrassAnimationCode GrassEventManager;
+
+
+
     void Start()
     {
+        BookFXDMG_SR = EnemyAI.DamageFX_book.GetComponent<SpriteRenderer>();
         if (BossTheme != null)
         {
             BossTheme.gameObject.SetActive(false);
@@ -142,7 +142,7 @@ public class Embry_Attach : MonoBehaviour
     }
 
     private bool OP34243242467676;
-
+    private SpriteRenderer BookFXDMG_SR;
 
     [SerializeField] private int TimesStick_Stick = 0;
     [SerializeField] private int StickStick_TimesNeeded = 25;
@@ -151,6 +151,18 @@ public class Embry_Attach : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (StickStickOccuring)
+        {
+           
+            BookFXDMG_SR.enabled = false;
+        }
+        else
+        {
+            BookFXDMG_SR.enabled = true;
+
+        }
+
 
         if (ExtremlyBusy_StopUpdate) return;
 
@@ -252,7 +264,10 @@ public class Embry_Attach : MonoBehaviour
         }
 
 
-       
+        if (Time.time >= EnemyAI.MeleeCD + EnemyAI.LastMelee )// like when the player is tryna aggresive head towards the enemy
+        {
+            NormalMeleeAttack();
+        }
 
     }
 
@@ -848,12 +863,27 @@ public class Embry_Attach : MonoBehaviour
     }
 
 
-
+    public GameObject FXBookNor;
     private bool TouchingPlayer;
+
+
+    private float LastFX_SSG;
+    private float FXSSGCD = 0.3f;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("StickMelee"))
         {
+
+
+
+            if (PlayerReadyToGattle && StickStickOccuring && Time.time >= LastFX_SSG + FXSSGCD)
+            {
+                LastFX_SSG = Time.time;
+                 GameObject effect = ObjectPooler.SpawnObj(FXBookNor, EnemyAI.HitMarker.FXPOS.position, Quaternion.identity, ObjectPooler.PoolingType = ObjectPooler.PoolType.Partcles);
+            }
+
+
+
 
             if (!isDodging)
             {
@@ -1287,7 +1317,7 @@ public class Embry_Attach : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.6f); // extra gap
 
         Impact_Radial_In_Real.gameObject.SetActive(true);
-
+        StartCoroutine(GrassEventManager.WindyForABit(3, 2.5f));
         AudioP.PlayOneShot(Whoosh_AfterMathWind);
         SetEnemyAIEnabled(false);
 
@@ -1555,6 +1585,24 @@ public class Embry_Attach : MonoBehaviour
     public void GroundAttack_Enabled()
     {
         Ten_Ground_ATK.gameObject.SetActive(true);
+    }
+
+
+    // extra
+
+
+
+    public void NormalMeleeAttack()
+    {
+        // litteraly a punch what did ya think
+        EnemyAI.LastMelee = Time.time;
+        EnemyAI.isAttackingHighEnergy = false;
+        //FollowUpPunchFinish = false;
+
+        // Follow Up
+        EnemyAnim.SetTrigger("NormMelee");
+
+
     }
 
 
