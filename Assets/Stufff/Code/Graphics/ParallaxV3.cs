@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[ExecuteAlways]
 public class ParallaxV3 : MonoBehaviour
 {
     [Tooltip("0 = far away (barely moves), 1 = same as camera (no parallax).")]
@@ -12,7 +11,6 @@ public class ParallaxV3 : MonoBehaviour
     private Transform cam;
     private Vector3 startPos;
     private Vector3 camStartPos;
-
     void Start()
     {
         cam = Camera.main.transform;
@@ -34,6 +32,11 @@ public class ParallaxV3 : MonoBehaviour
         Vector3 newPos = startPos + camDelta * parallaxStrength;
 
         transform.position = newPos;
+
+
+
+
+
     }
 
 

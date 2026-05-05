@@ -15,6 +15,9 @@ public class Shockwave : MonoBehaviour
     public float Distance;
     public AudioSource AudioP;
     public AudioClip Hit;
+
+
+    
     void Update()
     {
         if(Left != null && Right != null)
@@ -37,6 +40,18 @@ public class Shockwave : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
+        {
+            AudioP.PlayOneShot(Hit);
+            StickManager.StickAnim.CrossFade("Stick_Mega_Hurt", 0, 0);
+            StickManager.CameraScript.StartCoroutine(StickManager.CameraScript.ShakeCam(3.5f, 0.15f));
+            PlayerHP.PlayerHP -= DMG;
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
         {
             AudioP.PlayOneShot(Hit);
             StickManager.StickAnim.CrossFade("Stick_Mega_Hurt", 0, 0);

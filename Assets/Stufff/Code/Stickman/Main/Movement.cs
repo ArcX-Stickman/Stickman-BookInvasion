@@ -845,7 +845,7 @@ public class Movement : MonoBehaviour
         }
 
         HeldPunch = Input.GetButton("Fire2") & Input.GetKey(KeyCode.LeftShift);
-        if (Input.GetButtonDown("Fire2") && !HeldPunch)
+        if (Input.GetButton("Fire2") && !HeldPunch)
         {
 
             if (Time.time >= lastPunchTime + MeleeCD && !BackFlip || isInPerfectDodge)

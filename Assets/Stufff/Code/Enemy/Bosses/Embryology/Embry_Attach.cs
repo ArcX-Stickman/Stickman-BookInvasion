@@ -110,8 +110,11 @@ public class Embry_Attach : MonoBehaviour
     public AudioClip MassivePunch;
     public AudioClip Whoosh_AfterMathWind;
     public GrassAnimationCode GrassEventManager;
+    public GameObject ShockWaveObj;
+    public GameObject ShockWaveObj2;
 
 
+    public Transform ShockWavePOS;
 
     void Start()
     {
@@ -264,12 +267,15 @@ public class Embry_Attach : MonoBehaviour
         }
 
 
-        if (Time.time >= EnemyAI.MeleeCD + EnemyAI.LastMelee )// like when the player is tryna aggresive head towards the enemy
+        if (Time.time >= EnemyAI.MeleeCD + EnemyAI.LastMelee && EnemyAI.PlayerIsVulnerable() )// like when the player is tryna aggresive head towards the enemy
         {
+            
             NormalMeleeAttack();
         }
 
     }
+
+  
 
     public void ExtraVoids()
     {
@@ -836,6 +842,19 @@ public class Embry_Attach : MonoBehaviour
         }
         // EnemyAI.SpawnGroundDecal(new Vector2(FakeStickPos.x,transform.position.y - 5));  -- add ts back when you make it work
         Instantiate(FX_Dirt.gameObject, new Vector2(FakeStickPos.x, rb.position.y - 5), Quaternion.identity);
+
+        GameObject Shock = Instantiate(ShockWaveObj, ShockWavePOS.transform.position, Quaternion.identity);
+        GameObject Shock2 = Instantiate(ShockWaveObj2, ShockWavePOS.transform.position, Quaternion.identity);
+
+        Shockwave SW1 = Shock.GetComponent<Shockwave>();
+        SW1.isOG = false;
+        Shockwave SW2 = Shock.GetComponent<Shockwave>();
+        SW2.isOG = false;
+
+
+        //Shockwave ShockShock = Shock.gameObject.GetComponent<Shockwave>();
+
+        ////ShockShock.enabled = true;
 
         //while (checker < maxcheck)
         //{
