@@ -7,7 +7,15 @@ public class DirectionalCam : MonoBehaviour
 
     public CameraScript StickCam;
     public bool Flip;
+    public float HoriShake;
 
+    private void Start()
+    {
+        if (HoriShake <= 0) 
+        {
+            HoriShake = 5.5f;
+        }
+    }
     public void CamHold()
     {
         StickCam.HoldNeeeded = true;
@@ -22,7 +30,7 @@ public class DirectionalCam : MonoBehaviour
     public void DiretionCamShake()
     {
         CameraScript CS = StickCam;
-        StartCoroutine(CS.ShakeCamDirection(5.5f, 0.2f, transform,Flip));
+        StartCoroutine(CS.ShakeCamDirection(HoriShake, 0.2f, transform,Flip));
     }
     public void DiretionCamShakeVert(float Upf)
     {

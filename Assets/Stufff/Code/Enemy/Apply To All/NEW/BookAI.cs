@@ -715,7 +715,7 @@ public class BookAI : MonoBehaviour
             MeleeContact = true;
             LastStickAttack = "Melee";
             HurtAnim();
-            StartCoroutine(DirecCam.HoldNUnHold(0.2f));
+          
 
         }
 

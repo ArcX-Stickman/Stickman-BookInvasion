@@ -403299,7 +403299,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &158062195
 Transform:
   m_ObjectHideFlags: 0
@@ -3215903,6 +3215903,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StickCam: {fileID: 272675440}
   Flip: 1
+  HoriShake: 9.8
 --- !u!114 &5450228803025898682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3232982,6 +3232983,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StickCam: {fileID: 272675440}
   Flip: 0
+  HoriShake: 0
 --- !u!114 &9036904891369936178
 MonoBehaviour:
   m_ObjectHideFlags: 0

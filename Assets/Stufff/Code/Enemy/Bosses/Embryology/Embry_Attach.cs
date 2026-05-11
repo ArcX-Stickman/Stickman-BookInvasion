@@ -751,9 +751,15 @@ public class Embry_Attach : MonoBehaviour
     public bool AnimatiorBoolJumpReady;
 
     private bool InLaunchKick;
+
     public IEnumerator LaunchKick()
     {
         yield return new WaitForSecondsRealtime(0.4f);
+
+
+        BoxCollider2D boxCollider2D = GetComponent<BoxCollider2D>();
+        Physics2D.IgnoreCollision(boxCollider2D,movement.StickCollider , true);
+
         SetScriptedPhysicsLock(true);
         isAttachedVer_Attack = true;
 
@@ -831,7 +837,6 @@ public class Embry_Attach : MonoBehaviour
 
         if (TouchingPlayer)
         {
-            StartCoroutine(movement.PlayerKnockBack(5, 0, 0.5f));
             EnemyAI.DamagePlayer(25);
 
         }
@@ -873,6 +878,7 @@ public class Embry_Attach : MonoBehaviour
             HasDone1stLandKick = true;
 
         }
+        Physics2D.IgnoreCollision(boxCollider2D, movement.StickCollider, false);
 
 
         yield return new WaitForSecondsRealtime(3);

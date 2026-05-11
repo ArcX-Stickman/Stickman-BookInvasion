@@ -352,13 +352,6 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.31666666
-    functionName: ShakeWithSpecificGivenAmount_AnimKey
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 10
-    intParameter: 0
-    messageOptions: 0
   - time: 0.38333333
     functionName: PunchAnim_Bool_is_NOT_InPunch
     data: 
@@ -378,13 +371,6 @@ AnimationClip:
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.8
-    functionName: ShakeWithSpecificGivenAmount_AnimKey
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 10
     intParameter: 0
     messageOptions: 0
   - time: 0.8
