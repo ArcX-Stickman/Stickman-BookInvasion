@@ -334,8 +334,7 @@ public class Embry_Attach : MonoBehaviour
         bool punchStarted = movement.PunchBool && !lastPunchState;
 
         if (punchStarted && EnemyAI.DistanceFromPlayer <= EnemyAI.MinMeleeDistance + 5 || movement.StickAnim.GetCurrentAnimatorStateInfo(0).IsName("Punch")
-            && EnemyAI.DistanceFromPlayer <= EnemyAI.MinMeleeDistance + 5
-            || movement.StickAnim.GetCurrentAnimatorStateInfo(0).IsName("StickKick") && EnemyAI.DistanceFromPlayer <= EnemyAI.MinMeleeDistance + 5)
+            && EnemyAI.DistanceFromPlayer <= EnemyAI.MinMeleeDistance + 5 || movement.StickAnim.GetCurrentAnimatorStateInfo(0).IsName("StickKick") && EnemyAI.DistanceFromPlayer <= EnemyAI.MinMeleeDistance + 5)
         {
             if (Time.time >= LastDodgePhase_Move + DodgeCD_Move && !isDodging && !IsBossBusy())
             {

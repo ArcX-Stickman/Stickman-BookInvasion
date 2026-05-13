@@ -1869729,7 +1869729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97d2b84aef88d244a962a7b5c6be4e66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DBM: {fileID: 1088668717}
+  DBM: {fileID: 0}
   StickBoi: {fileID: 228098106}
   StickBoiObj: {fileID: 228098100}
   MinDis: 10
@@ -3191903,7 +3191903,7 @@ MonoBehaviour:
   slider: {fileID: 1336559401}
   movement: {fileID: 228098106}
   LastLaunchKick: 0
-  LauchCD: 4
+  LauchCD: 11.95
   Y_Axis_Launch: 161.9
   Tendril: {fileID: 1150782273}
   SpawnTen: {fileID: 8300000, guid: 015b8219985eb864282235e44fafe92a, type: 3}
@@ -3221072,7 +3221072,7 @@ MonoBehaviour:
   StickmanBehavior: 0
   StickmanState: 0
   isAttackingHighEnergy: 0
-  Health: 105
+  Health: 100
   HitMarker: {fileID: 9036904891369936176}
   EnemyAnim: {fileID: 7800953102998033775}
   DistanceFromPlayer: 0
