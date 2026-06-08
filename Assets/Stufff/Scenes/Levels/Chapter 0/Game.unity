@@ -9592,7 +9592,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 13573.903
+  currentDistance: 11465.436
   player: {fileID: 228098103}
   light2D: {fileID: 55675557}
 --- !u!114 &55675560
@@ -9919,7 +9919,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 500
-  currentDistance: 6732.2266
+  currentDistance: 4627.3936
   player: {fileID: 228098103}
   light2D: {fileID: 55732158}
 --- !u!114 &55732162
@@ -11627,7 +11627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 13386.677
+  currentDistance: 11278.254
   player: {fileID: 228098103}
   light2D: {fileID: 64404771}
 --- !u!114 &64404774
@@ -399247,7 +399247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 13749.13
+  currentDistance: 11640.411
   player: {fileID: 228098103}
   light2D: {fileID: 136491605}
 --- !u!114 &136491605 stripped
@@ -401557,7 +401557,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 7378.573
+  currentDistance: 5273.816
   player: {fileID: 228098103}
   light2D: {fileID: 146235517}
 --- !u!114 &146235517 stripped
@@ -403626,7 +403626,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: BarGuy_Hide
-  Distance: 0
+  Distance: 9265.686
   MinDis: 13.29
   Stick: {fileID: 228098106}
   Animator: {fileID: 160827454}
@@ -410992,8 +410992,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 395125691
+  m_SortingLayer: 7
   m_SortingOrder: 1911
   m_Sprite: {fileID: 21300000, guid: f0d15a3a0b7d2b148bbfad5782dadc00, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -411837,7 +411837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 13274.9795
+  currentDistance: 11166.584
   player: {fileID: 228098103}
   light2D: {fileID: 176513911}
 --- !u!114 &176513914
@@ -427390,7 +427390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 13623.829
+  currentDistance: 11515.35
   player: {fileID: 228098103}
   light2D: {fileID: 223944361}
 --- !u!114 &223944364
@@ -429669,7 +429669,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Bio_Dead
-  Distance: 0
+  Distance: 2379.05
   MinDis: 47.8
   Stick: {fileID: 228098106}
   Animator: {fileID: 681625897}
@@ -430992,11 +430992,11 @@ PrefabInstance:
       objectReference: {fileID: 590502044}
     - target: {fileID: 4499751089060001759, guid: be34aded37374bd4a91e9529ba126f44, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4499751089060001759, guid: be34aded37374bd4a91e9529ba126f44, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4510298501944609075, guid: be34aded37374bd4a91e9529ba126f44, type: 3}
       propertyPath: m_LocalPosition.x
@@ -433605,7 +433605,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 6361.0234
+  currentDistance: 4256.81
   player: {fileID: 228098103}
   light2D: {fileID: 258597750}
 --- !u!114 &258597750 stripped
@@ -448476,7 +448476,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 6046.0815
+  currentDistance: 3943.857
   player: {fileID: 228098103}
   light2D: {fileID: 320061511}
 --- !u!114 &320061511 stripped
@@ -448689,7 +448689,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 13805.18
+  currentDistance: 11696.659
   player: {fileID: 228098103}
   light2D: {fileID: 320530732}
 --- !u!114 &320530735
@@ -450753,7 +450753,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 450
-  currentDistance: 7552.405
+  currentDistance: 5448.014
   player: {fileID: 228098103}
   light2D: {fileID: 331441715}
 --- !u!1 &332059402 stripped
@@ -452251,7 +452251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 7317.4644
+  currentDistance: 5211.84
   player: {fileID: 228098103}
   light2D: {fileID: 340023219}
 --- !u!114 &340023219 stripped
@@ -459297,7 +459297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 13337.757
+  currentDistance: 11229.346
   player: {fileID: 228098103}
   light2D: {fileID: 374651620}
 --- !u!114 &374651623
@@ -467770,7 +467770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 6617.644
+  currentDistance: 4514.127
   player: {fileID: 228098103}
   light2D: {fileID: 401124480}
 --- !u!114 &401124480 stripped
@@ -471480,7 +471480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 6173.633
+  currentDistance: 4069.7803
   player: {fileID: 228098103}
   light2D: {fileID: 414634457}
 --- !u!114 &414634457 stripped
@@ -472564,7 +472564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 13076.28
+  currentDistance: 10967.707
   player: {fileID: 228098103}
   light2D: {fileID: 419501173}
 --- !u!114 &419501173 stripped
@@ -479259,7 +479259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 13535.202
+  currentDistance: 11426.743
   player: {fileID: 228098103}
   light2D: {fileID: 428798019}
 --- !u!114 &428798022
@@ -492250,7 +492250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 450
-  currentDistance: 7552.3228
+  currentDistance: 5447.846
   player: {fileID: 228098103}
   light2D: {fileID: 476910265}
 --- !u!1 &477690006
@@ -492867,7 +492867,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 6445.5684
+  currentDistance: 4342.4
   player: {fileID: 228098103}
   light2D: {fileID: 483502112}
 --- !u!114 &483502112 stripped
@@ -501312,11 +501312,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7926902834082728065, guid: 9bbefcc39fc52f14d9f3d5b33cd10e68, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7926902834082728065, guid: 9bbefcc39fc52f14d9f3d5b33cd10e68, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7977080334080574557, guid: 9bbefcc39fc52f14d9f3d5b33cd10e68, type: 3}
       propertyPath: player
@@ -502022,7 +502022,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 350
-  currentDistance: 11309.547
+  currentDistance: 9201.12
   player: {fileID: 228098103}
   light2D: {fileID: 514612887}
 --- !u!114 &514612890
@@ -746892,7 +746892,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 350
-  currentDistance: 11278.908
+  currentDistance: 9170.617
   player: {fileID: 228098103}
   light2D: {fileID: 571153992}
 --- !u!1001 &571740512
@@ -763400,11 +763400,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1819813413933744852, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1819813413933744852, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2412421986177453105, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
       propertyPath: FX
@@ -765190,7 +765190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Bio_Run
-  Distance: 0
+  Distance: 11472.883
   MinDis: 23.5
   Stick: {fileID: 228098106}
   Animator: {fileID: 613836994}
@@ -771907,7 +771907,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 5791.279
+  currentDistance: 3688.2883
   player: {fileID: 228098103}
   light2D: {fileID: 622761386}
 --- !u!114 &622761386 stripped
@@ -789960,7 +789960,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 13484.661
+  currentDistance: 11376.215
   player: {fileID: 228098103}
   light2D: {fileID: 659970110}
 --- !u!114 &659970113
@@ -791295,7 +791295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 13422.33
+  currentDistance: 11313.68
   player: {fileID: 228098103}
   light2D: {fileID: 669865661}
 --- !u!114 &669865661 stripped
@@ -792213,7 +792213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: ScienDead_Drunk
-  Distance: 0
+  Distance: 9201.619
   MinDis: 5
   Stick: {fileID: 228098106}
   Animator: {fileID: 673813364}
@@ -807923,7 +807923,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 5386.446
+  currentDistance: 3286.349
   player: {fileID: 228098103}
   light2D: {fileID: 732751671}
 --- !u!114 &732751671 stripped
@@ -808277,7 +808277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 11282.8125
+  currentDistance: 9174.698
   player: {fileID: 228098103}
   light2D: {fileID: 735911212}
 --- !u!1 &736425181
@@ -826669,11 +826669,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8380783624032431910, guid: 92d8ef2cbd93b0e44890be76039e0302, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8380783624032431910, guid: 92d8ef2cbd93b0e44890be76039e0302, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8514332684728922539, guid: 92d8ef2cbd93b0e44890be76039e0302, type: 3}
       propertyPath: player
@@ -828976,11 +828976,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1819813413933744852, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1819813413933744852, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2412421986177453105, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
       propertyPath: FX
@@ -838158,7 +838158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 500
-  currentDistance: 5010.2896
+  currentDistance: 2911.2615
   player: {fileID: 228098103}
   light2D: {fileID: 881214696}
 --- !u!1 &881427838
@@ -843635,11 +843635,11 @@ PrefabInstance:
       objectReference: {fileID: 228098103}
     - target: {fileID: 3055694370171488748, guid: bd3dc5213f4a27c4f886531869fecbe2, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3055694370171488748, guid: bd3dc5213f4a27c4f886531869fecbe2, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3526005850625296967, guid: bd3dc5213f4a27c4f886531869fecbe2, type: 3}
       propertyPath: player
@@ -854896,11 +854896,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4909521096508835489, guid: 15e0271c4d5a7c647bb96329914dd644, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4909521096508835489, guid: 15e0271c4d5a7c647bb96329914dd644, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5063283301845620780, guid: 15e0271c4d5a7c647bb96329914dd644, type: 3}
       propertyPath: player
@@ -866570,7 +866570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 13191.773
+  currentDistance: 11083.174
   player: {fileID: 228098103}
   light2D: {fileID: 951869728}
 --- !u!114 &951869728 stripped
@@ -868295,11 +868295,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8083930035053595750, guid: c36bdf0bc5c592545b5100a83a994e47, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8083930035053595750, guid: c36bdf0bc5c592545b5100a83a994e47, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8187721894489858361, guid: c36bdf0bc5c592545b5100a83a994e47, type: 3}
       propertyPath: MusicTrigg
@@ -869721,7 +869721,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 500
-  currentDistance: 7799.66
+  currentDistance: 5693.5317
   player: {fileID: 228098103}
   light2D: {fileID: 964001341}
 --- !u!114 &964001345
@@ -876845,7 +876845,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 13299.313
+  currentDistance: 11190.69
   player: {fileID: 228098103}
   light2D: {fileID: 977322028}
 --- !u!114 &977322028 stripped
@@ -883072,11 +883072,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7926902834082728065, guid: 9bbefcc39fc52f14d9f3d5b33cd10e68, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7926902834082728065, guid: 9bbefcc39fc52f14d9f3d5b33cd10e68, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7977080334080574557, guid: 9bbefcc39fc52f14d9f3d5b33cd10e68, type: 3}
       propertyPath: player
@@ -904415,11 +904415,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7926902834082728065, guid: 9bbefcc39fc52f14d9f3d5b33cd10e68, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7926902834082728065, guid: 9bbefcc39fc52f14d9f3d5b33cd10e68, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7977080334080574557, guid: 9bbefcc39fc52f14d9f3d5b33cd10e68, type: 3}
       propertyPath: player
@@ -931827,7 +931827,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 13110.388
+  currentDistance: 11002.033
   player: {fileID: 228098103}
   light2D: {fileID: 1084649188}
 --- !u!114 &1084649191
@@ -932541,7 +932541,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: GeoScared
-  Distance: 0
+  Distance: 11494.485
   MinDis: 31.3
   Stick: {fileID: 228098106}
   Animator: {fileID: 1088458515}
@@ -932560,7 +932560,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 0
+  Distance: 11494.485
   MinDis: 31.3
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -949234,7 +949234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 13221.533
+  currentDistance: 11113.151
   player: {fileID: 228098103}
   light2D: {fileID: 1159715825}
 --- !u!114 &1159715828
@@ -950892,11 +950892,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8380783624032431910, guid: 92d8ef2cbd93b0e44890be76039e0302, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8380783624032431910, guid: 92d8ef2cbd93b0e44890be76039e0302, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8514332684728922539, guid: 92d8ef2cbd93b0e44890be76039e0302, type: 3}
       propertyPath: player
@@ -954666,7 +954666,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 4858.225
+  currentDistance: 2758.4485
   player: {fileID: 228098103}
   light2D: {fileID: 1189325956}
 --- !u!114 &1189325956 stripped
@@ -956851,7 +956851,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 350
-  currentDistance: 4273.2886
+  currentDistance: 2177.1396
   player: {fileID: 228098103}
   light2D: {fileID: 1200633887}
 --- !u!114 &1200633887 stripped
@@ -1041779,7 +1041779,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 13666.449
+  currentDistance: 11557.96
   player: {fileID: 228098103}
   light2D: {fileID: 1238295834}
 --- !u!114 &1238295837
@@ -1060004,7 +1060004,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 5909.699
+  currentDistance: 3806.4214
   player: {fileID: 228098103}
   light2D: {fileID: 1311826824}
 --- !u!114 &1311826824 stripped
@@ -1060400,11 +1060400,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8083930035053595750, guid: c36bdf0bc5c592545b5100a83a994e47, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8083930035053595750, guid: c36bdf0bc5c592545b5100a83a994e47, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8187721894489858361, guid: c36bdf0bc5c592545b5100a83a994e47, type: 3}
       propertyPath: MusicTrigg
@@ -1073006,11 +1073006,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1819813413933744852, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1819813413933744852, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2412421986177453105, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
       propertyPath: FX
@@ -1096217,7 +1096217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 5848.7524
+  currentDistance: 3747.077
   player: {fileID: 228098103}
   light2D: {fileID: 1413710599}
 --- !u!114 &1413710599 stripped
@@ -1099377,7 +1099377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 13755.516
+  currentDistance: 11647.006
   player: {fileID: 228098103}
   light2D: {fileID: 1436246959}
 --- !u!114 &1436246962
@@ -1107576,7 +1107576,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 4558.535
+  currentDistance: 2460.3696
   player: {fileID: 228098103}
   light2D: {fileID: 1452575862}
 --- !u!114 &1452575862 stripped
@@ -1110755,7 +1110755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 500
-  currentDistance: 5634.49
+  currentDistance: 3531.9163
   player: {fileID: 228098103}
   light2D: {fileID: 1466666658}
 --- !u!114 &1466666662
@@ -1112255,11 +1112255,11 @@ PrefabInstance:
       objectReference: {fileID: 228098103}
     - target: {fileID: 3055694370171488748, guid: bd3dc5213f4a27c4f886531869fecbe2, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3055694370171488748, guid: bd3dc5213f4a27c4f886531869fecbe2, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3526005850625296967, guid: bd3dc5213f4a27c4f886531869fecbe2, type: 3}
       propertyPath: player
@@ -1116769,7 +1116769,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 4952.505
+  currentDistance: 2854.408
   player: {fileID: 228098103}
   light2D: {fileID: 1504723907}
 --- !u!114 &1504723907 stripped
@@ -1122441,7 +1122441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 4505.1646
+  currentDistance: 2409.8887
   player: {fileID: 228098103}
   light2D: {fileID: 1511810315}
 --- !u!114 &1511810315 stripped
@@ -1129464,11 +1129464,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7926902834082728065, guid: 9bbefcc39fc52f14d9f3d5b33cd10e68, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7926902834082728065, guid: 9bbefcc39fc52f14d9f3d5b33cd10e68, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7977080334080574557, guid: 9bbefcc39fc52f14d9f3d5b33cd10e68, type: 3}
       propertyPath: player
@@ -1131684,11 +1131684,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1879649492574695959, guid: cca3a22bce81f1640993a9a1aede6569, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1879649492574695959, guid: cca3a22bce81f1640993a9a1aede6569, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1914428706761459782, guid: cca3a22bce81f1640993a9a1aede6569, type: 3}
       propertyPath: m_IsActive
@@ -1133406,11 +1133406,11 @@ PrefabInstance:
       objectReference: {fileID: 590502044}
     - target: {fileID: 4499751089060001759, guid: be34aded37374bd4a91e9529ba126f44, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4499751089060001759, guid: be34aded37374bd4a91e9529ba126f44, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4510298501944609075, guid: be34aded37374bd4a91e9529ba126f44, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1134577,7 +1134577,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: ScientistBJ_Panic
-  Distance: 0
+  Distance: 9174.698
   MinDis: 12.07
   Stick: {fileID: 228098106}
   Animator: {fileID: 1549990390}
@@ -1144714,7 +1144714,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 13716.508
+  currentDistance: 11608.008
   player: {fileID: 228098103}
   light2D: {fileID: 1584957370}
 --- !u!114 &1584957373
@@ -1150243,7 +1150243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 6824.2866
+  currentDistance: 4719.3228
   player: {fileID: 228098103}
   light2D: {fileID: 1613074703}
 --- !u!114 &1613074703 stripped
@@ -1157113,7 +1157113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 4665.6196
+  currentDistance: 2566.8318
   player: {fileID: 228098103}
   light2D: {fileID: 1631525030}
 --- !u!114 &1631525030 stripped
@@ -1157664,7 +1157664,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 500
-  currentDistance: 5154.7695
+  currentDistance: 3053.7532
   player: {fileID: 228098103}
   light2D: {fileID: 1632486788}
 --- !u!114 &1632486793
@@ -1158515,7 +1158515,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 13047.008
+  currentDistance: 10938.67
   player: {fileID: 228098103}
   light2D: {fileID: 1637432133}
 --- !u!114 &1637432136
@@ -1173873,7 +1173873,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1703456577
 Transform:
   m_ObjectHideFlags: 0
@@ -1182843,7 +1182843,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 13549.614
+  currentDistance: 11440.9375
   player: {fileID: 228098103}
   light2D: {fileID: 1726541447}
 --- !u!114 &1726541447 stripped
@@ -1871263,11 +1871263,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1819813413933744852, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1819813413933744852, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2412421986177453105, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
       propertyPath: FX
@@ -1877989,11 +1877989,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8083930035053595750, guid: c36bdf0bc5c592545b5100a83a994e47, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8083930035053595750, guid: c36bdf0bc5c592545b5100a83a994e47, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8187721894489858361, guid: c36bdf0bc5c592545b5100a83a994e47, type: 3}
       propertyPath: MusicTrigg
@@ -1886604,11 +1886604,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7926902834082728065, guid: 9bbefcc39fc52f14d9f3d5b33cd10e68, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7926902834082728065, guid: 9bbefcc39fc52f14d9f3d5b33cd10e68, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7977080334080574557, guid: 9bbefcc39fc52f14d9f3d5b33cd10e68, type: 3}
       propertyPath: player
@@ -1894591,7 +1894591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 13448.958
+  currentDistance: 11340.52
   player: {fileID: 228098103}
   light2D: {fileID: 1832143929}
 --- !u!114 &1832143932
@@ -1906811,7 +1906811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 5337.3022
+  currentDistance: 3235.6155
   player: {fileID: 228098103}
   light2D: {fileID: 1885497836}
 --- !u!114 &1885497836 stripped
@@ -1907015,11 +1907015,11 @@ PrefabInstance:
       objectReference: {fileID: 228098103}
     - target: {fileID: 3055694370171488748, guid: bd3dc5213f4a27c4f886531869fecbe2, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3055694370171488748, guid: bd3dc5213f4a27c4f886531869fecbe2, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3526005850625296967, guid: bd3dc5213f4a27c4f886531869fecbe2, type: 3}
       propertyPath: player
@@ -1910551,7 +1910551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 350
-  currentDistance: 11330.479
+  currentDistance: 9222.171
   player: {fileID: 228098103}
   light2D: {fileID: 1901381966}
 --- !u!1001 &1901773899
@@ -1910576,11 +1910576,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1819813413933744852, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1819813413933744852, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2412421986177453105, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
       propertyPath: FX
@@ -1914173,7 +1914173,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1918000495
 Transform:
   m_ObjectHideFlags: 0
@@ -2260130,7 +2260130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 13158.921
+  currentDistance: 11050.554
   player: {fileID: 228098103}
   light2D: {fileID: 1930842579}
 --- !u!114 &1930842582
@@ -2263512,11 +2263512,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1819813413933744852, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1819813413933744852, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2412421986177453105, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
       propertyPath: FX
@@ -2265575,11 +2265575,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1819813413933744852, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1819813413933744852, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2412421986177453105, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
       propertyPath: FX
@@ -2273974,7 +2273974,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Gen_Shocked(Special)
-  Distance: 0
+  Distance: 1963.2681
   MinDis: 67
   Stick: {fileID: 228098106}
   Animator: {fileID: 1976607518}
@@ -2290623,11 +2290623,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1819813413933744852, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1819813413933744852, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2412421986177453105, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
       propertyPath: FX
@@ -3157594,7 +3157594,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 0
-  currentDistance: 4580.149
+  currentDistance: 2486.0706
   player: {fileID: 228098103}
   light2D: {fileID: 2058800735}
 --- !u!114 &2058800738
@@ -3179562,7 +3179562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 5427.6313
+  currentDistance: 3325.6511
   player: {fileID: 228098103}
   light2D: {fileID: 2133802617}
 --- !u!114 &2133802617 stripped
@@ -3179858,11 +3179858,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1819813413933744852, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1819813413933744852, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2412421986177453105, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
       propertyPath: FX
@@ -3185969,7 +3185969,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 13654.715
+  currentDistance: 11546.015
   player: {fileID: 228098103}
   light2D: {fileID: 2143266881}
 --- !u!114 &2143266881 stripped
@@ -3198262,11 +3198262,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1819813413933744852, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1819813413933744852, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2412421986177453105, guid: 1bf864c044a42ad40aa6ebcbf0a3f9c6, type: 3}
       propertyPath: FX
@@ -3233834,7 +3233834,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 4163.8794
+  currentDistance: 2071.8333
   player: {fileID: 228098103}
   light2D: {fileID: 8996519235810189053}
 --- !u!114 &8996519235810189053 stripped

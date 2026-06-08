@@ -21,13 +21,20 @@ public class MaxFPS : MonoBehaviour
         if (pauseManager == null)
         {
             pauseManager = FindAnyObjectByType<PauseManager>();
+
         }
-        deltaTime += (Time.deltaTime - deltaTime) * 0.1f; 
+
         float currentfps = 1.0f / deltaTime;
-        if (currentfps < 9 && currentfps != 0)
+        if(pauseManager != null)
         {
-            pauseManager.Pause();
+            if (currentfps < 9 && currentfps != 0)
+            {
+                pauseManager.Pause();
+            }
         }
+        
+        deltaTime += (Time.deltaTime - deltaTime) * 0.1f; 
+        
         
         Application.targetFrameRate = fps;
         if(Input.GetKeyDown(KeyCode.M))

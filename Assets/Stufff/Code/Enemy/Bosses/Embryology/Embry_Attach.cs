@@ -1328,7 +1328,7 @@ public class Embry_Attach : MonoBehaviour
 
         // impact fram
         //Impact_Radial_In_Real.transform.position = StickHand_IRIR.position;
-        StartCoroutine(movement.CameraScript.ShakeCamGroundFeeling(100, 0.5f));
+        StartCoroutine(movement.CameraScript.ShakeCamGroundFeeling(10, 0.1f));
 
         // wait for the camera to be fully zoomed
         AudioP.PlayOneShot(MassivePunch);

@@ -2198,6 +2198,8 @@ public class Movement : MonoBehaviour
             }
 
 
+            // movement crap right heere
+
 
             rb.velocity = new Vector2(horizontalInput * Speed, rb.velocity.y);
             FacingRight = transform.localScale.x >= 1 ? true : false;
