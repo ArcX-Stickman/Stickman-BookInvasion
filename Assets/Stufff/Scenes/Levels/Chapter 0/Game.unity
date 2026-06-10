@@ -435484,7 +435484,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 1276125720}
   m_Lens:
-    FieldOfView: 153.76
+    FieldOfView: 144.66
     OrthographicSize: 54.06
     NearClipPlane: 0.37
     FarClipPlane: 5000.06
@@ -2275242,7 +2275242,7 @@ Camera:
     height: 1
   near clip plane: 0.37
   far clip plane: 5000.06
-  field of view: 153.76
+  field of view: 144.66
   orthographic: 1
   orthographic size: 54.06
   m_Depth: -1
@@ -2275344,7 +2275344,7 @@ MonoBehaviour:
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
-    m_Time: 2
+    m_Time: 0
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []

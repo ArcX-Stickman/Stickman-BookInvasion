@@ -8,8 +8,10 @@ public class ClickerManagerQTE : MonoBehaviour
 
 
 
-    public void Start()
+    public AudioClip ClickSFX()
     {
-        
+        AudioClip rnd = SFX[UnityEngine.Random.Range(0, SFX.Length)];
+        return rnd;
+
     }
 }
