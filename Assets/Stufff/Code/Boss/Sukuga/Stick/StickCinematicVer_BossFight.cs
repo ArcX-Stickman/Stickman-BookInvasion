@@ -245,7 +245,7 @@ public class StickCinematicVer_BossFight : MonoBehaviour
             Footsteps.enabled = false;
         }
 
-            rb.velocity = new Vector2(horizontalInput * Speed, rb.velocity.y);
+        rb.velocity = new Vector2(horizontalInput * Speed, rb.velocity.y);
 
       
 

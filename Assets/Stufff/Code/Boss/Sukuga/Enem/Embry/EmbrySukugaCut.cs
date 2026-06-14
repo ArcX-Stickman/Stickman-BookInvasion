@@ -11,6 +11,7 @@ public class EmbrySukugaCut : MonoBehaviour
     public StickCinematicVer_BossFight StickManager;
     public Animator EnemyAnim;
     public AudioClip PunchImpact;
+    public AudioClip Stagger;
     public AudioSource PunchAudioP;
 
     public float DistanceFromPlayer;
@@ -45,10 +46,11 @@ public class EmbrySukugaCut : MonoBehaviour
 
     public EmbryTop Top;
 
+    public Rigidbody2D rb;
 
-    private bool CanMove = true;
-
-
+    [SerializeField]private bool CanMove = true;
+    
+    public Transform StickPOS;
     private void Start()
     {
         SCALEX = transform.localScale.x;
@@ -76,8 +78,7 @@ public class EmbrySukugaCut : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DistanceFromPlayer = Vector2.Distance(transform.position,StickManager.gameObject.transform.position);
-
+        DistanceFromPlayer = Vector2.Distance(transform.position, StickManager.transform.position);
 
         RunImportant();   
     }
@@ -85,17 +86,19 @@ public class EmbrySukugaCut : MonoBehaviour
     
     public void MoveTowardsPlayer()
     {
+       
+        Vector3 PlayerPos = new Vector3(StickPOS.transform.position.x, transform.position.y,transform.position.z); // change number later
+        float distanceFromPlayer = Vector2.Distance(transform.position, StickManager.transform.position);
+        DistanceFromPlayer = distanceFromPlayer;
+
         if (HP <= 0) return;
-        float distanceFromPlayer = Vector2.Distance(transform.position,StickManager.transform.position);
-
-        Vector2 PlayerPos = new Vector2(StickManager.transform.position.x, transform.position.y);
 
 
-        if(distanceFromPlayer > MinDisPlayer)
+        if (distanceFromPlayer > MinDisPlayer)
         {
             EnemyAnim.SetBool("Run", true);
 
-            transform.position = Vector2.MoveTowards(transform.position, PlayerPos, Speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, PlayerPos, Speed * Time.deltaTime);
         }
         else
         {
@@ -119,26 +122,150 @@ public class EmbrySukugaCut : MonoBehaviour
 
     public void RunImportant()
     {
-        // Animations:
-        AnimationManager();
-        if (CanMove)
+        if (!OnceSM)
         {
-            MoveTowardsPlayer();
+            // Animations:
+            AnimationManager();
+
+
+            //movement
+            if (CanMove)
+            {
+                MoveTowardsPlayer();
+
+            }
+            else if (CanMove == false && EnemyAnim.GetBool("Run"))
+            {
+
+                EnemyAnim.SetBool("Run", false);
+            }
+
+            // Managers
+            TopManager();
+        }
+       
+        StaggerManager();
+    }
+
+    private bool OnceSM;
+
+    public Sprite[] StickFreezeSprites;
+
+    public void StaggerManager()
+    {
+        if (StaggerMeter > 0) return;
+
+        if (OnceSM) return;
+       
+        OnceSM = true;
+
+        StickManager.StickAnim.enabled = false;
+
+        SpriteRenderer StickR = StickManager.gameObject.GetComponentInChildren<SpriteRenderer>();
+        StickR.sortingOrder = gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder + 10;
+        switch (StickManager.punchIndex)
+        {
+
+            case 0:
+                StickR.sprite = StickFreezeSprites[0];
+                break;
+
+            case 1:
+                StickR.sprite = StickFreezeSprites[1];
+
+                break;
+
+            case 2:
+                StickR.sprite = StickFreezeSprites[2];
+                break;
+            default:
+                StickR.sprite = StickFreezeSprites[0];
+                break;
+        }
+
+        PunchAudioP.PlayOneShot(Stagger);
+
+        EnemyAnim.CrossFade("FarStagger", 0, 0);
+
+
+        CameraSukugaCuts CSC = FindAnyObjectByType<CameraSukugaCuts>();
+        CSC.CameraShake(gameObject.GetComponent<CinemachineImpulseSource>(), CamShake * 2);
+
+        GameObject FX = Instantiate(ImpactFX_OBJ.gameObject, transform.position, Quaternion.identity);
+        StartCoroutine(ZoomCamIn());
+        StartCoroutine(SlowlySlide());
+       return;
+
+
+    }
+    [SerializeField] private float timerSlide;
+
+    private bool Slid;
+
+    public IEnumerator SlowlySlide()
+    {
+        if(Slid) yield break;
+        Slid = true;
+        float horizontalMomentum = 0.5f;
+    
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        rb.velocity = new Vector2(transform.localScale.x * ((horizontalMomentum)), 0);
+
+        BoxCollider2D my = gameObject.GetComponent<BoxCollider2D>();
+        BoxCollider2D Stick = StickManager.gameObject.GetComponent<BoxCollider2D>();
+        float flipTime = 0.7f;
+        float elapsedTime = 0f;
+        
+        while (flipTime > elapsedTime)
+        {
+            Physics2D.IgnoreCollision(my, Stick, true);
+
+            timerSlide = elapsedTime;
+
+            if (transform.localScale.x >= 0)
+            {
+                new Vector2(transform.localScale.x * ((horizontalMomentum)), 0);
+            }
+            else
+            {
+                new Vector2(transform.localScale.x * ((horizontalMomentum)), 0);
+            }
+
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
 
         }
-        else if(!CanMove && EnemyAnim.GetBool("Run"))
+        Physics2D.IgnoreCollision(my, Stick, false);
+
+        rb.bodyType = RigidbodyType2D.Kinematic;
+
+
+    }
+
+    public IEnumerator ZoomCamIn()
+    {
+        float Max = 46.82f;
+        float MinusThing = 67;
+
+
+        CinemachineVirtualCamera CVM = FindAnyObjectByType<CinemachineVirtualCamera>();
+
+        while (CVM.m_Lens.FieldOfView > Max)
         {
-            
-            EnemyAnim.SetBool("Run", false);
+            CVM.m_Lens.FieldOfView -= MinusThing * Time.unscaledDeltaTime;
+            yield return null;
         }
-        TopManager();
+
+        yield break;
+
     }
 
     public int TimesPlayerJumpOver = 0;
 
     public void TopManager()
     {
-        if(TimesPlayerJumpOver > 4 && Top.PlayerOnTop)
+        if(TimesPlayerJumpOver > 2 && Top.PlayerOnTop)
         {
             TimesPlayerJumpOver = 0;
             EnemyAnim.CrossFade("EmbryFlySwapImmediate",0,0);
@@ -199,7 +326,7 @@ public class EmbrySukugaCut : MonoBehaviour
         }
 
 
-        if (HP > 0 && StaggerMeter > 0 && Time.time >= LastAutoPunch + AutoPunchCD && !ParryPunch)
+        if (HP > 0 && StaggerMeter > 0 && Time.time >= LastAutoPunch + AutoPunchCD && !ParryPunch && DistanceFromPlayer <= MinDisPlayer)
         {
             LastAutoPunch = Time.time;
             EnemyAnim.SetTrigger("Punch");
@@ -227,21 +354,21 @@ public class EmbrySukugaCut : MonoBehaviour
         StartedJBNT = true;
         EnemyAnim.CrossFade("EmbryFarJump", 0, 0);
 
-        float DisP1 = Vector3.Distance(transform.position, P1.position);
+        float DisP1 = Vector2.Distance(transform.position, P1.position);
         float minDis = 2.5f;
         while(DisP1 > minDis)
         {
-            DisP1 = Vector3.Distance(transform.position, P1.position);
-            transform.position = Vector3.MoveTowards(transform.position, P1.position, JumpSpeed * Time.deltaTime);
+            DisP1 = Vector2.Distance(transform.position, P1.position);
+            transform.position = Vector2.MoveTowards(transform.position, P1.position, JumpSpeed * Time.deltaTime);
             yield return null;
         }
 
-        float DisP2 = Vector3.Distance(transform.position, P2.position);
+        float DisP2 = Vector2.Distance(transform.position, P2.position);
 
         while (DisP2 > minDis)
         {
-            DisP2 = Vector3.Distance(transform.position, P2.position);
-            transform.position = Vector3.MoveTowards(transform.position, P2.position, JumpSpeed * Time.deltaTime);
+            DisP2 = Vector2.Distance(transform.position, P2.position);
+            transform.position = Vector2.MoveTowards(transform.position, P2.position, JumpSpeed * Time.deltaTime);
             yield return null;
         }
 
