@@ -84,11 +84,39 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0
+    functionName: InPunchAnimKey
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0
     functionName: AttackBool_ANIMKey
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 1
+    messageOptions: 0
+  - time: 0.083333336
+    functionName: DecreaseStamina
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.125
+    functionName: PauseStamina
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0.56
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.5833333
+    functionName: InPunchAnimKeyFalse
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
     messageOptions: 0
   - time: 0.5833333
     functionName: AttackBool_ANIMKey

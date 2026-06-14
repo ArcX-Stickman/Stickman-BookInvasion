@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using static System.Net.WebRequestMethods;
 
 public class StickCinematicVer_BossFight : MonoBehaviour
@@ -13,7 +15,7 @@ public class StickCinematicVer_BossFight : MonoBehaviour
     public bool Grounded;
     public LayerMask WhatsGround;
     public Animator StickAnim;
-    
+    private float horizontalInput;
     public GameObject Enemy;
     public float MinDisEnemy;
     public float DisEnemy;
@@ -23,49 +25,171 @@ public class StickCinematicVer_BossFight : MonoBehaviour
     public AudioClip[] PunchWhooshes;
     public AudioClip[] PunchMiss;
     public AudioClip[] PunchHit;
+    public AudioClip StaminaOut;
     private bool inPunchVoidAnim;
     public LayerMask WhatsTheBookLayer;
     public float RayDistance;
     public AudioSource PunchAudioP;
     public bool Attack;
-    
 
-
+    public bool RequireFirstPunchDone;
+    private bool FirstPunDone;
+    private bool InPunch;
 
     public bool PunchA;
     public bool KickA;
 
+    public float Stamina;
+    [SerializeField] private float MaxStamina;
+    [SerializeField] private float StaminaIncreaseRate;
 
+    public float Health;
+
+
+    public Slider HealthSlider;
+    public Slider StaminaSlider;
+    private bool StaminaPaused;
+
+    public float MinStaminaForMelee;
+    public float StaminaRecovery;
+
+    public AudioClip BackFlipSFX;
+    public float LastBackflipTime;
+    public float BackFlipForce;
+    public float BackFlipHorizontalForce;
+    public AudioClip JumpSfx;
+    public AudioSource Footsteps;
     void Start()
     {
-        
+        // Stats Set-up
+
+        // Stamina
+        MaxStamina = Stamina;
+        StaminaSlider.maxValue = MaxStamina;
+
+        // Health
+        HealthSlider.maxValue = Health;
+
+
+
+        StickAnim.CrossFade("StickFarPunchFirstHeavy", 0, 0);
+
     }
 
+    private void FixedUpdate()
+    {
+        StaminaUpdate();
+    }
     void Update()
     {
+        HealthUpdate();
         RunImportantCrap();
         InputManager();
+        AnimForJump();
     }
 
+    public void AnimForJump()
+    {
+        StickAnim.SetBool("Jump", !Grounded && !CheckIfGrounded());
+    }
+
+    public void StaminaUpdate()
+    {
+        if (RunningPausedStam || StaminaPaused) return;  // woah that stamina is paused, YOOOO THATS BADDDD AAAAAAAAAAAAAAAAAAAAHHHH!!!!!!!
+
+        float stamIn = StaminaIncreaseRate;
+
+        if(Stamina < MaxStamina / 3)
+        {
+            stamIn -= 2.5f; // prevent da spammingggg
+        }
+        else if (Stamina < MaxStamina / 2)
+        {
+            stamIn -= 0.5f;
+        }
+        else
+        {
+            stamIn = StaminaIncreaseRate;
+        }
+
+
+        if (Stamina < MaxStamina)
+        {
+            Stamina += stamIn * Time.deltaTime;
+        }
+        StaminaSlider.value = Stamina;
+    }
+
+    public void HealthUpdate()
+    {
+        HealthSlider.value = Health;
+
+    }
+
+    private bool RunningPausedStam;
+    public IEnumerator PauseStamina(float t)
+    {
+        if(RunningPausedStam) yield break;
+        RunningPausedStam = true;
+        StaminaPaused = true;
+
+        if(Stamina > 10)
+        {
+            t += 1;
+        }
+        else if(Stamina < MaxStamina / 3)
+        {
+            t += 0.5f;
+        }
+
+
+        yield return new WaitForSecondsRealtime(t);
+        RunningPausedStam = false;
+
+        StaminaPaused = false;
+
+        yield break;
+    }
 
     public void InputManager()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && CheckIfGrounded())
+        if (Input.GetKeyDown(KeyCode.Space) && CheckIfGrounded() )
         {
             Jump();
         }
+     
 
-        if (Input.GetButton("Fire2") && Time.time >= MeleeCD +LastMelee)
+        if (Input.GetButtonDown("Fire2") && Time.time >= MeleeCD + LastMelee )
         {
             LastMelee = Time.time;
             Punch();
         }
+
+        if(Input.GetKeyDown(KeyCode.Q) && Grounded && !InBackflip && Stamina >= 8 || Input.GetKeyDown(KeyCode.Q) && !Grounded && !InBackflip && Stamina >= 8)
+        {
+            LastBackflipTime = Time.time;
+            InBackflip = true;
+            StartCoroutine(Backflip());
+        }
+        else if (Stamina <= 6 && Input.GetKeyDown(KeyCode.Q))
+        {
+            PunchAudioP.PlayOneShot(StaminaOut);
+        }
     }
 
+    public void InPunchAnimKey()
+    {
+        InPunch = true;
+    }
 
+    public void InPunchAnimKeyFalse()
+    {
+        InPunch = false;
+    }
 
     private bool CheckIfGrounded()
     {
+        
         float extraHeight = 1.3f;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, GetComponent<BoxCollider2D>().bounds.extents.y + extraHeight, WhatsGround);
         Debug.DrawRay(transform.position, Vector2.down * (GetComponent<BoxCollider2D>().bounds.extents.y + extraHeight), Color.red);
@@ -76,15 +200,30 @@ public class StickCinematicVer_BossFight : MonoBehaviour
     {
         Move();
         CheckIfGrounded();
+        DirectionCrap();
     }
 
+
+    private void DirectionCrap()
+    {
+        if (Enemy.transform.localScale.x > 0)
+        {
+            transform.localScale = Vector3.one;
+
+        }
+        else if (Enemy.transform.localScale.x <= 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+
+        }
+    }
 
     public int punchIndex;
     public void Punch()
     {
         // put stuff for prediticing enemy
 
-        if (Grounded)
+        if (Grounded )
         {
             PunchAnim();
         }
@@ -95,30 +234,60 @@ public class StickCinematicVer_BossFight : MonoBehaviour
     public void Move()
     {
 
-        float horizontalInput = Input.GetAxis("Horizontal");
+        horizontalInput = Input.GetAxis("Horizontal");
         StickAnim.SetBool("Move", horizontalInput != 0);
-        rb.velocity = new Vector2(horizontalInput * Speed, rb.velocity.y);
+        if(rb.velocity != (Vector2.zero) && CheckIfGrounded() || rb.velocity != Vector2.zero && Grounded)
+        {
+            Footsteps.enabled = true;
+        }
+        else
+        {
+            Footsteps.enabled = false;
+        }
 
+            rb.velocity = new Vector2(horizontalInput * Speed, rb.velocity.y);
+
+      
+
+    }
+
+
+    public AudioClip GroundImpact;
+    public void GroundedSFX()
+    {
+        if(Grounded || CheckIfGrounded())
+        {
+            PunchAudioP.PlayOneShot(GroundImpact);
+
+        }
     }
 
     public void Jump()
     {
+        PunchAudioP.pitch = Random.Range(0.7f, 1.5f);
+        Stamina -= 3;
+        PunchAudioP.PlayOneShot(JumpSfx);
         float horizontalMomentum = rb.velocity.x;
         rb.velocity = new Vector2(horizontalMomentum, JumpForce);
 
 
     }
 
+    public void AnimFirstPunchDone()
+    {
+        FirstPunDone = true;    
+    }
 
     public void PunchAnim()
     {
+        if (RequireFirstPunchDone && !FirstPunDone) return;
+        if(InPunch) return;
         if (inPunchVoidAnim) return;
 
         bool KickAnim = (StickAnim.GetCurrentAnimatorStateInfo(0).IsName("Kick"));
         bool DontMakeMoreIndexxGrr = false;
 
         inPunchVoidAnim = true;
-
 
         if (EnemyClose())
         {
@@ -130,12 +299,16 @@ public class StickCinematicVer_BossFight : MonoBehaviour
         }
 
 
-        if (Grounded && !KickAnim)
+        if (Grounded && !KickAnim && Stamina > MinStaminaForMelee + 0.2f) // 0.2f isjust a lil balance thing
         {
+           
             switch (punchIndex)
             {
+                
+
+
                 case 0:
-                    StickAnim.CrossFade("Punch", 0, 0);
+                    StickAnim.CrossFade("Punch", 1, 0);
                     PunchA = true;
                     break;
 
@@ -145,7 +318,7 @@ public class StickCinematicVer_BossFight : MonoBehaviour
                     break;
 
                 case 2:
-                    StickAnim.CrossFade("Kick", 0.2f, 0);
+                    StickAnim.CrossFade("Kick",0, 0);
                     KickA = true;
                     break;
                 default:
@@ -153,6 +326,11 @@ public class StickCinematicVer_BossFight : MonoBehaviour
                     PunchA = true;
                     break;
             }
+        }
+        else if(Stamina < MinStaminaForMelee)
+        {
+            PunchAudioP.pitch = 1;
+            PunchAudioP.PlayOneShot(StaminaOut);
         }
 
 
@@ -165,9 +343,14 @@ public class StickCinematicVer_BossFight : MonoBehaviour
         }
 
         if (punchIndex > 2)
-            punchIndex = -1;
+            punchIndex = 0;
         inPunchVoidAnim = false;
         return;
+    }
+
+    public void DecreaseStamina()
+    {
+        Stamina -= MinStaminaForMelee;
     }
 
 
@@ -241,6 +424,7 @@ public class StickCinematicVer_BossFight : MonoBehaviour
     {
         if (collision.collider.CompareTag("Ground"))
         {
+            StickAnim.SetBool("Ground", true);
             Grounded = true;
         }
     }
@@ -249,7 +433,114 @@ public class StickCinematicVer_BossFight : MonoBehaviour
     {
         if (collision.collider.CompareTag("Ground"))
         {
+            StickAnim.SetBool("Ground", false);
+
             Grounded = false;
         }
+    }
+
+    public bool InBackflip;
+    public IEnumerator Backflip()
+    {
+
+        Stamina -= 5;
+
+
+        float horizontalMomentum = BackFlipHorizontalForce;
+        StickAnim.SetBool("Backflip", true);
+
+
+
+        PunchAudioP.pitch = Random.Range(0.7f, 1.5f);
+        PunchAudioP.PlayOneShot(BackFlipSFX);
+        LastBackflipTime = Time.time;
+        InBackflip = true;
+        if (transform.localScale.x > 0)
+        {
+            horizontalMomentum = horizontalMomentum * -1;
+        }
+        rb.velocity = new Vector2(transform.localScale.x * ((horizontalMomentum)), BackFlipForce);
+        float flipTime = 0.5f;
+        float elapsedTime = 0f;
+        while (flipTime > elapsedTime)
+        {
+
+            if (transform.localScale.x > 0)
+            {
+                rb.velocity = new Vector2(-Mathf.Abs(-horizontalMomentum), rb.velocity.y);
+            }
+            else
+            {
+                rb.velocity = new Vector2(Mathf.Abs(horizontalMomentum), rb.velocity.y);
+            }
+            elapsedTime += Time.deltaTime;
+            yield return null;
+
+        }
+
+      
+        InBackflip = false;
+        rb.rotation = 0;
+        StickAnim.SetBool("Backflip", false);
+
+        while (!Grounded)
+        {
+            yield return null;
+        }
+
+        GroundedSFX();
+
+        yield break;
+
+    }
+
+
+    public IEnumerator BackflipMofified(float Force,float y)
+    {
+
+
+
+        float horizontalMomentum = Force;
+
+        PunchAudioP.pitch = Random.Range(0.7f, 1.5f);
+        PunchAudioP.PlayOneShot(BackFlipSFX);
+        LastBackflipTime = Time.time;
+        InBackflip = true;
+        if (transform.localScale.x > 0)
+        {
+            horizontalMomentum = horizontalMomentum * -1;
+        }
+        rb.velocity = new Vector2(transform.localScale.x * ((horizontalMomentum)), y);
+        float flipTime = 0.5f;
+        float elapsedTime = 0f;
+        while (flipTime > elapsedTime)
+        {
+
+            if (transform.localScale.x > 0)
+            {
+                rb.velocity = new Vector2(-Mathf.Abs(-horizontalMomentum), rb.velocity.y);
+            }
+            else
+            {
+                rb.velocity = new Vector2(Mathf.Abs(horizontalMomentum), rb.velocity.y);
+            }
+            elapsedTime += Time.deltaTime;
+            yield return null;
+
+        }
+
+
+        InBackflip = false;
+        rb.rotation = 0;
+
+        while (!Grounded)
+        {
+            yield return null;
+        }
+
+        GroundedSFX();
+
+        yield break;
+
     }
 }
