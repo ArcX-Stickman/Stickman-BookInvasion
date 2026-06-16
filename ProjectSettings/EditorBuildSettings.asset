@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/Stufff/Scenes/OnlineGame.unity
     guid: 9faf3329c524cdd46a20652efd8e0795
   - enabled: 1
+    path: Assets/Stufff/Scenes/Levels/BossFights/SukugaCuts/EmbryPhase2_SUK_1.unity
+    guid: c09040b217f12c342ad3b241ed592d78
+  - enabled: 1
     path: Assets/Stufff/Scenes/Levels/Chapter 0/StickBrain.unity
     guid: 06b06ca2692672040b59f6b4ca910526
   - enabled: 1

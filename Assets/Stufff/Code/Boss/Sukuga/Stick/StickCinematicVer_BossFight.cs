@@ -34,7 +34,7 @@ public class StickCinematicVer_BossFight : MonoBehaviour
 
     public bool RequireFirstPunchDone;
     private bool FirstPunDone;
-    private bool InPunch;
+    public bool InPunch;
 
     public bool PunchA;
     public bool KickA;
@@ -59,10 +59,14 @@ public class StickCinematicVer_BossFight : MonoBehaviour
     public float BackFlipHorizontalForce;
     public AudioClip JumpSfx;
     public AudioSource Footsteps;
+
+
+    public bool CanJump;
+  
     void Start()
     {
         // Stats Set-up
-
+        CanJump = true;
         // Stamina
         MaxStamina = Stamina;
         StaminaSlider.maxValue = MaxStamina;
@@ -153,7 +157,7 @@ public class StickCinematicVer_BossFight : MonoBehaviour
 
     public void InputManager()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && CheckIfGrounded() )
+        if (Input.GetKeyDown(KeyCode.Space) && CheckIfGrounded()  && CanJump)
         {
             Jump();
         }
@@ -161,8 +165,17 @@ public class StickCinematicVer_BossFight : MonoBehaviour
 
         if (Input.GetButtonDown("Fire2") && Time.time >= MeleeCD + LastMelee )
         {
+            
             LastMelee = Time.time;
-            Punch();
+            if (!StickAnim.GetBool("Spam"))
+            {
+                Punch();
+
+            }
+            else
+            {
+                Spammer();
+            }
         }
 
         if(Input.GetKeyDown(KeyCode.Q) && Grounded && !InBackflip && Stamina >= 8 || Input.GetKeyDown(KeyCode.Q) && !Grounded && !InBackflip && Stamina >= 8)
@@ -175,6 +188,69 @@ public class StickCinematicVer_BossFight : MonoBehaviour
         {
             PunchAudioP.PlayOneShot(StaminaOut);
         }
+    }
+
+    private void Spammer()
+    {
+
+        if(StaminaSlider.gameObject.activeSelf)
+        {
+            StaminaSlider.gameObject.SetActive(false);
+            HealthSlider.gameObject.SetActive(false);
+        }
+
+        MeleeCD = 0.2f;
+        Stamina = 30;
+        // skibi stuff go here
+        bool DontMakeMoreIndexxGrr = false;
+
+        inPunchVoidAnim = true;
+
+        if (EnemyClose())
+        {
+            PunchWhoosh_NonMiss_SFX();
+        }
+        else
+        {
+            PunchMiss_SFX();
+        }
+
+
+        switch (punchIndex)
+        {
+
+
+
+            case 0:
+                StickAnim.CrossFade("PUNCH1HOLD", 1, 0);
+                PunchA = true;
+                break;
+
+            case 1:
+                StickAnim.CrossFade("PUNCH2HOLD", 0, 0);
+                PunchA = true;
+                break;
+
+            
+            default:
+                StickAnim.CrossFade("Punch", 0, 0);
+                PunchA = true;
+                break;
+        }
+
+
+        if (!DontMakeMoreIndexxGrr)
+        {
+            DontMakeMoreIndexxGrr = true;
+
+            punchIndex += 1;
+
+        }
+
+        if (punchIndex > 2)
+            punchIndex = 0;
+        inPunchVoidAnim = false;
+        return;
     }
 
     public void InPunchAnimKey()

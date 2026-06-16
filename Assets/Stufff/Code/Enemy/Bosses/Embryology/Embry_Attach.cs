@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Embry_Attach : MonoBehaviour
@@ -1420,8 +1421,14 @@ public class Embry_Attach : MonoBehaviour
     public Animator RockAnim;
     private bool ICallItOperationRock_67;
     public GameObject SmokeRock;
+
     public IEnumerator EmbryKnockFast_StickStick()
     {
+
+
+        AsyncOperation loadOperation = SceneManager.LoadSceneAsync(sceneToLoad);
+        loadOperation.allowSceneActivation = false;
+
         movement.CameraScript.Interupt = true;
 
         PlayerStatusInGame.InBossFight = false;
@@ -1569,9 +1576,22 @@ public class Embry_Attach : MonoBehaviour
         Debug.Log("loop Finished Yay");
         movement.CameraScript.Interupt = false;
 
+
+        while (!WhiteFade.IAmTrue)
+        {
+            yield return null;
+        }
+
+        loadOperation.allowSceneActivation = true;
+
+
+
         yield break;
 
     }
+
+
+    public BoolForAnim WhiteFade;
 
 
     void ResetCamera()
@@ -1629,6 +1649,7 @@ public class Embry_Attach : MonoBehaviour
 
     }
 
+    [SerializeField] private string sceneToLoad;
 
 
 }

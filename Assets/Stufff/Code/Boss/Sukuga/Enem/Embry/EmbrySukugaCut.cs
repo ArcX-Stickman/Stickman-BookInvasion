@@ -51,6 +51,8 @@ public class EmbrySukugaCut : MonoBehaviour
     [SerializeField]private bool CanMove = true;
     
     public Transform StickPOS;
+
+    public GameObject FX_STAGG_BLUD;
     private void Start()
     {
         SCALEX = transform.localScale.x;
@@ -153,6 +155,10 @@ public class EmbrySukugaCut : MonoBehaviour
 
     public void StaggerManager()
     {
+        if (StickManager.InPunch && StaggerMeter <= 0)
+        {
+            StartCoroutine(ZoomCamIn());
+        }
         if (StaggerMeter > 0) return;
 
         if (OnceSM) return;
@@ -160,9 +166,12 @@ public class EmbrySukugaCut : MonoBehaviour
         OnceSM = true;
 
         StickManager.StickAnim.enabled = false;
-
+        StickManager.rb.velocity = Vector3.zero;
         SpriteRenderer StickR = StickManager.gameObject.GetComponentInChildren<SpriteRenderer>();
         StickR.sortingOrder = gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder + 10;
+        StickManager.enabled = false;
+        StickManager.CanJump = false;
+
         switch (StickManager.punchIndex)
         {
 
@@ -192,8 +201,8 @@ public class EmbrySukugaCut : MonoBehaviour
         CSC.CameraShake(gameObject.GetComponent<CinemachineImpulseSource>(), CamShake * 2);
 
         GameObject FX = Instantiate(ImpactFX_OBJ.gameObject, transform.position, Quaternion.identity);
-        StartCoroutine(ZoomCamIn());
         StartCoroutine(SlowlySlide());
+        StartCoroutine(PunchCombo());
        return;
 
 
@@ -202,9 +211,82 @@ public class EmbrySukugaCut : MonoBehaviour
 
     private bool Slid;
 
+    private bool Stagg;
+
+    public IEnumerator PunchCombo()
+    {
+        // UI for spam time
+
+        yield return new WaitForSecondsRealtime(2);
+       
+        // stop embry
+        StopCoroutine(SlowlySlide());
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        rb.velocity = Vector3.zero;
+        StickManager.StickAnim.enabled = true;
+        // go player goo
+        float dis = Vector2.Distance(StickManager.gameObject.transform.position, transform.position);
+        while(dis > 5.2f)
+        {
+            StickManager.StickAnim.SetBool("Move",true);
+            dis = Vector2.Distance(StickManager.gameObject.transform.position, transform.position);
+            StickManager.gameObject.transform.position = Vector3.MoveTowards(StickManager.gameObject.transform.position, transform.position, 5 * Time.deltaTime);
+            yield return null;  
+        }
+        StickManager.StickAnim.SetBool("Move", false);
+
+        StickManager.Speed = 0;
+       
+
+        StickManager.enabled = true;
+
+        StickManager.StickAnim.SetBool("Spam", true);
+
+        Stagg = true;
+
+        int times = 0;
+        int max = 10;
+
+
+        float LastPunch = 0;
+        float PunchCD = 0.2f;
+
+        while(times < max)
+        {
+            if (StickManager.Attack)
+            {
+                if (Time.time >= LastPunch + PunchCD)
+                {
+
+                    LastPunch = Time.time;
+                    AudioClip rnd = StickManager.PunchHit[UnityEngine.Random.Range(0, StickManager.PunchHit.Length)];
+                    PunchAudioP.pitch = UnityEngine.Random.Range(0.9f, 1.3f);
+
+                    PunchAudioP.PlayOneShot(rnd);
+                    PunchAudioP.PlayOneShot(BludImpact);
+                    EnemyAnim.CrossFade("EmbryFAR_STAG_HURT", 0.1f, 0);
+                    CameraSukugaCuts CSC = FindAnyObjectByType<CameraSukugaCuts>();
+                    CSC.CameraShake(gameObject.GetComponent<CinemachineImpulseSource>(), 5);
+
+                    GameObject FX = Instantiate(FX_STAGG_BLUD.gameObject, transform.position, Quaternion.identity);
+                    times += 1;
+
+                }
+            }
+            yield return null;  
+        }
+
+        // yay phase is over now play cutscene
+
+        StartCoroutine(ZoomCamInAGAINNN());
+
+        yield break;
+    }
+    public AudioClip BludImpact; // ya see what i did there blud??
     public IEnumerator SlowlySlide()
     {
         if(Slid) yield break;
+
         Slid = true;
         float horizontalMomentum = 0.5f;
     
@@ -233,7 +315,7 @@ public class EmbrySukugaCut : MonoBehaviour
 
             elapsedTime += Time.deltaTime;
 
-            yield return null;
+            yield return null; 
 
         }
         Physics2D.IgnoreCollision(my, Stick, false);
@@ -260,6 +342,45 @@ public class EmbrySukugaCut : MonoBehaviour
         yield break;
 
     }
+
+    public GameObject R_CUT;
+    public GameObject Canva;
+    public GameObject L_CUT;
+    public IEnumerator ZoomCamInAGAINNN()
+    {
+        float Max = 23.52f;
+        float MinusThing = 67;
+
+
+        CinemachineVirtualCamera CVM = FindAnyObjectByType<CinemachineVirtualCamera>();
+
+        while (CVM.m_Lens.FieldOfView > Max)
+        {
+            CVM.m_Lens.FieldOfView -= MinusThing * Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+
+        if(StickManager.transform.localScale.x >= 0)
+        {
+            CutsceneFinisher = R_CUT;
+        }
+        else
+        {
+            CutsceneFinisher = L_CUT;
+
+        }
+
+        Canva.gameObject.SetActive(true);
+        CutsceneFinisher.gameObject.SetActive(true);
+
+        
+
+        yield break;
+
+    }
+
+    public GameObject CutsceneFinisher;
 
     public int TimesPlayerJumpOver = 0;
 

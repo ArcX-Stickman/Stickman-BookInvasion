@@ -9,6 +9,7 @@ public class ActivateOnCutSceneEnd : MonoBehaviour
     public GameObject LoadedObject;
     [SerializeField] private double timerThing;
     [SerializeField] private double VidDur;
+    public GameObject CUT;
     void Update()
     {
 
@@ -19,9 +20,10 @@ public class ActivateOnCutSceneEnd : MonoBehaviour
         {
             LoadedObject.gameObject.SetActive(true);
 
-            this.gameObject.SetActive(false);
+            CUT.gameObject.SetActive(false);
+            this.enabled = false;
+
         }
 
-      
     }
 }
