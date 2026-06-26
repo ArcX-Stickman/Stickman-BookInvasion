@@ -279,9 +279,17 @@ public class BookAI : MonoBehaviour
             Debug.LogWarning("Yo MaxPunchesForPlayerKnockbnack_EnemyPunches is 0 so we makin it 3 alr?");
             MaxPunchesForPlayerKnockbnack_EnemyPunches = 3;
         }
+        Add_NULL();
         StartUPAI();
     }
 
+    private void Add_NULL()
+    {
+        if(DirecCam == null)
+        {
+            DirecCam = FindAnyObjectByType<DirectionalCam>();
+        }
+    }
 
     private void StartUPAI()
     {

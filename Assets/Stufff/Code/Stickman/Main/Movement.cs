@@ -845,11 +845,14 @@ public class Movement : MonoBehaviour
         }
 
         HeldPunch = Input.GetButton("Fire2") & Input.GetKey(KeyCode.LeftShift);
-        if (Input.GetButton("Fire2") && !HeldPunch)
+        if (Input.GetButton("Fire2") )
         {
 
             if (Time.time >= lastPunchTime + MeleeCD && !BackFlip || isInPerfectDodge)
             {
+
+
+                StartCoroutine(PunchFreeFlow());
                 if (BackFlip && isInPerfectDodge && !MegaHeal)
                 {
                     PowerfulPunch = true;
@@ -890,10 +893,7 @@ public class Movement : MonoBehaviour
 
             }
         }
-        else if (HeldPunch && Time.time >= lastPunchTime + MeleeCD + 0.4f)
-        {
-            StartCoroutine(PunchFreeFlow());
-        }
+       
         
 
 

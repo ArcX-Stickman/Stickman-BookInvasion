@@ -21,6 +21,11 @@ public class SpriteCulling : MonoBehaviour
 
     public bool useManager = true;
 
+    private void Start()
+    {
+        this.enabled = false;
+    }
+
     //void Start()
     //{
     //    if (spriteRenderer == null)
@@ -38,7 +43,7 @@ public class SpriteCulling : MonoBehaviour
 
     //void OnEnable()
     //{
-       
+
     //    nextCheckTime = Time.time + Random.Range(0f, checkInterval);
     //}
 

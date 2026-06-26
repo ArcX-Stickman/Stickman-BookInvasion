@@ -231,7 +231,6 @@ public class StickCinematicVer_BossFight : MonoBehaviour
                 PunchA = true;
                 break;
 
-            
             default:
                 StickAnim.CrossFade("Punch", 0, 0);
                 PunchA = true;
@@ -279,19 +278,24 @@ public class StickCinematicVer_BossFight : MonoBehaviour
         DirectionCrap();
     }
 
-
+    [SerializeField]private bool NoNeedDirectionCrap;
     private void DirectionCrap()
     {
-        if (Enemy.transform.localScale.x > 0)
+        if(!NoNeedDirectionCrap)
         {
-            transform.localScale = Vector3.one;
+            if (Enemy.transform.localScale.x > 0)
+            {
+                transform.localScale = Vector3.one;
 
-        }
-        else if (Enemy.transform.localScale.x <= 0)
-        {
-            transform.localScale = new Vector3(-1, 1, 1);
+            }
+            else if (Enemy.transform.localScale.x <= 0)
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
 
+            }
         }
+      
+        
     }
 
     public int punchIndex;
@@ -311,6 +315,7 @@ public class StickCinematicVer_BossFight : MonoBehaviour
     {
 
         horizontalInput = Input.GetAxis("Horizontal");
+        float horizontalInputT =Input.GetAxis("Horizontal");
         StickAnim.SetBool("Move", horizontalInput != 0);
         if(rb.velocity != (Vector2.zero) && CheckIfGrounded() || rb.velocity != Vector2.zero && Grounded)
         {
@@ -323,7 +328,18 @@ public class StickCinematicVer_BossFight : MonoBehaviour
 
         rb.velocity = new Vector2(horizontalInput * Speed, rb.velocity.y);
 
-      
+        if (horizontalInputT > 0.01)
+        {
+    
+            transform.localScale = Vector3.one;
+
+        }
+        else if (horizontalInputT < -0.01)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+
+        }
+
 
     }
 

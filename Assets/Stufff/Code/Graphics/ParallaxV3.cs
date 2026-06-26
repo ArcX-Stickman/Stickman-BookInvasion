@@ -1,5 +1,5 @@
 using UnityEngine;
-
+[ExecuteAlways]
 public class ParallaxV3 : MonoBehaviour
 {
     [Tooltip("0 = far away (barely moves), 1 = same as camera (no parallax).")]

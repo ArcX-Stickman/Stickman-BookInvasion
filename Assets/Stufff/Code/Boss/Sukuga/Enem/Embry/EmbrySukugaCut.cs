@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 
 public class EmbrySukugaCut : MonoBehaviour
@@ -53,8 +54,15 @@ public class EmbrySukugaCut : MonoBehaviour
     public Transform StickPOS;
 
     public GameObject FX_STAGG_BLUD;
+
+    private float SUPA_SECURE_FLOAT_CAMMMM;
+
+    public GameObject CutEnd;
     private void Start()
     {
+        CinemachineVirtualCamera CVC = FindFirstObjectByType<CinemachineVirtualCamera>();
+        SUPA_SECURE_FLOAT_CAMMMM = CVC.m_Lens.FieldOfView;
+
         SCALEX = transform.localScale.x;
         EnemyAnim.CrossFade("EmbryFarPunchHeavy", 0, 0);
         LastSFX = Time.time;
@@ -66,8 +74,8 @@ public class EmbrySukugaCut : MonoBehaviour
 
         PunchAudioP.PlayOneShot(rnd);
 
-        CameraSukugaCuts CSC = FindAnyObjectByType<CameraSukugaCuts>();
-        CSC.CameraShake(gameObject.GetComponent<CinemachineImpulseSource>(), CamShake);
+        ShakeCam();
+
 
         GameObject FX = Instantiate(ImpactFX_OBJ.gameObject, ImpactFX.transform.position, Quaternion.identity);
 
@@ -374,7 +382,24 @@ public class EmbrySukugaCut : MonoBehaviour
         Canva.gameObject.SetActive(true);
         CutsceneFinisher.gameObject.SetActive(true);
 
-        
+        Bool4Cut B4C = CutsceneFinisher.GetComponentInChildren<Bool4Cut>();
+
+        while (!B4C.CUT)
+        {
+            yield return null;
+        }
+
+        HP = 0;
+        StartCoroutine(JumpBackNThrow());
+
+
+        while(CVM.m_Lens.FieldOfView < SUPA_SECURE_FLOAT_CAMMMM)
+        {
+            CVM.m_Lens.FieldOfView += MinusThing * Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+
 
         yield break;
 
@@ -473,14 +498,16 @@ public class EmbrySukugaCut : MonoBehaviour
     {
         if (StartedJBNT) yield break;
         StartedJBNT = true;
+        StickManager.enabled = false;
         EnemyAnim.CrossFade("EmbryFarJump", 0, 0);
 
+        transform.localScale = new Vector3(1, 1, 1);
         float DisP1 = Vector2.Distance(transform.position, P1.position);
         float minDis = 2.5f;
         while(DisP1 > minDis)
         {
             DisP1 = Vector2.Distance(transform.position, P1.position);
-            transform.position = Vector2.MoveTowards(transform.position, P1.position, JumpSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, P1.position, JumpSpeed * Time.deltaTime);
             yield return null;
         }
 
@@ -489,7 +516,7 @@ public class EmbrySukugaCut : MonoBehaviour
         while (DisP2 > minDis)
         {
             DisP2 = Vector2.Distance(transform.position, P2.position);
-            transform.position = Vector2.MoveTowards(transform.position, P2.position, JumpSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, P2.position, JumpSpeed * Time.deltaTime);
             yield return null;
         }
 
@@ -515,10 +542,12 @@ public class EmbrySukugaCut : MonoBehaviour
 
                 PunchAudioP.PlayOneShot(rnd);
 
-                CameraSukugaCuts CSC = FindAnyObjectByType<CameraSukugaCuts>();
-                CSC.CameraShake(gameObject.GetComponent<CinemachineImpulseSource>(), CamShake);
+                ShakeCam();
+
 
                 GameObject FX = Instantiate(ImpactFX_OBJ.gameObject,ImpactFX.transform.position,Quaternion.identity);
+
+              
 
                 HP -= 1;
             }
@@ -534,18 +563,18 @@ public class EmbrySukugaCut : MonoBehaviour
                 if (!StickManager.InBackflip && DistanceFromPlayer <= MinDisPlayer)
                 {
                     rnd = StickManager.PunchHit[UnityEngine.Random.Range(0, StickManager.PunchHit.Length)];
-                    CameraSukugaCuts CSC = FindAnyObjectByType<CameraSukugaCuts>();
-                    CSC.CameraShake(gameObject.GetComponent<CinemachineImpulseSource>(), CamShake);
+                    ShakeCam();
+
 
                     GameObject FX = Instantiate(ImpactFX_OBJ.gameObject, StickManager.transform.position, Quaternion.identity);
 
                     StickManager.Health -= DMG_MELEE;
                 }
-                
 
 
 
-                
+
+
 
 
                 PunchAudioP.PlayOneShot(rnd);
@@ -576,10 +605,41 @@ public class EmbrySukugaCut : MonoBehaviour
         }
     }
 
+
+    public void HitStop(float t)
+    {
+        if ((StickManager.Attack && DistanceFromPlayer <= MinDisPlayer) ||  DistanceFromPlayer <= MinDisPlayer)
+        {
+            TimeScale_MOD MOD = FindAnyObjectByType<TimeScale_MOD>();
+            MOD.Stop(t);
+        }
+       
+    }
+
+    public AudioSource Music;
+    public AudioSource SLOMO;
     public void ThrowTendril()
     {
+        TimeScale_MOD MOD = FindAnyObjectByType<TimeScale_MOD>();
+        VolSlo.gameObject.SetActive(true);
+        MOD.SloMO(2, 0.2f);
+        Music.volume = 0.5f;
+        SLOMO.enabled = true;
+        StartCoroutine(SloMOPOST());
         GameObject TendrilS = Instantiate(Tendril.gameObject,AimPoint.transform.position,Quaternion.identity);
         StartCoroutine(MoveTendril(TendrilS)); 
+    }
+    public Volume VolSlo;
+
+    public IEnumerator SloMOPOST()
+    {
+        VolSlo.weight = 0;
+        while(VolSlo.weight < 1)
+        {
+            VolSlo.weight += 0.8f * Time.unscaledDeltaTime;
+            yield return null;
+        }
+        yield break;
     }
 
     private IEnumerator MoveTendril(GameObject obj)
@@ -604,20 +664,31 @@ public class EmbrySukugaCut : MonoBehaviour
 
         QTE.finished = true;
 
+        VolSlo.gameObject.SetActive(false);
+        Music.volume = 1;
 
+
+        
+        Canva.gameObject.SetActive(true);
         if (QTE.WinQTE)
         {
+            
             Debug.Log("QTE Sucess");
+            CutEnd.gameObject.SetActive(true);
         }
         else
         {
             Debug.Log("QTE fail");
 
         }
+        GAME_THING.gameObject.SetActive(false);
 
-        yield break;
+
+    yield break;
     }
 
+
+    public GameObject GAME_THING;
     public void ParryPunchON()
     {
         ParryPunch = true;
@@ -639,8 +710,7 @@ public class EmbrySukugaCut : MonoBehaviour
             AudioClip rnd = StickManager.PunchHit[UnityEngine.Random.Range(0, StickManager.PunchHit.Length)];
 
             PunchAudioP.PlayOneShot(rnd);
-            CameraSukugaCuts CSC = FindAnyObjectByType<CameraSukugaCuts>();
-            CSC.CameraShake(gameObject.GetComponent<CinemachineImpulseSource>(), CamShake);
+            ShakeCam();
             StickManager.Health -= DMG_MELEE;
             StickManager.StartCoroutine(StickManager.BackflipMofified(20, 4));
             StickManager.StickAnim.CrossFade("JumpHurt", 0, 0);
@@ -648,5 +718,13 @@ public class EmbrySukugaCut : MonoBehaviour
 
         return;
         
+    }
+
+    public void ShakeCam()
+    {
+        CinemachineImpulseManager.Instance.IgnoreTimeScale = true;
+
+        CameraSukugaCuts CSC = FindAnyObjectByType<CameraSukugaCuts>();
+        CSC.CameraShake(gameObject.GetComponent<CinemachineImpulseSource>(), CamShake);
     }
 }
