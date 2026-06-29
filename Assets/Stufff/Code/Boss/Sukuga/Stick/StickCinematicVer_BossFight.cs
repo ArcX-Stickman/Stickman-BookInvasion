@@ -61,7 +61,6 @@ public class StickCinematicVer_BossFight : MonoBehaviour
     public AudioClip JumpSfx;
     public AudioSource Footsteps;
 
-
     public bool CanJump;
   
     void Start()

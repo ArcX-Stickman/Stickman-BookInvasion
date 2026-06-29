@@ -59,6 +59,7 @@ public class EmbrySuk2 : MonoBehaviour
     public float CamShake;
 
     public GameObject Shockwave;
+    public AudioClip StaggerSFX;
 
 
     public float WaitTimeCombo;
@@ -90,7 +91,10 @@ public class EmbrySuk2 : MonoBehaviour
     private bool ALrinCorNotVun;
     public IEnumerator NotVun()
     {
+
         if (Vunerable || ALrinCorNotVun) yield break;
+        yield return new WaitForSecondsRealtime(0.7f);
+
         ALrinCorNotVun = true;
         Stagger = 4;
 
@@ -246,7 +250,7 @@ public class EmbrySuk2 : MonoBehaviour
             yield return null;
         }
 
-        EnemyAnim.CrossFade("EmbryIDLESUK2", 0, 0);
+        EnemyAnim.CrossFade("PunchDMG", 0, 0);
         LandedTime = Time.time;
 
         Vunerable = true;
@@ -338,7 +342,12 @@ public class EmbrySuk2 : MonoBehaviour
                 EnemyAnim.CrossFade("Kick", 0, 0);
             }
           
-           
+            if(Stagger - 1 == 0 || Stagger == 1)
+            {
+                TSM.SloMO(0.2f, 0.8f);
+
+            }
+
 
         }
 
@@ -347,13 +356,19 @@ public class EmbrySuk2 : MonoBehaviour
 
         if (Stagger <= 0)
         {
+            AnimShake(CamShake* 3);
+
+            TSM.Stop(0.1f);
             Vunerable = false;
             StartCoroutine(NotVun());
             Jump = false;
             Leaped = false;
+            AudioP.PlayOneShot(StaggerSFX);
             Health -= 1;
         }
     }
+
+    public TimeScale_MOD TSM;
 
     private bool MoveCorDone;
     public IEnumerator MoveToPOS(Transform pos, float speed)
@@ -663,5 +678,36 @@ public class EmbrySuk2 : MonoBehaviour
         float z = transform.rotation.z;
         z = Mathf.MoveTowards(z, tar, LookAtSpeed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(0, 0, z);
+    }
+
+    
+    public void DamagePlayer()
+    {
+        if (Stick.Attack) return;
+        if (DisEnemy <= MinDis)
+        {
+
+
+
+
+            AudioP.pitch = UnityEngine.Random.Range(0.9f, 1.3f);
+
+
+            AudioClip rnd = Stick.PunchHit[UnityEngine.Random.Range(0, Stick.PunchHit.Length)];
+            AudioP.PlayOneShot(rnd);
+
+            AudioP.PlayOneShot(ClapReverb);
+
+
+          
+
+            // Vector2 trans = new Vector2((EmbryAim.position.x + StickAim.transform.position.x / 2), (EmbryAim.position.y + StickAim.transform.position.y / 2));
+
+            GameObject FX = Instantiate(RadFX.gameObject, Stick.transform.position, Quaternion.identity);
+            Stick.Health -= 10;
+            AnimShake(CamShake * 1.5f);
+
+
+        }
     }
 }
