@@ -96,7 +96,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 1
     messageOptions: 0
-  - time: 0.041666668
+  - time: 0.083333336
     functionName: PunchWhoosh_NonMiss_SFX
     data: 
     objectReferenceParameter: {fileID: 0}

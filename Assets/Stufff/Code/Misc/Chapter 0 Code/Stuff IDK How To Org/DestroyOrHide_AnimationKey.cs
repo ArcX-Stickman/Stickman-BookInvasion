@@ -5,7 +5,7 @@ using UnityEngine;
 public class DestroyOrHide_AnimationKey : MonoBehaviour
 {
     public GameObject Object;
-
+    public bool isOG;
 
     private void Start()
     {
@@ -16,12 +16,17 @@ public class DestroyOrHide_AnimationKey : MonoBehaviour
     }
     public void HideIt()
     {
+        if (isOG) return;
         Object.gameObject.SetActive(false);
     }
 
     public void GETTT_OUTTT()
     {
-        Destroy(Object);
+        if (!isOG)
+        {
+            Destroy(Object);
+
+        }
     }
 
 }

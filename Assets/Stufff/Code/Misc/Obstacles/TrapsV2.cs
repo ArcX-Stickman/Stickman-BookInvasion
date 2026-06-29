@@ -22,7 +22,7 @@ public class TrapsV2 : MonoBehaviour
 
 
 
-    private bool triggered = false;
+    public bool triggered = false;
     public bool PlsDontGoAwayPapi;
     private void OnEnable()
     {

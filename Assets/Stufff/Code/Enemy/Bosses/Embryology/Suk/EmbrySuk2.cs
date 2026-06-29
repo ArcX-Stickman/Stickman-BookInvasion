@@ -1,11 +1,16 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.UIElements;
 
 public class EmbrySuk2 : MonoBehaviour
 {
+    [SerializeField] private float VunerableWindow;
     public StickCinematicVer_BossFight Stick;
-    public float Health;
+    public int Health;
 
     public float LastMelee;
     public float MeleeCD;
@@ -43,6 +48,24 @@ public class EmbrySuk2 : MonoBehaviour
     public AudioSource AudioP;
     public AudioClip ClapReverb;
 
+    public AudioClip ThrowSFX;
+    public AudioClip FallSFX;
+    public AudioClip JumpSFX;
+    public AudioClip Dash;
+    public AudioClip RunSFX;
+    public AudioClip Stomp;
+    public AudioClip StompAftermath;
+
+    public float CamShake;
+
+    public GameObject Shockwave;
+
+
+    public float WaitTimeCombo;
+    public float WaitTimeComboMin;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,7 +80,7 @@ public class EmbrySuk2 : MonoBehaviour
     {
         DisEnemy = Vector2.Distance(transform.position, Stick.transform.position);
         VunerableManager();
-
+        TimeCur = Time.time;
 
 
     }
@@ -74,9 +97,10 @@ public class EmbrySuk2 : MonoBehaviour
         Transform prev = null;
         if (!Leaped)
         {
+            AudioP.PlayOneShot(JumpSFX);
             Leaped = true;
 
-            EnemyAnim.SetBool("Leap", true);
+            EnemyAnim.CrossFade("EmbryLeapSUK2",0,0);
 
             if (transform.localScale.x > 0)
             {
@@ -95,7 +119,6 @@ public class EmbrySuk2 : MonoBehaviour
         {
             yield return null; // wait fo da leaop to done
         }
-        EnemyAnim.SetBool("Leap", false);
         MoveCorDone = false;
 
         SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
@@ -103,11 +126,13 @@ public class EmbrySuk2 : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.3f);
 
         EnemyAnim.CrossFade("EmbryThrowSUK2", 0, 0);
-        yield return new WaitForSecondsRealtime(1);
+        yield return new WaitForSecondsRealtime(0.2f + WaitTimeCombo);
 
 
         if (!Jump)
         {
+            AudioP.PlayOneShot(Dash);
+
             sr.enabled = false;
 
             if (prev == PointR)
@@ -138,31 +163,48 @@ public class EmbrySuk2 : MonoBehaviour
         // throw
 
         EnemyAnim.CrossFade("EmbryAirIDLESUK2", 0, 0);
+        float timer = 0;
+        while (timer < WaitTimeComboMin)
+        {
+            timer += Time.deltaTime;
 
-        yield return new WaitForSecondsRealtime(1.4f);
 
+            LookAtPlayerAngleBased();
+
+
+            yield return null;
+        }
+
+        AudioP.PlayOneShot(ThrowSFX);
 
         EnemyAnim.SetTrigger("Throw");
 
-        yield return new WaitForSecondsRealtime(1.4f);
+
+        yield return new WaitForSecondsRealtime(0.5f);
 
 
+        AudioP.PlayOneShot(FallSFX);
 
+        transform.rotation = Quaternion.Euler(0, 0, 0);
         if (prev == PointR)
         {
-            StartCoroutine(MoveToPOS(PointL, FallDown));
+            transform.localScale = new Vector3(1, 1, 1);
+
+            StartCoroutine(MoveToPOS(PointL, FallDown, Stomp));
 
         }
         else
         {
-            StartCoroutine(MoveToPOS(PointR, FallDown));
+            transform.localScale = new Vector3(-1, 1, 1);
+
+
+            StartCoroutine(MoveToPOS(PointR, FallDown,Stomp ));
 
         }
         EnemyAnim.SetBool("Fall", true);
 
 
         ALrinCorNotVun = false;
-        Vunerable = true;
 
         while (!MoveCorDone)
         {
@@ -172,21 +214,31 @@ public class EmbrySuk2 : MonoBehaviour
         MoveCorDone = false;
         EnemyAnim.SetBool("Fall", false);
 
+        // boi landed
 
-        if (prev == PointR)
+        Vector3 vector3 = new Vector3(transform.position.x, -18.9f,0);
+        GameObject Shock = Instantiate(Shockwave, vector3, Quaternion.identity);
+        DestroyOrHide_AnimationKey destroyOrHide_AnimationKey = Shock.GetComponent<DestroyOrHide_AnimationKey>();
+        destroyOrHide_AnimationKey.isOG = false;
+        ShockwaveDirecCtrl SDC = Shock.GetComponent<ShockwaveDirecCtrl>();
+        SDC.Targ = prev;
+
+
+
+        yield return new WaitForSecondsRealtime(WaitTimeComboMin);
+
+        StartCoroutine(MoveToPOS(Stick.transform, LeapSpeed,true));
+        AudioP.PlayOneShot(RunSFX);
+        Vector2 targetPosition = new Vector2(Stick.transform.position.x, transform.position.y);
+        if (targetPosition.x < transform.position.x)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+
+        }
+        else if (targetPosition.x > transform.position.x)
         {
             transform.localScale = new Vector3(-1, 1, 1);
         }
-        else
-        {
-            transform.localScale = Vector3.one;
-
-        }
-
-
-        yield return new WaitForSecondsRealtime(1.2f);
-
-        StartCoroutine(MoveToPOS(Stick.transform, LeapSpeed));
         EnemyAnim.CrossFade("EmbryDash", 0, 0);
 
         while (!MoveCorDone)
@@ -195,27 +247,84 @@ public class EmbrySuk2 : MonoBehaviour
         }
 
         EnemyAnim.CrossFade("EmbryIDLESUK2", 0, 0);
+        LandedTime = Time.time;
 
+        Vunerable = true;
 
 
         Jump = false;
         Leaped = false;
 
-        yield return new WaitForSecondsRealtime(0.1f);
+        yield return new WaitForSecondsRealtime(WaitTimeComboMin);
+
+        if(VunerableWindow > 1.5f)
+        {
+            VunerableWindow -= 0.25f;
+
+        }
+        if (WaitTimeComboMin > 0.3f)
+        {
+            WaitTimeComboMin -= 0.3f;
+
+        }
+
+        if (WaitTimeCombo > 0.5f)
+        {
+            WaitTimeCombo -= 0.2f;
+
+
+        }
+        else
+        {
+            WaitTimeCombo = 0.5f;
+        }
 
         yield break;
 
     }
 
-
+    private float LandedTime;
+    private float TimeCur;
     public int Stagger;
-
+    public void AnimShake(float sha)
+    {
+        CameraSukugaCuts CSC = FindAnyObjectByType<CameraSukugaCuts>();
+        CSC.CameraShake(gameObject.GetComponent<CinemachineImpulseSource>(), sha);
+    }
     public void VunerableManager()
     {
-        if (!Vunerable) return;
+        if (!Vunerable || ALrinCorNotVun) return;
+
+        if (Vunerable)
+        {
+            Vector2 targetPosition = new Vector2(Stick.transform.position.x, transform.position.y);
+            if (targetPosition.x < transform.position.x)
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+
+            }
+            else if (targetPosition.x > transform.position.x)
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+            }
+
+        }
+
+
+        float timeBeen = Time.time - LandedTime;
+
+        if (timeBeen >= VunerableWindow)
+        {
+            Vunerable = false;
+            StartCoroutine(NotVun());
+            Jump = false;
+            Leaped = false;
+        }
+
 
         if (Stick.Attack && DisEnemy <= MinDis && Time.time >= LastMelee + MeleeCD && OutOfATK)
         {
+            LandedTime += 0.25f; // buffer time for player 
             LastMelee = Time.time;
             if (Stick.PunchA)
             {
@@ -228,28 +337,28 @@ public class EmbrySuk2 : MonoBehaviour
 
                 EnemyAnim.CrossFade("Kick", 0, 0);
             }
-            Stagger -= 1;
-            AudioP.pitch = UnityEngine.Random.Range(0.9f, 1.3f);
-
-
-            AudioClip rnd = Stick.PunchHit[UnityEngine.Random.Range(0, Stick.PunchHit.Length)];
-            AudioP.PlayOneShot(rnd);
-
-            AudioP.PlayOneShot(ClapReverb);
+          
+           
 
         }
+
+       
+
 
         if (Stagger <= 0)
         {
             Vunerable = false;
             StartCoroutine(NotVun());
-
+            Jump = false;
+            Leaped = false;
+            Health -= 1;
         }
     }
 
     private bool MoveCorDone;
     public IEnumerator MoveToPOS(Transform pos, float speed)
     {
+       
         float minDIS = 2.5f;
         float Dis = Vector2.Distance(transform.position, pos.position);
         while (Dis > minDIS)
@@ -262,6 +371,94 @@ public class EmbrySuk2 : MonoBehaviour
         yield break;
     }
 
+    public IEnumerator MoveToPOS(Transform pos, float speed,AudioClip SFX)
+    {
+
+        float minDIS = 2.5f;
+        float Dis = Vector2.Distance(transform.position, pos.position);
+        while (Dis > minDIS)
+        {
+            Dis = Vector2.Distance(transform.position, pos.position);
+            transform.position = Vector2.MoveTowards(transform.position, pos.position, speed * Time.deltaTime);
+            yield return null;
+        }
+        MoveCorDone = true;
+        AudioP.PlayOneShot(SFX);
+
+        if(SFX == Stomp)
+        {
+            AnimShake(CamShake);
+            GameObject FX = Instantiate(LandFX.gameObject, LandPoint.position, Quaternion.identity);
+
+
+        }
+
+        yield break;
+    }
+
+
+    public Transform LandPoint;
+    public GameObject RadFX;
+    public GameObject LandFX;
+
+
+    public Transform StickAim;
+    public Transform EmbryAim;
+    public void PunchSFX()
+    {
+        if (DisEnemy <= MinDis )
+        {
+
+            AnimShake(CamShake);
+            AudioP.pitch = UnityEngine.Random.Range(0.9f, 1.3f);
+
+
+            AudioClip rnd = Stick.PunchHit[UnityEngine.Random.Range(0, Stick.PunchHit.Length)];
+            AudioP.PlayOneShot(rnd);
+
+            AudioP.PlayOneShot(ClapReverb);
+
+
+            if (Stick.Attack)
+            {
+                Stagger -= 1;
+            }
+
+           // Vector2 trans = new Vector2((EmbryAim.position.x + StickAim.transform.position.x / 2), (EmbryAim.position.y + StickAim.transform.position.y / 2));
+
+            GameObject FX = Instantiate(RadFX.gameObject, EmbryAim.position, Quaternion.identity);
+
+        }
+        
+    }
+
+    public IEnumerator MoveToPOS(Transform pos, float speed, bool moveOnlyX)
+    {
+        if (pos == null) yield break;
+
+        Vector3 targetPosition = pos.position;
+
+        if (moveOnlyX)
+        {
+            targetPosition = new Vector3(pos.position.x, transform.position.y, 0f);
+        }
+
+        float minDIS = 2.5f;
+        float distance = Vector2.Distance(transform.position, targetPosition);
+        float timer = 0;
+        while (distance > minDIS)
+        {
+            timer += Time.deltaTime;
+            if (timer > 2.5) yield break;
+            distance = Vector2.Distance(transform.position, targetPosition);
+            transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+
+            yield return null;
+        }
+
+        MoveCorDone = true;
+    }
+
 
 
     public void OutATK()
@@ -272,5 +469,199 @@ public class EmbrySuk2 : MonoBehaviour
     public void inAtk()
     {
         OutOfATK = false;
+    }
+
+    public GameObject Ranged_Pro;
+    public Transform AimPoint_Ranged;
+    public void ThrowAttack()
+    {
+        Transform EndPos = null;
+        if(transform.localScale.x > 0f)
+        {
+            EndPos = PointL;
+        }
+        else
+        {
+            EndPos = PointR;
+
+        }
+
+
+        // crap i learned in math
+        // y = a(x-h)^2 + k
+
+        /// x = something i guess
+        /// h = this is not gonna be given
+        ///  k = player y position
+        ///  y = the desinty
+
+        GameObject Projectile = Instantiate(Ranged_Pro, AimPoint_Ranged.position, Quaternion.identity);
+
+
+        Vector2 PlayerPos = new Vector2(Stick.transform.position.x, Stick.transform.position.y);
+        StartCoroutine(ThrowAttackPredicatable(EndPos, PlayerPos, Projectile));
+        return;
+
+    }
+
+
+    public void ThrowAttackPLayerTargeted()
+    {
+      
+
+
+        // crap i learned in math
+        // y = a(x-h)^2 + k
+
+        /// x = something i guess
+        /// h = this is not gonna be given
+        ///  k = player y position
+        ///  y = the desinty
+
+        GameObject Projectile = Instantiate(Ranged_Pro, AimPoint_Ranged.position, Quaternion.identity);
+
+
+        Vector2 PlayerPos = new Vector2(Stick.transform.position.x, Stick.transform.position.y);
+        StartCoroutine(PlayerThrowTargetedZygote(PlayerPos,Projectile));
+        return;
+
+    }
+
+
+    private IEnumerator PlayerThrowTargetedZygote(Vector2 Player,GameObject projectile)
+    {
+        float mindis = 0.2f;
+        float timer = 0;
+        float dis = 0;
+        dis = Vector2.Distance(projectile.transform.position, Player);
+
+        float speed = RangedProSpeed / 2;
+
+
+        while (timer < 2 && mindis <= dis)
+        {
+            dis = Vector2.Distance(projectile.transform.position, Player);
+            projectile.transform.position = Vector2.MoveTowards(projectile.transform.position, Player, speed * Time.deltaTime);
+            yield return null;
+
+        }
+
+        yield break;
+    }
+
+
+    public float RangedProSpeed;
+    private IEnumerator ThrowAttackPredicatable(Transform Point, Vector2 PlayerPos, GameObject Ranged)
+    {
+        float timer = 0;
+        float MinDis = 1.4f;
+        float MidPoint_X = (transform.position.x + Stick.transform.position.x) / 2;
+
+        Vector2 Vertex = new Vector2(MidPoint_X, PlayerPos.y + 7);
+
+        float dis = Vector2.Distance(Ranged.transform.position, Vertex);
+
+
+
+        // math crap
+        float a = 0;
+        float h = 0;
+        float k = 0;
+        float x = 0;
+        float y = 0;
+
+
+        Debug.Log("Vertex Point: " + Vertex);
+
+
+        while(dis > MinDis && timer < 1.5f)
+        {
+
+            timer += Time.deltaTime;
+            dis = Vector2.Distance(Ranged.transform.position, Vertex);
+
+            Debug.Log("Vertex Dis: " + dis);
+
+            Ranged.transform.position = Vector2.MoveTowards(Ranged.transform.position, Vertex, RangedProSpeed * Time.deltaTime);
+
+
+            ///dis = Vector2.Distance(Ranged.transform.position, Point.position);
+            yield return null;
+
+            /// y = a * (Mathf.Pow((x - h), 2)) + k;
+
+        }
+
+        float timer2 = 0;
+        dis = Vector2.Distance(Ranged.transform.position, PlayerPos);
+        MinDis = 0.5f;
+        while (dis > MinDis && timer2 < 1.5f)
+        {
+            Debug.Log("EndPoint Dis: " + dis);
+
+            timer2 += Time.deltaTime;
+
+            if(PlayerPos.y > Vertex.y)
+            {
+                PlayerPos.y = Ranged.transform.position.y;
+            }
+
+
+
+            dis = Vector2.Distance(Ranged.transform.position, PlayerPos);
+
+
+            Ranged.transform.position = Vector2.MoveTowards(Ranged.transform.position, PlayerPos, RangedProSpeed * Time.deltaTime);
+
+
+            ///dis = Vector2.Distance(Ranged.transform.position, Point.position);
+
+            /// y = a * (Mathf.Pow((x - h), 2)) + k;
+            /// 
+            yield return null;
+
+        }
+        Debug.Log("YOOOO it finished ");
+
+
+        yield break;
+    }
+
+
+    public float LookAtSpeed;
+    public Quadrant Mid;
+    public Quadrant Left;
+    public Quadrant Right;
+    private float tar;
+    public void LookAtPlayerAngleBased()
+    {
+        if (Mid.Here)
+        {
+            transform.localScale = Vector3.one;
+            tar = 77.23f;
+        }
+        else if (Left.Here)
+        {
+            transform.localScale = Vector3.one;
+            tar = 11.74f;
+        }
+        else
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+            tar = -22.027f;
+        }
+
+        float z = transform.eulerAngles.z;
+        z = Mathf.MoveTowardsAngle(z, tar, LookAtSpeed * Time.deltaTime);
+
+        transform.rotation = Quaternion.Euler(0, 0, z);
+    }
+
+
+    private void ChangeRotation(float tar)
+    {
+        float z = transform.rotation.z;
+        z = Mathf.MoveTowards(z, tar, LookAtSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Euler(0, 0, z);
     }
 }

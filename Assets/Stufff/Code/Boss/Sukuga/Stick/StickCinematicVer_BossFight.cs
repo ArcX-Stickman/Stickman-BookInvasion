@@ -55,6 +55,7 @@ public class StickCinematicVer_BossFight : MonoBehaviour
 
     public AudioClip BackFlipSFX;
     public float LastBackflipTime;
+    public float BackflipCD;
     public float BackFlipForce;
     public float BackFlipHorizontalForce;
     public AudioClip JumpSfx;
@@ -180,9 +181,13 @@ public class StickCinematicVer_BossFight : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Q) && Grounded && !InBackflip && Stamina >= 8 || Input.GetKeyDown(KeyCode.Q) && !Grounded && !InBackflip && Stamina >= 8)
         {
-            LastBackflipTime = Time.time;
-            InBackflip = true;
-            StartCoroutine(Backflip());
+            if(BackflipCD + LastBackflipTime <= Time.time)
+            {
+                LastBackflipTime = Time.time;
+                InBackflip = true;
+                StartCoroutine(Backflip());
+            }
+          
         }
         else if (Stamina <= 6 && Input.GetKeyDown(KeyCode.Q))
         {
@@ -370,11 +375,15 @@ public class StickCinematicVer_BossFight : MonoBehaviour
         FirstPunDone = true;    
     }
 
+    public bool ForceSoundPunch_WHOOSH;
     public void PunchAnim()
     {
         if (RequireFirstPunchDone && !FirstPunDone) return;
         if(InPunch) return;
         if (inPunchVoidAnim) return;
+
+        
+
 
         bool KickAnim = (StickAnim.GetCurrentAnimatorStateInfo(0).IsName("Kick"));
         bool DontMakeMoreIndexxGrr = false;
@@ -462,6 +471,12 @@ public class StickCinematicVer_BossFight : MonoBehaviour
         float pitch = UnityEngine.Random.Range(1, 1.3f);
         PunchAudioP.pitch = pitch;
         StartCoroutine(PunchAnimWhoosh(rnd));
+        if (ForceSoundPunch_WHOOSH)
+        {
+
+            PunchAudioP.PlayOneShot(rnd);
+            PunchAnimKeyFrame = false;
+        }
 
     }
 
@@ -635,4 +650,7 @@ public class StickCinematicVer_BossFight : MonoBehaviour
         yield break;
 
     }
+
+
+    
 }
