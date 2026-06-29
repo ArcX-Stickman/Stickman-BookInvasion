@@ -450,13 +450,16 @@ MonoBehaviour:
   StaminaRecovery: 0
   BackFlipSFX: {fileID: 8300000, guid: e556900601a48804d878a8f4dc740d10, type: 3}
   LastBackflipTime: 0
+  BackflipCD: 0
   BackFlipForce: 23.11
   BackFlipHorizontalForce: 35.4
   JumpSfx: {fileID: 8300000, guid: d9ebf5707325c714bb2ccb66ac610735, type: 3}
   Footsteps: {fileID: 36225363}
   CanJump: 0
+  NoNeedDirectionCrap: 0
   punchIndex: 0
   GroundImpact: {fileID: 8300000, guid: 6e310db5445170f4a86113db3802e278, type: 3}
+  ForceSoundPunch_WHOOSH: 0
   InBackflip: 0
 --- !u!95 &36225362
 Animator:
@@ -714,6 +717,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Object: {fileID: 101818626}
+  isOG: 0
 --- !u!1 &104766588
 GameObject:
   m_ObjectHideFlags: 0
@@ -1103,7 +1107,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &212340922
 Transform:
   m_ObjectHideFlags: 0
@@ -1145,6 +1149,7 @@ GameObject:
   m_Component:
   - component: {fileID: 216685210}
   - component: {fileID: 216685211}
+  - component: {fileID: 216685212}
   m_Layer: 0
   m_Name: Cutscene EndP2 part 1
   m_TagString: Untagged
@@ -1186,7 +1191,7 @@ VideoPlayer:
   m_RenderMode: 2
   m_AspectRatio: 2
   m_DataSource: 0
-  m_TimeUpdateMode: 1
+  m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
   m_TargetAudioSources:
@@ -1203,6 +1208,26 @@ VideoPlayer:
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
+--- !u!114 &216685212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216685209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda0d642bc6f49843ae805cbcdab4c84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 216685211}
+  LoadedObject: {fileID: 0}
+  timerThing: 0
+  VidDur: 0
+  CUT: {fileID: 2107245196}
+  PreLoad: 1
+  DontDecSelf: 1
+  sceneToLoad: EmbryPhase2_SUK_2
 --- !u!1 &255368670
 GameObject:
   m_ObjectHideFlags: 0
@@ -6690,6 +6715,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Object: {fileID: 388388846}
+  isOG: 0
 --- !u!114 &388388851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7387,6 +7413,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 615788786}
+  - component: {fileID: 615788788}
   - component: {fileID: 615788787}
   m_Layer: 0
   m_Name: Music
@@ -7506,6 +7533,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &615788788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615788785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa504f149750264eae851719dba3df2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &622772635
 GameObject:
   m_ObjectHideFlags: 0
@@ -20558,7 +20597,7 @@ VideoPlayer:
   m_RenderMode: 2
   m_AspectRatio: 2
   m_DataSource: 0
-  m_TimeUpdateMode: 1
+  m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
   m_TargetAudioSources:
@@ -20972,6 +21011,7 @@ MonoBehaviour:
   P1: {fileID: 36225358}
   P2: {fileID: 1785410594}
   StartZ: -5.169
+  OnlyX: 0
 --- !u!1 &1439703524
 GameObject:
   m_ObjectHideFlags: 0
@@ -24547,7 +24587,7 @@ VideoPlayer:
   m_RenderMode: 2
   m_AspectRatio: 2
   m_DataSource: 0
-  m_TimeUpdateMode: 1
+  m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
   m_TargetAudioSources:

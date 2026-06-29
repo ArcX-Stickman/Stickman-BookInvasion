@@ -23,6 +23,25 @@ public class ActivateObject_ANIMATION_KEY : MonoBehaviour
 
         }
 
+        if(StickHP == null)
+        {
+            StickCinematicVer_BossFight SCVB = FindAnyObjectByType<StickCinematicVer_BossFight>();
+            if ((SCVB != null) )
+            {
+                Obj_To_Activate.gameObject.SetActive(true);
+
+            }
+        }
+
+    }
+
+
+
+    public void ActivateALT()
+    {
+        Obj_To_Activate.gameObject.SetActive(true);
+
+
     }
 
     public void DeActivate()

@@ -65,8 +65,12 @@ public class EmbrySuk2 : MonoBehaviour
     public float WaitTimeCombo;
     public float WaitTimeComboMin;
 
-
-
+    public GameObject Cutscene;
+    public GameObject CutSprite;
+    public GameObject CutFin;
+    public Transform MidPoint;
+    public GameObject Game;
+    public CinemachineVirtualCamera VirtualCamera;
     // Start is called before the first frame update
     void Start()
     {
@@ -79,11 +83,68 @@ public class EmbrySuk2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DisEnemy = Vector2.Distance(transform.position, Stick.transform.position);
-        VunerableManager();
-        TimeCur = Time.time;
+        if(Health > 0)
+        {
+            DisEnemy = Vector2.Distance(transform.position, Stick.transform.position);
+            VunerableManager();
+            TimeCur = Time.time;
+        }
+        else if(Health <= 0 && Time.timeScale == 1)
+        {
+            MidPointTransform midPointTransform =  FindAnyObjectByType<MidPointTransform>();
+            midPointTransform.enabled = false; // now position is frozen yessir
+            LowManager();
+        }
+      
 
 
+    }
+
+    private bool ReadytoSwap;
+    private bool Operation67;
+    public void LowManager()
+    {
+
+        if(!ReadytoSwap &&!Operation67)
+        {
+            Operation67= true;
+            StartCoroutine(Op67());
+        }
+
+        if(ReadytoSwap)
+        {
+            if(Stick.transform.localScale.x <= 0)
+            {
+                SpriteRenderer SR =CutSprite.GetComponent<SpriteRenderer>();
+                
+                SpriteRenderer SR2 = CutFin.GetComponent<SpriteRenderer>();
+
+                SR.flipX = true;
+                SR2.flipX = true;
+
+            }
+            CutSprite.transform.position = MidPoint.position;
+
+            GameObject[] FX = GameObject.FindGameObjectsWithTag("SuperB");
+            foreach (GameObject fx in FX)
+            {
+                Destroy(fx);
+            }
+
+            VirtualCamera.gameObject.SetActive(false);
+            Cutscene.gameObject.SetActive(true);
+            Game.gameObject.SetActive(false);
+        }
+       
+       
+    }
+
+
+    private IEnumerator Op67()
+    {
+        yield return new WaitForSecondsRealtime(0.6f);
+        ReadytoSwap = true;
+        yield break;
     }
 
     private bool Leaped;
@@ -91,7 +152,7 @@ public class EmbrySuk2 : MonoBehaviour
     private bool ALrinCorNotVun;
     public IEnumerator NotVun()
     {
-
+        if(Health <= 0) yield break;
         if (Vunerable || ALrinCorNotVun) yield break;
         yield return new WaitForSecondsRealtime(0.7f);
 
