@@ -65,6 +65,10 @@ public class StickCinematicVer_BossFight : MonoBehaviour
   
     void Start()
     {
+
+        Time.timeScale = 1;
+        Time.fixedDeltaTime = 0.02f;
+
         // Stats Set-up
         CanJump = true;
         // Stamina

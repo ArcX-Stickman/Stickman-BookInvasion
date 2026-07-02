@@ -9,6 +9,7 @@ public class TrapsSukuga : MonoBehaviour
     public AudioSource AudioP;
     public AudioClip SFX;
     public bool DMGed;
+    public bool  NotAvoidBackflip;
 
 
     private void Start()
@@ -19,7 +20,7 @@ public class TrapsSukuga : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (DMGed) return;
-        if (Stick.InBackflip) return;
+        if (Stick.InBackflip && !NotAvoidBackflip) return;
         if (collision.gameObject.CompareTag("Player"))
         {
             DMG_STUFF();
@@ -29,7 +30,7 @@ public class TrapsSukuga : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (DMGed) return;
-        if (Stick.InBackflip) return;
+        if (Stick.InBackflip && !NotAvoidBackflip) return;
 
         if (collision.gameObject.CompareTag("Player"))
         {

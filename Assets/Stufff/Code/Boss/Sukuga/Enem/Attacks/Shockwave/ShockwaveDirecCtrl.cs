@@ -9,6 +9,7 @@ public class ShockwaveDirecCtrl : MonoBehaviour
     private TrapsSukuga TrapsSukuga;
     private TrapsV2 TrapsNorm;
     public Transform Targ;
+    public bool IgnoreY;
 
     private bool Sukuga;
     void Start()
@@ -52,8 +53,17 @@ public class ShockwaveDirecCtrl : MonoBehaviour
 
     public void SukugaManager()
     {
+        
         float Distance = Vector2.Distance(transform.position, Targ.position);
-        if(Distance >= MinDis) //&& !TrapsSukuga.DMGed
+        if (IgnoreY)
+        {
+            Vector2 Des = new Vector2(Targ.transform.position.x, transform.position.y);
+            Distance = Vector2.Distance(transform.position, Targ.position);
+
+            transform.position = Vector2.MoveTowards(transform.position, Des, Speed * Time.deltaTime);
+
+        }
+        else if (Distance >= MinDis) //&& !TrapsSukuga.DMGed
         {
             Distance = Vector2.Distance(transform.position, Targ.position);
             transform.position = Vector2.MoveTowards(transform.position, Targ.position, Speed * Time.deltaTime);

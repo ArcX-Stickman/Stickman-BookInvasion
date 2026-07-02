@@ -6,7 +6,7 @@ public class ObjectToNextScene : MonoBehaviour
 {
     public static ObjectToNextScene instance;
 
-     private void Awake()
+    private void Awake()
     {
         if (instance == null)
         {
@@ -15,7 +15,8 @@ public class ObjectToNextScene : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject); // Prevent duplicates
+            Destroy(gameObject);
         }
     }
+
 }

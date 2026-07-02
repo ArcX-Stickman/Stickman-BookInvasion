@@ -336,8 +336,6 @@ public class EmbrySuk2 : MonoBehaviour
         if (WaitTimeCombo > 0.5f)
         {
             WaitTimeCombo -= 0.2f;
-
-
         }
         else
         {
