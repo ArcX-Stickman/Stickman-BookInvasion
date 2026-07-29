@@ -3398,7 +3398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 3007.9863
+  currentDistance: 3022.5027
   player: {fileID: 228098103}
   light2D: {fileID: 14925531}
 --- !u!1 &16425266
@@ -4005,7 +4005,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 7371.5347
+  Distance: 7385.6567
   MinDis: 15
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -8665,7 +8665,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 622.538
+  currentDistance: 631.728
   player: {fileID: 228098103}
   light2D: {fileID: 45179255}
 --- !u!114 &45179258
@@ -9067,6 +9067,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Object: {fileID: 49664473}
+  isOG: 0
 --- !u!1 &49889134 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 817569964484396903, guid: 30007465c798928469890ac29812bfc2, type: 3}
@@ -9592,7 +9593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 11454.392
+  currentDistance: 11468.592
   player: {fileID: 228098103}
   light2D: {fileID: 55675557}
 --- !u!114 &55675560
@@ -9919,7 +9920,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 500
-  currentDistance: 4616.5327
+  currentDistance: 4630.553
   player: {fileID: 228098103}
   light2D: {fileID: 55732158}
 --- !u!114 &55732162
@@ -10998,7 +10999,7 @@ Transform:
   m_GameObject: {fileID: 62893325}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 24.801758, y: 1.2821655, z: 0}
+  m_LocalPosition: {x: 24.672852, y: 1.2436905, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11627,7 +11628,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 11267.213
+  currentDistance: 11281.41
   player: {fileID: 228098103}
   light2D: {fileID: 64404771}
 --- !u!114 &64404774
@@ -389063,7 +389064,7 @@ GameObject:
   m_Component:
   - component: {fileID: 103980277}
   - component: {fileID: 103980279}
-  - component: {fileID: 103980278}
+  - component: {fileID: 103980280}
   m_Layer: 0
   m_Name: BG (3)
   m_TagString: Untagged
@@ -389080,26 +389081,12 @@ Transform:
   m_GameObject: {fileID: 103980276}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -814.72534, y: 112.973755, z: 0}
+  m_LocalPosition: {x: -1867.0509, y: 112.973755, z: 0}
   m_LocalScale: {x: 10.954195, y: 12.545867, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2135301076}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &103980278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 103980276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a1c188977bda664b8436e3947f87c6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parallaxStrength: 0.4
-  affectVertical: 0
 --- !u!212 &103980279
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -389152,6 +389139,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &103980280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103980276}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a1c188977bda664b8436e3947f87c6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parallaxStrength: 0.4
+  affectVertical: 0
 --- !u!1 &104269689
 GameObject:
   m_ObjectHideFlags: 0
@@ -398599,7 +398600,7 @@ Transform:
   m_GameObject: {fileID: 135909209}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 115.5918, y: 0, z: 0}
+  m_LocalPosition: {x: 115.3053, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -399247,7 +399248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 11629.357
+  currentDistance: 11643.567
   player: {fileID: 228098103}
   light2D: {fileID: 136491605}
 --- !u!114 &136491605 stripped
@@ -400158,7 +400159,7 @@ Transform:
   m_GameObject: {fileID: 141647922}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -208.58374, y: 0, z: 0.00000011920929}
+  m_LocalPosition: {x: -210.87573, y: 0, z: 0.00000011920929}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -401557,7 +401558,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 5262.947
+  currentDistance: 5276.9756
   player: {fileID: 228098103}
   light2D: {fileID: 146235517}
 --- !u!114 &146235517 stripped
@@ -403328,6 +403329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Object: {fileID: 158062194}
+  isOG: 0
 --- !u!95 &158062197
 Animator:
   serializedVersion: 5
@@ -403626,7 +403628,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: BarGuy_Hide
-  Distance: 9254.66
+  Distance: 9268.843
   MinDis: 13.29
   Stick: {fileID: 228098106}
   Animator: {fileID: 160827454}
@@ -408628,7 +408630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 10713.348
+  Distance: 10727.532
   MinDis: 15
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -408875,7 +408877,7 @@ Transform:
   m_GameObject: {fileID: 161604107}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -152.11597, y: 5.130005, z: 0}
+  m_LocalPosition: {x: -154.12158, y: 5.130005, z: 0}
   m_LocalScale: {x: 15, y: 15, z: 11.25}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -409358,6 +409360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Object: {fileID: 162364332}
+  isOG: 0
 --- !u!1 &162589102
 GameObject:
   m_ObjectHideFlags: 0
@@ -410940,6 +410943,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Object: {fileID: 171487308}
+  isOG: 0
 --- !u!114 &171487311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411837,7 +411841,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 11155.545
+  currentDistance: 11169.74
   player: {fileID: 228098103}
   light2D: {fileID: 176513911}
 --- !u!114 &176513914
@@ -412356,7 +412360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 9040.161
+  Distance: 9054.336
   MinDis: 15
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -418636,7 +418640,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 550
-  currentDistance: 983.0675
+  currentDistance: 996.64325
   player: {fileID: 228098103}
   light2D: {fileID: 205274024}
 --- !u!1 &205347868
@@ -419503,6 +419507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Object: {fileID: 209258918}
+  isOG: 0
 --- !u!95 &209258921
 Animator:
   serializedVersion: 5
@@ -427390,7 +427395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 11504.306
+  currentDistance: 11518.506
   player: {fileID: 228098103}
   light2D: {fileID: 223944361}
 --- !u!114 &223944364
@@ -427446,7 +427451,7 @@ PrefabInstance:
       objectReference: {fileID: 590502044}
     - target: {fileID: 4007725764757369757, guid: 5802987c90cb4504e980507463aed67c, type: 3}
       propertyPath: Health
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4007725764757369757, guid: 5802987c90cb4504e980507463aed67c, type: 3}
       propertyPath: Graphix
@@ -427488,6 +427493,10 @@ PrefabInstance:
       propertyPath: ImpactFrameEffect
       value: 
       objectReference: {fileID: 1738988547}
+    - target: {fileID: 4007725764757369757, guid: 5802987c90cb4504e980507463aed67c, type: 3}
+      propertyPath: DistanceFromPlayer
+      value: 0.001
+      objectReference: {fileID: 0}
     - target: {fileID: 4007725764757369757, guid: 5802987c90cb4504e980507463aed67c, type: 3}
       propertyPath: AudioP_PitchShifter
       value: 
@@ -429669,7 +429678,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Bio_Dead
-  Distance: 2368.5781
+  Distance: 2382.2056
   MinDis: 47.8
   Stick: {fileID: 228098106}
   Animator: {fileID: 681625897}
@@ -429930,6 +429939,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Object: {fileID: 235583597}
+  isOG: 0
 --- !u!114 &235583605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -433605,7 +433615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 4245.9785
+  currentDistance: 4259.9697
   player: {fileID: 228098103}
   light2D: {fileID: 258597750}
 --- !u!114 &258597750 stripped
@@ -434895,6 +434905,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Object: {fileID: 269612131}
+  isOG: 0
 --- !u!4 &269612135 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4981870689888627708, guid: 8587ea2a51492944b95e0e16d2687aed, type: 3}
@@ -435511,7 +435522,7 @@ Transform:
   m_GameObject: {fileID: 272675435}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1654.8962, y: 75.136475, z: -8.199721}
+  m_LocalPosition: {x: 1640.5712, y: 70.86148, z: -8.199721}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -448476,7 +448487,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 3933.1006
+  currentDistance: 3947.0168
   player: {fileID: 228098103}
   light2D: {fileID: 320061511}
 --- !u!114 &320061511 stripped
@@ -448689,7 +448700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 11685.613
+  currentDistance: 11699.815
   player: {fileID: 228098103}
   light2D: {fileID: 320530732}
 --- !u!114 &320530735
@@ -450753,7 +450764,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 450
-  currentDistance: 5437.1553
+  currentDistance: 5451.174
   player: {fileID: 228098103}
   light2D: {fileID: 331441715}
 --- !u!1 &332059402 stripped
@@ -452049,7 +452060,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 790
-  currentDistance: 17838.3
+  currentDistance: 17841.252
   player: {fileID: 228098103}
   light2D: {fileID: 338868791}
 --- !u!114 &338868796
@@ -452251,7 +452262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 5200.941
+  currentDistance: 5214.999
   player: {fileID: 228098103}
   light2D: {fileID: 340023219}
 --- !u!114 &340023219 stripped
@@ -459040,7 +459051,7 @@ Transform:
   m_GameObject: {fileID: 374179958}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1606.5121, y: 97.4, z: 0}
+  m_LocalPosition: {x: -1606.6553, y: 97.4, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -459297,7 +459308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 11218.305
+  currentDistance: 11232.502
   player: {fileID: 228098103}
   light2D: {fileID: 374651620}
 --- !u!114 &374651623
@@ -466220,7 +466231,7 @@ Transform:
   m_GameObject: {fileID: 394031833}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 610.5825, y: 0, z: 0}
+  m_LocalPosition: {x: 607.4309, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -466626,7 +466637,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 900
-  currentDistance: 8315.398
+  currentDistance: 8327.1455
   player: {fileID: 228098103}
   light2D: {fileID: 397341802}
 --- !u!95 &397341801
@@ -467770,7 +467781,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 4503.3135
+  currentDistance: 4517.2866
   player: {fileID: 228098103}
   light2D: {fileID: 401124480}
 --- !u!114 &401124480 stripped
@@ -471480,7 +471491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 4058.9658
+  currentDistance: 4072.9402
   player: {fileID: 228098103}
   light2D: {fileID: 414634457}
 --- !u!114 &414634457 stripped
@@ -472564,7 +472575,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 10956.66
+  currentDistance: 10970.863
   player: {fileID: 228098103}
   light2D: {fileID: 419501173}
 --- !u!114 &419501173 stripped
@@ -479259,7 +479270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 11415.7
+  currentDistance: 11429.899
   player: {fileID: 228098103}
   light2D: {fileID: 428798019}
 --- !u!114 &428798022
@@ -479806,7 +479817,7 @@ GameObject:
   m_Component:
   - component: {fileID: 436228336}
   - component: {fileID: 436228338}
-  - component: {fileID: 436228337}
+  - component: {fileID: 436228339}
   m_Layer: 0
   m_Name: Wood
   m_TagString: Untagged
@@ -479823,26 +479834,12 @@ Transform:
   m_GameObject: {fileID: 436228335}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -764.1549, y: 117.6, z: 0}
+  m_LocalPosition: {x: -496.13782, y: 117.6, z: 0}
   m_LocalScale: {x: 7.1280003, y: 7.195, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1437081188}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &436228337
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 436228335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a1c188977bda664b8436e3947f87c6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parallaxStrength: 0.12
-  affectVertical: 0
 --- !u!212 &436228338
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -479895,6 +479892,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &436228339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436228335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a1c188977bda664b8436e3947f87c6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parallaxStrength: 0.1
+  affectVertical: 0
 --- !u!1 &436765767
 GameObject:
   m_ObjectHideFlags: 0
@@ -486911,6 +486922,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Object: {fileID: 448986527}
+  isOG: 0
 --- !u!4 &448986531 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4981870689888627708, guid: 8587ea2a51492944b95e0e16d2687aed, type: 3}
@@ -492250,7 +492262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 450
-  currentDistance: 5436.9844
+  currentDistance: 5451.006
   player: {fileID: 228098103}
   light2D: {fileID: 476910265}
 --- !u!1 &477690006
@@ -492867,7 +492879,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 4331.602
+  currentDistance: 4345.56
   player: {fileID: 228098103}
   light2D: {fileID: 483502112}
 --- !u!114 &483502112 stripped
@@ -502022,7 +502034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 350
-  currentDistance: 9190.085
+  currentDistance: 9204.276
   player: {fileID: 228098103}
   light2D: {fileID: 514612887}
 --- !u!114 &514612890
@@ -502465,7 +502477,7 @@ Transform:
   m_GameObject: {fileID: 516322022}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1755.2347, y: 104.4, z: 0}
+  m_LocalPosition: {x: -1755.3779, y: 104.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -503394,7 +503406,7 @@ Transform:
   m_GameObject: {fileID: 519936013}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 914.31104, y: -16.350006, z: 0}
+  m_LocalPosition: {x: 912.30566, y: -16.350006, z: 0}
   m_LocalScale: {x: 1.3282166, y: 1.4015275, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -503798,7 +503810,7 @@ Transform:
   m_GameObject: {fileID: 522111667}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 199.12915, y: 9.35136, z: 0}
+  m_LocalPosition: {x: 198.09766, y: 9.04356, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -734994,7 +735006,7 @@ Transform:
   m_GameObject: {fileID: 534460453}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1173.4567, y: 112.3, z: 0}
+  m_LocalPosition: {x: -1173.4996, y: 112.3, z: 0}
   m_LocalScale: {x: 5.827, y: 4.46574, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -735634,7 +735646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 10834.39
+  Distance: 10848.576
   MinDis: 15
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -736280,7 +736292,7 @@ Transform:
   m_GameObject: {fileID: 540433851}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.409584, y: 1.8299998, z: 0.43999994}
+  m_LocalPosition: {x: 10.35783, y: 1.8299998, z: 0.43999994}
   m_LocalScale: {x: 0.5013429, y: 0.48852324, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -736428,6 +736440,7 @@ MonoBehaviour:
   DMG: 10.42
   respawnUI_ForTraps: {fileID: 0}
   RespawnUI_BlackFade: {fileID: 0}
+  triggered: 0
   PlsDontGoAwayPapi: 0
   GroundLimbs: {fileID: 0}
 --- !u!82 &541000521
@@ -736722,7 +736735,7 @@ Transform:
   m_GameObject: {fileID: 541493960}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1679.1462, y: 61.663235, z: -8.199721}
+  m_LocalPosition: {x: 1664.8212, y: 57.388233, z: -8.199721}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -744858,7 +744871,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 10516.946
+  Distance: 10531.129
   MinDis: 15
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -746893,7 +746906,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 350
-  currentDistance: 9159.588
+  currentDistance: 9173.773
   player: {fileID: 228098103}
   light2D: {fileID: 571153992}
 --- !u!1001 &571740512
@@ -761396,7 +761409,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 800
-  currentDistance: 2217.973
+  currentDistance: 2225.845
   player: {fileID: 228098103}
   light2D: {fileID: 594757169}
 --- !u!114 &594757169
@@ -762575,7 +762588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 490
-  currentDistance: 2742.9731
+  currentDistance: 2728.4636
   player: {fileID: 228098103}
   light2D: {fileID: 596689822}
 --- !u!114 &596689830
@@ -762803,7 +762816,7 @@ Transform:
   m_GameObject: {fileID: 599311144}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.24991135, w: 0.9682688}
-  m_LocalPosition: {x: 1242.8833, y: -18.730011, z: -0.00000011920929}
+  m_LocalPosition: {x: 1240.4482, y: -18.730011, z: -0.00000011920929}
   m_LocalScale: {x: 1.2683, y: 1.3934954, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -764860,7 +764873,7 @@ Transform:
   m_GameObject: {fileID: 611539452}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.08905295, w: 0.9960269}
-  m_LocalPosition: {x: 188.42065, y: -16.730011, z: -0.00000011920929}
+  m_LocalPosition: {x: 185.98535, y: -16.730011, z: -0.00000011920929}
   m_LocalScale: {x: 1.2714639, y: 1.1980363, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -765191,7 +765204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Bio_Run
-  Distance: 11461.844
+  Distance: 11476.039
   MinDis: 23.5
   Stick: {fileID: 228098106}
   Animator: {fileID: 613836994}
@@ -771908,7 +771921,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 3677.5144
+  currentDistance: 3691.4482
   player: {fileID: 228098103}
   light2D: {fileID: 622761386}
 --- !u!114 &622761386 stripped
@@ -788000,7 +788013,7 @@ Transform:
   m_GameObject: {fileID: 652428038}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -152.11597, y: -14.430008, z: 0}
+  m_LocalPosition: {x: -154.12158, y: -14.430008, z: 0}
   m_LocalScale: {x: 25, y: 25, z: 0.71428573}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -790099,7 +790112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 11365.172
+  currentDistance: 11379.37
   player: {fileID: 228098103}
   light2D: {fileID: 659970110}
 --- !u!114 &659970113
@@ -791434,7 +791447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 11302.63
+  currentDistance: 11316.836
   player: {fileID: 228098103}
   light2D: {fileID: 669865661}
 --- !u!114 &669865661 stripped
@@ -792352,7 +792365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: ScienDead_Drunk
-  Distance: 9190.597
+  Distance: 9204.776
   MinDis: 5
   Stick: {fileID: 228098106}
   Animator: {fileID: 673813364}
@@ -795159,6 +795172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Object: {fileID: 688897079}
+  isOG: 0
 --- !u!95 &688897083
 Animator:
   serializedVersion: 5
@@ -808062,7 +808076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 3275.6865
+  currentDistance: 3289.5083
   player: {fileID: 228098103}
   light2D: {fileID: 732751671}
 --- !u!114 &732751671 stripped
@@ -808416,7 +808430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 9163.676
+  currentDistance: 9177.855
   player: {fileID: 228098103}
   light2D: {fileID: 735911212}
 --- !u!1 &736425181
@@ -808600,7 +808614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 11413.782
+  Distance: 11427.98
   MinDis: 15
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -810787,7 +810801,7 @@ Transform:
   m_GameObject: {fileID: 747642807}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -152.78784, y: 0, z: 0}
+  m_LocalPosition: {x: -154.79346, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -820755,6 +820769,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Object: {fileID: 0}
+  isOG: 0
 --- !u!95 &779216456
 Animator:
   serializedVersion: 5
@@ -825570,7 +825585,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 3015.5308
+  currentDistance: 3030.0469
   player: {fileID: 228098103}
   light2D: {fileID: 808748221}
 --- !u!1 &808844805 stripped
@@ -830069,7 +830084,7 @@ Transform:
   m_GameObject: {fileID: 834202388}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 277.5376, y: 0, z: 0}
+  m_LocalPosition: {x: 276.10498, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -836006,6 +836021,7 @@ MonoBehaviour:
   DMG: 10.42
   respawnUI_ForTraps: {fileID: 0}
   RespawnUI_BlackFade: {fileID: 0}
+  triggered: 0
   PlsDontGoAwayPapi: 0
   GroundLimbs: {fileID: 0}
 --- !u!82 &862111143
@@ -838369,7 +838385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 500
-  currentDistance: 2900.6533
+  currentDistance: 2914.42
   player: {fileID: 228098103}
   light2D: {fileID: 881214696}
 --- !u!1 &881427838
@@ -853309,6 +853325,7 @@ MonoBehaviour:
   DMG: 10
   respawnUI_ForTraps: {fileID: 171212854}
   RespawnUI_BlackFade: {fileID: 171212853}
+  triggered: 0
   PlsDontGoAwayPapi: 0
   GroundLimbs: {fileID: 0}
 --- !u!114 &931275684
@@ -866795,7 +866812,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 11072.126
+  currentDistance: 11086.33
   player: {fileID: 228098103}
   light2D: {fileID: 951869728}
 --- !u!114 &951869728 stripped
@@ -869946,7 +869963,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 500
-  currentDistance: 5682.6084
+  currentDistance: 5696.6904
   player: {fileID: 228098103}
   light2D: {fileID: 964001341}
 --- !u!114 &964001345
@@ -870414,7 +870431,7 @@ Transform:
   m_GameObject: {fileID: 966095628}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1480.7327, y: 0, z: 0}
+  m_LocalPosition: {x: 1476.4353, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.82, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -877070,7 +877087,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 11179.642
+  currentDistance: 11193.846
   player: {fileID: 228098103}
   light2D: {fileID: 977322028}
 --- !u!114 &977322028 stripped
@@ -882751,7 +882768,7 @@ Transform:
   m_GameObject: {fileID: 980241693}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1654.8962, y: 75.136475, z: -8.199721}
+  m_LocalPosition: {x: 1640.5712, y: 70.86148, z: -8.199721}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -910864,7 +910881,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 23.86
-  currentDistance: 1188.9954
+  currentDistance: 1175.8805
   player: {fileID: 228098103}
   light2D: {fileID: 1026399579}
 --- !u!1 &1026576948 stripped
@@ -910922,7 +910939,7 @@ Transform:
   m_GameObject: {fileID: 1026906370}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1355.9269, y: 104.5, z: 0}
+  m_LocalPosition: {x: -1332.5632, y: 104, z: 0}
   m_LocalScale: {x: 3.7569926, y: 4.8401837, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -910992,7 +911009,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a1c188977bda664b8436e3947f87c6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxStrength: 0.01
+  parallaxStrength: 0.09
   affectVertical: 0
 --- !u!1 &1027307305
 GameObject:
@@ -911523,7 +911540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 11035.494
+  Distance: 11049.683
   MinDis: 15
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -917790,6 +917807,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Object: {fileID: 0}
+  isOG: 0
 --- !u!95 &1036024193
 Animator:
   serializedVersion: 5
@@ -922613,6 +922631,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Object: {fileID: 1056412730}
+  isOG: 0
 --- !u!114 &1056412740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -924411,7 +924430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 10855.679
+  Distance: 10869.865
   MinDis: 15
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -932052,7 +932071,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 10990.996
+  currentDistance: 11005.189
   player: {fileID: 228098103}
   light2D: {fileID: 1084649188}
 --- !u!114 &1084649191
@@ -932766,7 +932785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: GeoScared
-  Distance: 11483.444
+  Distance: 11497.642
   MinDis: 31.3
   Stick: {fileID: 228098106}
   Animator: {fileID: 1088458515}
@@ -932785,7 +932804,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 11483.444
+  Distance: 11497.642
   MinDis: 31.3
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -934210,7 +934229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 627.6377
+  currentDistance: 636.89557
   player: {fileID: 228098103}
   light2D: {fileID: 1094534373}
 --- !u!114 &1094534376
@@ -941649,7 +941668,7 @@ Transform:
   m_GameObject: {fileID: 1109779939}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 758.07495, y: -1.3290405, z: 0}
+  m_LocalPosition: {x: 756.6428, y: -1.3290405, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -944072,6 +944091,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Object: {fileID: 0}
+  isOG: 0
 --- !u!95 &1129216522
 Animator:
   serializedVersion: 5
@@ -949459,7 +949479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 11102.112
+  currentDistance: 11116.308
   player: {fileID: 228098103}
   light2D: {fileID: 1159715825}
 --- !u!114 &1159715828
@@ -950243,7 +950263,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1166199156}
   - component: {fileID: 1166199158}
-  - component: {fileID: 1166199157}
+  - component: {fileID: 1166199159}
   m_Layer: 0
   m_Name: Wood (3)
   m_TagString: Untagged
@@ -950260,26 +950280,12 @@ Transform:
   m_GameObject: {fileID: 1166199155}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -822.4624, y: 120.4, z: 0}
+  m_LocalPosition: {x: -546.21497, y: 120.4, z: 0}
   m_LocalScale: {x: 7.1280003, y: 7.195, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1437081188}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1166199157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1166199155}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a1c188977bda664b8436e3947f87c6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parallaxStrength: 0.1
-  affectVertical: 0
 --- !u!212 &1166199158
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -950332,6 +950338,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1166199159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166199155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a1c188977bda664b8436e3947f87c6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parallaxStrength: 0.1
+  affectVertical: 0
 --- !u!1 &1166250376
 GameObject:
   m_ObjectHideFlags: 0
@@ -954612,6 +954632,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Object: {fileID: 1187639047}
+  isOG: 0
 --- !u!1 &1187736868
 GameObject:
   m_ObjectHideFlags: 0
@@ -954891,7 +954912,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 2747.826
+  currentDistance: 2761.607
   player: {fileID: 228098103}
   light2D: {fileID: 1189325956}
 --- !u!114 &1189325956 stripped
@@ -955203,7 +955224,7 @@ Transform:
   m_GameObject: {fileID: 1191357934}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2876.775, y: -211.7003, z: 0}
+  m_LocalPosition: {x: 2874.7695, y: -211.7003, z: 0}
   m_LocalScale: {x: 14.076028, y: 14.324132, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -957076,7 +957097,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 350
-  currentDistance: 2166.6882
+  currentDistance: 2180.2942
   player: {fileID: 228098103}
   light2D: {fileID: 1200633887}
 --- !u!114 &1200633887 stripped
@@ -1033453,7 +1033474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: KingFIsh_Fly
-  Distance: 1427.5066
+  Distance: 1412.9081
   MinDis: 30
   Stick: {fileID: 228098106}
   Animator: {fileID: 1222173759}
@@ -1040162,7 +1040183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 11161.936
+  Distance: 11176.126
   MinDis: 15
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -1042004,7 +1042025,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 11546.916
+  currentDistance: 11561.116
   player: {fileID: 228098103}
   light2D: {fileID: 1238295834}
 --- !u!114 &1238295837
@@ -1051094,7 +1051115,7 @@ Transform:
   m_GameObject: {fileID: 1255144741}
   serializedVersion: 2
   m_LocalRotation: {x: 0.11294114, y: -0.1370931, z: -0.015735654, w: 0.9839727}
-  m_LocalPosition: {x: 8.103665, y: 1.6799995, z: -3.21}
+  m_LocalPosition: {x: 8.062252, y: 1.6799995, z: -3.21}
   m_LocalScale: {x: 0.47862545, y: 0.40010855, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1051492,6 +1051513,7 @@ MonoBehaviour:
   DMG: 10.42
   respawnUI_ForTraps: {fileID: 0}
   RespawnUI_BlackFade: {fileID: 0}
+  triggered: 0
   PlsDontGoAwayPapi: 0
   GroundLimbs: {fileID: 0}
 --- !u!82 &1256088580
@@ -1051945,7 +1051967,7 @@ Transform:
   m_GameObject: {fileID: 1256740718}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.049459875, w: 0.99877614}
-  m_LocalPosition: {x: -1535.8306, y: 103.4, z: 0}
+  m_LocalPosition: {x: -1536.4037, y: 103.4, z: 0}
   m_LocalScale: {x: 8.510781, y: 10.008088, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1052904,6 +1052926,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Object: {fileID: 1262801859}
+  isOG: 0
 --- !u!114 &1262801866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1054306,7 +1054329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 9330.304
+  Distance: 9344.483
   MinDis: 15
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -1054893,7 +1054916,7 @@ Transform:
   m_GameObject: {fileID: 1276444071}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 294.27893, y: 0, z: 0}
+  m_LocalPosition: {x: 293.41943, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1060229,7 +1060252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 3795.634
+  currentDistance: 3809.581
   player: {fileID: 228098103}
   light2D: {fileID: 1311826824}
 --- !u!114 &1311826824 stripped
@@ -1072278,6 +1072301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Object: {fileID: 1354313152}
+  isOG: 0
 --- !u!114 &1354313157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1080518,6 +1080542,7 @@ MonoBehaviour:
   DMG: 100
   respawnUI_ForTraps: {fileID: 0}
   RespawnUI_BlackFade: {fileID: 0}
+  triggered: 0
   PlsDontGoAwayPapi: 0
   GroundLimbs: {fileID: 0}
 --- !u!61 &1366258307
@@ -1081355,7 +1081380,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1369856885}
   - component: {fileID: 1369856887}
-  - component: {fileID: 1369856886}
+  - component: {fileID: 1369856888}
   m_Layer: 0
   m_Name: Wood (1)
   m_TagString: Untagged
@@ -1081372,26 +1081397,12 @@ Transform:
   m_GameObject: {fileID: 1369856884}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -822.3423, y: 116.2, z: 0}
+  m_LocalPosition: {x: -546.09485, y: 116.2, z: 0}
   m_LocalScale: {x: 7.1280003, y: 7.195, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1437081188}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1369856886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1369856884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a1c188977bda664b8436e3947f87c6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parallaxStrength: 0.1
-  affectVertical: 0
 --- !u!212 &1369856887
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1081444,6 +1081455,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1369856888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369856884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a1c188977bda664b8436e3947f87c6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parallaxStrength: 0.1
+  affectVertical: 0
 --- !u!1 &1370464936
 GameObject:
   m_ObjectHideFlags: 0
@@ -1088239,7 +1088264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 1093.6783
+  currentDistance: 1103.8835
   player: {fileID: 228098103}
   light2D: {fileID: 1383919737}
 --- !u!1 &1383947270
@@ -1089002,7 +1089027,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 9904.553
+  Distance: 9918.734
   MinDis: 50
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -1089477,7 +1089502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: KingFIsh_Fly
-  Distance: 1421.6836
+  Distance: 1407.0839
   MinDis: 20
   Stick: {fileID: 228098106}
   Animator: {fileID: 1394042542}
@@ -1089627,7 +1089652,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 10055.08
+  Distance: 10069.266
   MinDis: 15
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -1096442,7 +1096467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 3736.3447
+  currentDistance: 3750.2366
   player: {fileID: 228098103}
   light2D: {fileID: 1413710599}
 --- !u!114 &1413710599 stripped
@@ -1097509,7 +1097534,7 @@ Transform:
   m_GameObject: {fileID: 1423200108}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1480.985, y: 105.6, z: 0}
+  m_LocalPosition: {x: -1481.5581, y: 105.6, z: 0}
   m_LocalScale: {x: 12.29968, y: 9.790446, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1099602,7 +1099627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 11635.961
+  currentDistance: 11650.162
   player: {fileID: 228098103}
   light2D: {fileID: 1436246959}
 --- !u!114 &1436246962
@@ -1100411,7 +1100436,7 @@ Transform:
   m_GameObject: {fileID: 1437081187}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -550.9, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1107801,7 +1107826,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 2449.8232
+  currentDistance: 2463.527
   player: {fileID: 228098103}
   light2D: {fileID: 1452575862}
 --- !u!114 &1452575862 stripped
@@ -1110980,7 +1111005,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 500
-  currentDistance: 3521.162
+  currentDistance: 3535.0762
   player: {fileID: 228098103}
   light2D: {fileID: 1466666658}
 --- !u!114 &1466666662
@@ -1116420,7 +1116445,7 @@ Transform:
   m_GameObject: {fileID: 1498041541}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1317.1631, y: 104.187904, z: 0}
+  m_LocalPosition: {x: -1378.3585, y: 102.8725, z: 0}
   m_LocalScale: {x: 3.7569926, y: 5.47, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1116994,7 +1117019,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 2843.8328
+  currentDistance: 2857.5657
   player: {fileID: 228098103}
   light2D: {fileID: 1504723907}
 --- !u!114 &1504723907 stripped
@@ -1122666,7 +1122691,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 2399.4385
+  currentDistance: 2413.0435
   player: {fileID: 228098103}
   light2D: {fileID: 1511810315}
 --- !u!114 &1511810315 stripped
@@ -1128887,6 +1128912,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Object: {fileID: 1523687467}
+  isOG: 0
 --- !u!114 &1523687472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1134802,7 +1134828,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: ScientistBJ_Panic
-  Distance: 9163.676
+  Distance: 9177.8545
   MinDis: 12.07
   Stick: {fileID: 228098106}
   Animator: {fileID: 1549990390}
@@ -1136187,6 +1136213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Object: {fileID: 1563499990}
+  isOG: 0
 --- !u!114 &1563499995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1142925,7 +1142952,7 @@ Transform:
   m_GameObject: {fileID: 1573227217}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2862.7847, y: -211.7003, z: 0}
+  m_LocalPosition: {x: 2860.7793, y: -211.7003, z: 0}
   m_LocalScale: {x: 14.076028, y: 14.324132, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1143545,7 +1143572,7 @@ Transform:
   m_GameObject: {fileID: 1576482153}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1665.6902, y: -3.0604782, z: 0}
+  m_LocalPosition: {x: 1662.5388, y: -3.0604782, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1143708,7 +1143735,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 8146.7485
+  Distance: 8160.923
   MinDis: 50
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -1144939,7 +1144966,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 11596.963
+  currentDistance: 11611.163
   player: {fileID: 228098103}
   light2D: {fileID: 1584957370}
 --- !u!114 &1584957373
@@ -1150468,7 +1150495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 4708.4556
+  currentDistance: 4722.4824
   player: {fileID: 228098103}
   light2D: {fileID: 1613074703}
 --- !u!114 &1613074703 stripped
@@ -1157338,7 +1157365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 2556.2559
+  currentDistance: 2569.9895
   player: {fileID: 228098103}
   light2D: {fileID: 1631525030}
 --- !u!114 &1631525030 stripped
@@ -1157889,7 +1157916,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 500
-  currentDistance: 3043.072
+  currentDistance: 3056.9126
   player: {fileID: 228098103}
   light2D: {fileID: 1632486788}
 --- !u!114 &1632486793
@@ -1158740,7 +1158767,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 10927.633
+  currentDistance: 10941.826
   player: {fileID: 228098103}
   light2D: {fileID: 1637432133}
 --- !u!114 &1637432136
@@ -1168691,6 +1168718,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Object: {fileID: 1664792874}
+  isOG: 0
 --- !u!4 &1664792878 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4981870689888627708, guid: 8587ea2a51492944b95e0e16d2687aed, type: 3}
@@ -1170360,7 +1170388,7 @@ Transform:
   m_GameObject: {fileID: 1676338591}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2571.324, y: -4.725456, z: 0}
+  m_LocalPosition: {x: 2566.4536, y: -4.725456, z: 0}
   m_LocalScale: {x: -0.73, y: 0.73, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1173516,7 +1173544,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 900
-  currentDistance: 8332.228
+  currentDistance: 8343.981
   player: {fileID: 228098103}
   light2D: {fileID: 1700804951}
 --- !u!95 &1700804950
@@ -1174408,7 +1174436,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1705773758}
   - component: {fileID: 1705773760}
-  - component: {fileID: 1705773759}
+  - component: {fileID: 1705773761}
   m_Layer: 0
   m_Name: BG (2)
   m_TagString: Untagged
@@ -1174425,26 +1174453,12 @@ Transform:
   m_GameObject: {fileID: 1705773757}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -849.7793, y: 111.9, z: 0}
+  m_LocalPosition: {x: -1897.9894, y: 111.9, z: 0}
   m_LocalScale: {x: 10.954195, y: 12.545867, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2135301076}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1705773759
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1705773757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a1c188977bda664b8436e3947f87c6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parallaxStrength: 0.39
-  affectVertical: 0
 --- !u!212 &1705773760
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1174497,6 +1174511,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1705773761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1705773757}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a1c188977bda664b8436e3947f87c6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parallaxStrength: 0.4
+  affectVertical: 0
 --- !u!1 &1705967939
 GameObject:
   m_ObjectHideFlags: 0
@@ -1182691,7 +1182719,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 9658.854
+  Distance: 9673.032
   MinDis: 15
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -1183068,7 +1183096,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 11429.885
+  currentDistance: 11444.093
   player: {fileID: 228098103}
   light2D: {fileID: 1726541447}
 --- !u!114 &1726541447 stripped
@@ -1195556,7 +1195584,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 3000.384
+  currentDistance: 3014.9011
   player: {fileID: 228098103}
   light2D: {fileID: 1742871990}
 --- !u!1 &1743404907 stripped
@@ -1196950,7 +1196978,7 @@ Transform:
   m_GameObject: {fileID: 1753082652}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1228.9961, y: 110.2, z: 0}
+  m_LocalPosition: {x: -2067.104, y: 109.65325, z: 0}
   m_LocalScale: {x: 10.954195, y: 6.239242, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1197021,7 +1197049,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parallaxStrength: 0.27
-  affectVertical: 0
+  affectVertical: 1
 --- !u!1001 &1753107987
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1871984,7 +1872012,7 @@ Transform:
   m_GameObject: {fileID: 1773580750}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.049459875, w: 0.99877614}
-  m_LocalPosition: {x: -1616.3656, y: 102.4, z: 0}
+  m_LocalPosition: {x: -1616.6521, y: 102.4, z: 0}
   m_LocalScale: {x: 8.510781, y: 10.008088, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1874664,6 +1874692,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Object: {fileID: 1783995737}
+  isOG: 0
 --- !u!114 &1784124645 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4061602632914287902, guid: 3aaed3e05ee61c34cb3df4c3c6f67226, type: 3}
@@ -1879367,7 +1879396,7 @@ Transform:
   m_GameObject: {fileID: 1808727153}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1044.8877, y: 84.25, z: 3.2853925}
+  m_LocalPosition: {x: 1044.8805, y: 84.25, z: 3.2853925}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1879402,7 +1879431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 490
-  currentDistance: 215.19238
+  currentDistance: 200.78224
   player: {fileID: 228098103}
   light2D: {fileID: 1808727161}
 --- !u!114 &1808727157
@@ -1894816,7 +1894845,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 11329.478
+  currentDistance: 11343.676
   player: {fileID: 228098103}
   light2D: {fileID: 1832143929}
 --- !u!114 &1832143932
@@ -1905074,7 +1905103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1874070135}
   - component: {fileID: 1874070137}
-  - component: {fileID: 1874070136}
+  - component: {fileID: 1874070138}
   m_Layer: 0
   m_Name: Wood (2)
   m_TagString: Untagged
@@ -1905091,26 +1905120,12 @@ Transform:
   m_GameObject: {fileID: 1874070134}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -858.4424, y: 119.2, z: 0}
+  m_LocalPosition: {x: -582.19495, y: 119.2, z: 0}
   m_LocalScale: {x: 7.1280003, y: 7.195, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1437081188}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1874070136
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1874070134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a1c188977bda664b8436e3947f87c6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parallaxStrength: 0.1
-  affectVertical: 0
 --- !u!212 &1874070137
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1905163,6 +1905178,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1874070138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1874070134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a1c188977bda664b8436e3947f87c6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parallaxStrength: 0.1
+  affectVertical: 0
 --- !u!1 &1874309582
 GameObject:
   m_ObjectHideFlags: 0
@@ -1905621,7 +1905650,7 @@ Transform:
   m_GameObject: {fileID: 1878170737}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3320.9016, y: -164.24548, z: 0}
+  m_LocalPosition: {x: 3312.8794, y: -164.24548, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1906526,7 +1906555,7 @@ Transform:
   m_GameObject: {fileID: 1882018021}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.2039221, w: 0.97898716}
-  m_LocalPosition: {x: 2412.771, y: -17.290009, z: -0.00000011920929}
+  m_LocalPosition: {x: 2410.336, y: -17.290009, z: -0.00000011920929}
   m_LocalScale: {x: 1.2683, y: 1.3934954, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1907036,7 +1907065,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 3224.903
+  currentDistance: 3238.775
   player: {fileID: 228098103}
   light2D: {fileID: 1885497836}
 --- !u!114 &1885497836 stripped
@@ -1908194,7 +1908223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 1111.1981
+  currentDistance: 1121.4978
   player: {fileID: 228098103}
   light2D: {fileID: 1888135348}
 --- !u!114 &1888135356
@@ -1909542,7 +1909571,7 @@ Transform:
   m_GameObject: {fileID: 1896495515}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 75.335205, y: 0, z: 0}
+  m_LocalPosition: {x: 75.04883, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1910776,7 +1910805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 350
-  currentDistance: 9211.141
+  currentDistance: 9225.328
   player: {fileID: 228098103}
   light2D: {fileID: 1901381966}
 --- !u!1001 &1901773899
@@ -1913824,7 +1913853,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7412191410351072029, guid: 0b9c1126e06510840850d94b9c736705, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8258.92
+      value: 8248.893
       objectReference: {fileID: 0}
     - target: {fileID: 7412191410351072029, guid: 0b9c1126e06510840850d94b9c736705, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2260355,7 +2260384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 11039.516
+  currentDistance: 11053.71
   player: {fileID: 228098103}
   light2D: {fileID: 1930842579}
 --- !u!114 &1930842582
@@ -2272848,7 +2272877,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 902.8711
+  currentDistance: 916.5978
   player: {fileID: 228098103}
   light2D: {fileID: 1973168083}
 --- !u!1 &1973283983 stripped
@@ -2274199,7 +2274228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Gen_Shocked(Special)
-  Distance: 1953.0897
+  Distance: 1966.4122
   MinDis: 67
   Stick: {fileID: 228098106}
   Animator: {fileID: 1976607518}
@@ -2275494,7 +2275523,7 @@ Transform:
   m_GameObject: {fileID: 1979567075}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1654.8962, y: 75.136475, z: -8.199721}
+  m_LocalPosition: {x: 1640.5712, y: 70.86148, z: -8.199721}
   m_LocalScale: {x: 0.9, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2283001,6 +2283030,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Object: {fileID: 929191298}
+  isOG: 0
 --- !u!114 &1994393404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2284256,6 +2284286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Object: {fileID: 0}
+  isOG: 0
 --- !u!95 &1996723320
 Animator:
   serializedVersion: 5
@@ -2292447,7 +2292478,7 @@ Transform:
   m_GameObject: {fileID: 2019528817}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 67.883545, y: 14.399994, z: 0.00000011920929}
+  m_LocalPosition: {x: 65.59155, y: 14.399994, z: 0.00000011920929}
   m_LocalScale: {x: -1.411774, y: 1.4286655, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3157696,7 +3157727,7 @@ Transform:
   m_GameObject: {fileID: 2058800733}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.7049551, w: 0.70925194}
-  m_LocalPosition: {x: 893.5112, y: -16.550018, z: 0}
+  m_LocalPosition: {x: 891.50586, y: -16.550018, z: 0}
   m_LocalScale: {x: 1.884306, y: 2.7161553, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3157819,7 +3157850,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 0
-  currentDistance: 2860.7578
+  currentDistance: 2872.4607
   player: {fileID: 228098103}
   light2D: {fileID: 2058800735}
 --- !u!114 &2058800738
@@ -3157846,7 +3157877,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2059014108}
   - component: {fileID: 2059014110}
-  - component: {fileID: 2059014109}
+  - component: {fileID: 2059014111}
   m_Layer: 0
   m_Name: BG
   m_TagString: Untagged
@@ -3157863,26 +3157894,12 @@ Transform:
   m_GameObject: {fileID: 2059014107}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1013.2969, y: 106.9809, z: 0}
+  m_LocalPosition: {x: -1880.2113, y: 106.43416, z: 0}
   m_LocalScale: {x: 10.954195, y: 6.239242, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2135301076}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2059014109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2059014107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a1c188977bda664b8436e3947f87c6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parallaxStrength: 0.34
-  affectVertical: 0
 --- !u!212 &2059014110
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3157935,6 +3157952,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2059014111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059014107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a1c188977bda664b8436e3947f87c6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parallaxStrength: 0.27
+  affectVertical: 1
 --- !u!1 &2059814885
 GameObject:
   m_ObjectHideFlags: 0
@@ -3163668,6 +3163699,10 @@ PrefabInstance:
       propertyPath: AudioP
       value: 
       objectReference: {fileID: 590502044}
+    - target: {fileID: 6420429830013635488, guid: bc30f2117439d6b4d81df250bdbe9d7a, type: 3}
+      propertyPath: Health
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6420429830013635488, guid: bc30f2117439d6b4d81df250bdbe9d7a, type: 3}
       propertyPath: Graphix
       value: 
@@ -3175181,7 +3175216,7 @@ Transform:
   m_GameObject: {fileID: 2108026334}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4806.64, y: -157.01085, z: 101.50314}
+  m_LocalPosition: {x: -4781.1416, y: -149.40135, z: 101.50314}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3175355,7 +3175390,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2108926416}
   - component: {fileID: 2108926418}
-  - component: {fileID: 2108926417}
+  - component: {fileID: 2108926419}
   m_Layer: 0
   m_Name: BG (1)
   m_TagString: Untagged
@@ -3175372,26 +3175407,12 @@ Transform:
   m_GameObject: {fileID: 2108926415}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -947.7356, y: 111.9, z: 0}
+  m_LocalPosition: {x: -1983.6, y: 104.1, z: 0}
   m_LocalScale: {x: 10.954195, y: 12.545867, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2135301076}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2108926417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2108926415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a1c188977bda664b8436e3947f87c6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parallaxStrength: 0.36
-  affectVertical: 0
 --- !u!212 &2108926418
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3175444,6 +3175465,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2108926419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2108926415}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a1c188977bda664b8436e3947f87c6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parallaxStrength: 0.4
+  affectVertical: 0
 --- !u!1 &2109374358 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2782877524146784529, guid: 30007465c798928469890ac29812bfc2, type: 3}
@@ -3179026,7 +3179061,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 10499.455
+  Distance: 10513.637
   MinDis: 15
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -3179787,7 +3179822,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 3314.925
+  currentDistance: 3328.8108
   player: {fileID: 228098103}
   light2D: {fileID: 2133802617}
 --- !u!114 &2133802617 stripped
@@ -3180036,7 +3180071,7 @@ Transform:
   m_GameObject: {fileID: 2135301075}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 945.8457, y: 0, z: 0}
+  m_LocalPosition: {x: 940.9751, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3186194,7 +3186229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 11534.962
+  currentDistance: 11549.171
   player: {fileID: 228098103}
   light2D: {fileID: 2143266881}
 --- !u!114 &2143266881 stripped
@@ -3186698,7 +3186733,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 12084.625
+  Distance: 12098.831
   MinDis: 15
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -3215265,11 +3215300,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4504906694961665403, guid: c5eb8e393ac47ba4fb75245fdb42082f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6376.163
+      value: -6389.0566
       objectReference: {fileID: 0}
     - target: {fileID: 4504906694961665403, guid: c5eb8e393ac47ba4fb75245fdb42082f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 115.325005
+      value: 111.4775
       objectReference: {fileID: 0}
     - target: {fileID: 4504906694961665403, guid: c5eb8e393ac47ba4fb75245fdb42082f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3216417,11 +3216452,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2571841994194246869, guid: a881a36805962bc4fa0fc6699f831541, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -289.1
+      value: -308.2
       objectReference: {fileID: 0}
     - target: {fileID: 2571841994194246869, guid: a881a36805962bc4fa0fc6699f831541, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.5
+      value: -10.2
       objectReference: {fileID: 0}
     - target: {fileID: 4327480445314298536, guid: a881a36805962bc4fa0fc6699f831541, type: 3}
       propertyPath: Fill
@@ -3217817,7 +3217852,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1322369209614634501, guid: e09d3d5f81f43d049b9e1224aed9e57c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6021.823
+      value: -6028.9863
       objectReference: {fileID: 0}
     - target: {fileID: 1322369209614634501, guid: e09d3d5f81f43d049b9e1224aed9e57c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3221490,11 +3221525,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7412191410351072029, guid: 0b9c1126e06510840850d94b9c736705, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5349.9375
+      value: 5339.7803
       objectReference: {fileID: 0}
     - target: {fileID: 7412191410351072029, guid: 0b9c1126e06510840850d94b9c736705, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 164.37924
+      value: 161.3483
       objectReference: {fileID: 0}
     - target: {fileID: 7412191410351072029, guid: 0b9c1126e06510840850d94b9c736705, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3234065,7 +3234100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 2061.525
+  currentDistance: 2074.9832
   player: {fileID: 228098103}
   light2D: {fileID: 8996519235810189053}
 --- !u!114 &8996519235810189053 stripped

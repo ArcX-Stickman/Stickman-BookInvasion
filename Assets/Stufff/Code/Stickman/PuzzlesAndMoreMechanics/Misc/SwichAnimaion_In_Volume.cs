@@ -12,10 +12,15 @@ public class SwichAnimaion_In_Volume : MonoBehaviour
     public Animator animator;
     public string Gtag = "";
     public bool ForceStickAnim;
-    public Movement StickScript;
 
     private void Update()
     {
+        if(animator == null)
+        {
+            Debug.LogError("Yo the uh aniamtor aint no more it got delted man :(");
+            this.enabled = false;
+
+        }
         //Gtag = animator.gameObject.tag;
     }
     private void OnTriggerEnter2D(Collider2D collision)

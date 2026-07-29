@@ -21,11 +21,17 @@ EditorBuildSettings:
     path: Assets/Stufff/Scenes/OnlineGame.unity
     guid: 9faf3329c524cdd46a20652efd8e0795
   - enabled: 1
-    path: Assets/Stufff/Scenes/Levels/BossFights/SukugaCuts/EmbryPhase2_SUK_1.unity
+    path: Assets/Stufff/Scenes/Levels/BossFights/SukugaCuts/Ch0/Embryology/EmbryPhase2_SUK_1.unity
     guid: c09040b217f12c342ad3b241ed592d78
   - enabled: 1
-    path: Assets/Stufff/Scenes/Levels/BossFights/SukugaCuts/EmbryPhase2_SUK_2.unity
+    path: Assets/Stufff/Scenes/Levels/BossFights/SukugaCuts/Ch0/Embryology/EmbryPhase2_SUK_2.unity
     guid: 118f2cff7e26c034a862ee731e9325e1
+  - enabled: 1
+    path: Assets/Stufff/Scenes/Levels/BossFights/SukugaCuts/Ch0/Embryology/EmbryPhase2_SUK_3.unity
+    guid: 98194dcc53f45b5408b64beec5b4b344
+  - enabled: 1
+    path: Assets/Stufff/Scenes/Levels/BossFights/SukugaCuts/Ch0/Embryology/EmbryFinale.unity
+    guid: ce0092adc57f0674ab80218338457a88
   - enabled: 1
     path: Assets/Stufff/Scenes/Levels/Chapter 0/StickBrain.unity
     guid: 06b06ca2692672040b59f6b4ca910526

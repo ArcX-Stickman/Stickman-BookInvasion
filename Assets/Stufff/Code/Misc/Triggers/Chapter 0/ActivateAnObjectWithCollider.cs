@@ -147,6 +147,79 @@ public class ActivateAnObjectWithCollider : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (!collision.gameObject.CompareTag("Player")) return;
+        if (Alrdid) return;
+        if (Wantonce)
+            Alrdid = true;
+
+
+        if (StickDisabledWhenObjActivate)
+        {
+            StartCoroutine(Stick_Requested_Disable());
+        }
+
+        if (WantMuteAudio && TheObject != null)
+        {
+            AudioSource audioSource = TheObject.GetComponent<AudioSource>();
+            if (audioSource != null)
+                audioSource.mute = true;
+
+            audioSource.enabled = false;
+        }
+        if (TurnOnAudio && TheObject != null)
+        {
+            AudioSource audioSource = TheObject.GetComponent<AudioSource>();
+            if (audioSource != null)
+                audioSource.mute = false;
+            audioSource.enabled = true;
+
+        }
+
+        if (OptionalExtraObject != null)
+            OptionalExtraObject.SetActive(true);
+
+        if (isTut && !WantDeactivate && TheObject != null)
+        {
+            TextMeshProUGUI txt = TheObject.GetComponent<TextMeshProUGUI>();
+            if (txt != null)
+                txt.text = txtt;
+
+            TutorialKeyInput keyCode = TheObject.GetComponent<TutorialKeyInput>();
+            if (keyCode != null)
+                keyCode.InputS = KeyCodeE;
+        }
+
+        if (WantDeactivate)
+        {
+            if (TheObject != null)
+                TheObject.SetActive(false);
+            return;
+        }
+
+        if (WantDelayForActivation)
+        {
+            if (!TimerStart)
+                StartCoroutine(TimerBased());
+            return;
+        }
+
+        if (wantAlrDid)
+        {
+            if (!AlrDid && TheObject != null)
+            {
+                TheObject.SetActive(true);
+                AlrDid = true;
+            }
+        }
+        else
+        {
+            if (TheObject != null)
+                TheObject.SetActive(true);
+        }
+
+    }
 
     public IEnumerator TimerBased()
     {

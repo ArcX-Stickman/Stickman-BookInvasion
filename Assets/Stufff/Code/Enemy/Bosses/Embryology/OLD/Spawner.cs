@@ -14,7 +14,13 @@ public class Spawner : MonoBehaviour
         if(Time.time >= CD + LastCD )
         {
             LastCD = Time.time;
-            GameObject MinionC = Instantiate(Obj, transform.position, Quaternion.identity);
+
+            SpawnIT();
         }
+    }
+
+    public void SpawnIT()
+    {
+        GameObject MinionC = Instantiate(Obj, transform.position, Quaternion.identity);
     }
 }

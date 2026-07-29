@@ -9,6 +9,17 @@ using static System.Net.WebRequestMethods;
 public class StickCinematicVer_BossFight : MonoBehaviour
 {
 
+    [Header("Type")]
+
+    public bool Platformer;
+
+
+    [Header("Platformer")]
+    public float coyoteTime;
+    public float coyoteTimeCounter;
+
+    [Header("vars")]
+
     public Rigidbody2D rb;
     public float Speed;
     public float JumpForce;
@@ -62,7 +73,7 @@ public class StickCinematicVer_BossFight : MonoBehaviour
     public AudioSource Footsteps;
 
     public bool CanJump;
-  
+
     void Start()
     {
 
@@ -94,8 +105,28 @@ public class StickCinematicVer_BossFight : MonoBehaviour
         RunImportantCrap();
         InputManager();
         AnimForJump();
+
+
+
+
+        if (Platformer)
+        {
+            coyoteTimePLAT();
+
+        }
     }
 
+    public void coyoteTimePLAT()
+    {
+        if (Grounded || CheckIfGrounded())
+        {
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+    }
     public void AnimForJump()
     {
         StickAnim.SetBool("Jump", !Grounded && !CheckIfGrounded());
@@ -107,7 +138,7 @@ public class StickCinematicVer_BossFight : MonoBehaviour
 
         float stamIn = StaminaIncreaseRate;
 
-        if(Stamina < MaxStamina / 3)
+        if (Stamina < MaxStamina / 3)
         {
             stamIn -= 2.5f; // prevent da spammingggg
         }
@@ -137,15 +168,15 @@ public class StickCinematicVer_BossFight : MonoBehaviour
     private bool RunningPausedStam;
     public IEnumerator PauseStamina(float t)
     {
-        if(RunningPausedStam) yield break;
+        if (RunningPausedStam) yield break;
         RunningPausedStam = true;
         StaminaPaused = true;
 
-        if(Stamina > 10)
+        if (Stamina > 10)
         {
             t += 1;
         }
-        else if(Stamina < MaxStamina / 3)
+        else if (Stamina < MaxStamina / 3)
         {
             t += 0.5f;
         }
@@ -161,15 +192,15 @@ public class StickCinematicVer_BossFight : MonoBehaviour
 
     public void InputManager()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && CheckIfGrounded()  && CanJump)
+        if (Input.GetKeyDown(KeyCode.Space) && coyoteTimeCounter > 0 && CanJump || (Input.GetKeyDown(KeyCode.Space) && !Platformer))
         {
             Jump();
         }
-     
 
-        if (Input.GetButtonDown("Fire2") && Time.time >= MeleeCD + LastMelee )
+
+        if (Input.GetButtonDown("Fire2") && Time.time >= MeleeCD + LastMelee)
         {
-            
+
             LastMelee = Time.time;
             if (!StickAnim.GetBool("Spam"))
             {
@@ -182,15 +213,15 @@ public class StickCinematicVer_BossFight : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.Q) && Grounded && !InBackflip && Stamina >= 8 || Input.GetKeyDown(KeyCode.Q) && !Grounded && !InBackflip && Stamina >= 8)
+        if (Input.GetKeyDown(KeyCode.Q) && Grounded && !InBackflip && Stamina >= 8 || Input.GetKeyDown(KeyCode.Q) && !Grounded && !InBackflip && Stamina >= 8)
         {
-            if(BackflipCD + LastBackflipTime <= Time.time)
+            if (BackflipCD + LastBackflipTime <= Time.time)
             {
                 LastBackflipTime = Time.time;
                 InBackflip = true;
                 StartCoroutine(Backflip());
             }
-          
+
         }
         else if (Stamina <= 6 && Input.GetKeyDown(KeyCode.Q))
         {
@@ -201,7 +232,7 @@ public class StickCinematicVer_BossFight : MonoBehaviour
     private void Spammer()
     {
 
-        if(StaminaSlider.gameObject.activeSelf)
+        if (StaminaSlider.gameObject.activeSelf)
         {
             StaminaSlider.gameObject.SetActive(false);
             HealthSlider.gameObject.SetActive(false);
@@ -272,7 +303,7 @@ public class StickCinematicVer_BossFight : MonoBehaviour
 
     private bool CheckIfGrounded()
     {
-        
+
         float extraHeight = 1.3f;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, GetComponent<BoxCollider2D>().bounds.extents.y + extraHeight, WhatsGround);
         Debug.DrawRay(transform.position, Vector2.down * (GetComponent<BoxCollider2D>().bounds.extents.y + extraHeight), Color.red);
@@ -286,10 +317,10 @@ public class StickCinematicVer_BossFight : MonoBehaviour
         DirectionCrap();
     }
 
-    [SerializeField]private bool NoNeedDirectionCrap;
+    [SerializeField] private bool NoNeedDirectionCrap;
     private void DirectionCrap()
     {
-        if(!NoNeedDirectionCrap)
+        if (!NoNeedDirectionCrap)
         {
             if (Enemy.transform.localScale.x > 0)
             {
@@ -302,8 +333,8 @@ public class StickCinematicVer_BossFight : MonoBehaviour
 
             }
         }
-      
-        
+
+
     }
 
     public int punchIndex;
@@ -311,21 +342,21 @@ public class StickCinematicVer_BossFight : MonoBehaviour
     {
         // put stuff for prediticing enemy
 
-        if (Grounded )
+        if (Grounded)
         {
             PunchAnim();
         }
-     
-       
+
+
     }
 
     public void Move()
     {
 
         horizontalInput = Input.GetAxis("Horizontal");
-        float horizontalInputT =Input.GetAxis("Horizontal");
+        float horizontalInputT = Input.GetAxis("Horizontal");
         StickAnim.SetBool("Move", horizontalInput != 0);
-        if(rb.velocity != (Vector2.zero) && CheckIfGrounded() || rb.velocity != Vector2.zero && Grounded)
+        if (rb.velocity != (Vector2.zero) && CheckIfGrounded() || rb.velocity != Vector2.zero && Grounded)
         {
             Footsteps.enabled = true;
         }
@@ -338,7 +369,7 @@ public class StickCinematicVer_BossFight : MonoBehaviour
 
         if (horizontalInputT > 0.01)
         {
-    
+
             transform.localScale = Vector3.one;
 
         }
@@ -355,7 +386,7 @@ public class StickCinematicVer_BossFight : MonoBehaviour
     public AudioClip GroundImpact;
     public void GroundedSFX()
     {
-        if(Grounded || CheckIfGrounded())
+        if (Grounded || CheckIfGrounded())
         {
             PunchAudioP.PlayOneShot(GroundImpact);
 
@@ -375,17 +406,17 @@ public class StickCinematicVer_BossFight : MonoBehaviour
 
     public void AnimFirstPunchDone()
     {
-        FirstPunDone = true;    
+        FirstPunDone = true;
     }
 
     public bool ForceSoundPunch_WHOOSH;
     public void PunchAnim()
     {
         if (RequireFirstPunchDone && !FirstPunDone) return;
-        if(InPunch) return;
+        if (InPunch) return;
         if (inPunchVoidAnim) return;
 
-        
+
 
 
         bool KickAnim = (StickAnim.GetCurrentAnimatorStateInfo(0).IsName("Kick"));
@@ -405,10 +436,10 @@ public class StickCinematicVer_BossFight : MonoBehaviour
 
         if (Grounded && !KickAnim && Stamina > MinStaminaForMelee + 0.2f) // 0.2f isjust a lil balance thing
         {
-           
+
             switch (punchIndex)
             {
-                
+
 
 
                 case 0:
@@ -422,7 +453,7 @@ public class StickCinematicVer_BossFight : MonoBehaviour
                     break;
 
                 case 2:
-                    StickAnim.CrossFade("Kick",0, 0);
+                    StickAnim.CrossFade("Kick", 0, 0);
                     KickA = true;
                     break;
                 default:
@@ -431,7 +462,7 @@ public class StickCinematicVer_BossFight : MonoBehaviour
                     break;
             }
         }
-        else if(Stamina < MinStaminaForMelee)
+        else if (Stamina < MinStaminaForMelee)
         {
             PunchAudioP.pitch = 1;
             PunchAudioP.PlayOneShot(StaminaOut);
@@ -487,7 +518,7 @@ public class StickCinematicVer_BossFight : MonoBehaviour
     {
         while (!PunchAnimKeyFrame)
         {
-            yield return null;  
+            yield return null;
         }
 
         PunchAudioP.PlayOneShot(rnd);
@@ -507,7 +538,7 @@ public class StickCinematicVer_BossFight : MonoBehaviour
     {
         DisEnemy = Vector2.Distance(transform.position, Enemy.gameObject.transform.position);
 
-        if(DisEnemy <= MinDisEnemy)
+        if (DisEnemy <= MinDisEnemy)
         {
             return true;
         }
@@ -518,7 +549,7 @@ public class StickCinematicVer_BossFight : MonoBehaviour
     public void AttackBool_ANIMKey(int T)
     {
         bool temp = false;
-        if(T > 0)
+        if (T > 0)
         {
             temp = true;
         }
@@ -588,7 +619,7 @@ public class StickCinematicVer_BossFight : MonoBehaviour
 
         }
 
-      
+
         InBackflip = false;
         rb.rotation = 0;
         StickAnim.SetBool("Backflip", false);
@@ -605,7 +636,7 @@ public class StickCinematicVer_BossFight : MonoBehaviour
     }
 
 
-    public IEnumerator BackflipMofified(float Force,float y)
+    public IEnumerator BackflipMofified(float Force, float y)
     {
 
 
@@ -655,5 +686,5 @@ public class StickCinematicVer_BossFight : MonoBehaviour
     }
 
 
-    
+
 }

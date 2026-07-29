@@ -62,6 +62,10 @@ public class EmbrySuk3 : MonoBehaviour
     public Transform LandFX_POS;
 
 
+    public GameObject Cutscene;
+    public GameObject GameScene;
+
+
     private void Start()
     {
         OpenedTime = Time.time;
@@ -96,21 +100,37 @@ public class EmbrySuk3 : MonoBehaviour
     private bool InAir;
     public void ComboManager()
     {
-        if (!HasJumped && !Jumping)
+        if(Health <= 0)
         {
-            Jumping = true;
-            StartCoroutine(Jump());
+            Cutscene.gameObject.SetActive(true);
+            if (Time.timeScale != 1 || Time.fixedDeltaTime != 0.02f)
+            {
+                Time.timeScale = 1;
+                Time.fixedDeltaTime = 0.02f;
+
+            }
+            GameScene.gameObject.SetActive(false);
         }
-        if(HasJumped && !InAir && !Leaping)
+       
+        if(Health > 0)
         {
-            Leaping = true;
-            StartCoroutine(LeapAir());
+            if (!HasJumped && !Jumping && Health > 0)
+            {
+                Jumping = true;
+                StartCoroutine(Jump());
+            }
+            if (HasJumped && !InAir && !Leaping && Health > 0)
+            {
+                Leaping = true;
+                StartCoroutine(LeapAir());
+            }
+            if (HasJumped && InAir && !RangedSlashin && !RangedSlash && Health > 0)
+            {
+                StartCoroutine(RangedSlashAttack());
+                RangedSlashin = true;
+            }
         }
-        if(HasJumped && InAir && !RangedSlashin && !RangedSlash)
-        {
-            StartCoroutine(RangedSlashAttack());
-            RangedSlashin = true;
-        }
+        
     }
 
     public float JumpSpeed;
@@ -159,6 +179,7 @@ public class EmbrySuk3 : MonoBehaviour
 
         float minDis = 3f;
 
+        yield return new WaitForSecondsRealtime(0.1f);
         float dis = Vector2.Distance(transform.position,StickPosPast);
 
         while(dis > minDis)
@@ -326,14 +347,14 @@ public class EmbrySuk3 : MonoBehaviour
         RangedSlash = false;
         RangedSlashin = false;
        
-        if(VunerableWindow > 0.3f)
+        if(VunerableWindow > 0.7f)
         {
             VunerableWindow -= 0.2f;
 
         }
         else
         {
-            VunerableWindow = 0.2f;
+            VunerableWindow = 0.7f;
         }
         if (DelayMin > 0.1f)
         {
@@ -421,6 +442,10 @@ public class EmbrySuk3 : MonoBehaviour
     private int PunchIndex = 0;
     public void VunerableManager()
     {
+        if (Health >= 0 && Cutscene.gameObject.activeSelf) 
+        {
+            return;
+        }
         if (!Vunerable || Stick == null)
         {
             return;
@@ -435,7 +460,7 @@ public class EmbrySuk3 : MonoBehaviour
             return;
         }
 
-        if (DisEnemy <= MinDis && Time.time >= LastMelee + MeleeCD && OutOfATK)
+        if (DisEnemy <= MinDis && Time.time >= LastMelee + MeleeCD && OutOfATK && Health > 0)
         {
             OpenedTime += 0.15f;
             LastMelee = Time.time;
@@ -466,6 +491,17 @@ public class EmbrySuk3 : MonoBehaviour
             {
                 PunchIndex = 0;
             }
+        }
+        else if (DisEnemy <= MinDis && Time.time >= LastMelee + MeleeCD && Health <= 0)
+        {
+            Cutscene.gameObject.SetActive(true);
+            if(Time.timeScale != 1 || Time.fixedDeltaTime != 0.02f)
+            {
+                Time.timeScale = 1;
+                Time.fixedDeltaTime = 0.02f;
+
+            }
+            GameScene.gameObject.SetActive(false);
         }
 
         if (Stagger <= 0)
@@ -512,6 +548,8 @@ public class EmbrySuk3 : MonoBehaviour
             AudioP.PlayOneShot(ClashSFX);
             AnimShake(CamShake);
             Stagger -= 1;
+
+            VunerableWindow += 0.12f;
         }
         else if(DisEnemy <= MinDis && !Stick.Attack)
         {
