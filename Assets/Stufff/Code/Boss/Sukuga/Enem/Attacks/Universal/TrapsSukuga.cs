@@ -9,7 +9,7 @@ public class TrapsSukuga : MonoBehaviour
     public AudioSource AudioP;
     public AudioClip SFX;
     public bool DMGed;
-    public bool  NotAvoidBackflip;
+    public bool NotAvoidBackflip;
     public GameObject FX;
     public bool Destroyy;
     public bool MustMatchPlayerZ;
@@ -82,9 +82,9 @@ public class TrapsSukuga : MonoBehaviour
         DMGed = true;
         Stick.Health -= DMG;
         AudioP.PlayOneShot(SFX);
-        if(FX != null)
-        { 
-            GameObject FX_ = Instantiate(FX,Stick.transform.position,Quaternion.identity);
+        if (FX != null)
+        {
+            GameObject FX_ = Instantiate(FX, Stick.transform.position, Quaternion.identity);
         }
 
         if (Destroyy && !GapAndDestroy)
@@ -104,7 +104,7 @@ public class TrapsSukuga : MonoBehaviour
         AudioP.PlayOneShot(SFX);
         if (FX != null)
         {
-            Vector3 Fake = new Vector3(transform.position.x,transform.position.y,Stick.transform.position.z);
+            Vector3 Fake = new Vector3(transform.position.x, transform.position.y, Stick.transform.position.z);
             GameObject FX_ = Instantiate(FX, Fake, Quaternion.identity);
         }
 
@@ -123,7 +123,7 @@ public class TrapsSukuga : MonoBehaviour
     public IEnumerator GapHoldDes()
     {
         MoveToPositionV2 MP2 = GetComponent<MoveToPositionV2>();
-        if(MP2 != null)
+        if (MP2 != null)
         {
             MP2.enabled = false;
         }
