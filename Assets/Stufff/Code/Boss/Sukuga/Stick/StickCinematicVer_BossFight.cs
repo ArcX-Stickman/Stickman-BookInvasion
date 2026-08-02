@@ -17,6 +17,7 @@ public class StickCinematicVer_BossFight : MonoBehaviour
     [Header("Platformer")]
     public float coyoteTime;
     public float coyoteTimeCounter;
+    public bool Accel;
 
     [Header("vars")]
 
@@ -74,8 +75,11 @@ public class StickCinematicVer_BossFight : MonoBehaviour
 
     public bool CanJump;
 
+   public float OGSpeed;
+
     void Start()
     {
+        OGSpeed = Speed;
 
         Time.timeScale = 1;
         Time.fixedDeltaTime = 0.02f;
@@ -379,7 +383,56 @@ public class StickCinematicVer_BossFight : MonoBehaviour
 
         }
 
+        if (Accel && !inAcc)
+        {
+            inAcc = true;
+            StartCoroutine(Acceleration());
 
+        }
+
+        float dir = Mathf.Sign(horizontalInput);
+
+        if (horizontalInput != 0 && dir != lastDirection)
+        {
+            StopCoroutine(Acceleration());
+            inAcc = false;
+            lastDirection = dir;
+        }
+
+
+    }
+    private float lastDirection;
+    private bool inAcc;
+    public float accelGain;
+    public IEnumerator Acceleration()
+    {
+        if(rb.velocity == Vector2.zero)
+        {
+            yield return null;  
+        }
+        Speed = OGSpeed / 3f;
+
+        while (Speed < OGSpeed)
+        {
+            if (rb.velocity == Vector2.zero)
+            {
+                yield return null;
+            }
+
+            if(rb.velocity != Vector2.zero)
+            {
+                Speed = Mathf.MoveTowards(Speed, OGSpeed, accelGain * Time.deltaTime);
+            }
+            
+
+            yield return null;
+        }
+
+        while (Mathf.Abs(horizontalInput) > 0.01f)
+            yield return null;
+
+        Speed = OGSpeed;
+        inAcc = false;
     }
 
 

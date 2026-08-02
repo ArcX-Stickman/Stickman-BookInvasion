@@ -7,7 +7,7 @@ public class Trigger_Animation_BasedOnCollision : MonoBehaviour
     public string CrossFadeAnimation;
     public string CompareTag_Tag;
     public Animator anim;
-
+    public bool OnlyOnce;
 
     private void OnEnable()
     {
@@ -31,6 +31,10 @@ public class Trigger_Animation_BasedOnCollision : MonoBehaviour
         if (collision.CompareTag(CompareTag_Tag))
         {
             anim.CrossFade(CrossFadeAnimation, 0, 0);
+            if(OnlyOnce)
+            {
+                this.enabled = false;
+            }
             this.enabled = false;
         }
     
