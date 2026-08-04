@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TrapsSukuga : MonoBehaviour
@@ -19,9 +18,13 @@ public class TrapsSukuga : MonoBehaviour
 
     private bool SamePosAsPlayer()
     {
-        Vector3 Trans = Stick.transform.position;
-        Vector3 Pos = transform.position;
-        return Trans == Pos;
+        // Only compare fake depth now.
+        // Physics already checks X/Y.
+        float zDifference = Mathf.Abs(
+            Stick.transform.position.z - transform.position.z
+        );
+
+        return zDifference < 0.5f;
     }
 
     private void Start()
@@ -33,14 +36,15 @@ public class TrapsSukuga : MonoBehaviour
     {
         if (DMGed) return;
         if (Stick.InBackflip && !NotAvoidBackflip) return;
+
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (SamePosAsPlayer() && MustMatchPlayerZ)
+            if (MustMatchPlayerZ)
             {
-                DMG_STUFF();
-
+                if (SamePosAsPlayer())
+                    DMG_STUFF();
             }
-            else if (!MustMatchPlayerZ)
+            else
             {
                 DMG_STUFF();
             }
@@ -59,12 +63,14 @@ public class TrapsSukuga : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (SamePosAsPlayer() && MustMatchPlayerZ)
-            {
-                DMG_STUFF();
+            UnityEngine.Debug.Log("collided with player");
 
+            if (MustMatchPlayerZ)
+            {
+                if (SamePosAsPlayer())
+                    DMG_STUFF();
             }
-            else if (!MustMatchPlayerZ)
+            else
             {
                 DMG_STUFF();
             }
@@ -80,11 +86,14 @@ public class TrapsSukuga : MonoBehaviour
     public void DMG_STUFF()
     {
         DMGed = true;
+
         Stick.Health -= DMG;
+
         AudioP.PlayOneShot(SFX);
+
         if (FX != null)
         {
-            GameObject FX_ = Instantiate(FX, Stick.transform.position, Quaternion.identity);
+            Instantiate(FX, Stick.transform.position, Quaternion.identity);
         }
 
         if (Destroyy && !GapAndDestroy)
@@ -95,17 +104,24 @@ public class TrapsSukuga : MonoBehaviour
         {
             StartCoroutine(GapHoldDes());
         }
-
     }
+
 
     public void NONDMG_STUFF()
     {
         DMGed = true;
+
         AudioP.PlayOneShot(SFX);
+
         if (FX != null)
         {
-            Vector3 Fake = new Vector3(transform.position.x, transform.position.y, Stick.transform.position.z);
-            GameObject FX_ = Instantiate(FX, Fake, Quaternion.identity);
+            Vector3 Fake = new Vector3(
+                transform.position.x,
+                transform.position.y,
+                Stick.transform.position.z
+            );
+
+            Instantiate(FX, Fake, Quaternion.identity);
         }
 
         if (Destroyy && !GapAndDestroy)
@@ -116,19 +132,22 @@ public class TrapsSukuga : MonoBehaviour
         {
             StartCoroutine(GapHoldDes());
         }
-
     }
 
+
     public float GapWait;
+
     public IEnumerator GapHoldDes()
     {
         MoveToPositionV2 MP2 = GetComponent<MoveToPositionV2>();
+
         if (MP2 != null)
         {
             MP2.enabled = false;
         }
+
         yield return new WaitForSecondsRealtime(GapWait);
+
         Destroy(gameObject);
-        yield break;
     }
 }
