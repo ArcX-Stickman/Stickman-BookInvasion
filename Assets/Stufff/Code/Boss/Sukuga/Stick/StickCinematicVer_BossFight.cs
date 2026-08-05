@@ -738,6 +738,32 @@ public class StickCinematicVer_BossFight : MonoBehaviour
 
     }
 
+    public void FreezeRB()
+    {
+        if(rb == null)
+        {
+            rb = GetComponent<Rigidbody2D>();
+        }
 
+        rb.simulated = false;
+    }
+
+    public void LookDirec(int i)
+    {
+        if(i > 0)
+        {
+            transform.localScale = Vector3.one;
+
+        }
+        else
+        {
+            transform.localScale = -Vector3.one;
+        }
+    }
+
+    public void DisableScript()
+    {
+        this.enabled = false;   
+    }
 
 }

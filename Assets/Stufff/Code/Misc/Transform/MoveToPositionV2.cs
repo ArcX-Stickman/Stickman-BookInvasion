@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEngine.Audio;
-
+using UnityEngine.Events;
 
 
 public class MoveToPositionV2 : MonoBehaviour
@@ -23,6 +23,7 @@ public class MoveToPositionV2 : MonoBehaviour
     public bool Vec3;
 
     private Rigidbody2D rb;
+    private Collider2D collider2d;
 
     public Transform[] AdditionalColliders;
 
@@ -119,6 +120,11 @@ public class MoveToPositionV2 : MonoBehaviour
     [Header("Traps and More")]
 
     public TrapsSukuga TrapSuk;
+    public string[] Fake3DNonDamageTags = { "Ground" };
+    public bool Fake3DNonDamageMustMatchZ;
+    [SerializeField] private UnityEvent Event;
+
+    private readonly List<Collider2D> fake3DOverlapResults = new List<Collider2D>();
 
 
 
@@ -165,6 +171,7 @@ public class MoveToPositionV2 : MonoBehaviour
         // Nulls and stuff
 
         TrapSuk = gameObject.GetComponent<TrapsSukuga>();
+        collider2d = gameObject.GetComponent<Collider2D>();
 
 
 
@@ -175,7 +182,10 @@ public class MoveToPositionV2 : MonoBehaviour
     }
 
 
-
+    private void EventThing()
+    {
+        Event?.Invoke();
+    }
 
 
 
@@ -206,6 +216,8 @@ public class MoveToPositionV2 : MonoBehaviour
 
 
 
+        Vector3 positionBeforeMove = transform.position;
+
         if (Vec2)
 
         {
@@ -226,7 +238,7 @@ public class MoveToPositionV2 : MonoBehaviour
 
 
 
-        TrapsAndMore();
+        TrapsAndMore(positionBeforeMove, transform.position);
 
 
 
@@ -242,20 +254,20 @@ public class MoveToPositionV2 : MonoBehaviour
     public float ZRange = 2f;      // how close in depth
 
 
-    public void TrapsAndMore()
+    public void TrapsAndMore(Vector3 positionBeforeMove, Vector3 positionAfterMove)
     {
-        if (PlayerPos == null || TrapSuk == null) return;
+        if (TrapSuk == null || TrapSuk.DMGed || OnceTr) return;
 
+        Transform hitTarget = null;
+        bool hitPlayer = false;
+        float hitTime = float.PositiveInfinity;
 
-        // Player check
-        if (Fake3DCollision(PlayerPos))
+        if (PlayerPos != null)
         {
-            Debug.Log("Fake 3D player hit");
-
-            TrapSuk.DMG_STUFF();
-            OnceTr = true;
-            return;
+            RegisterFake3DHit(PlayerPos, true, positionBeforeMove, positionAfterMove, ref hitTarget, ref hitPlayer, ref hitTime);
         }
+
+        RegisterOverlappingFake3DNonDamageHits(positionBeforeMove, positionAfterMove, ref hitTarget, ref hitPlayer, ref hitTime);
 
 
         // Tree / additional objects
@@ -265,38 +277,171 @@ public class MoveToPositionV2 : MonoBehaviour
             {
                 if (t == null) continue;
 
+                RegisterFake3DHit(t, false, positionBeforeMove, positionAfterMove, ref hitTarget, ref hitPlayer, ref hitTime);
+            }
+        }
 
-                if (Fake3DCollision(t))
-                {
-                    Debug.Log("Fake 3D tree hit");
+        if (hitTarget == null) return;
 
-                    TrapSuk.NONDMG_STUFF();
-                    OnceTr = true;
-                    return;
-                }
+        if (hitPlayer)
+        {
+            Debug.Log("Fake 3D player hit");
+
+            if (TrapSuk.TryDMG_STUFF())
+            {
+                OnceTr = true;
+            }
+        }
+        else
+        {
+            Debug.Log("Fake 3D ground hit");
+
+            if (TrapSuk.TryNONDMG_STUFF())
+            {
+                OnceTr = true;
             }
         }
     }
 
 
-
-    private bool Fake3DCollision(Transform target)
+    private void RegisterFake3DHit(Transform target, bool isPlayer, Vector3 positionBeforeMove, Vector3 positionAfterMove, ref Transform hitTarget, ref bool hitPlayer, ref float hitTime)
     {
-        // Ignore rotation/camera perspective
-        float xyDistance = Vector2.Distance(
-            transform.position,
-            target.position
-        );
+        float targetHitTime;
+
+        if (!Fake3DCollision(target, positionBeforeMove, positionAfterMove, out targetHitTime)) return;
+
+        RegisterHitCandidate(target, isPlayer, targetHitTime, ref hitTarget, ref hitPlayer, ref hitTime);
+    }
+
+    private void RegisterHitCandidate(Transform target, bool isPlayer, float targetHitTime, ref Transform hitTarget, ref bool hitPlayer, ref float hitTime)
+    {
+        if (targetHitTime > hitTime) return;
+
+        if (Mathf.Approximately(targetHitTime, hitTime) && (isPlayer || !hitPlayer)) return;
+
+        hitTarget = target;
+        hitPlayer = isPlayer;
+        hitTime = targetHitTime;
+    }
+
+    private void RegisterOverlappingFake3DNonDamageHits(Vector3 positionBeforeMove, Vector3 positionAfterMove, ref Transform hitTarget, ref bool hitPlayer, ref float hitTime)
+    {
+        if (collider2d == null) return;
+
+        fake3DOverlapResults.Clear();
+
+        ContactFilter2D filter = new ContactFilter2D();
+        filter.NoFilter();
+
+        collider2d.OverlapCollider(filter, fake3DOverlapResults);
+
+        foreach (Collider2D targetCollider in fake3DOverlapResults)
+        {
+            if (targetCollider == null || targetCollider == collider2d) continue;
+            if (IsOwnCollider(targetCollider)) continue;
+            if (!IsFake3DNonDamageCollider(targetCollider)) continue;
+            if (IsPlayerCollider(targetCollider)) continue;
+
+            if (Fake3DNonDamageMustMatchZ)
+            {
+                RegisterFake3DHit(targetCollider.transform, false, positionBeforeMove, positionAfterMove, ref hitTarget, ref hitPlayer, ref hitTime);
+            }
+            else
+            {
+                RegisterHitCandidate(targetCollider.transform, false, 0f, ref hitTarget, ref hitPlayer, ref hitTime);
+            }
+        }
+    }
+
+    private bool IsFake3DNonDamageCollider(Collider2D targetCollider)
+    {
+        if (Fake3DNonDamageTags == null || Fake3DNonDamageTags.Length == 0)
+        {
+            return targetCollider.CompareTag("Ground");
+        }
+
+        foreach (string tagName in Fake3DNonDamageTags)
+        {
+            if (string.IsNullOrEmpty(tagName)) continue;
+            if (targetCollider.CompareTag(tagName)) return true;
+        }
+
+        return false;
+    }
+
+    private bool IsPlayerCollider(Collider2D targetCollider)
+    {
+        if (PlayerPos == null) return false;
+
+        return targetCollider.transform == PlayerPos || targetCollider.transform.IsChildOf(PlayerPos);
+    }
+
+    private bool IsOwnCollider(Collider2D targetCollider)
+    {
+        return targetCollider.transform == transform || targetCollider.transform.IsChildOf(transform);
+    }
+
+    private bool Fake3DCollision(Transform target, Vector3 positionBeforeMove, Vector3 positionAfterMove, out float hitTime)
+    {
+        hitTime = 1f;
+
+        if (!FakeXYCollision(target)) return false;
 
 
-        float zDistance = Mathf.Abs(
-            transform.position.z -
-            target.position.z
-        );
+        if (FollowZ_Only)
+        {
+            return ZOnlyCollision(positionBeforeMove.z, positionAfterMove.z, target.position.z, out hitTime);
+        }
 
 
-        return xyDistance <= XYRange
-            && zDistance <= ZRange;
+        float zDistance = Mathf.Abs(positionAfterMove.z - target.position.z);
+
+        return zDistance <= ZRange;
+    }
+
+    private bool FakeXYCollision(Transform target)
+    {
+        Collider2D targetCollider = target.GetComponent<Collider2D>();
+
+        if (targetCollider == null)
+        {
+            targetCollider = target.GetComponentInChildren<Collider2D>();
+        }
+
+        if (collider2d != null && targetCollider != null)
+        {
+            ColliderDistance2D distance = collider2d.Distance(targetCollider);
+
+            return distance.isOverlapped;
+        }
+
+        float xyDistance = Vector2.Distance(transform.position, target.position);
+
+        return xyDistance <= XYRange;
+    }
+
+    private bool ZOnlyCollision(float startZ, float endZ, float targetZ, out float hitTime)
+    {
+        hitTime = 1f;
+
+        float minZ = Mathf.Min(startZ, endZ) - ZRange;
+        float maxZ = Mathf.Max(startZ, endZ) + ZRange;
+
+        if (targetZ < minZ || targetZ > maxZ) return false;
+
+        float zDelta = endZ - startZ;
+
+        if (Mathf.Approximately(zDelta, 0f))
+        {
+            hitTime = 0f;
+            return true;
+        }
+
+        float enterZ = zDelta > 0f ? targetZ - ZRange : targetZ + ZRange;
+
+        hitTime = Mathf.Clamp01((enterZ - startZ) / zDelta);
+
+        return true;
     }
 
 
@@ -400,6 +545,11 @@ public class MoveToPositionV2 : MonoBehaviour
 
     {
 
+        if (Event != null && Dis() <= MinDistance)
+        {
+            EventThing();
+        }
+
         if (Dis() >= MinDistance)
 
         {
@@ -467,7 +617,10 @@ public class MoveToPositionV2 : MonoBehaviour
     public void Vec3Man()
 
     {
-
+        if (Event != null && Dis() <= MinDistance)
+        {
+            EventThing();
+        }
         if (Dis() >= MinDistance)
 
         {
@@ -525,6 +678,7 @@ public class MoveToPositionV2 : MonoBehaviour
             }
 
         }
+
 
     }
 

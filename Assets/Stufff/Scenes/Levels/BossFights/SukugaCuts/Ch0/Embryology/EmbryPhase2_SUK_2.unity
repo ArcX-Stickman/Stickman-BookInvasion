@@ -2021,6 +2021,7 @@ MonoBehaviour:
   CrossFadeAnimation: Break_Zygote_EMBRY
   CompareTag_Tag: Ground
   anim: {fileID: 283755447}
+  OnlyOnce: 0
 --- !u!114 &283755445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2086,6 +2087,7 @@ MonoBehaviour:
   CrossFadeAnimation: Break_Zygote_EMBRY
   CompareTag_Tag: Player
   anim: {fileID: 283755447}
+  OnlyOnce: 0
 --- !u!114 &283755449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4485,6 +4487,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a550c037f6380f54187a13aa1b7e7178, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Platformer: 0
+  coyoteTime: 0
+  coyoteTimeCounter: 0
+  Accel: 0
   rb: {fileID: 1090554139}
   Speed: 176.1
   JumpForce: 104.9
@@ -4551,8 +4557,10 @@ MonoBehaviour:
   JumpSfx: {fileID: 8300000, guid: d9ebf5707325c714bb2ccb66ac610735, type: 3}
   Footsteps: {fileID: 387404365}
   CanJump: 1
+  OGSpeed: 0
   NoNeedDirectionCrap: 1
   punchIndex: 0
+  accelGain: 0
   GroundImpact: {fileID: 8300000, guid: 6e310db5445170f4a86113db3802e278, type: 3}
   ForceSoundPunch_WHOOSH: 1
   InBackflip: 0
@@ -5447,7 +5455,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 354
   m_Sprite: {fileID: 21300000, guid: 18c1b3619fa91cd42ad6bcd9141ba11c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.836478, g: 0.836478, b: 0.836478, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -7225,6 +7233,12 @@ MonoBehaviour:
   SFX: {fileID: 8300000, guid: b8b1da4c5d78f434fac86da5a952275d, type: 3}
   DMGed: 0
   NotAvoidBackflip: 0
+  FX: {fileID: 0}
+  Destroyy: 0
+  MustMatchPlayerZ: 0
+  GapAndDestroy: 0
+  DestoryOnGround: 0
+  GapWait: 0
 --- !u!61 &1738854859
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8130,7 +8144,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 386
   m_Sprite: {fileID: 21300000, guid: 746ad96092690bd42abdee0b412536fb, type: 3}
-  m_Color: {r: 0.8820755, g: 0.91910565, b: 1, a: 1}
+  m_Color: {r: 0.72344834, g: 0.7649044, b: 0.8616352, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

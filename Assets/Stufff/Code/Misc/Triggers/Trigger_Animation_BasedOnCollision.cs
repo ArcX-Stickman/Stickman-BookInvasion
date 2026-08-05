@@ -39,4 +39,15 @@ public class Trigger_Animation_BasedOnCollision : MonoBehaviour
         }
     
     }
+
+    public void ForcedAnim()
+    {
+        anim.CrossFade(CrossFadeAnimation, 0, 0);
+        if (OnlyOnce)
+        {
+            this.enabled = false;
+        }
+        this.enabled = false;
+    }
+
 }

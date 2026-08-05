@@ -16,8 +16,20 @@ public class TrapsSukuga : MonoBehaviour
 
     public bool DestoryOnGround;
 
+    private void EnsureStick()
+    {
+        if (Stick == null)
+        {
+            Stick = FindAnyObjectByType<StickCinematicVer_BossFight>();
+        }
+    }
+
     private bool SamePosAsPlayer()
     {
+        EnsureStick();
+
+        if (Stick == null) return false;
+
         // Only compare fake depth now.
         // Physics already checks X/Y.
         float zDifference = Mathf.Abs(
@@ -29,12 +41,15 @@ public class TrapsSukuga : MonoBehaviour
 
     private void Start()
     {
-        Stick = FindAnyObjectByType<StickCinematicVer_BossFight>();
+        EnsureStick();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        EnsureStick();
+
         if (DMGed) return;
+        if (Stick == null) return;
         if (Stick.InBackflip && !NotAvoidBackflip) return;
 
         if (collision.gameObject.CompareTag("Player"))
@@ -58,7 +73,10 @@ public class TrapsSukuga : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        EnsureStick();
+
         if (DMGed) return;
+        if (Stick == null) return;
         if (Stick.InBackflip && !NotAvoidBackflip) return;
 
         if (collision.gameObject.CompareTag("Player"))
@@ -83,13 +101,48 @@ public class TrapsSukuga : MonoBehaviour
     }
 
 
+    public bool CanDMG_STUFF()
+    {
+        EnsureStick();
+
+        if (DMGed) return false;
+        if (Stick == null) return false;
+        if (Stick.InBackflip && !NotAvoidBackflip) return false;
+
+        return true;
+    }
+
+    public bool TryDMG_STUFF()
+    {
+        if (!CanDMG_STUFF()) return false;
+
+        DMG_STUFF();
+        return true;
+    }
+
+    public bool TryNONDMG_STUFF()
+    {
+        if (DMGed) return false;
+
+        NONDMG_STUFF();
+        return true;
+    }
+
     public void DMG_STUFF()
     {
+        EnsureStick();
+
+        if (DMGed) return;
+        if (Stick == null) return;
+
         DMGed = true;
 
         Stick.Health -= DMG;
 
-        AudioP.PlayOneShot(SFX);
+        if (AudioP != null && SFX != null)
+        {
+            AudioP.PlayOneShot(SFX);
+        }
 
         if (FX != null)
         {
@@ -109,17 +162,29 @@ public class TrapsSukuga : MonoBehaviour
 
     public void NONDMG_STUFF()
     {
+        EnsureStick();
+
+        if (DMGed) return;
+
         DMGed = true;
 
-        AudioP.PlayOneShot(SFX);
+        if (AudioP != null && SFX != null)
+        {
+            AudioP.PlayOneShot(SFX);
+        }
 
         if (FX != null)
         {
             Vector3 Fake = new Vector3(
                 transform.position.x,
                 transform.position.y,
-                Stick.transform.position.z
+                transform.position.z
             );
+
+            if (Stick != null)
+            {
+                Fake.z = Stick.transform.position.z;
+            }
 
             Instantiate(FX, Fake, Quaternion.identity);
         }
