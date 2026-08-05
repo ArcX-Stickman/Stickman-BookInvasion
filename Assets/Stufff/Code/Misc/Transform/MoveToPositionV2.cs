@@ -127,6 +127,9 @@ public class MoveToPositionV2 : MonoBehaviour
     private readonly List<Collider2D> fake3DOverlapResults = new List<Collider2D>();
 
 
+    [Header("Hinderances")]
+    public ChangeTransform Transformer;
+    public bool WaitTilTranformerUnfroze;
 
     public void SetUp()
 
@@ -206,6 +209,10 @@ public class MoveToPositionV2 : MonoBehaviour
 
         }
 
+        if(WaitTilTranformerUnfroze && Transformer != null && Transformer.Frozen)
+        {
+            return;
+        }
 
 
         ActivationManager();
@@ -315,9 +322,19 @@ public class MoveToPositionV2 : MonoBehaviour
 
     private void RegisterHitCandidate(Transform target, bool isPlayer, float targetHitTime, ref Transform hitTarget, ref bool hitPlayer, ref float hitTime)
     {
+        if (hitPlayer && !isPlayer) return;
+
+        if (isPlayer && !hitPlayer)
+        {
+            hitTarget = target;
+            hitPlayer = true;
+            hitTime = targetHitTime;
+            return;
+        }
+
         if (targetHitTime > hitTime) return;
 
-        if (Mathf.Approximately(targetHitTime, hitTime) && (isPlayer || !hitPlayer)) return;
+        if (Mathf.Approximately(targetHitTime, hitTime)) return;
 
         hitTarget = target;
         hitPlayer = isPlayer;
@@ -469,7 +486,7 @@ public class MoveToPositionV2 : MonoBehaviour
 
             {
 
-                Debug.LogError("Animation missing is this normal??" + " Called from " + gameObject.name);
+               // Debug.LogError("Animation missing is this normal??" + " Called from " + gameObject.name);
 
 
 
@@ -487,7 +504,7 @@ public class MoveToPositionV2 : MonoBehaviour
 
             {
 
-                Debug.LogError("no cam shake ok?? " + gameObject.name);
+              //  Debug.LogError("no cam shake ok?? " + gameObject.name);
 
             }
 
@@ -505,7 +522,7 @@ public class MoveToPositionV2 : MonoBehaviour
 
             {
 
-                Debug.LogError("Gameobject missing is this normal??" + " Called from " + gameObject.name);
+               // Debug.LogError("Gameobject missing is this normal??" + " Called from " + gameObject.name);
 
             }
 
@@ -521,7 +538,7 @@ public class MoveToPositionV2 : MonoBehaviour
 
             {
 
-                Debug.LogError("Audio missing is this normal??" + " Called from " + gameObject.name);
+                //Debug.LogError("Audio missing is this normal??" + " Called from " + gameObject.name);
 
 
 
