@@ -103,7 +103,7 @@ public class MoveToPositionV2 : MonoBehaviour
 
     public string AnimName;
 
-
+    private float Og_Z;
 
     [Header("SFX")]
 
@@ -134,6 +134,8 @@ public class MoveToPositionV2 : MonoBehaviour
     public void SetUp()
 
     {
+
+        Og_Z = transform.position.z;
 
         if (FollowZ_Only)
 
@@ -257,8 +259,9 @@ public class MoveToPositionV2 : MonoBehaviour
 
     [SerializeField] private float MessyDistance;
 
-    public float XYRange = 1.5f;   // how close on screen
-    public float ZRange = 2f;      // how close in depth
+    public float XYRange = 1.5f;   
+    public float ZRange = 2f;
+    public float ZRange_Ground = 0.2f;
 
 
     public void TrapsAndMore(Vector3 positionBeforeMove, Vector3 positionAfterMove)
@@ -311,13 +314,28 @@ public class MoveToPositionV2 : MonoBehaviour
     }
 
 
-    private void RegisterFake3DHit(Transform target, bool isPlayer, Vector3 positionBeforeMove, Vector3 positionAfterMove, ref Transform hitTarget, ref bool hitPlayer, ref float hitTime)
+    private void RegisterFake3DHit(
+     Transform target,
+     bool isPlayer,
+     Vector3 positionBeforeMove,
+     Vector3 positionAfterMove,
+     ref Transform hitTarget,
+     ref bool hitPlayer,
+     ref float hitTime)
     {
         float targetHitTime;
 
-        if (!Fake3DCollision(target, positionBeforeMove, positionAfterMove, out targetHitTime)) return;
+        if (!Fake3DCollision(target, isPlayer, positionBeforeMove, positionAfterMove, out targetHitTime))
+            return;
 
-        RegisterHitCandidate(target, isPlayer, targetHitTime, ref hitTarget, ref hitPlayer, ref hitTime);
+        RegisterHitCandidate(
+            target,
+            isPlayer,
+            targetHitTime,
+            ref hitTarget,
+            ref hitPlayer,
+            ref hitTime
+        );
     }
 
     private void RegisterHitCandidate(Transform target, bool isPlayer, float targetHitTime, ref Transform hitTarget, ref bool hitPlayer, ref float hitTime)
@@ -365,7 +383,15 @@ public class MoveToPositionV2 : MonoBehaviour
             }
             else
             {
-                RegisterHitCandidate(targetCollider.transform, false, 0f, ref hitTarget, ref hitPlayer, ref hitTime);
+                RegisterFake3DHit(
+                    targetCollider.transform,
+                    false,
+                    positionBeforeMove,
+                    positionAfterMove,
+                    ref hitTarget,
+                    ref hitPlayer,
+                    ref hitTime
+                );
             }
         }
     }
@@ -398,22 +424,40 @@ public class MoveToPositionV2 : MonoBehaviour
         return targetCollider.transform == transform || targetCollider.transform.IsChildOf(transform);
     }
 
-    private bool Fake3DCollision(Transform target, Vector3 positionBeforeMove, Vector3 positionAfterMove, out float hitTime)
+    private bool Fake3DCollision(
+     Transform target,
+     bool isPlayer,
+     Vector3 positionBeforeMove,
+     Vector3 positionAfterMove,
+     out float hitTime)
     {
         hitTime = 1f;
 
-        if (!FakeXYCollision(target)) return false;
+        if (!FakeXYCollision(target))
+            return false;
+
+
+        // Different depth rules:
+        // Player = forgiving
+        // Ground = strict
+        float currentZRange = isPlayer ? ZRange : ZRange_Ground;
 
 
         if (FollowZ_Only)
         {
-            return ZOnlyCollision(positionBeforeMove.z, positionAfterMove.z, target.position.z, out hitTime);
+            return ZOnlyCollision(
+                positionBeforeMove.z,
+                positionAfterMove.z,
+                target.position.z,
+                currentZRange,
+                out hitTime
+            );
         }
 
 
         float zDistance = Mathf.Abs(positionAfterMove.z - target.position.z);
 
-        return zDistance <= ZRange;
+        return zDistance <= currentZRange;
     }
 
     private bool FakeXYCollision(Transform target)
@@ -437,12 +481,12 @@ public class MoveToPositionV2 : MonoBehaviour
         return xyDistance <= XYRange;
     }
 
-    private bool ZOnlyCollision(float startZ, float endZ, float targetZ, out float hitTime)
+    private bool ZOnlyCollision(float startZ,float endZ,float targetZ,float range,out float hitTime)
     {
         hitTime = 1f;
 
-        float minZ = Mathf.Min(startZ, endZ) - ZRange;
-        float maxZ = Mathf.Max(startZ, endZ) + ZRange;
+        float minZ = Mathf.Min(startZ, endZ) - range;
+        float maxZ = Mathf.Max(startZ, endZ) + range;
 
         if (targetZ < minZ || targetZ > maxZ) return false;
 
@@ -454,7 +498,7 @@ public class MoveToPositionV2 : MonoBehaviour
             return true;
         }
 
-        float enterZ = zDelta > 0f ? targetZ - ZRange : targetZ + ZRange;
+        float enterZ = zDelta > 0f ? targetZ - range : targetZ + range;
 
         hitTime = Mathf.Clamp01((enterZ - startZ) / zDelta);
 
@@ -567,13 +611,15 @@ public class MoveToPositionV2 : MonoBehaviour
             EventThing();
         }
 
+        Vector3 Posfake = new Vector3 (Position.position.x,Position.position.y, Og_Z);
+
         if (Dis() >= MinDistance)
 
         {
 
 
 
-            transform.position = Vector2.MoveTowards(transform.position, Position.position, Speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, Posfake, Speed * Time.deltaTime);
 
         }
 
