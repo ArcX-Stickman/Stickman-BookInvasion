@@ -11,6 +11,7 @@ public class ActivateAnObjectWithCollider : MonoBehaviour
     public bool wantAlrDid;
     public bool AlrDid;
     public bool WantDeactivate;
+    public bool WantToDeactiveInsteadOnActivate;
     public bool isTut;
     public string txtt;
     public KeyCode KeyCodeE;
@@ -72,155 +73,90 @@ public class ActivateAnObjectWithCollider : MonoBehaviour
         }
     }
 
-  
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Player")) return;
         if (Alrdid) return;
 
-        if (Wantonce)
-            Alrdid = true;
 
-
-        if (StickDisabledWhenObjActivate)
+        if (collision.CompareTag("Player"))
         {
-            StartCoroutine(Stick_Requested_Disable());
-        }
+            if (Wantonce)
+                Alrdid = true;
 
-        if (WantMuteAudio && TheObject != null)
-        {
-            AudioSource audioSource = TheObject.GetComponent<AudioSource>();
-            if (audioSource != null)
-                audioSource.mute = true;
 
-            audioSource.enabled = false;
-        }
-        if (TurnOnAudio && TheObject != null)
-        {
-            AudioSource audioSource = TheObject.GetComponent<AudioSource>();
-            if (audioSource != null)
-                audioSource.mute = false;
-            audioSource.enabled = true;
-          
-        }
-
-        if (OptionalExtraObject != null)
-            OptionalExtraObject.SetActive(true);
-
-        if (isTut && !WantDeactivate && TheObject != null)
-        {
-            TextMeshProUGUI txt = TheObject.GetComponent<TextMeshProUGUI>();
-            if (txt != null)
-                txt.text = txtt;
-
-            TutorialKeyInput keyCode = TheObject.GetComponent<TutorialKeyInput>();
-            if (keyCode != null)
-                keyCode.InputS = KeyCodeE;
-        }
-
-        if (WantDeactivate)
-        {
-            if (TheObject != null)
-                TheObject.SetActive(false);
-            return;
-        }
-
-        if (WantDelayForActivation)
-        {
-            if (!TimerStart)
-                StartCoroutine(TimerBased());
-            return;
-        }
-
-        if (wantAlrDid)
-        {
-            if (!AlrDid && TheObject != null)
+            if (StickDisabledWhenObjActivate)
             {
-                TheObject.SetActive(true);
-                AlrDid = true;
+                StartCoroutine(Stick_Requested_Disable());
             }
-        }
-        else
-        {
-            if (TheObject != null)
-                TheObject.SetActive(true);
+
+            if (WantMuteAudio && TheObject != null)
+            {
+                AudioSource audioSource = TheObject.GetComponent<AudioSource>();
+                if (audioSource != null)
+                    audioSource.mute = true;
+
+                audioSource.enabled = false;
+            }
+            if (TurnOnAudio && TheObject != null)
+            {
+                AudioSource audioSource = TheObject.GetComponent<AudioSource>();
+                if (audioSource != null)
+                    audioSource.mute = false;
+                audioSource.enabled = true;
+
+            }
+
+            if (OptionalExtraObject != null)
+                OptionalExtraObject.SetActive(true);
+
+            if (isTut && !WantDeactivate && TheObject != null)
+            {
+                TextMeshProUGUI txt = TheObject.GetComponent<TextMeshProUGUI>();
+                if (txt != null)
+                    txt.text = txtt;
+
+                TutorialKeyInput keyCode = TheObject.GetComponent<TutorialKeyInput>();
+                if (keyCode != null)
+                    keyCode.InputS = KeyCodeE;
+            }
+
+            if (WantDeactivate)
+            {
+                if (TheObject != null)
+                    TheObject.SetActive(false);
+                return;
+            }
+
+            if (WantDelayForActivation)
+            {
+                if (!TimerStart)
+                    StartCoroutine(TimerBased());
+                return;
+            }
+
+            if (wantAlrDid)
+            {
+                if (!AlrDid && TheObject != null)
+                {
+                    TheObject.SetActive(true);
+                    AlrDid = true;
+                }
+            }
+            else
+            {
+                if (TheObject != null)
+                    TheObject.SetActive(true);
+            }
+            if (WantToDeactiveInsteadOnActivate)
+            {
+                TheObject.gameObject.SetActive(false);
+            }
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (!collision.gameObject.CompareTag("Player")) return;
-        if (Alrdid) return;
-        if (Wantonce)
-            Alrdid = true;
-
-
-        if (StickDisabledWhenObjActivate)
-        {
-            StartCoroutine(Stick_Requested_Disable());
-        }
-
-        if (WantMuteAudio && TheObject != null)
-        {
-            AudioSource audioSource = TheObject.GetComponent<AudioSource>();
-            if (audioSource != null)
-                audioSource.mute = true;
-
-            audioSource.enabled = false;
-        }
-        if (TurnOnAudio && TheObject != null)
-        {
-            AudioSource audioSource = TheObject.GetComponent<AudioSource>();
-            if (audioSource != null)
-                audioSource.mute = false;
-            audioSource.enabled = true;
-
-        }
-
-        if (OptionalExtraObject != null)
-            OptionalExtraObject.SetActive(true);
-
-        if (isTut && !WantDeactivate && TheObject != null)
-        {
-            TextMeshProUGUI txt = TheObject.GetComponent<TextMeshProUGUI>();
-            if (txt != null)
-                txt.text = txtt;
-
-            TutorialKeyInput keyCode = TheObject.GetComponent<TutorialKeyInput>();
-            if (keyCode != null)
-                keyCode.InputS = KeyCodeE;
-        }
-
-        if (WantDeactivate)
-        {
-            if (TheObject != null)
-                TheObject.SetActive(false);
-            return;
-        }
-
-        if (WantDelayForActivation)
-        {
-            if (!TimerStart)
-                StartCoroutine(TimerBased());
-            return;
-        }
-
-        if (wantAlrDid)
-        {
-            if (!AlrDid && TheObject != null)
-            {
-                TheObject.SetActive(true);
-                AlrDid = true;
-            }
-        }
-        else
-        {
-            if (TheObject != null)
-                TheObject.SetActive(true);
-        }
-
-    }
-
+   
     public IEnumerator TimerBased()
     {
         TimerStart = true;
