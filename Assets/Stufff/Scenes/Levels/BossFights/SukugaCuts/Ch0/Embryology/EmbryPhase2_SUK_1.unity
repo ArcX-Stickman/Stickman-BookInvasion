@@ -393,6 +393,7 @@ MonoBehaviour:
   Platformer: 0
   coyoteTime: 0
   coyoteTimeCounter: 0
+  Accel: 0
   rb: {fileID: 36225360}
   Speed: 45.5
   JumpForce: 33.2
@@ -459,8 +460,10 @@ MonoBehaviour:
   JumpSfx: {fileID: 8300000, guid: d9ebf5707325c714bb2ccb66ac610735, type: 3}
   Footsteps: {fileID: 36225363}
   CanJump: 0
+  OGSpeed: 0
   NoNeedDirectionCrap: 0
   punchIndex: 0
+  accelGain: 0
   GroundImpact: {fileID: 8300000, guid: 6e310db5445170f4a86113db3802e278, type: 3}
   ForceSoundPunch_WHOOSH: 0
   InBackflip: 0
@@ -7450,7 +7453,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 705cdb5f5a9504f4db6a897089b647fa, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 37b886dea143584488c035f0e774001b, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.817
   m_Pitch: 1
@@ -20743,6 +20746,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e30adbdf86b5505498f119b6aa85e2c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Size: 0
+  Speed: 0
+  Speed2: 0
+  virtualCamera: {fileID: 0}
 --- !u!1 &1380135043
 GameObject:
   m_ObjectHideFlags: 0
