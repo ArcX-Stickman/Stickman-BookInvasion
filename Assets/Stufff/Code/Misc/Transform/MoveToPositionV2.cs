@@ -295,16 +295,16 @@ public class MoveToPositionV2 : MonoBehaviour
 
         if (hitPlayer)
         {
-            Debug.Log("Fake 3D player hit");
+            //Debug.Log("Fake 3D player hit");
 
             if (TrapSuk.TryDMG_STUFF())
             {
                 OnceTr = true;
-            }
+            } 
         }
         else
         {
-            Debug.Log("Fake 3D ground hit");
+            //Debug.Log("Fake 3D ground hit");
 
             if (TrapSuk.TryNONDMG_STUFF())
             {
@@ -754,7 +754,7 @@ public class MoveToPositionV2 : MonoBehaviour
     {
 
         float temp;
-
+        if (Position == null) return 0;
 
 
         if (Vec2)

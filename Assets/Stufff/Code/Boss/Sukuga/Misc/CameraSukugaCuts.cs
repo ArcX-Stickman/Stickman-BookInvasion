@@ -26,6 +26,7 @@ public class CameraSukugaCuts : MonoBehaviour
 
     public void CameraShake(CinemachineImpulseSource source, float intensity)
     {
+
         if (source == null)
             return;
 

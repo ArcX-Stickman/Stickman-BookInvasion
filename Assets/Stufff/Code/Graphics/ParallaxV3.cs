@@ -3,7 +3,7 @@ using UnityEngine;
 public class ParallaxV3 : MonoBehaviour
 {
     [Tooltip("0 = far away (barely moves), 1 = same as camera (no parallax).")]
-    [Range(0f, 3f)] public float parallaxStrength = 0.5f;
+     public float parallaxStrength = 0.5f;
 
     [Tooltip("Include Y movement as well.")]
     public bool affectVertical = true;

@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
@@ -31,6 +32,7 @@ public class StickCinematicVer_BossFight : MonoBehaviour
     public GameObject Enemy;
     public float MinDisEnemy;
     public float DisEnemy;
+    public bool Jumping;
 
     public float MeleeCD;
     public float LastMelee;
@@ -74,8 +76,15 @@ public class StickCinematicVer_BossFight : MonoBehaviour
     public AudioSource Footsteps;
 
     public bool CanJump;
+    public float LastJump;
 
    public float OGSpeed;
+
+   [SerializeField] private CinemachineImpulseSource CinemachineImpulseSource;
+    [SerializeField] private ContinousShakeCam ShakeCamManager;
+    public CameraShakeBasics Basics;
+    public bool ShakeCamOnMove;
+    public float ShakeCamIntesity;
 
     void Start()
     {
@@ -125,15 +134,29 @@ public class StickCinematicVer_BossFight : MonoBehaviour
         if (Grounded || CheckIfGrounded())
         {
             coyoteTimeCounter = coyoteTime;
+
         }
         else
         {
             coyoteTimeCounter -= Time.deltaTime;
         }
+
+        
     }
     public void AnimForJump()
     {
         StickAnim.SetBool("Jump", !Grounded && !CheckIfGrounded());
+        if (Grounded && coyoteTime == coyoteTimeCounter)
+        {
+            Jumping = false;
+        }
+        //if(!Grounded && StickAnim.GetBool("Jump") && coyoteTime !=  coyoteTimeCounter)
+        //{
+        //    Jumping = true;
+
+        //}
+
+
     }
 
     public void StaminaUpdate()
@@ -198,6 +221,8 @@ public class StickCinematicVer_BossFight : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && coyoteTimeCounter > 0 && CanJump || (Input.GetKeyDown(KeyCode.Space) && !Platformer))
         {
+            LastJump = Time.time;
+            Jumping = true;
             Jump();
         }
 
@@ -353,7 +378,7 @@ public class StickCinematicVer_BossFight : MonoBehaviour
 
 
     }
-
+    public float RumbleA;
     public void Move()
     {
 
@@ -362,6 +387,10 @@ public class StickCinematicVer_BossFight : MonoBehaviour
         StickAnim.SetBool("Move", horizontalInput != 0);
         if (rb.velocity != (Vector2.zero) && CheckIfGrounded() || rb.velocity != Vector2.zero && Grounded)
         {
+            if(Basics != null && ShakeCamOnMove)
+            {
+                Basics.RumbleShake(RumbleA);
+            }
             Footsteps.enabled = true;
         }
         else
@@ -448,6 +477,7 @@ public class StickCinematicVer_BossFight : MonoBehaviour
 
     public void Jump()
     {
+       
         PunchAudioP.pitch = Random.Range(0.7f, 1.5f);
         Stamina -= 3;
         PunchAudioP.PlayOneShot(JumpSfx);
@@ -766,4 +796,14 @@ public class StickCinematicVer_BossFight : MonoBehaviour
         this.enabled = false;   
     }
 
+
+    public void EnableJumpingBool()
+    {
+        Jumping = true;
+    }
+
+    public void disableJumpingBool()
+    {
+        Jumping = false;
+    }
 }
