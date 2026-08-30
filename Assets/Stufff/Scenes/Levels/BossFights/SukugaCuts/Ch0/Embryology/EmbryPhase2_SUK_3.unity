@@ -2038,6 +2038,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioP: {fileID: 1380135046}
   Sound: {fileID: 8300000, guid: c9210baff9840db4d9b9751ce91691b8, type: 3}
+  SoundV2: []
   WantDifferentPitches: 1
 --- !u!114 &283755446
 MonoBehaviour:
@@ -5787,6 +5788,7 @@ MonoBehaviour:
   Enemy: {fileID: 1688179937}
   MinDisEnemy: 25
   DisEnemy: 2.1078684
+  Jumping: 0
   MeleeCD: 0.1
   LastMelee: 0
   PunchWhooshes:
@@ -5842,9 +5844,16 @@ MonoBehaviour:
   JumpSfx: {fileID: 8300000, guid: d9ebf5707325c714bb2ccb66ac610735, type: 3}
   Footsteps: {fileID: 387404365}
   CanJump: 1
+  LastJump: 0
   OGSpeed: 0
+  CinemachineImpulseSource: {fileID: 0}
+  ShakeCamManager: {fileID: 0}
+  Basics: {fileID: 0}
+  ShakeCamOnMove: 0
+  ShakeCamIntesity: 0
   NoNeedDirectionCrap: 1
   punchIndex: 0
+  RumbleA: 0
   accelGain: 0
   GroundImpact: {fileID: 8300000, guid: 6e310db5445170f4a86113db3802e278, type: 3}
   ForceSoundPunch_WHOOSH: 1
@@ -7263,6 +7272,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e30adbdf86b5505498f119b6aa85e2c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Size: 0
+  Speed: 0
+  Speed2: 0
+  virtualCamera: {fileID: 0}
 --- !u!1 &1374808656
 GameObject:
   m_ObjectHideFlags: 0
@@ -8625,6 +8638,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioP: {fileID: 1380135046}
   Sound: {fileID: 8300000, guid: 60882448c522307419ecb7d1f0b91715, type: 3}
+  SoundV2: []
   WantDifferentPitches: 1
 --- !u!114 &1688179944
 MonoBehaviour:
@@ -8836,7 +8850,7 @@ MonoBehaviour:
   StaggerSFX: {fileID: 8300000, guid: e4d933ecc439bfc4f888e0d686e398e1, type: 3}
   CamShake: 30
   TSM: {fileID: 1688179946}
-  DelayMin: 0.36
+  DelayMin: 0.18
   StuckTime: 2
   ClashSFX: {fileID: 8300000, guid: 09c31fab12e14fd4b9d55d8a3de3d6b4, type: 3}
   SlashSFX: {fileID: 8300000, guid: 60882448c522307419ecb7d1f0b91715, type: 3}
@@ -8863,7 +8877,7 @@ MonoBehaviour:
   LandFX_POS: {fileID: 435404339}
   Cutscene: {fileID: 1548507735}
   GameScene: {fileID: 212340921}
-  JumpSpeed: 154
+  JumpSpeed: 231.6
   FallSpeed: 450.4
   MotionLinesR: {fileID: 714665347}
   MotionLinesL: {fileID: 2129201694}
@@ -9264,7 +9278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4680e22d8e18564ca716e2be186d913, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 109
+  Speed: 384.9
   DestroySFX: {fileID: 8300000, guid: b8b1da4c5d78f434fac86da5a952275d, type: 3}
   Targ: {fileID: 0}
   IgnoreY: 0

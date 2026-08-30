@@ -35,37 +35,38 @@ public class MoveStickSukuga : MonoBehaviour
     // why i did serialze field and private you might ask well I DONT KNOW YOHOHOHOHOHOHOHOOOOOOOOO
     private void Update()
     {
-        if(!VolumeBased) return; /// temp remove later for new updated code
+        if (!VolumeBased)
+            return;
+        
+        bool IsJumpingNow = StickSUK.Jumping;
 
         if (ThisC.IsTouching(StickC))
         {
-            Debug.Log("touched Collsion");
+            Debug.Log("TOUCHING VOLUME");
 
-            Debug.Log("YOHOHOHOHOOO WE TOUCHED");
-            if (VolumeBased)
+            if (MustJump)
             {
-                if(MustJumpInTime && MustJump)
+                if (MustJumpInTime)
                 {
-                    if(Time.time >= StickSUK.LastJump + Boost - JumpTime)
+                    if (Time.time >= StickSUK.LastJump + Boost - JumpTime)
                     {
-                        if (MustJump && StickSUK.Jumping)
+                        if (StickSUK.Jumping)
                         {
                             VolumeCrapBased();
                         }
-
-                       
                     }
-                  
                 }
                 else
                 {
-                    if (MustJump && StickSUK.Jumping)
+                    if (StickSUK.Jumping)
                     {
                         VolumeCrapBased();
                     }
-                   
                 }
-               
+            }
+            else
+            {
+                VolumeCrapBased();
             }
         }
     }
@@ -152,25 +153,25 @@ public class MoveStickSukuga : MonoBehaviour
         }
     }
 
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
+    // it don work so i got rid of it
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
        
-        if ((collision.CompareTag("Player")))
-        {
-            if (VolumeBased)
-            {
-                Debug.Log("Ontrigger Collsion");
-                if (MustJump && StickSUK.Jumping)
-                {
-                    VolumeCrapBased();
-                }
+    //    if ((collision.CompareTag("Player")))
+    //    {
+    //        if (VolumeBased)
+    //        {
+    //            Debug.Log("Ontrigger Collsion");
+    //            if (MustJump && StickSUK.Jumping)
+    //            {
+    //                VolumeCrapBased();
+    //            }
 
                
-            }
-        }
+    //        }
+    //    }
         
-    }
+    //}
 
 
     public float Distance()

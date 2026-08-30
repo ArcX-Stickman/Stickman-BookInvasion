@@ -145,7 +145,7 @@ public class StickCinematicVer_BossFight : MonoBehaviour
     }
     public void AnimForJump()
     {
-        StickAnim.SetBool("Jump", !Grounded && !CheckIfGrounded());
+       // StickAnim.SetBool("Jump", !Grounded && !CheckIfGrounded());
         if (Grounded && coyoteTime == coyoteTimeCounter)
         {
             Jumping = false;
@@ -336,6 +336,11 @@ public class StickCinematicVer_BossFight : MonoBehaviour
         float extraHeight = 1.3f;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, GetComponent<BoxCollider2D>().bounds.extents.y + extraHeight, WhatsGround);
         Debug.DrawRay(transform.position, Vector2.down * (GetComponent<BoxCollider2D>().bounds.extents.y + extraHeight), Color.red);
+        if (hit.collider != null)
+        {
+            StickAnim.SetBool("Jump",false);
+        }
+
         return hit.collider != null;
     }
 
@@ -477,7 +482,7 @@ public class StickCinematicVer_BossFight : MonoBehaviour
 
     public void Jump()
     {
-       
+        StickAnim.SetBool("Jump", true);
         PunchAudioP.pitch = Random.Range(0.7f, 1.5f);
         Stamina -= 3;
         PunchAudioP.PlayOneShot(JumpSfx);
@@ -805,5 +810,10 @@ public class StickCinematicVer_BossFight : MonoBehaviour
     public void disableJumpingBool()
     {
         Jumping = false;
+    }
+
+    public void HurtDelaysPunch()
+    {
+        LastMelee = Time.time;  
     }
 }

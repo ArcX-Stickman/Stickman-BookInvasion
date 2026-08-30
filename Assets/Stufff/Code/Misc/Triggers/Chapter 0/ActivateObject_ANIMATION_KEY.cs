@@ -17,10 +17,13 @@ public class ActivateObject_ANIMATION_KEY : MonoBehaviour
     public void Activate()
     {
         StickHP = FindAnyObjectByType<Health>();
-        if(StickHP.PlayerHP > 0)
+        if(StickHP != null)
         {
-            Obj_To_Activate.gameObject.SetActive(true);
+            if (StickHP.PlayerHP > 0)
+            {
+                Obj_To_Activate.gameObject.SetActive(true);
 
+            }
         }
 
         if(StickHP == null)
