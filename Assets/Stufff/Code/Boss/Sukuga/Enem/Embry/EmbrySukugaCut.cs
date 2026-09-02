@@ -58,6 +58,27 @@ public class EmbrySukugaCut : MonoBehaviour
     private float SUPA_SECURE_FLOAT_CAMMMM;
 
     public GameObject CutEnd;
+
+    private bool OGCCsize;
+    private void OnEnable()
+    {
+        StopAllCoroutines();
+
+        if (CloseUpFinished && !OGCCsize)
+        {
+            OGCCsize = true;
+            StartCoroutine(SpecialWaitZoom());
+            OnceSM = false;
+        }
+    }
+
+    private IEnumerator SpecialWaitZoom()
+    {
+        yield return new WaitForSecondsRealtime(0.6f);
+        CSC_1.StartCoroutine(CSC_1.Zoom(CSC_1.OriginalSize, 100));
+
+    }
+
     private void Start()
     {
         CinemachineVirtualCamera CVC = FindFirstObjectByType<CinemachineVirtualCamera>();
@@ -129,9 +150,50 @@ public class EmbrySukugaCut : MonoBehaviour
 
     }
 
+    public bool CloseUpFinished;
+    public GameObject CloseUp;
+    public GameObject LongShot;
+    public Transform StickPosEndClose;
+    public CameraSukugaCuts CSC_1;
+    public GameObject FlyStickCut;
+    private IEnumerator CloseUpThing()
+    {
+
+        yield return StartCoroutine(CSC_1.Zoom(37.29f,900));
+
+        if(transform.localScale.x > 0)
+        {
+            CloseUp.transform.localScale = Vector3.one;
+        }
+        else
+        {
+            CloseUp.transform.localScale = new Vector3(-1,1,1);
+            FlyStickCut .transform.localScale = new Vector3(-1,1,1);
+
+        }
+
+        CloseUp.gameObject.SetActive(true);
+
+
+
+        StickManager.gameObject.transform.position = StickPosEndClose.transform.position;
+
+        LongShot.gameObject.SetActive(false);
+
+        yield break;
+        
+    }
 
     public void RunImportant()
     {
+
+        if(StaggerMeter <= 7 && !CloseUpFinished)
+        {
+            CloseUpFinished = true;
+            StartCoroutine(CloseUpThing());
+
+        }
+
         if (!OnceSM)
         {
             // Animations:

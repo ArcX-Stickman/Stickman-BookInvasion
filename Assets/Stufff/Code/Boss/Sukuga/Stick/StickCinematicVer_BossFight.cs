@@ -108,6 +108,19 @@ public class StickCinematicVer_BossFight : MonoBehaviour
 
     }
 
+
+    private void OnEnable()
+    {
+        if (MaxStamina > 0)
+        {
+            Stamina = MaxStamina;
+        }
+        StaminaUpdate();
+
+        RunningPausedStam = false;
+        StaminaPaused = false;
+    }
+
     private void FixedUpdate()
     {
         StaminaUpdate();
@@ -336,7 +349,7 @@ public class StickCinematicVer_BossFight : MonoBehaviour
         float extraHeight = 1.3f;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, GetComponent<BoxCollider2D>().bounds.extents.y + extraHeight, WhatsGround);
         Debug.DrawRay(transform.position, Vector2.down * (GetComponent<BoxCollider2D>().bounds.extents.y + extraHeight), Color.red);
-        if (hit.collider != null)
+        if (hit.collider != null && LastJump < Time.time - 0.4f )
         {
             StickAnim.SetBool("Jump",false);
         }

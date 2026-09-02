@@ -452,6 +452,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioP: {fileID: 34808413}
   Sound: {fileID: 8300000, guid: 09c92256b43c0b645a3e3b832114238c, type: 3}
+  SoundV2: []
   WantDifferentPitches: 0
 --- !u!114 &34808415
 MonoBehaviour:
@@ -2036,6 +2037,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioP: {fileID: 1380135046}
   Sound: {fileID: 8300000, guid: c9210baff9840db4d9b9751ce91691b8, type: 3}
+  SoundV2: []
   WantDifferentPitches: 1
 --- !u!114 &283755446
 MonoBehaviour:
@@ -4502,6 +4504,7 @@ MonoBehaviour:
   Enemy: {fileID: 1688179937}
   MinDisEnemy: 25
   DisEnemy: 2.1078684
+  Jumping: 0
   MeleeCD: 0.1
   LastMelee: 0
   PunchWhooshes:
@@ -4557,9 +4560,16 @@ MonoBehaviour:
   JumpSfx: {fileID: 8300000, guid: d9ebf5707325c714bb2ccb66ac610735, type: 3}
   Footsteps: {fileID: 387404365}
   CanJump: 1
+  LastJump: 0
   OGSpeed: 0
+  CinemachineImpulseSource: {fileID: 0}
+  ShakeCamManager: {fileID: 0}
+  Basics: {fileID: 0}
+  ShakeCamOnMove: 0
+  ShakeCamIntesity: 0
   NoNeedDirectionCrap: 1
   punchIndex: 0
+  RumbleA: 0
   accelGain: 0
   GroundImpact: {fileID: 8300000, guid: 6e310db5445170f4a86113db3802e278, type: 3}
   ForceSoundPunch_WHOOSH: 1
@@ -5840,6 +5850,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e30adbdf86b5505498f119b6aa85e2c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Size: 0
+  Speed: 0
+  Speed2: 0
+  virtualCamera: {fileID: 0}
+  Stick: {fileID: 0}
+  Targ: {fileID: 0}
+  OGTarg: {fileID: 0}
 --- !u!1 &1380135043
 GameObject:
   m_ObjectHideFlags: 0
@@ -6804,7 +6821,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VunerableWindow: 3
   Stick: {fileID: 1090554140}
-  Health: 7
+  Health: 3
   LastMelee: 0
   MeleeCD: 0.18
   OutOfATK: 1
@@ -6942,6 +6959,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioP: {fileID: 1380135046}
   Sound: {fileID: 8300000, guid: 09c92256b43c0b645a3e3b832114238c, type: 3}
+  SoundV2: []
   WantDifferentPitches: 1
 --- !u!114 &1688179944
 MonoBehaviour:
@@ -8005,6 +8023,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e30adbdf86b5505498f119b6aa85e2c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Size: 0
+  Speed: 0
+  Speed2: 0
+  virtualCamera: {fileID: 0}
+  Stick: {fileID: 0}
+  Targ: {fileID: 0}
+  OGTarg: {fileID: 0}
 --- !u!114 &1872361340
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3398,7 +3398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 3022.5027
+  currentDistance: 3024.4973
   player: {fileID: 228098103}
   light2D: {fileID: 14925531}
 --- !u!1 &16425266
@@ -4005,7 +4005,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 7385.6567
+  Distance: 7387.5635
   MinDis: 15
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -7759,6 +7759,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -8665,7 +8666,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 631.728
+  currentDistance: 632.78613
   player: {fileID: 228098103}
   light2D: {fileID: 45179255}
 --- !u!114 &45179258
@@ -9593,7 +9594,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 11468.592
+  currentDistance: 11470.514
   player: {fileID: 228098103}
   light2D: {fileID: 55675557}
 --- !u!114 &55675560
@@ -9920,7 +9921,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 500
-  currentDistance: 4630.553
+  currentDistance: 4632.439
   player: {fileID: 228098103}
   light2D: {fileID: 55732158}
 --- !u!114 &55732162
@@ -11204,7 +11205,6 @@ MonoBehaviour:
   animator: {fileID: 228098101}
   Gtag: Player
   ForceStickAnim: 0
-  StickScript: {fileID: 0}
 --- !u!61 &62997752
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11628,7 +11628,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 11281.41
+  currentDistance: 11283.331
   player: {fileID: 228098103}
   light2D: {fileID: 64404771}
 --- !u!114 &64404774
@@ -17488,6 +17488,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -398600,7 +398601,7 @@ Transform:
   m_GameObject: {fileID: 135909209}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 115.3053, y: 0, z: 0}
+  m_LocalPosition: {x: 115.26636, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -399248,7 +399249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 11643.567
+  currentDistance: 11645.491
   player: {fileID: 228098103}
   light2D: {fileID: 136491605}
 --- !u!114 &136491605 stripped
@@ -400159,7 +400160,7 @@ Transform:
   m_GameObject: {fileID: 141647922}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -210.87573, y: 0, z: 0.00000011920929}
+  m_LocalPosition: {x: -211.18774, y: 0, z: 0.00000011920929}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -401558,7 +401559,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 5276.9756
+  currentDistance: 5278.863
   player: {fileID: 228098103}
   light2D: {fileID: 146235517}
 --- !u!114 &146235517 stripped
@@ -403628,7 +403629,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: BarGuy_Hide
-  Distance: 9268.843
+  Distance: 9270.761
   MinDis: 13.29
   Stick: {fileID: 228098106}
   Animator: {fileID: 160827454}
@@ -408630,7 +408631,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 10727.532
+  Distance: 10729.451
   MinDis: 15
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -408877,7 +408878,7 @@ Transform:
   m_GameObject: {fileID: 161604107}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -154.12158, y: 5.130005, z: 0}
+  m_LocalPosition: {x: -154.39453, y: 5.130005, z: 0}
   m_LocalScale: {x: 15, y: 15, z: 11.25}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -411841,7 +411842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 11169.74
+  currentDistance: 11171.661
   player: {fileID: 228098103}
   light2D: {fileID: 176513911}
 --- !u!114 &176513914
@@ -412360,7 +412361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 9054.336
+  Distance: 9056.253
   MinDis: 15
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -418640,7 +418641,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 550
-  currentDistance: 996.64325
+  currentDistance: 998.44366
   player: {fileID: 228098103}
   light2D: {fileID: 205274024}
 --- !u!1 &205347868
@@ -427395,7 +427396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 11518.506
+  currentDistance: 11520.428
   player: {fileID: 228098103}
   light2D: {fileID: 223944361}
 --- !u!114 &223944364
@@ -429678,7 +429679,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Bio_Dead
-  Distance: 2382.2056
+  Distance: 2384.0132
   MinDis: 47.8
   Stick: {fileID: 228098106}
   Animator: {fileID: 681625897}
@@ -429738,6 +429739,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioP: {fileID: 590502044}
   Sound: {fileID: 8300000, guid: 6e310db5445170f4a86113db3802e278, type: 3}
+  SoundV2: []
   WantDifferentPitches: 0
 --- !u!114 &235583600
 MonoBehaviour:
@@ -432096,6 +432098,7 @@ MonoBehaviour:
   wantAlrDid: 1
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 1
   txtt: Jump[Space] + Backflip[Q]
   KeyCodeE: 0
@@ -433615,7 +433618,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 4259.9697
+  currentDistance: 4261.8496
   player: {fileID: 228098103}
   light2D: {fileID: 258597750}
 --- !u!114 &258597750 stripped
@@ -435522,7 +435525,7 @@ Transform:
   m_GameObject: {fileID: 272675435}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1640.5712, y: 70.86148, z: -8.199721}
+  m_LocalPosition: {x: 1638.6212, y: 69.91148, z: -8.199721}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -448487,7 +448490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 3947.0168
+  currentDistance: 3948.8813
   player: {fileID: 228098103}
   light2D: {fileID: 320061511}
 --- !u!114 &320061511 stripped
@@ -448700,7 +448703,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 11699.815
+  currentDistance: 11701.738
   player: {fileID: 228098103}
   light2D: {fileID: 320530732}
 --- !u!114 &320530735
@@ -450764,7 +450767,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 450
-  currentDistance: 5451.174
+  currentDistance: 5453.059
   player: {fileID: 228098103}
   light2D: {fileID: 331441715}
 --- !u!1 &332059402 stripped
@@ -452060,7 +452063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 790
-  currentDistance: 17841.252
+  currentDistance: 17842.021
   player: {fileID: 228098103}
   light2D: {fileID: 338868791}
 --- !u!114 &338868796
@@ -452262,7 +452265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 5214.999
+  currentDistance: 5216.892
   player: {fileID: 228098103}
   light2D: {fileID: 340023219}
 --- !u!114 &340023219 stripped
@@ -459051,7 +459054,7 @@ Transform:
   m_GameObject: {fileID: 374179958}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1606.6553, y: 97.4, z: 0}
+  m_LocalPosition: {x: -1606.6748, y: 97.4, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -459308,7 +459311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 11232.502
+  currentDistance: 11234.423
   player: {fileID: 228098103}
   light2D: {fileID: 374651620}
 --- !u!114 &374651623
@@ -466214,7 +466217,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 394031834}
-  - component: {fileID: 394031835}
   m_Layer: 0
   m_Name: backTree
   m_TagString: Untagged
@@ -466231,7 +466233,7 @@ Transform:
   m_GameObject: {fileID: 394031833}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 607.4309, y: 0, z: 0}
+  m_LocalPosition: {x: 12, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -466242,20 +466244,6 @@ Transform:
   - {fileID: 760226933}
   m_Father: {fileID: 1059847490}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &394031835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 394031833}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a1c188977bda664b8436e3947f87c6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parallaxStrength: 0.22
-  affectVertical: 0
 --- !u!1 &395123810 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1821805762122054023, guid: 30007465c798928469890ac29812bfc2, type: 3}
@@ -466637,7 +466625,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 900
-  currentDistance: 8327.1455
+  currentDistance: 8328.61
   player: {fileID: 228098103}
   light2D: {fileID: 397341802}
 --- !u!95 &397341801
@@ -467570,6 +467558,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioP: {fileID: 1798478675}
   Sound: {fileID: 8300000, guid: 93a0006a6a365474e88a187fc2dc98d9, type: 3}
+  SoundV2: []
   WantDifferentPitches: 0
 --- !u!82 &400694829
 AudioSource:
@@ -467781,7 +467770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 4517.2866
+  currentDistance: 4519.1626
   player: {fileID: 228098103}
   light2D: {fileID: 401124480}
 --- !u!114 &401124480 stripped
@@ -471491,7 +471480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 4072.9402
+  currentDistance: 4074.8167
   player: {fileID: 228098103}
   light2D: {fileID: 414634457}
 --- !u!114 &414634457 stripped
@@ -472575,7 +472564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 10970.863
+  currentDistance: 10972.786
   player: {fileID: 228098103}
   light2D: {fileID: 419501173}
 --- !u!114 &419501173 stripped
@@ -479270,7 +479259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 11429.899
+  currentDistance: 11431.821
   player: {fileID: 228098103}
   light2D: {fileID: 428798019}
 --- !u!114 &428798022
@@ -479834,7 +479823,7 @@ Transform:
   m_GameObject: {fileID: 436228335}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -496.13782, y: 117.6, z: 0}
+  m_LocalPosition: {x: -496.33276, y: 117.6, z: 0}
   m_LocalScale: {x: 7.1280003, y: 7.195, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -490571,6 +490560,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -492262,7 +492252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 450
-  currentDistance: 5451.006
+  currentDistance: 5452.8916
   player: {fileID: 228098103}
   light2D: {fileID: 476910265}
 --- !u!1 &477690006
@@ -492879,7 +492869,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 4345.56
+  currentDistance: 4347.4326
   player: {fileID: 228098103}
   light2D: {fileID: 483502112}
 --- !u!114 &483502112 stripped
@@ -502034,7 +502024,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 350
-  currentDistance: 9204.276
+  currentDistance: 9206.197
   player: {fileID: 228098103}
   light2D: {fileID: 514612887}
 --- !u!114 &514612890
@@ -502477,7 +502467,7 @@ Transform:
   m_GameObject: {fileID: 516322022}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1755.3779, y: 104.4, z: 0}
+  m_LocalPosition: {x: -1755.3975, y: 104.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -503406,7 +503396,7 @@ Transform:
   m_GameObject: {fileID: 519936013}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 912.30566, y: -16.350006, z: 0}
+  m_LocalPosition: {x: 912.0327, y: -16.350006, z: 0}
   m_LocalScale: {x: 1.3282166, y: 1.4015275, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -503543,6 +503533,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioP: {fileID: 519936016}
   Sound: {fileID: 8300000, guid: 5dacc2740b5bf3842a668dfbd5fd26d2, type: 3}
+  SoundV2: []
   WantDifferentPitches: 0
 --- !u!114 &519936018
 MonoBehaviour:
@@ -735006,7 +734997,7 @@ Transform:
   m_GameObject: {fileID: 534460453}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1173.4996, y: 112.3, z: 0}
+  m_LocalPosition: {x: -1173.5055, y: 112.3, z: 0}
   m_LocalScale: {x: 5.827, y: 4.46574, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -735494,6 +735485,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -735646,7 +735638,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 10848.576
+  Distance: 10850.496
   MinDis: 15
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -736292,7 +736284,7 @@ Transform:
   m_GameObject: {fileID: 540433851}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.35783, y: 1.8299998, z: 0.43999994}
+  m_LocalPosition: {x: 10.350789, y: 1.8299998, z: 0.43999994}
   m_LocalScale: {x: 0.5013429, y: 0.48852324, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -736735,7 +736727,7 @@ Transform:
   m_GameObject: {fileID: 541493960}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1664.8212, y: 57.388233, z: -8.199721}
+  m_LocalPosition: {x: 1662.8712, y: 56.438236, z: -8.199721}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -744871,7 +744863,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 10531.129
+  Distance: 10533.047
   MinDis: 15
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -746906,7 +746898,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 350
-  currentDistance: 9173.773
+  currentDistance: 9175.693
   player: {fileID: 228098103}
   light2D: {fileID: 571153992}
 --- !u!1001 &571740512
@@ -754510,6 +754502,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -761409,7 +761402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 800
-  currentDistance: 2225.845
+  currentDistance: 2227.2769
   player: {fileID: 228098103}
   light2D: {fileID: 594757169}
 --- !u!114 &594757169
@@ -762588,7 +762581,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 490
-  currentDistance: 2728.4636
+  currentDistance: 2726.4717
   player: {fileID: 228098103}
   light2D: {fileID: 596689822}
 --- !u!114 &596689830
@@ -762816,7 +762809,7 @@ Transform:
   m_GameObject: {fileID: 599311144}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.24991135, w: 0.9682688}
-  m_LocalPosition: {x: 1240.4482, y: -18.730011, z: -0.00000011920929}
+  m_LocalPosition: {x: 1240.1167, y: -18.730011, z: -0.00000011920929}
   m_LocalScale: {x: 1.2683, y: 1.3934954, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -764085,6 +764078,7 @@ MonoBehaviour:
   wantAlrDid: 1
   AlrDid: 0
   WantDeactivate: 1
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -764873,7 +764867,7 @@ Transform:
   m_GameObject: {fileID: 611539452}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.08905295, w: 0.9960269}
-  m_LocalPosition: {x: 185.98535, y: -16.730011, z: -0.00000011920929}
+  m_LocalPosition: {x: 185.65381, y: -16.730011, z: -0.00000011920929}
   m_LocalScale: {x: 1.2714639, y: 1.1980363, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -765204,7 +765198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Bio_Run
-  Distance: 11476.039
+  Distance: 11477.961
   MinDis: 23.5
   Stick: {fileID: 228098106}
   Animator: {fileID: 613836994}
@@ -771921,7 +771915,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 3691.4482
+  currentDistance: 3693.3164
   player: {fileID: 228098103}
   light2D: {fileID: 622761386}
 --- !u!114 &622761386 stripped
@@ -788013,7 +788007,7 @@ Transform:
   m_GameObject: {fileID: 652428038}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -154.12158, y: -14.430008, z: 0}
+  m_LocalPosition: {x: -154.39453, y: -14.430008, z: 0}
   m_LocalScale: {x: 25, y: 25, z: 0.71428573}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -789755,6 +789749,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 1
   txtt: 'Move [WASD] '
   KeyCodeE: 100
@@ -790112,7 +790107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 11379.37
+  currentDistance: 11381.292
   player: {fileID: 228098103}
   light2D: {fileID: 659970110}
 --- !u!114 &659970113
@@ -791447,7 +791442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 11316.836
+  currentDistance: 11318.76
   player: {fileID: 228098103}
   light2D: {fileID: 669865661}
 --- !u!114 &669865661 stripped
@@ -792365,7 +792360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: ScienDead_Drunk
-  Distance: 9204.776
+  Distance: 9206.693
   MinDis: 5
   Stick: {fileID: 228098106}
   Animator: {fileID: 673813364}
@@ -792460,6 +792455,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioP: {fileID: 590502044}
   Sound: {fileID: 8300000, guid: 0dc3fc046a365eb45ba53a98b2d6c306, type: 3}
+  SoundV2: []
   WantDifferentPitches: 0
 --- !u!114 &673813373
 MonoBehaviour:
@@ -797955,6 +797951,7 @@ MonoBehaviour:
   wantAlrDid: 1
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -798944,6 +798941,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -807813,6 +807811,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -808076,7 +808075,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 3289.5083
+  currentDistance: 3291.3542
   player: {fileID: 228098103}
   light2D: {fileID: 732751671}
 --- !u!114 &732751671 stripped
@@ -808430,7 +808429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 9177.855
+  currentDistance: 9179.772
   player: {fileID: 228098103}
   light2D: {fileID: 735911212}
 --- !u!1 &736425181
@@ -808614,7 +808613,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 11427.98
+  Distance: 11429.902
   MinDis: 15
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -810801,7 +810800,7 @@ Transform:
   m_GameObject: {fileID: 747642807}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -154.79346, y: 0, z: 0}
+  m_LocalPosition: {x: -155.0664, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -825585,7 +825584,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 3030.0469
+  currentDistance: 3032.0417
   player: {fileID: 228098103}
   light2D: {fileID: 808748221}
 --- !u!1 &808844805 stripped
@@ -829998,6 +829997,7 @@ MonoBehaviour:
   wantAlrDid: 1
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 1
   txtt: Jump[Space]
   KeyCodeE: 32
@@ -830084,7 +830084,7 @@ Transform:
   m_GameObject: {fileID: 834202388}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 276.10498, y: 0, z: 0}
+  m_LocalPosition: {x: -2.840088, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -838385,7 +838385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 500
-  currentDistance: 2914.42
+  currentDistance: 2916.255
   player: {fileID: 228098103}
   light2D: {fileID: 881214696}
 --- !u!1 &881427838
@@ -841656,6 +841656,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -853622,6 +853623,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioP: {fileID: 590502044}
   Sound: {fileID: 8300000, guid: 7b3808ec9a83a1c4baf3ca452c2c6224, type: 3}
+  SoundV2: []
   WantDifferentPitches: 0
 --- !u!212 &931830914
 SpriteRenderer:
@@ -853832,6 +853834,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -866812,7 +866815,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 11086.33
+  currentDistance: 11088.253
   player: {fileID: 228098103}
   light2D: {fileID: 951869728}
 --- !u!114 &951869728 stripped
@@ -869963,7 +869966,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 500
-  currentDistance: 5696.6904
+  currentDistance: 5698.589
   player: {fileID: 228098103}
   light2D: {fileID: 964001341}
 --- !u!114 &964001345
@@ -870431,7 +870434,7 @@ Transform:
   m_GameObject: {fileID: 966095628}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1476.4353, y: 0, z: 0}
+  m_LocalPosition: {x: 1475.8503, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.82, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -877087,7 +877090,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 11193.846
+  currentDistance: 11195.77
   player: {fileID: 228098103}
   light2D: {fileID: 977322028}
 --- !u!114 &977322028 stripped
@@ -882768,7 +882771,7 @@ Transform:
   m_GameObject: {fileID: 980241693}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1640.5712, y: 70.86148, z: -8.199721}
+  m_LocalPosition: {x: 1638.6212, y: 69.91148, z: -8.199721}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -910881,7 +910884,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 23.86
-  currentDistance: 1175.8805
+  currentDistance: 1173.836
   player: {fileID: 228098103}
   light2D: {fileID: 1026399579}
 --- !u!1 &1026576948 stripped
@@ -910939,7 +910942,7 @@ Transform:
   m_GameObject: {fileID: 1026906370}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1332.5632, y: 104, z: 0}
+  m_LocalPosition: {x: -1332.7388, y: 104, z: 0}
   m_LocalScale: {x: 3.7569926, y: 4.8401837, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -911540,7 +911543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 11049.683
+  Distance: 11051.603
   MinDis: 15
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -922599,6 +922602,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioP: {fileID: 590502044}
   Sound: {fileID: 8300000, guid: 5530e35556cf3504ca5edd2d9fa56612, type: 3}
+  SoundV2: []
   WantDifferentPitches: 0
 --- !u!114 &1056412738
 MonoBehaviour:
@@ -924430,7 +924434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 10869.865
+  Distance: 10871.784
   MinDis: 15
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -931465,6 +931469,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -932071,7 +932076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 11005.189
+  currentDistance: 11007.11
   player: {fileID: 228098103}
   light2D: {fileID: 1084649188}
 --- !u!114 &1084649191
@@ -932785,7 +932790,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: GeoScared
-  Distance: 11497.642
+  Distance: 11499.5625
   MinDis: 31.3
   Stick: {fileID: 228098106}
   Animator: {fileID: 1088458515}
@@ -932804,7 +932809,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 11497.642
+  Distance: 11499.5625
   MinDis: 31.3
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -932824,6 +932829,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioP: {fileID: 590502044}
   Sound: {fileID: 8300000, guid: 4124ccb5e47f1e342bc1c8ba73620597, type: 3}
+  SoundV2: []
   WantDifferentPitches: 0
 --- !u!1 &1088668715
 GameObject:
@@ -934229,7 +934235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 636.89557
+  currentDistance: 637.9643
   player: {fileID: 228098103}
   light2D: {fileID: 1094534373}
 --- !u!114 &1094534376
@@ -941668,7 +941674,7 @@ Transform:
   m_GameObject: {fileID: 1109779939}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 756.6428, y: -1.3290405, z: 0}
+  m_LocalPosition: {x: 756.448, y: -1.3290405, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -944806,6 +944812,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioP: {fileID: 1132308415}
   Sound: {fileID: 8300000, guid: 5d283d7e5b847ee478d64dbf285aed58, type: 3}
+  SoundV2: []
   WantDifferentPitches: 0
 --- !u!1 &1133016486
 GameObject:
@@ -948167,6 +948174,7 @@ MonoBehaviour:
   CrossFadeAnimation: ChemicalExhaustFall_Ch0_Lab
   CompareTag_Tag: ObjectOfDestruction
   anim: {fileID: 0}
+  OnlyOnce: 0
 --- !u!320 &1153053522
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -948366,6 +948374,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioP: {fileID: 590502044}
   Sound: {fileID: 8300000, guid: 3f983e855ff367147b9a37aff54dc2d1, type: 3}
+  SoundV2: []
   WantDifferentPitches: 0
 --- !u!1 &1153656633 stripped
 GameObject:
@@ -949479,7 +949488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 11116.308
+  currentDistance: 11118.229
   player: {fileID: 228098103}
   light2D: {fileID: 1159715825}
 --- !u!114 &1159715828
@@ -950280,7 +950289,7 @@ Transform:
   m_GameObject: {fileID: 1166199155}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -546.21497, y: 120.4, z: 0}
+  m_LocalPosition: {x: -546.4099, y: 120.4, z: 0}
   m_LocalScale: {x: 7.1280003, y: 7.195, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -954022,6 +954031,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -954912,7 +954922,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 2761.607
+  currentDistance: 2763.445
   player: {fileID: 228098103}
   light2D: {fileID: 1189325956}
 --- !u!114 &1189325956 stripped
@@ -955224,7 +955234,7 @@ Transform:
   m_GameObject: {fileID: 1191357934}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2874.7695, y: -211.7003, z: 0}
+  m_LocalPosition: {x: 2874.4966, y: -211.7003, z: 0}
   m_LocalScale: {x: 14.076028, y: 14.324132, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -957097,7 +957107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 350
-  currentDistance: 2180.2942
+  currentDistance: 2182.0984
   player: {fileID: 228098103}
   light2D: {fileID: 1200633887}
 --- !u!114 &1200633887 stripped
@@ -1033474,7 +1033484,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: KingFIsh_Fly
-  Distance: 1412.9081
+  Distance: 1410.8953
   MinDis: 30
   Stick: {fileID: 228098106}
   Animator: {fileID: 1222173759}
@@ -1040072,6 +1040082,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 1
   txtt: Jump[SPACE] + Backflip[Q]
   KeyCodeE: 0
@@ -1040183,7 +1040194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 11176.126
+  Distance: 11178.047
   MinDis: 15
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -1042025,7 +1042036,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 11561.116
+  currentDistance: 11563.038
   player: {fileID: 228098103}
   light2D: {fileID: 1238295834}
 --- !u!114 &1238295837
@@ -1051115,7 +1051126,7 @@ Transform:
   m_GameObject: {fileID: 1255144741}
   serializedVersion: 2
   m_LocalRotation: {x: 0.11294114, y: -0.1370931, z: -0.015735654, w: 0.9839727}
-  m_LocalPosition: {x: 8.062252, y: 1.6799995, z: -3.21}
+  m_LocalPosition: {x: 8.056623, y: 1.6799995, z: -3.21}
   m_LocalScale: {x: 0.47862545, y: 0.40010855, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1051967,7 +1051978,7 @@ Transform:
   m_GameObject: {fileID: 1256740718}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.049459875, w: 0.99877614}
-  m_LocalPosition: {x: -1536.4037, y: 103.4, z: 0}
+  m_LocalPosition: {x: -1536.4817, y: 103.4, z: 0}
   m_LocalScale: {x: 8.510781, y: 10.008088, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1054329,7 +1054340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 9344.483
+  Distance: 9346.4
   MinDis: 15
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -1054916,7 +1054927,7 @@ Transform:
   m_GameObject: {fileID: 1276444071}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 293.41943, y: 0, z: 0}
+  m_LocalPosition: {x: 293.3025, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1060252,7 +1060263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 3809.581
+  currentDistance: 3811.4521
   player: {fileID: 228098103}
   light2D: {fileID: 1311826824}
 --- !u!114 &1311826824 stripped
@@ -1067110,6 +1067121,7 @@ MonoBehaviour:
   wantAlrDid: 1
   AlrDid: 0
   WantDeactivate: 1
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -1081397,7 +1081409,7 @@ Transform:
   m_GameObject: {fileID: 1369856884}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -546.09485, y: 116.2, z: 0}
+  m_LocalPosition: {x: -546.2898, y: 116.2, z: 0}
   m_LocalScale: {x: 7.1280003, y: 7.195, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1087534,6 +1087546,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -1088264,7 +1088277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 1103.8835
+  currentDistance: 1105.0973
   player: {fileID: 228098103}
   light2D: {fileID: 1383919737}
 --- !u!1 &1383947270
@@ -1089027,7 +1089040,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 9918.734
+  Distance: 9920.652
   MinDis: 50
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -1089502,7 +1089515,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: KingFIsh_Fly
-  Distance: 1407.0839
+  Distance: 1405.0707
   MinDis: 20
   Stick: {fileID: 228098106}
   Animator: {fileID: 1394042542}
@@ -1089652,7 +1089665,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 10069.266
+  Distance: 10071.185
   MinDis: 15
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -1089828,6 +1089841,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -1095930,6 +1095944,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -1096467,7 +1096482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 3750.2366
+  currentDistance: 3752.0964
   player: {fileID: 228098103}
   light2D: {fileID: 1413710599}
 --- !u!114 &1413710599 stripped
@@ -1097534,7 +1097549,7 @@ Transform:
   m_GameObject: {fileID: 1423200108}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1481.5581, y: 105.6, z: 0}
+  m_LocalPosition: {x: -1481.6361, y: 105.6, z: 0}
   m_LocalScale: {x: 12.29968, y: 9.790446, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1099627,7 +1099642,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 11650.162
+  currentDistance: 11652.085
   player: {fileID: 228098103}
   light2D: {fileID: 1436246959}
 --- !u!114 &1436246962
@@ -1107826,7 +1107841,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 2463.527
+  currentDistance: 2465.3496
   player: {fileID: 228098103}
   light2D: {fileID: 1452575862}
 --- !u!114 &1452575862 stripped
@@ -1111005,7 +1111020,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 500
-  currentDistance: 3535.0762
+  currentDistance: 3536.9404
   player: {fileID: 228098103}
   light2D: {fileID: 1466666658}
 --- !u!114 &1466666662
@@ -1116445,7 +1116460,7 @@ Transform:
   m_GameObject: {fileID: 1498041541}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1378.3585, y: 102.8725, z: 0}
+  m_LocalPosition: {x: -1378.3975, y: 102.8535, z: 0}
   m_LocalScale: {x: 3.7569926, y: 5.47, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1117019,7 +1117034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 2857.5657
+  currentDistance: 2859.394
   player: {fileID: 228098103}
   light2D: {fileID: 1504723907}
 --- !u!114 &1504723907 stripped
@@ -1122691,7 +1122706,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 2413.0435
+  currentDistance: 2414.847
   player: {fileID: 228098103}
   light2D: {fileID: 1511810315}
 --- !u!114 &1511810315 stripped
@@ -1134828,7 +1134843,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: ScientistBJ_Panic
-  Distance: 9177.8545
+  Distance: 9179.772
   MinDis: 12.07
   Stick: {fileID: 228098106}
   Animator: {fileID: 1549990390}
@@ -1142458,6 +1142473,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -1142952,7 +1142968,7 @@ Transform:
   m_GameObject: {fileID: 1573227217}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2860.7793, y: -211.7003, z: 0}
+  m_LocalPosition: {x: 2860.5063, y: -211.7003, z: 0}
   m_LocalScale: {x: 14.076028, y: 14.324132, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1143572,7 +1143588,7 @@ Transform:
   m_GameObject: {fileID: 1576482153}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1662.5388, y: -3.0604782, z: 0}
+  m_LocalPosition: {x: 1662.1099, y: -3.0604782, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1143735,7 +1143751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 8160.923
+  Distance: 8162.841
   MinDis: 50
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -1144318,6 +1144334,7 @@ MonoBehaviour:
   wantAlrDid: 1
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -1144966,7 +1144983,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 11611.163
+  currentDistance: 11613.086
   player: {fileID: 228098103}
   light2D: {fileID: 1584957370}
 --- !u!114 &1584957373
@@ -1150495,7 +1150512,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 4722.4824
+  currentDistance: 4724.3696
   player: {fileID: 228098103}
   light2D: {fileID: 1613074703}
 --- !u!114 &1613074703 stripped
@@ -1151033,6 +1151050,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -1157365,7 +1157383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 2569.9895
+  currentDistance: 2571.8184
   player: {fileID: 228098103}
   light2D: {fileID: 1631525030}
 --- !u!114 &1631525030 stripped
@@ -1157916,7 +1157934,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 500
-  currentDistance: 3056.9126
+  currentDistance: 3058.7622
   player: {fileID: 228098103}
   light2D: {fileID: 1632486788}
 --- !u!114 &1632486793
@@ -1158767,7 +1158785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 10941.826
+  currentDistance: 10943.747
   player: {fileID: 228098103}
   light2D: {fileID: 1637432133}
 --- !u!114 &1637432136
@@ -1168375,6 +1168393,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioP: {fileID: 1734015287}
   Sound: {fileID: 8300000, guid: 2c6471390d06a654fb1005d3847b64de, type: 3}
+  SoundV2: []
   WantDifferentPitches: 0
 --- !u!1 &1662817601
 GameObject:
@@ -1170388,7 +1170407,7 @@ Transform:
   m_GameObject: {fileID: 1676338591}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2566.4536, y: -4.725456, z: 0}
+  m_LocalPosition: {x: 2565.7905, y: -4.725456, z: 0}
   m_LocalScale: {x: -0.73, y: 0.73, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1173544,7 +1173563,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 900
-  currentDistance: 8343.981
+  currentDistance: 8345.447
   player: {fileID: 228098103}
   light2D: {fileID: 1700804951}
 --- !u!95 &1700804950
@@ -1182719,7 +1182738,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 9673.032
+  Distance: 9674.949
   MinDis: 15
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -1183096,7 +1183115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 11444.093
+  currentDistance: 11446.017
   player: {fileID: 228098103}
   light2D: {fileID: 1726541447}
 --- !u!114 &1726541447 stripped
@@ -1195584,7 +1195603,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 3014.9011
+  currentDistance: 3016.8962
   player: {fileID: 228098103}
   light2D: {fileID: 1742871990}
 --- !u!1 &1743404907 stripped
@@ -1196978,7 +1196997,7 @@ Transform:
   m_GameObject: {fileID: 1753082652}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2067.104, y: 109.65325, z: 0}
+  m_LocalPosition: {x: -2066.9673, y: 109.39675, z: 0}
   m_LocalScale: {x: 10.954195, y: 6.239242, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1872012,7 +1872031,7 @@ Transform:
   m_GameObject: {fileID: 1773580750}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.049459875, w: 0.99877614}
-  m_LocalPosition: {x: -1616.6521, y: 102.4, z: 0}
+  m_LocalPosition: {x: -1616.691, y: 102.4, z: 0}
   m_LocalScale: {x: 8.510781, y: 10.008088, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1875677,6 +1875696,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -1879396,7 +1879416,7 @@ Transform:
   m_GameObject: {fileID: 1808727153}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1044.8805, y: 84.25, z: 3.2853925}
+  m_LocalPosition: {x: 1044.8795, y: 84.25, z: 3.2853925}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1879431,7 +1879451,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 490
-  currentDistance: 200.78224
+  currentDistance: 198.82344
   player: {fileID: 228098103}
   light2D: {fileID: 1808727161}
 --- !u!114 &1808727157
@@ -1887873,6 +1887893,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -1894845,7 +1894866,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 11343.676
+  currentDistance: 11345.598
   player: {fileID: 228098103}
   light2D: {fileID: 1832143929}
 --- !u!114 &1832143932
@@ -1902378,6 +1902399,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -1902610,6 +1902632,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -1905120,7 +1905143,7 @@ Transform:
   m_GameObject: {fileID: 1874070134}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -582.19495, y: 119.2, z: 0}
+  m_LocalPosition: {x: -582.3899, y: 119.2, z: 0}
   m_LocalScale: {x: 7.1280003, y: 7.195, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1905650,7 +1905673,7 @@ Transform:
   m_GameObject: {fileID: 1878170737}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3312.8794, y: -164.24548, z: 0}
+  m_LocalPosition: {x: 3311.7874, y: -164.24548, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1906555,7 +1906578,7 @@ Transform:
   m_GameObject: {fileID: 1882018021}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.2039221, w: 0.97898716}
-  m_LocalPosition: {x: 2410.336, y: -17.290009, z: -0.00000011920929}
+  m_LocalPosition: {x: 2410.0044, y: -17.290009, z: -0.00000011920929}
   m_LocalScale: {x: 1.2683, y: 1.3934954, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1907065,7 +1907088,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 3238.775
+  currentDistance: 3240.6309
   player: {fileID: 228098103}
   light2D: {fileID: 1885497836}
 --- !u!114 &1885497836 stripped
@@ -1908223,7 +1908246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 1121.4978
+  currentDistance: 1122.7267
   player: {fileID: 228098103}
   light2D: {fileID: 1888135348}
 --- !u!114 &1888135356
@@ -1909571,7 +1909594,7 @@ Transform:
   m_GameObject: {fileID: 1896495515}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 75.04883, y: 0, z: 0}
+  m_LocalPosition: {x: 75.009766, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1909643,6 +1909666,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -1910805,7 +1910829,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 350
-  currentDistance: 9225.328
+  currentDistance: 9227.247
   player: {fileID: 228098103}
   light2D: {fileID: 1901381966}
 --- !u!1001 &1901773899
@@ -1913853,7 +1913877,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7412191410351072029, guid: 0b9c1126e06510840850d94b9c736705, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8248.893
+      value: 8247.528
       objectReference: {fileID: 0}
     - target: {fileID: 7412191410351072029, guid: 0b9c1126e06510840850d94b9c736705, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2260384,7 +2260408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 250
-  currentDistance: 11053.71
+  currentDistance: 11055.631
   player: {fileID: 228098103}
   light2D: {fileID: 1930842579}
 --- !u!114 &1930842582
@@ -2272877,7 +2272901,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 916.5978
+  currentDistance: 918.4278
   player: {fileID: 228098103}
   light2D: {fileID: 1973168083}
 --- !u!1 &1973283983 stripped
@@ -2274228,7 +2274252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Gen_Shocked(Special)
-  Distance: 1966.4122
+  Distance: 1968.1621
   MinDis: 67
   Stick: {fileID: 228098106}
   Animator: {fileID: 1976607518}
@@ -2275523,7 +2275547,7 @@ Transform:
   m_GameObject: {fileID: 1979567075}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1640.5712, y: 70.86148, z: -8.199721}
+  m_LocalPosition: {x: 1638.6212, y: 69.91148, z: -8.199721}
   m_LocalScale: {x: 0.9, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2277756,6 +2277780,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -2283045,6 +2283070,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioP: {fileID: 590502044}
   Sound: {fileID: 8300000, guid: 0c10d8d2dcbeaa04b8dc52328d47c927, type: 3}
+  SoundV2: []
   WantDifferentPitches: 0
 --- !u!114 &1994393405
 MonoBehaviour:
@@ -2292478,7 +2292504,7 @@ Transform:
   m_GameObject: {fileID: 2019528817}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 65.59155, y: 14.399994, z: 0.00000011920929}
+  m_LocalPosition: {x: 65.27954, y: 14.399994, z: 0.00000011920929}
   m_LocalScale: {x: -1.411774, y: 1.4286655, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3157727,7 +3157753,7 @@ Transform:
   m_GameObject: {fileID: 2058800733}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.7049551, w: 0.70925194}
-  m_LocalPosition: {x: 891.50586, y: -16.550018, z: 0}
+  m_LocalPosition: {x: 891.2329, y: -16.550018, z: 0}
   m_LocalScale: {x: 1.884306, y: 2.7161553, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3157850,7 +3157876,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 0
-  currentDistance: 2872.4607
+  currentDistance: 2874.0103
   player: {fileID: 228098103}
   light2D: {fileID: 2058800735}
 --- !u!114 &2058800738
@@ -3157894,7 +3157920,7 @@ Transform:
   m_GameObject: {fileID: 2059014107}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1880.2113, y: 106.43416, z: 0}
+  m_LocalPosition: {x: -1880.0747, y: 106.17766, z: 0}
   m_LocalScale: {x: 10.954195, y: 6.239242, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3175216,7 +3175242,7 @@ Transform:
   m_GameObject: {fileID: 2108026334}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4781.1416, y: -149.40135, z: 101.50314}
+  m_LocalPosition: {x: -4777.671, y: -147.71036, z: 101.50314}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3176383,6 +3176409,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -3176415,6 +3176442,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -3176447,6 +3176475,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -3176524,6 +3176553,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -3179061,7 +3179091,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 10513.637
+  Distance: 10515.556
   MinDis: 15
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -3179570,6 +3179600,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -3179822,7 +3179853,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 3328.8108
+  currentDistance: 3330.6694
   player: {fileID: 228098103}
   light2D: {fileID: 2133802617}
 --- !u!114 &2133802617 stripped
@@ -3180071,7 +3180102,7 @@ Transform:
   m_GameObject: {fileID: 2135301075}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 940.9751, y: 0, z: 0}
+  m_LocalPosition: {x: 940.312, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3186229,7 +3186260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 11549.171
+  currentDistance: 11551.095
   player: {fileID: 228098103}
   light2D: {fileID: 2143266881}
 --- !u!114 &2143266881 stripped
@@ -3186733,7 +3186764,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AninmationName: Exam_Shoot
-  Distance: 12098.831
+  Distance: 12100.754
   MinDis: 15
   Stick: {fileID: 228098106}
   Animator: {fileID: 2114423253}
@@ -3215300,11 +3215331,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4504906694961665403, guid: c5eb8e393ac47ba4fb75245fdb42082f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6389.0566
+      value: -6390.8115
       objectReference: {fileID: 0}
     - target: {fileID: 4504906694961665403, guid: c5eb8e393ac47ba4fb75245fdb42082f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 111.4775
+      value: 110.622505
       objectReference: {fileID: 0}
     - target: {fileID: 4504906694961665403, guid: c5eb8e393ac47ba4fb75245fdb42082f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3216452,11 +3216483,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2571841994194246869, guid: a881a36805962bc4fa0fc6699f831541, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -308.2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2571841994194246869, guid: a881a36805962bc4fa0fc6699f831541, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10.2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4327480445314298536, guid: a881a36805962bc4fa0fc6699f831541, type: 3}
       propertyPath: Fill
@@ -3216500,11 +3216531,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6939442137954724658, guid: a881a36805962bc4fa0fc6699f831541, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -532.5
+      value: -765.6
       objectReference: {fileID: 0}
     - target: {fileID: 6939442137954724658, guid: a881a36805962bc4fa0fc6699f831541, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 112.6
+      value: 104
       objectReference: {fileID: 0}
     - target: {fileID: 6939442137954724658, guid: a881a36805962bc4fa0fc6699f831541, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3217052,6 +3217083,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioP: {fileID: 590502044}
   Sound: {fileID: 8300000, guid: 087a0f4dfddd5d147b2c3ed6f34296f9, type: 3}
+  SoundV2: []
   WantDifferentPitches: 0
 --- !u!114 &5450228803025898675
 MonoBehaviour:
@@ -3217852,7 +3217884,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1322369209614634501, guid: e09d3d5f81f43d049b9e1224aed9e57c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6028.9863
+      value: -6029.962
       objectReference: {fileID: 0}
     - target: {fileID: 1322369209614634501, guid: e09d3d5f81f43d049b9e1224aed9e57c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3221525,11 +3221557,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7412191410351072029, guid: 0b9c1126e06510840850d94b9c736705, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5339.7803
+      value: 5338.3975
       objectReference: {fileID: 0}
     - target: {fileID: 7412191410351072029, guid: 0b9c1126e06510840850d94b9c736705, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 161.3483
+      value: 160.67474
       objectReference: {fileID: 0}
     - target: {fileID: 7412191410351072029, guid: 0b9c1126e06510840850d94b9c736705, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3222462,6 +3222494,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioP: {fileID: 590502044}
   Sound: {fileID: 8300000, guid: 69115f87989c0e3409e9ac08c76bc0c2, type: 3}
+  SoundV2: []
   WantDifferentPitches: 1
 --- !u!114 &6528766620234984907
 MonoBehaviour:
@@ -3234100,7 +3234133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 150
-  currentDistance: 2074.9832
+  currentDistance: 2076.7583
   player: {fileID: 228098103}
   light2D: {fileID: 8996519235810189053}
 --- !u!114 &8996519235810189053 stripped

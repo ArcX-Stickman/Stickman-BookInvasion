@@ -104,10 +104,17 @@ public class StickCloseUpSuk : MonoBehaviour
 
     }
 
-    private void FixedUpdate()
+
+    private void OnEnable()
     {
+        if(MaxStamina > 0)
+        {
+            Stamina = MaxStamina;
+        }
         StaminaUpdate();
     }
+
+
     void Update()
     {
         if (isMovingSum) return;
@@ -115,7 +122,7 @@ public class StickCloseUpSuk : MonoBehaviour
         RunImportantCrap();
         InputManager();
         AnimForJump();
-
+        StaminaUpdate();
         DisEnemy = Vector2.Distance(transform.position, Enemy.gameObject.transform.position);
 
     }
@@ -267,8 +274,6 @@ public class StickCloseUpSuk : MonoBehaviour
 
         switch (punchIndex)
         {
-
-
 
             case 0:
                 StickAnim.CrossFade("PUNCH1HOLD", 1, 0);
@@ -886,7 +891,7 @@ public class StickCloseUpSuk : MonoBehaviour
     public Transform MoveSum;
     public float SpeedMoveSum;
     public bool isMovingSum;
-    [SerializeField] private float minDIsMoveSum = 0.2f;
+    [SerializeField] private float minDIsMoveSum = 1.5f;
     public void MoveTowardsSum()
     {
         isMovingSum = true;
@@ -904,7 +909,7 @@ public class StickCloseUpSuk : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSecondsRealtime(0.4f);
+        yield return new WaitForSecondsRealtime(0.01f);
         MiniCutscene.gameObject.SetActive(true);
         CloseShotGameplay.gameObject.SetActive(false);
 

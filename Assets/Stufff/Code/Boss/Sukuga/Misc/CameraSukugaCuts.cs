@@ -13,7 +13,7 @@ public class CameraSukugaCuts : MonoBehaviour
     public static CameraSukugaCuts instance;
     public GameObject Stick;
     public Transform Targ;
-
+    public float OriginalSize;
     private IEnumerator enumerator;
 
     void Start()
@@ -23,7 +23,7 @@ public class CameraSukugaCuts : MonoBehaviour
         {
             instance = this;
         }
-        
+        OriginalSize = virtualCamera.m_Lens.FieldOfView;
     }
 
     public void CameraShake(CinemachineImpulseSource source, float intensity)
@@ -199,12 +199,17 @@ public class CameraSukugaCuts : MonoBehaviour
     public IEnumerator Zoom(float targetSize, float speed)
     {
         if (virtualCamera == null)
+        {
+            Debug.LogError(" yo bro cam was null i aint doin this");
             yield break;
+
+        }
 
         StopCurrentZoom();
 
         enumerator = ZoomInternal(targetSize, speed);
         yield return StartCoroutine(enumerator);
+        Debug.LogError(" yo bro i did sum");
 
         enumerator = null;
     }
