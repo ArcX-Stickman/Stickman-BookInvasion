@@ -227,8 +227,12 @@ public class EmbrySukugaCut : MonoBehaviour
     {
         if (StickManager.InPunch && StaggerMeter <= 0)
         {
-            StartCoroutine(ZoomCamIn());
+            StartCoroutine(ZoomCamInAGAINNN());
+
         }
+        return;
+        // cut content
+
         if (StaggerMeter > 0) return;
 
         if (OnceSM) return;

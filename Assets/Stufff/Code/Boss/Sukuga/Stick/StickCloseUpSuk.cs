@@ -23,6 +23,7 @@ public class StickCloseUpSuk : MonoBehaviour
     public GameObject Enemy;
     public float MinDisEnemy;
     public float DisEnemy;
+    public AudioSource FootSteps;
     public bool Jumping;
 
     public float MeleeCD;
@@ -127,6 +128,18 @@ public class StickCloseUpSuk : MonoBehaviour
 
     }
 
+    private float TimeGrounded;
+    public void FixedUpdate()
+    {
+        if (Grounded )
+        {
+            TimeGrounded += Time.deltaTime;
+        }
+        else
+        {
+            TimeGrounded = 0;
+        }
+    }
 
     public void AnimForJump()
     {
@@ -134,7 +147,13 @@ public class StickCloseUpSuk : MonoBehaviour
         if (Grounded)
         {
             Jumping = false;
+            if (TimeGrounded >= 0.001f && StickAnim.GetBool("Jump"))
+            {
+                StickAnim.SetBool("Jump", false);
+
+            }
         }
+        
         //if(!Grounded && StickAnim.GetBool("Jump") && coyoteTime !=  coyoteTimeCounter)
         //{
         //    Jumping = true;
@@ -207,7 +226,7 @@ public class StickCloseUpSuk : MonoBehaviour
 
     public void InputManager()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && CanJump)
+        if (Input.GetKeyDown(KeyCode.Space) && CanJump && Grounded && CheckIfGrounded())
         {
             LastJump = Time.time;
             Jumping = true;
@@ -322,10 +341,10 @@ public class StickCloseUpSuk : MonoBehaviour
         float extraHeight = 1.3f;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, GetComponent<BoxCollider2D>().bounds.extents.y + extraHeight, WhatsGround);
         Debug.DrawRay(transform.position, Vector2.down * (GetComponent<BoxCollider2D>().bounds.extents.y + extraHeight), Color.red);
-        if (hit.collider != null)
-        {
-            StickAnim.SetBool("Jump", false);
-        }
+        //if (hit.collider != null)
+        //{
+        //    StickAnim.SetBool("Jump", false);
+        //}
 
         return hit.collider != null;
     }
@@ -463,14 +482,31 @@ public class StickCloseUpSuk : MonoBehaviour
 
     public void Jump()
     {
+        Grounded = false;
+        TimeGrounded = 0f;
+        Jumping = true;
+
+        StickAnim.SetBool("Ground", false);
         StickAnim.SetBool("Jump", true);
-        PunchAudioP.pitch = Random.Range(0.7f, 1.5f);
+
+        PunchAudioP.pitch = Random.Range(0.7f, 1.0f);
         Stamina -= 3;
         PunchAudioP.PlayOneShot(JumpSfx);
-        float horizontalMomentum = rb.velocity.x;
-        rb.velocity = new Vector2(horizontalMomentum, JumpForce);
+
+        rb.velocity = new Vector2(rb.velocity.x, JumpForce);
+        StartCoroutine(WaitForGroundedSFX());
+    }
 
 
+    private IEnumerator WaitForGroundedSFX()
+    {
+        // Wait until the ground ray no longer detects the floor.
+        yield return new WaitUntil(() => !CheckIfGrounded());
+
+        // Wait for actual ground contact.
+        yield return new WaitUntil(() => Grounded);
+
+        PunchAudioP.PlayOneShot(GroundImpact);
     }
 
     public void AnimFirstPunchDone()

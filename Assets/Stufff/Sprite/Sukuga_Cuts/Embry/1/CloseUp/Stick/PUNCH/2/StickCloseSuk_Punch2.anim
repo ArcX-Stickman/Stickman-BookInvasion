@@ -436,6 +436,13 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
+    functionName: Animationkey_PunchSound
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0
     functionName: InPunchAnimKey
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -461,13 +468,6 @@ AnimationClip:
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0.5
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.125
-    functionName: Animationkey_PunchSound
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.125

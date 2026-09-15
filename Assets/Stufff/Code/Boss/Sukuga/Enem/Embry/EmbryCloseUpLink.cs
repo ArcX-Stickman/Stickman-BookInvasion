@@ -17,6 +17,11 @@ public class EmbryCloseUpLink : MonoBehaviour
     public float CamShake;
     public CameraSukugaCuts CameraSukugaCuts;
     public float Hitstop;
+    public GameObject PlayerDamageFX;
+    public GameObject EnemyDamageFX;
+    public Transform EnemyDMG_FX_POS;
+    public Transform PLayerDMG_FX_;
+    public AudioClip Miss;
 
     public float Zoom;
     private float OG_CAMSIZE;
@@ -30,6 +35,13 @@ public class EmbryCloseUpLink : MonoBehaviour
     public bool FirstPhaseAI;
     public int Punches;
 
+
+    //Movement stuff
+    public float TimePlayerFarEnemy;
+    public float MinDisMove;
+    public float DisMove;
+    public float MoveSpeed;
+    public AudioSource FootSteps;
 
     // Start is called before the first frame update
     void Start()
@@ -62,11 +74,51 @@ public class EmbryCloseUpLink : MonoBehaviour
             if(StickCloseUpSuk.isMovingSum)
             {
 
-                StartCoroutine(CameraSukugaCuts.instance.SwitchTargets(transform));
+                StartCoroutine(CameraSukugaCuts.SwitchTargets(transform));
             }
         }
 
-        
+       
+
+        DisMove = Vector2.Distance(transform.position, StickCloseUpSuk.transform.position);
+
+        if(DisMove > MinDisMove)
+        {
+            TimePlayerFarEnemy += Time.deltaTime;
+        }
+        else
+        {
+            TimePlayerFarEnemy = 0;
+        }
+
+
+
+        if(TimePlayerFarEnemy >= MaxTimeAFK)
+        {
+            MoveTowardsStick();
+        }
+        else
+        {
+            Anim.SetBool("Move", false);
+
+        }
+
+    }
+    public float MaxTimeAFK;
+    public void MoveTowardsStick()
+    {
+        if(DisMove > MinDisMove)
+        {
+            Vector3 FakeStick = new Vector3(StickCloseUpSuk.transform.position.x, transform.position.y, transform.position.z);
+            transform.position = Vector3.MoveTowards(transform.position, FakeStick, MoveSpeed * Time.deltaTime);
+            Anim.SetBool("Move", true);
+        }
+        else
+        {
+            Anim.SetBool("Move", false);
+
+        }
+
     }
 
     public float QuickDrawCD;
@@ -137,10 +189,10 @@ public class EmbryCloseUpLink : MonoBehaviour
             {
                 HP -= 1;
                 Anim.SetTrigger("Hurt");
+                GameObject FX = Instantiate(EnemyDamageFX, EnemyDMG_FX_POS.position, Quaternion.identity);
 
 
-
-                StartCoroutine(CameraSukugaCuts.instance.Zoom(45, true, GapForCamZoom * 1.2f, GetComponent<CinemachineImpulseSource>(), CamShake));
+                StartCoroutine(CameraSukugaCuts.Zoom(45, true, GapForCamZoom * 1.2f, GetComponent<CinemachineImpulseSource>(), CamShake));
 
                 
                 ShakeCam(CamShake);
@@ -159,8 +211,10 @@ public class EmbryCloseUpLink : MonoBehaviour
 
     public void StickHurtAnimPLay(int i)
     {
-        if(StickCloseUpSuk.DisEnemy <= StickCloseUpSuk.MinDisEnemy && !StickCloseUpSuk.InBackflip)
+        if(StickCloseUpSuk.DisEnemy <= StickCloseUpSuk.MinDisEnemy && !StickCloseUpSuk.InBackflip && StickCloseUpSuk.Grounded)
         {
+            GameObject FX = Instantiate(PlayerDamageFX, PLayerDMG_FX_.transform.position, Quaternion.identity);
+
             Debug.Log("Playing" + AnimCLipsHurtStick[i].name);
             StickCloseUpSuk.StickAnim.CrossFade(AnimCLipsHurtStick[i].name, 0, 0);
 
@@ -169,11 +223,11 @@ public class EmbryCloseUpLink : MonoBehaviour
         return;
     }
 
-
+    
     public float GapForCamZoom;
     public void Attack(float DMG)
     {
-        if((StickCloseUpSuk.DisEnemy <= StickCloseUpSuk.MinDisEnemy && !StickCloseUpSuk.InBackflip))
+        if((StickCloseUpSuk.DisEnemy <= StickCloseUpSuk.MinDisEnemy && !StickCloseUpSuk.InBackflip  && StickCloseUpSuk.Grounded))
         {
             AudioP.PlayOneShot(SFX);
             StickCloseUpSuk.Health -= DMG;
@@ -182,7 +236,22 @@ public class EmbryCloseUpLink : MonoBehaviour
             if (cameraSukugaCuts != null)
             {
                /// cameraSukugaCuts.ZoomAnim(Zoom);
-                StartCoroutine(CameraSukugaCuts.instance.Zoom(Zoom,true, GapForCamZoom, StickCloseUpSuk.transform, true));
+                StartCoroutine(CameraSukugaCuts.Zoom(Zoom,true, GapForCamZoom, StickCloseUpSuk.transform, true));
+
+            }
+
+        }
+        else if(StickCloseUpSuk.DisEnemy <= StickCloseUpSuk.MinDisEnemy + 6 && !StickCloseUpSuk.InBackflip && !StickCloseUpSuk.Grounded && StickCloseUpSuk.StickAnim.GetBool("Jump"))
+        {
+            // if player is jumping make it cool 
+            AudioP.PlayOneShot(Miss);
+            ShakeCam(CamShake * 2.3f, true);
+
+            CameraSukugaCuts cameraSukugaCuts = CameraSukugaCuts;
+            if (cameraSukugaCuts != null)
+            {
+                /// cameraSukugaCuts.ZoomAnim(Zoom);
+                StartCoroutine(CameraSukugaCuts.Zoom(Zoom, true, GapForCamZoom, StickCloseUpSuk.transform, true));
 
             }
 

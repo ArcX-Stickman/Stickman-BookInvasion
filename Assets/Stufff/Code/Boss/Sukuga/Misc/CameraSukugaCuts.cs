@@ -209,7 +209,7 @@ public class CameraSukugaCuts : MonoBehaviour
 
         enumerator = ZoomInternal(targetSize, speed);
         yield return StartCoroutine(enumerator);
-        Debug.LogError(" yo bro i did sum");
+        Debug.Log(" yo bro i did sum");
 
         enumerator = null;
     }
