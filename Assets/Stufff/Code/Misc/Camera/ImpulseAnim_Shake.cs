@@ -19,6 +19,7 @@ public class ImpulseAnim_Shake : MonoBehaviour
     public void ImpulseList(int i)
     {
         impulseSourceList[i].GenerateImpulse(vel);
+        Debug.Log("called Impulse from" + impulseSourceList[i].gameObject.name);
     }
 
     public void ImpulseAnim(float dt)

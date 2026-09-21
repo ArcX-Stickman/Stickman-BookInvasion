@@ -562,7 +562,7 @@ public class EmbrySukugaCut : MonoBehaviour
 
     private IEnumerator JumpBackNThrow()
     {
-        if (StartedJBNT) yield break;
+        Debug.Log("bro jump");
         StartedJBNT = true;
         StickManager.enabled = false;
         EnemyAnim.CrossFade("EmbryFarJump", 0, 0);

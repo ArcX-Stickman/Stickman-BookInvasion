@@ -7759,6 +7759,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -11204,7 +11205,6 @@ MonoBehaviour:
   animator: {fileID: 228098101}
   Gtag: Player
   ForceStickAnim: 0
-  StickScript: {fileID: 0}
 --- !u!61 &62997752
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -17488,6 +17488,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -431513,6 +431514,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioP: {fileID: 590502044}
   Sound: {fileID: 8300000, guid: 6e310db5445170f4a86113db3802e278, type: 3}
+  SoundV2: []
   WantDifferentPitches: 0
 --- !u!114 &235583600
 MonoBehaviour:
@@ -433871,6 +433873,7 @@ MonoBehaviour:
   wantAlrDid: 1
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 1
   txtt: Jump[Space] + Backflip[Q]
   KeyCodeE: 0
@@ -469345,6 +469348,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioP: {fileID: 1798478675}
   Sound: {fileID: 8300000, guid: 93a0006a6a365474e88a187fc2dc98d9, type: 3}
+  SoundV2: []
   WantDifferentPitches: 0
 --- !u!82 &400694829
 AudioSource:
@@ -492346,6 +492350,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -505213,6 +505218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioP: {fileID: 519936016}
   Sound: {fileID: 8300000, guid: 5dacc2740b5bf3842a668dfbd5fd26d2, type: 3}
+  SoundV2: []
   WantDifferentPitches: 0
 --- !u!114 &519936018
 MonoBehaviour:
@@ -737270,6 +737276,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -756286,6 +756293,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -765861,6 +765869,7 @@ MonoBehaviour:
   wantAlrDid: 1
   AlrDid: 0
   WantDeactivate: 1
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -791393,6 +791402,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 1
   txtt: 'Move [WASD] '
   KeyCodeE: 100
@@ -794098,6 +794108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioP: {fileID: 590502044}
   Sound: {fileID: 8300000, guid: 0dc3fc046a365eb45ba53a98b2d6c306, type: 3}
+  SoundV2: []
   WantDifferentPitches: 0
 --- !u!114 &673813373
 MonoBehaviour:
@@ -799593,6 +799604,7 @@ MonoBehaviour:
   wantAlrDid: 1
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -800582,6 +800594,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -809451,6 +809464,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -831564,6 +831578,7 @@ MonoBehaviour:
   wantAlrDid: 1
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 1
   txtt: Jump[Space]
   KeyCodeE: 32
@@ -835025,6 +835040,7 @@ GameObject:
   - component: {fileID: 850340989}
   - component: {fileID: 850340991}
   - component: {fileID: 850340990}
+  - component: {fileID: 850340992}
   m_Layer: 0
   m_Name: Guy (2)
   m_TagString: Untagged
@@ -835059,8 +835075,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4300173bcc2bb408dda2438025c2b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Obj: {fileID: 2055706460}
+  Obj: {fileID: 634112627}
   CD: 0.1
+  AudioP: {fileID: 850340992}
+  AudioClip: {fileID: 8300000, guid: 15e15eb2de3407b4b8bfb83eabf6d720, type: 3}
 --- !u!212 &850340991
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -835113,6 +835131,102 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!82 &850340992
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850340988}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 15e15eb2de3407b4b8bfb83eabf6d720, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &851161926 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7253703288403393703, guid: e09d3d5f81f43d049b9e1224aed9e57c, type: 3}
@@ -843355,6 +843469,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -855321,6 +855436,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioP: {fileID: 590502044}
   Sound: {fileID: 8300000, guid: 7b3808ec9a83a1c4baf3ca452c2c6224, type: 3}
+  SoundV2: []
   WantDifferentPitches: 0
 --- !u!212 &931830914
 SpriteRenderer:
@@ -855531,6 +855647,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -924382,6 +924499,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioP: {fileID: 590502044}
   Sound: {fileID: 8300000, guid: 5530e35556cf3504ca5edd2d9fa56612, type: 3}
+  SoundV2: []
   WantDifferentPitches: 0
 --- !u!114 &1056412738
 MonoBehaviour:
@@ -933142,6 +933260,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -934501,6 +934620,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioP: {fileID: 590502044}
   Sound: {fileID: 8300000, guid: 4124ccb5e47f1e342bc1c8ba73620597, type: 3}
+  SoundV2: []
   WantDifferentPitches: 0
 --- !u!1 &1088668715
 GameObject:
@@ -946574,6 +946694,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioP: {fileID: 1132308415}
   Sound: {fileID: 8300000, guid: 5d283d7e5b847ee478d64dbf285aed58, type: 3}
+  SoundV2: []
   WantDifferentPitches: 0
 --- !u!1 &1133016486
 GameObject:
@@ -949935,6 +950056,7 @@ MonoBehaviour:
   CrossFadeAnimation: ChemicalExhaustFall_Ch0_Lab
   CompareTag_Tag: ObjectOfDestruction
   anim: {fileID: 0}
+  OnlyOnce: 0
 --- !u!320 &1153053522
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -950134,6 +950256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioP: {fileID: 590502044}
   Sound: {fileID: 8300000, guid: 3f983e855ff367147b9a37aff54dc2d1, type: 3}
+  SoundV2: []
   WantDifferentPitches: 0
 --- !u!1 &1153656633 stripped
 GameObject:
@@ -955896,6 +956019,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -1041947,6 +1042071,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 1
   txtt: Jump[SPACE] + Backflip[Q]
   KeyCodeE: 0
@@ -1068985,6 +1069110,7 @@ MonoBehaviour:
   wantAlrDid: 1
   AlrDid: 0
   WantDeactivate: 1
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -1089409,6 +1089535,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -1091703,6 +1091830,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -1097805,6 +1097933,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -1144219,6 +1144348,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -1146079,6 +1146209,7 @@ MonoBehaviour:
   wantAlrDid: 1
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -1152900,6 +1153031,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -1170242,6 +1170374,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioP: {fileID: 1734015287}
   Sound: {fileID: 8300000, guid: 2c6471390d06a654fb1005d3847b64de, type: 3}
+  SoundV2: []
   WantDifferentPitches: 0
 --- !u!1 &1662817601
 GameObject:
@@ -1877544,6 +1877677,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -1889772,6 +1889906,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -1904277,6 +1904412,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -1904509,6 +1904645,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -1911542,6 +1911679,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -2279655,6 +2279793,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -2284944,6 +2285083,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioP: {fileID: 590502044}
   Sound: {fileID: 8300000, guid: 0c10d8d2dcbeaa04b8dc52328d47c927, type: 3}
+  SoundV2: []
   WantDifferentPitches: 0
 --- !u!114 &1994393405
 MonoBehaviour:
@@ -3178371,6 +3178511,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -3178403,6 +3178544,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -3178435,6 +3178577,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -3178512,6 +3178655,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -3181558,6 +3181702,7 @@ MonoBehaviour:
   wantAlrDid: 0
   AlrDid: 0
   WantDeactivate: 0
+  WantToDeactiveInsteadOnActivate: 0
   isTut: 0
   txtt: 
   KeyCodeE: 0
@@ -3219129,6 +3219274,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioP: {fileID: 590502044}
   Sound: {fileID: 8300000, guid: 087a0f4dfddd5d147b2c3ed6f34296f9, type: 3}
+  SoundV2: []
   WantDifferentPitches: 0
 --- !u!114 &5450228803025898675
 MonoBehaviour:
@@ -3224547,6 +3224693,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioP: {fileID: 590502044}
   Sound: {fileID: 8300000, guid: 69115f87989c0e3409e9ac08c76bc0c2, type: 3}
+  SoundV2: []
   WantDifferentPitches: 1
 --- !u!114 &6528766620234984907
 MonoBehaviour:

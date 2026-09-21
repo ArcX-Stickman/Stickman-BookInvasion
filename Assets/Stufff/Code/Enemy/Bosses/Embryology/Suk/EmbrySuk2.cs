@@ -354,9 +354,23 @@ public class EmbrySuk2 : MonoBehaviour
         CameraSukugaCuts CSC = FindAnyObjectByType<CameraSukugaCuts>();
         CSC.CameraShake(gameObject.GetComponent<CinemachineImpulseSource>(), sha);
     }
+
+    public CinemachineVirtualCamera VC;
     public void VunerableManager()
     {
+        if ((!Vunerable && VC.m_Lens.OrthographicSize != 47.76f)) 
+        {
+            VC.m_Lens.OrthographicSize = Mathf.Lerp(VC.m_Lens.OrthographicSize, 47.76f, 10 * Time.deltaTime);
+        }
         if (!Vunerable || ALrinCorNotVun) return;
+
+
+
+        if ((Vunerable && VC.m_Lens.OrthographicSize != 35.03f))
+        {
+            VC.m_Lens.OrthographicSize = Mathf.Lerp(VC.m_Lens.OrthographicSize, 35.03f, 25 * Time.deltaTime);
+        }
+
 
         if (Vunerable)
         {

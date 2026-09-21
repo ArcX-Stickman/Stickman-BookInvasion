@@ -13,7 +13,7 @@ public class MidPointTransform : MonoBehaviour
     public bool OnlyX;
   
 
-    private void FixedUpdate()
+    private void Update()
     {
         if(!P1.gameObject.activeSelf || !P2.gameObject.activeSelf) return;
         float X = (P1.position.x + P2.position.x)/2; 
