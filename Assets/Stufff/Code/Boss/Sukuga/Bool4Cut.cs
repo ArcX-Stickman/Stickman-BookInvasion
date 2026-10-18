@@ -17,7 +17,7 @@ public class Bool4Cut : MonoBehaviour
         double VidDur = Math.Round(player.length, 1);
 
         timerThing = player.time;
-        if (player.time + 0.6f >= VidDur)
+        if (player.time + 0.1f >= VidDur)
         {
             CUTS.gameObject.SetActive(false);
             CUT = true;
