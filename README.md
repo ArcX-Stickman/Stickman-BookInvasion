@@ -70,3 +70,6 @@ I started this project to turn an imaginative idea into a playable game. Develop
 I hope to continue exploring how programming and intelligent systems can create more dynamic, responsive, and engaging gameplay experiences.
 
 **This project represents my ongoing effort to learn by building, experimenting, and improving a game of my own.**
+Copyright © 2026 ArcX / Arjun Chodapaneedi
+
+
